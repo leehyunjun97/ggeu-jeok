@@ -8,7 +8,9 @@ const Home = () => {
     <div className={styles.main}>
       <section className={styles.leftSection}>홈페이지소개</section>
       <section className={styles.rightSection}>
-        <Logo />
+        <section className={styles.logoSection}>
+          <Logo />
+        </section>
         <Login />
       </section>
     </div>

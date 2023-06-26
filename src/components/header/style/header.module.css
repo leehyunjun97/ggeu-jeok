@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  background-color: #faf6f1;
+  justify-content: space-between;
+  border-bottom: 1.7px solid black;
+}
+
+.header h2 {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.headerSide {
+  width: 40%;
+  text-align: right;
+  margin-right: 15px;
+}
+
+.headerSide button {
+  height: 100%;
+  width: 80px;
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: black;
+  white-space: nowrap;
+}

@@ -1,0 +1,16 @@
+.ulList {
+  padding: 0px;
+  margin: 10px;
+}
+
+.ulList li {
+  list-style-type: none;
+  border: none;
+  background-color: #faeede;
+  border-radius: 3px;
+  height: 45px;
+  margin-bottom: 10px;
+  line-height: 45px;
+  padding: 5px;
+  padding-left: 12px;
+}

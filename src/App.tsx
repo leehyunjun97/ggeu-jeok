@@ -1,9 +1,23 @@
-import { Outlet } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/home';
+import UserRouter from './router/UserRouter';
+import Main from './pages/Main';
+import Header from './components/header/Header';
+import NonUserRouter from './router/NonUserRouter';
 
 function App() {
   return (
     <>
-      <Outlet />
+      <Routes>
+        <Route path='/' element={<NonUserRouter />}>
+          <Route path='/' element={<Home />} />
+        </Route>
+        <Route path='/' element={<UserRouter />}>
+          <Route path='/' element={<Header />}>
+            <Route path='main' element={<Main />} />
+          </Route>
+        </Route>
+      </Routes>
     </>
   );
 }

@@ -1,0 +1,17 @@
+.ulList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
+  padding-left: 0px;
+  margin-top: 5px;
+}
+
+.ulList li {
+  margin: 5px;
+  height: 200px;
+  list-style-type: none;
+  border: none;
+  background-color: rgb(243 241 241);
+  border-radius: 2px;
+  text-align: center;
+}

@@ -1,0 +1,28 @@
+.main {
+  display: flex;
+  height: 600px;
+  margin: auto;
+  margin-top: 17px;
+  width: 99vw;
+}
+
+.main section {
+  margin: 20px;
+  border-radius: 3px;
+  position: relative;
+  border: 1.7px solid black;
+}
+
+.main section span {
+  position: absolute;
+  right: 3px;
+  top: -24px;
+  font-weight: bold;
+}
+
+.mainLeftSection {
+  width: 500px;
+}
+.mainRightSection {
+  width: 1200px;
+}
