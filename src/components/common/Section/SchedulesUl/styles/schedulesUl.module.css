@@ -7,11 +7,30 @@
 }
 
 .ulList li {
-  margin: 5px;
+  margin: 8px;
+  margin-top: 5px;
   height: 200px;
   list-style-type: none;
   border: none;
-  background-color: rgb(243 241 241);
+  background-color: rgb(242 233 233);
   border-radius: 2px;
   text-align: center;
+  line-height: 200px;
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.ulList li:hover {
+  background-color: rgb(228, 217, 217);
+  transform: rotate(1.2);
+  border-radius: 0px;
+}
+
+.plusLi {
+  line-height: 220px;
+}
+
+.plusIcon {
+  color: white;
+  font-size: 40px;
 }

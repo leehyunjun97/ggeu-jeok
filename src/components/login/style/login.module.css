@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   width: 80%;
+  position: relative;
 }
 
 .emailInput,
@@ -15,6 +16,15 @@
   border-radius: 2px;
   font-size: 12px;
   padding-left: 10px;
+}
+
+.signupSpan {
+  opacity: 0.5;
+  font-size: 11px;
+  position: absolute;
+  top: 108px;
+  right: 7px;
+  cursor: pointer;
 }
 
 .loginBtn {

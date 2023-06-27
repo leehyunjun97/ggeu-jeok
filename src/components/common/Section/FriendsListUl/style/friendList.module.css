@@ -13,4 +13,21 @@
   line-height: 45px;
   padding: 5px;
   padding-left: 12px;
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.ulList li:hover {
+  background-color: #f1e2cd;
+  transform: rotate(1.2);
+  border-radius: 0px;
+}
+
+.plusLi {
+  text-align: center;
+}
+
+.plusIcon {
+  color: white;
+  font-size: 25px;
 }

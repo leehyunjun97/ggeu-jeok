@@ -17,6 +17,9 @@ const Login = () => {
         type='password'
         className={styles.passwordInput}
       />
+      <span className={styles.signupSpan} onClick={() => navigate('/signup')}>
+        회원가입
+      </span>
       <button className={styles.loginBtn} onClick={loginHandler}>
         로그인
       </button>

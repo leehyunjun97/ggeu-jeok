@@ -4,6 +4,7 @@ import UserRouter from './router/UserRouter';
 import Main from './pages/Main';
 import Header from './components/header/Header';
 import NonUserRouter from './router/NonUserRouter';
+import Signup from './pages/signup/Signup';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<NonUserRouter />}>
           <Route path='/' element={<Home />} />
+          <Route path='/signup' element={<Signup />} />
         </Route>
         <Route path='/' element={<UserRouter />}>
           <Route path='/' element={<Header />}>
