@@ -1,0 +1,36 @@
+.alarmCardBody {
+  padding: 0px;
+  justify-content: center;
+  list-style: none;
+  border: 1.7px solid black;
+  border-radius: 10px;
+  height: 150px;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.btnSection {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  height: 30px;
+}
+
+.accepBtn {
+  background-color: #75d777;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 15px;
+  margin-right: 5px;
+  height: 80%;
+}
+
+.refusalBtn {
+  background-color: #e46060;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 15px;
+  height: 80%;
+}

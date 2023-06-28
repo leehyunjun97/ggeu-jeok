@@ -21,8 +21,15 @@
   justify-content: center;
   border-radius: 1px;
   border: 1.7px solid black;
-  display: flex;
-  flex-direction: column;
+  overflow: scroll;
+}
+
+.modalSection::-webkit-scrollbar {
+  display: none;
+}
+
+.searchSection {
+  height: 45px;
 }
 
 .modalCloseBtn {
