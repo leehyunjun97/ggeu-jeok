@@ -12,6 +12,9 @@ const AlarmModal = ({ closeModal }: any) => {
         <button onClick={closeModal} className={styles.modalCloseBtn}>
           <FontAwesomeIcon icon={faXmark} />
         </button>
+        <section className={styles.titleSection}>
+          <h4>알림</h4>
+        </section>
         <section className={styles.searchSection}>
           <ul style={{ padding: '25px' }}>
             <AlarmCard />

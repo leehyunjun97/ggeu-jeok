@@ -1,0 +1,79 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  height: 600px;
+  margin: auto;
+  margin-top: 3%;
+  text-align: center;
+  justify-content: center;
+  border-radius: 1px;
+  border: 1.7px solid black;
+  position: relative;
+}
+
+.main h3 {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.formSection {
+  width: 540px;
+  margin-left: 75px;
+  margin-right: auto;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.roomTitleSection,
+.dateSection {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.dateSection {
+  display: flex;
+  width: 100%;
+}
+
+.dateSection2 {
+  width: 40%;
+}
+
+.timeSection {
+  width: 40%;
+}
+
+.locationSection {
+  position: relative;
+}
+
+.roomTitleInput {
+  height: 25px;
+  border-radius: 3px;
+  width: 60%;
+  padding: 3px;
+}
+
+.dateInput {
+  height: 25px;
+  border-radius: 3px;
+  width: 75%;
+  padding: 3px;
+  font-weight: 400;
+}
+
+.locationInput {
+  height: 25px;
+  border-radius: 3px;
+  width: 100%;
+  padding: 3px;
+}
+
+.meetingBtn {
+  position: absolute;
+  top: 33px;
+  right: 0px;
+}

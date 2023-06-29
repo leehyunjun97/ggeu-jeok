@@ -5,6 +5,8 @@ import Main from './pages/Main';
 import Header from './components/header/Header';
 import NonUserRouter from './router/NonUserRouter';
 import Signup from './pages/signup/Signup';
+import ScheduleRouter from './router/ScheduleRouter';
+import CreateRoom from './pages/schedule/CreateRoom/CreateRoom';
 
 function App() {
   return (
@@ -14,9 +16,13 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/signup' element={<Signup />} />
         </Route>
+
         <Route path='/' element={<UserRouter />}>
           <Route path='/' element={<Header />}>
             <Route path='main' element={<Main />} />
+            <Route path='schedule' element={<ScheduleRouter />}>
+              <Route path='/schedule/create' element={<CreateRoom />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

@@ -20,12 +20,21 @@
   text-align: center;
   justify-content: center;
   border-radius: 1px;
-  border: 1.7px solid black;
+  border: 2px solid black;
   overflow: scroll;
+  box-shadow: 5px 5px 5px rgb(191, 146, 87);
 }
 
 .modalSection::-webkit-scrollbar {
   display: none;
+}
+
+.titleSection {
+  margin-top: 35px;
+}
+
+.titleSection h4 {
+  margin-bottom: 0px;
 }
 
 .searchSection {
