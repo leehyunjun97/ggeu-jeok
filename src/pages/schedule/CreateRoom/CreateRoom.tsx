@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
+import MapModal from '../../../components/common/Modal/MapModal/MapModal';
 
 const CreateRoom = () => {
+  const [isModal, setIsModal] = useState(false);
+  const [addr, setAddr] = useState('');
+
+  const modalHandler = () => {
+    setIsModal(!isModal);
+  };
+
   return (
     <div className={styles.main}>
       <h3>Create a plan</h3>
@@ -30,10 +38,17 @@ const CreateRoom = () => {
         </div>
         <div className={styles.locationSection}>
           <Label text='Location' />
-          <input className={styles.locationInput} type='location' />
-          <button className={styles.meetingBtn}>meeting</button>
+          <input
+            className={styles.locationInput}
+            type='location'
+            value={addr}
+          />
+          <button className={styles.meetingBtn} onClick={modalHandler}>
+            meeting
+          </button>
         </div>
       </div>
+      {isModal && <MapModal closeModal={modalHandler} setAddr={setAddr} />}
     </div>
   );
 };
