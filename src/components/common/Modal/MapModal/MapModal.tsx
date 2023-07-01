@@ -1,91 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './style/mapModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import useDidMountEffect from './hooks/useDidMountEffect';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
 
 const MapModal = ({ closeModal, setAddr }: any) => {
-  const [map, setMap] = useState<any>();
-  const [marker, setMarker] = useState<any>();
+  const mapRef = useRef<any>(null);
+  const [map, setMap] = useState({
+    center: {
+      lat: 33.450701,
+      lng: 126.570667,
+    },
+    errMsg: null,
+    isLoading: true,
+    ispanTo: false,
+  });
 
-  useEffect(() => {
-    window.kakao.maps.load(() => {
-      const container = document.getElementById('map');
-      const options = {
-        center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3,
-      };
-      setMap(new window.kakao.maps.Map(container, options));
-      setMarker(new window.kakao.maps.Marker());
-    });
-  }, []);
-
-  useDidMountEffect(() => {
-    navigator.geolocation.getCurrentPosition(() => {
-      window.kakao.maps.event.addListener(
-        map,
-        'click',
-        function (mouseEvent: any) {
-          // 주소-좌표 변환 객체를 생성합니다
-          var geocoder = new window.kakao.maps.services.Geocoder();
-
-          geocoder.coord2Address(
-            mouseEvent.latLng.getLng(),
-            mouseEvent.latLng.getLat(),
-            (result: any, status: any) => {
-              if (status === window.kakao.maps.services.Status.OK) {
-                var addr = !!result[0].road_address
-                  ? result[0].road_address.address_name
-                  : result[0].address.address_name;
-
-                // 클릭한 위치 주소를 가져온다.
-                console.log(addr);
-
-                setAddr(addr);
-
-                // 기존 마커를 제거하고 새로운 마커를 넣는다.
-                marker.setMap(null);
-                // 마커를 클릭한 위치에 표시합니다
-                marker.setPosition(mouseEvent.latLng);
-                marker.setMap(map);
-              }
-            }
-          );
+  const getCurrentPosition = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setMap((prev: any) => ({
+            ...prev,
+            center: {
+              lat: position.coords.latitude, // 위도
+              lng: position.coords.longitude, // 경도
+            },
+            isLoading: false,
+          }));
+        },
+        (err) => {
+          setMap((prev: any) => ({
+            ...prev,
+            errMsg: err.message,
+            isLoading: false,
+          }));
         }
       );
-    });
-  }, [map]);
-
-  const getCurrentPosBtn = () => {
-    navigator.geolocation.getCurrentPosition(
-      getPosSuccess,
-      () => alert('위치 정보 x'),
-      {
-        enableHighAccuracy: true,
-        maximumAge: 30000,
-        timeout: 27000,
-      }
-    );
+    } else {
+      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+      setMap((prev: any) => ({
+        ...prev,
+        errMsg: 'geolocation을 사용할수 없어요..',
+        isLoading: false,
+      }));
+    }
   };
 
-  const getPosSuccess = (pos: GeolocationPosition) => {
-    const currentPos = new window.kakao.maps.LatLng(
-      pos.coords.latitude,
-      pos.coords.longitude
-    );
-
-    map.panTo(currentPos);
-
-    marker.setMap(null);
-    marker.setPosition(currentPos);
-    marker.setMap(map);
-  };
+  useEffect(() => {
+    getCurrentPosition();
+  }, [map.ispanTo]);
 
   return (
     <>
@@ -97,8 +63,36 @@ const MapModal = ({ closeModal, setAddr }: any) => {
         <section className={styles.titleSection}>
           <h4>지도</h4>
         </section>
-        <div id='map' className={styles.mapSection}></div>
-        <button onClick={getCurrentPosBtn}>현재위치</button>
+        <Map
+          ref={mapRef}
+          isPanto={map.ispanTo}
+          className={styles.mapSection}
+          center={{ lat: map?.center?.lat, lng: map?.center?.lng }}
+        >
+          <MapMarker
+            position={{ lat: map?.center?.lat, lng: map?.center?.lng }}
+          >
+            <div style={{ color: '#000' }}>Hello World!</div>
+          </MapMarker>
+        </Map>
+
+        <button
+          onClick={() => {
+            const map = mapRef.current;
+            console.log(map);
+
+            setMap((prev) => ({
+              ...prev,
+              center: {
+                lat: 0,
+                lng: 0,
+              },
+            }));
+            getCurrentPosition();
+          }}
+        >
+          현재위치
+        </button>
       </div>
     </>
   );

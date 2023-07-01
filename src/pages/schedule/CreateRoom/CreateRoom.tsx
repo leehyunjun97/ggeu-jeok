@@ -48,6 +48,7 @@ const CreateRoom = () => {
           </button>
         </div>
       </div>
+
       {isModal && <MapModal closeModal={modalHandler} setAddr={setAddr} />}
     </div>
   );
