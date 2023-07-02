@@ -28,13 +28,17 @@ const CreateRoom = () => {
         </div>
         <div className={styles.dateSection}>
           <div className={styles.dateSection2}>
-            <Label text='DATE' />
+            <Label text='Departure' />
             <input className={styles.dateInput} type='date' />
           </div>
-          <div className={styles.timeSection}>
+          <div className={styles.dateSection2}>
+            <Label text='Return' />
+            <input className={styles.dateInput} type='date' />
+          </div>
+          {/* <div className={styles.timeSection}>
             <Label text='TIME' />
             <input className={styles.dateInput} type='time' />
-          </div>
+          </div> */}
         </div>
         <div className={styles.locationSection}>
           <Label text='Location' />
@@ -49,7 +53,9 @@ const CreateRoom = () => {
         </div>
       </div>
 
-      {isModal && <MapModal closeModal={modalHandler} setAddr={setAddr} />}
+      {isModal && (
+        <MapModal closeModal={modalHandler} addr={addr} setAddr={setAddr} />
+      )}
     </div>
   );
 };

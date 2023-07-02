@@ -1,13 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from './style/mapModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import useDidMountEffect from './hooks/useDidMountEffect';
+import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
+declare global {
+  interface Window {
+    kakao: any;
+    daum: any;
+  }
+}
 
-const MapModal = ({ closeModal, setAddr }: any) => {
+const MapModal = ({ closeModal, addr, setAddr }: any) => {
   const mapRef = useRef<any>(null);
+  const [position, setPosition] = useState<any>(null);
   const [map, setMap] = useState({
     center: {
       lat: 33.450701,
@@ -17,6 +23,8 @@ const MapModal = ({ closeModal, setAddr }: any) => {
     isLoading: true,
     ispanTo: false,
   });
+
+  const geocoder = new window.kakao.maps.services.Geocoder();
 
   const getCurrentPosition = () => {
     if (navigator.geolocation) {
@@ -30,6 +38,7 @@ const MapModal = ({ closeModal, setAddr }: any) => {
             },
             isLoading: false,
           }));
+          // transAddr(position.coords.longitude, position.coords.latitude);
         },
         (err) => {
           setMap((prev: any) => ({
@@ -49,6 +58,46 @@ const MapModal = ({ closeModal, setAddr }: any) => {
     }
   };
 
+  // const onClickAddr = () => {
+  //   // 3) 주소 검색
+  //   new window.daum.Postcode({
+  //     // 4) 검색된 주소 클릭 시 콜백 함수
+  //     oncomplete: function (addrData: any) {
+  //       var geocoder = new window.kakao.maps.services.Geocoder();
+  //       geocoder.addressSearch(
+  //         addrData.address, // 검색된 주소
+  //         function (result: any, status: any) {
+  //           // 5) 성공시 좌표 값을 가져온다.
+  //           if (status === window.kakao.maps.services.Status.OK) {
+  //             var currentPos = new window.kakao.maps.LatLng(
+  //               result[0].y,
+  //               result[0].x
+  //             );
+  //             (document.getElementById('addr') as HTMLInputElement).value =
+  //               addrData.address;
+
+  //             setPosition(currentPos);
+  //           }
+  //         }
+  //       );
+  //     },
+  //   }).open();
+  // };
+
+  const transAddr = (lng: any, lat: any) => {
+    geocoder.coord2Address(lng, lat, (result: any, status: any) => {
+      if (status === window.kakao.maps.services.Status.OK) {
+        const addr = !!result[0].road_address
+          ? result[0].road_address.address_name
+          : result[0].address.address_name;
+
+        // 클릭한 위치 주소를 가져온다.
+        console.log(addr);
+        setAddr(addr);
+      }
+    });
+  };
+
   useEffect(() => {
     getCurrentPosition();
   }, [map.ispanTo]);
@@ -63,20 +112,31 @@ const MapModal = ({ closeModal, setAddr }: any) => {
         <section className={styles.titleSection}>
           <h4>지도</h4>
         </section>
+        <section className={styles.searchSection}>
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            style={{ marginRight: '15px', opacity: '0.7', cursor: 'pointer' }}
+          />
+          <input type='text' value={addr} readOnly />
+        </section>
         <Map
           ref={mapRef}
           isPanto={map.ispanTo}
           className={styles.mapSection}
           center={{ lat: map?.center?.lat, lng: map?.center?.lng }}
+          onClick={(_t, mouseEvent) => {
+            setPosition({
+              lat: mouseEvent.latLng.getLat(),
+              lng: mouseEvent.latLng.getLng(),
+            });
+            transAddr(mouseEvent.latLng.getLng(), mouseEvent.latLng.getLat());
+          }}
         >
-          <MapMarker
-            position={{ lat: map?.center?.lat, lng: map?.center?.lng }}
-          >
-            <div style={{ color: '#000' }}>Hello World!</div>
-          </MapMarker>
+          {position && <MapMarker position={position} />}
         </Map>
 
         <button
+          className={styles.currentBtn}
           onClick={() => {
             const map = mapRef.current;
             console.log(map);
@@ -91,7 +151,7 @@ const MapModal = ({ closeModal, setAddr }: any) => {
             getCurrentPosition();
           }}
         >
-          현재위치
+          현위치
         </button>
       </div>
     </>
