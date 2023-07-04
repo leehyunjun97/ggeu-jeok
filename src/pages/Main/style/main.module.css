@@ -6,14 +6,16 @@
   width: 99vw;
 }
 
-.main section {
+.mainLeftSection,
+.mainRightSection {
   margin: 20px;
   border-radius: 3px;
   position: relative;
   border: 1.7px solid black;
 }
 
-.main section span {
+.scheduleSpan,
+.friendsListSpan {
   position: absolute;
   right: 3px;
   top: -24px;

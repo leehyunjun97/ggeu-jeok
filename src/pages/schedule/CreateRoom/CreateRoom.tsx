@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
+import FriendsList from '../../../components/common/Section/FriendsListUl/FriendsList';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 
 const CreateRoom = () => {
   const [isModal, setIsModal] = useState(false);
   const [addr, setAddr] = useState('');
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const modalHandler = () => {
     setIsModal(!isModal);
@@ -29,16 +37,40 @@ const CreateRoom = () => {
         <div className={styles.dateSection}>
           <div className={styles.dateSection2}>
             <Label text='Departure' />
-            <input className={styles.dateInput} type='date' />
+            {/* <input className={styles.dateInput} type='date' /> */}
+            <ReactDatePicker
+              dateFormat='yyyy년 MM월 dd일'
+              className={styles.dateInput}
+              selected={startDate}
+              onChange={(date: Date) => setStartDate(date)}
+              selectsStart
+              minDate={new Date()}
+              startDate={startDate}
+              endDate={endDate}
+            />
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              className={styles.dateIcon}
+            />
           </div>
           <div className={styles.dateSection2}>
             <Label text='Return' />
-            <input className={styles.dateInput} type='date' />
+            {/* <input className={styles.dateInput} type='date' /> */}
+            <ReactDatePicker
+              dateFormat='yyyy년 MM월 dd일'
+              className={styles.dateInput}
+              selected={endDate}
+              onChange={(date: Date) => setEndDate(date)}
+              selectsEnd
+              minDate={new Date()}
+              startDate={startDate}
+              endDate={endDate}
+            />
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              className={styles.dateIcon}
+            />
           </div>
-          {/* <div className={styles.timeSection}>
-            <Label text='TIME' />
-            <input className={styles.dateInput} type='time' />
-          </div> */}
         </div>
         <div className={styles.locationSection}>
           <Label text='Location' />
@@ -50,6 +82,10 @@ const CreateRoom = () => {
           <button className={styles.meetingBtn} onClick={modalHandler}>
             meeting
           </button>
+        </div>
+        <Label text='invitation' />
+        <div className={styles.invitationSection}>
+          <FriendsList />
         </div>
       </div>
 
