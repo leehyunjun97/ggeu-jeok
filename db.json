@@ -17,5 +17,25 @@
       "title": "백엔드 수정",
       "body": "json-server"
     }
+  ],
+  "user": [
+    {
+      "user_id": 1,
+      "email": "dlguswns41@naver.com",
+      "password": "123456",
+      "nickName": "monstamp"
+    },
+    {
+      "user_id": 2,
+      "email": "song@naver.com",
+      "password": "123456",
+      "nickName": "song"
+    },
+    {
+      "user_id": 3,
+      "email": "monster@naver.com",
+      "password": "123456",
+      "nickName": "monster"
+    }
   ]
 }

@@ -23,6 +23,7 @@ const FriendAddModal = ({ closeModal }: any) => {
         <section className={styles.listSection}>
           <span className={styles.subTtile}>목록</span>
           <FriendsList add={'add'} />
+          {/* 같은거 쓰면 안됨 시발려나 새로 추가하는 리스트 만들어야댐 */}
         </section>
       </div>
     </>

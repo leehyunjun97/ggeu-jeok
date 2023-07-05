@@ -18,11 +18,12 @@ const Header = () => {
     localStorage.removeItem('id');
     navigate('/');
   };
+
   return (
     <>
       {isModal && <AlarmModal closeModal={modalHandler} />}
       <div className={styles.header}>
-        <Logo />
+        <Logo goMain={() => navigate('/main')} />
         <div className={styles.headerSide}>
           <button onClick={modalHandler}>
             <FontAwesomeIcon
