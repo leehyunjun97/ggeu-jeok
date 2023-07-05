@@ -20,6 +20,8 @@ const Signup = () => {
     bool: true,
   });
   const [passwordCheck, setPasswordCheck] = useState({ text: '', bool: true });
+  const [nickNameCheck, setNickNameCheck] = useState({ text: '', bool: true });
+  const [nameCheck, setNameCheck] = useState({ text: '', bool: true });
 
   useEffect(() => {
     if (!emailCheck.bool) {
@@ -36,8 +38,12 @@ const Signup = () => {
 
   const checkEmail = async () => {
     const isEmail = await postEmailCheckApi(signUpInputState.email);
-    if (!isEmail) {
+    if (!emailTypeCheck.bool) {
+      setEmailCheck({ bool: false, text: '이메일 형식을 확인해주세요' });
+    } else if (emailTypeCheck.bool && !isEmail) {
       setEmailCheck({ bool: false, text: '사용 가능한 이메일 입니다' });
+    } else if (isEmail) {
+      setEmailCheck({ bool: false, text: '중복된 이메일 입니다' });
     }
   };
 
@@ -58,6 +64,7 @@ const Signup = () => {
     }
   };
 
+  // 나중에 물어볼거 (어떻게 재사용하는지)
   const checkPassword = (e: any) => {
     if (e.target.value.trim().length < 6) {
       setPasswordCheck({
@@ -66,6 +73,34 @@ const Signup = () => {
       });
     } else {
       setPasswordCheck({
+        text: '- 형식 합격',
+        bool: true,
+      });
+    }
+  };
+
+  const checkNick = (e: any) => {
+    if (e.target.value.trim().length < 3) {
+      setNickNameCheck({
+        text: '- 닉네임은 3자 이상 입력해주세요',
+        bool: false,
+      });
+    } else {
+      setNickNameCheck({
+        text: '- 형식 합격',
+        bool: true,
+      });
+    }
+  };
+
+  const checkName = (e: any) => {
+    if (e.target.value.trim().length < 2) {
+      setNameCheck({
+        text: '- 이름을 입력해주세요',
+        bool: false,
+      });
+    } else {
+      setNameCheck({
         text: '- 형식 합격',
         bool: true,
       });
@@ -123,13 +158,28 @@ const Signup = () => {
           placeholder='닉네임'
           type='text'
           className={styles.passwordInput}
+          onBlur={checkNick}
         />
 
         <input
           placeholder='이름'
           type='text'
           className={styles.passwordInput}
+          onBlur={checkName}
         />
+
+        <div
+          className={styles.errorMessageDiv}
+          style={errorMessageDivHandler(nickNameCheck.bool)}
+        >
+          <span>{nickNameCheck.text}</span>
+        </div>
+        <div
+          className={styles.errorMessageDiv}
+          style={errorMessageDivHandler(nameCheck.bool)}
+        >
+          <span>{nameCheck.text}</span>
+        </div>
 
         <button className={styles.signUpBtn}>회원가입</button>
       </div>
