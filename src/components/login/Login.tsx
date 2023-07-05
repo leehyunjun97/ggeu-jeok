@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './style/login.module.css';
 import { useNavigate } from 'react-router-dom';
 import { getUsersApi } from '../../services/user/user';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 
 const Login = () => {

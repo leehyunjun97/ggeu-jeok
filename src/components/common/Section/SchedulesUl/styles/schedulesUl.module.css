@@ -12,16 +12,17 @@
   height: 200px;
   list-style-type: none;
   border: none;
-  background-color: rgb(237 231 231);
+  background-color: rgb(216 185 185);
   border-radius: 2px;
   text-align: center;
   line-height: 200px;
   transition: all 150ms ease;
   cursor: pointer;
+  box-shadow: 5px 5px 5px rgb(166, 166, 166);
 }
 
 .ulList li:hover {
-  background-color: rgb(228, 217, 217);
+  background-color: rgb(193, 157, 157);
   transform: rotate(1.2);
   border-radius: 0px;
 }

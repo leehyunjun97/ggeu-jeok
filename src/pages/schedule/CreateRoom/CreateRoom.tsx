@@ -22,9 +22,6 @@ const CreateRoom = () => {
   return (
     <div className={styles.main}>
       <h3>Create a plan</h3>
-      {/* 방 제목 ( 10글자 이내 )
-          
-      */}
       <div className={styles.formSection}>
         <div className={styles.roomTitleSection}>
           <Label text='방 제목' />
@@ -36,7 +33,7 @@ const CreateRoom = () => {
         </div>
         <div className={styles.dateSection}>
           <div className={styles.dateSection2}>
-            <Label text='Departure' />
+            <Label text='놀러 가는 날' />
             {/* <input className={styles.dateInput} type='date' /> */}
             <ReactDatePicker
               dateFormat='yyyy년 MM월 dd일'
@@ -54,7 +51,7 @@ const CreateRoom = () => {
             />
           </div>
           <div className={styles.dateSection2}>
-            <Label text='Return' />
+            <Label text='집에 오는 날' />
             {/* <input className={styles.dateInput} type='date' /> */}
             <ReactDatePicker
               dateFormat='yyyy년 MM월 dd일'
@@ -73,7 +70,7 @@ const CreateRoom = () => {
           </div>
         </div>
         <div className={styles.locationSection}>
-          <Label text='Location' />
+          <Label text='지역' />
           <input
             className={styles.locationInput}
             type='location'
@@ -83,7 +80,7 @@ const CreateRoom = () => {
             meeting
           </button>
         </div>
-        <Label text='invitation' />
+        <Label text='초대' />
         <div className={styles.invitationSection}>
           <FriendsList />
         </div>

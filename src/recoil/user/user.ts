@@ -1,12 +1,14 @@
 import { atom } from 'recoil';
 
-export const userInfo = atom({
+const userInfo = atom({
   key: 'userInfo',
   default: {
-    user_id: '',
+    id: '',
     email: '',
     password: '',
     nickName: '',
     name: '',
   },
 });
+
+export { userInfo };

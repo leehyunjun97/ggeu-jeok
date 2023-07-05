@@ -20,32 +20,39 @@
   ],
   "user": [
     {
-      "user_id": 1,
+      "id": 1,
       "email": "dlguswns41@naver.com",
       "password": "123456",
       "nickName": "monstamp",
       "name": "이현준"
     },
     {
-      "user_id": 2,
+      "id": 2,
       "email": "song@naver.com",
       "password": "123456",
       "nickName": "song",
       "name": "송윙스"
     },
     {
-      "user_id": 3,
+      "id": 3,
       "email": "monster@naver.com",
       "password": "123456",
       "nickName": "monster",
       "name": "몬스터"
     },
     {
-      "user_id": 4,
+      "id": 4,
       "email": "admin",
       "password": "admin",
       "nickName": "ADMIN",
       "name": "어드민"
+    },
+    {
+      "email": "lee",
+      "password": "123456",
+      "nickName": "이명박",
+      "name": "이명박",
+      "id": 5
     }
   ]
 }

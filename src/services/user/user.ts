@@ -9,4 +9,14 @@ const getUsersApi = async () => {
   }
 };
 
-export { getUsersApi };
+const postEmailCheckApi = async (email: string) => {
+  try {
+    const userList = await getUsersApi();
+    const isEmail = userList.find((item: any) => item.email === email);
+    return isEmail;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export { getUsersApi, postEmailCheckApi };

@@ -12,6 +12,10 @@
   position: relative;
 }
 
+.main button {
+  cursor: pointer;
+}
+
 .main h3 {
   position: absolute;
   top: 7%;
@@ -66,6 +70,7 @@
   width: 85%;
   padding: 3px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .dateIcon {
@@ -86,6 +91,10 @@
   position: absolute;
   top: 33px;
   right: 0px;
+  font-weight: 550;
+  background-color: #c8ac88;
+  color: rgb(255 255 255);
+  border: 1px solid black;
 }
 
 .invitationSection {

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './style/signup.module.css';
+import { postEmailCheckApi } from '../../services/user/user';
+import Toast from '../../components/common/Toast/Toast';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState({
@@ -9,11 +11,34 @@ const Signup = () => {
     nickName: '',
   });
 
-  const [emailCheck, setEmailCheck] = useState({ text: '', bool: true });
+  const [emailCheck, setEmailCheck] = useState({
+    text: '사용 가능한 이메일 입니다',
+    bool: true,
+  });
+  const [emailTypeCheck, setEmailTypeCheck] = useState({
+    text: '',
+    bool: true,
+  });
   const [passwordCheck, setPasswordCheck] = useState({ text: '', bool: true });
+
+  useEffect(() => {
+    if (!emailCheck.bool) {
+      const timer = setTimeout(() => {
+        setEmailCheck({ ...emailCheck, bool: true });
+      }, 1300);
+      return () => clearTimeout(timer);
+    }
+  }, [emailCheck]);
 
   const changeInputHandler = (value: string, key: string) => {
     setSignUpInputState((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const checkEmail = async () => {
+    const isEmail = await postEmailCheckApi(signUpInputState.email);
+    if (!isEmail) {
+      setEmailCheck({ bool: false, text: '사용 가능한 이메일 입니다' });
+    }
   };
 
   const checkEmailType = (e: any) => {
@@ -23,10 +48,13 @@ const Signup = () => {
 
     if (!isRegExp) {
       console.log('이메일 유효성 불합격 :: ', regExp.test(e.target.value));
-      setEmailCheck({ text: '- 이메일 형식을 확인해주세요', bool: isRegExp });
+      setEmailTypeCheck({
+        text: '- 이메일 형식을 확인해주세요',
+        bool: isRegExp,
+      });
     } else {
       console.log('이메일 유효성 합격 :: ', regExp.test(e.target.value));
-      setEmailCheck({ text: '형식 확인 완료', bool: isRegExp });
+      setEmailTypeCheck({ text: '형식 확인 완료', bool: isRegExp });
     }
   };
 
@@ -54,6 +82,7 @@ const Signup = () => {
 
   return (
     <div className={styles.main}>
+      {!emailCheck.bool && <Toast text={emailCheck.text} />}
       <span className={styles.signupTitleSpan}>SignUp</span>
       <div className={styles.loginDiv}>
         <section className={styles.emailSection}>
@@ -65,7 +94,9 @@ const Signup = () => {
             value={signUpInputState.email}
             onChange={(e) => changeInputHandler(e.target.value, 'email')}
           />
-          <button className={styles.emailCheckBtn}>중복확인</button>
+          <button className={styles.emailCheckBtn} onClick={checkEmail}>
+            중복확인
+          </button>
         </section>
 
         <input
@@ -77,9 +108,9 @@ const Signup = () => {
 
         <div
           className={styles.errorMessageDiv}
-          style={errorMessageDivHandler(emailCheck.bool)}
+          style={errorMessageDivHandler(emailTypeCheck.bool)}
         >
-          <span>{emailCheck.text}</span>
+          <span>{emailTypeCheck.text}</span>
         </div>
         <div
           className={styles.errorMessageDiv}

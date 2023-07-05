@@ -1,0 +1,21 @@
+.toastSection1 {
+  z-index: 999;
+  position: fixed;
+  top: 23%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 35px;
+  background-color: #424745;
+  text-align: center;
+  border-radius: 10px;
+  opacity: 0.5;
+  font-weight: 550;
+}
+
+.toastSection1 p {
+  opacity: 1;
+  font-size: 15px;
+  color: white;
+  margin-top: 10px;
+}
