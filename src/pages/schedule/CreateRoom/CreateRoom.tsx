@@ -21,7 +21,7 @@ const CreateRoom = () => {
 
   return (
     <div className={styles.main}>
-      <h3>Create a plan</h3>
+      <h3>Make a plan</h3>
       <div className={styles.formSection}>
         <div className={styles.roomTitleSection}>
           <Label text='방 제목' />

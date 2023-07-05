@@ -31,6 +31,17 @@
   margin-top: 20px;
 }
 
+.formSection input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+}
+
+.formSection input:focus {
+  outline: none;
+}
+
 .roomTitleSection,
 .dateSection,
 .invitationSection,
@@ -59,14 +70,12 @@
 
 .roomTitleInput {
   height: 25px;
-  border-radius: 3px;
   width: 60%;
   padding: 3px;
 }
 
 .dateInput {
   height: 25px;
-  border-radius: 3px;
   width: 85%;
   padding: 3px;
   font-weight: 400;
@@ -82,7 +91,6 @@
 
 .locationInput {
   height: 25px;
-  border-radius: 3px;
   width: 100%;
   padding: 3px;
 }
@@ -100,9 +108,8 @@
 .invitationSection {
   height: 130px;
   width: 100%;
-  padding: 3px;
   overflow: scroll;
-  border: 1.7px solid black;
+  border: 1.5px solid black;
   border-radius: 3px;
 }
 
