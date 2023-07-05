@@ -23,19 +23,29 @@
       "user_id": 1,
       "email": "dlguswns41@naver.com",
       "password": "123456",
-      "nickName": "monstamp"
+      "nickName": "monstamp",
+      "name": "이현준"
     },
     {
       "user_id": 2,
       "email": "song@naver.com",
       "password": "123456",
-      "nickName": "song"
+      "nickName": "song",
+      "name": "송윙스"
     },
     {
       "user_id": 3,
       "email": "monster@naver.com",
       "password": "123456",
-      "nickName": "monster"
+      "nickName": "monster",
+      "name": "몬스터"
+    },
+    {
+      "user_id": 4,
+      "email": "admin",
+      "password": "admin",
+      "nickName": "ADMIN",
+      "name": "어드민"
     }
   ]
 }
