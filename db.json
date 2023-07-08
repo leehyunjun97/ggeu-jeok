@@ -53,6 +53,13 @@
       "nickName": "이명박",
       "name": "이명박",
       "id": 5
+    },
+    {
+      "email": "mon@naver.com",
+      "password": "123456",
+      "nickName": "멍멍멍",
+      "name": "박준영",
+      "id": 6
     }
   ]
 }

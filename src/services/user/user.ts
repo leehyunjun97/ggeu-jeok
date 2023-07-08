@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IUserInfo } from '../../types/user';
 
 const getUsersApi = async () => {
   try {
@@ -19,4 +20,18 @@ const postEmailCheckApi = async (email: string) => {
   }
 };
 
-export { getUsersApi, postEmailCheckApi };
+const postSignupApi = async (signState: IUserInfo) => {
+  try {
+    const postComplet = await axios.post('http://localhost:4000/user', {
+      email: signState.email,
+      password: signState.password,
+      nickName: signState.nickName,
+      name: signState.name,
+    });
+    return postComplet;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export { getUsersApi, postEmailCheckApi, postSignupApi };

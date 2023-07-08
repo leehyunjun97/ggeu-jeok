@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './style/signup.module.css';
-import { postEmailCheckApi } from '../../services/user/user';
+import { postEmailCheckApi, postSignupApi } from '../../services/user/user';
 import Toast from '../../components/common/Toast/Toast';
+import { IUserInfo } from '../../types/user';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { userInfo } from '../../recoil/user/user';
 
 const Signup = () => {
-  const [signUpInputState, setSignUpInputState] = useState({
+  const [signUpInputState, setSignUpInputState] = useState<IUserInfo>({
     email: '',
     password: '',
     name: '',
@@ -23,6 +27,15 @@ const Signup = () => {
   const [nickNameCheck, setNickNameCheck] = useState({ text: '', bool: true });
   const [nameCheck, setNameCheck] = useState({ text: '', bool: true });
 
+  const setUser = useSetRecoilState(userInfo);
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const nickNameRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!emailCheck.bool) {
       const timer = setTimeout(() => {
@@ -32,6 +45,28 @@ const Signup = () => {
     }
   }, [emailCheck]);
 
+  console.log(emailTypeCheck.bool);
+
+  const signupHandler = async () => {
+    if (signUpInputState.email.trim() === '') {
+      emailRef.current?.focus();
+      return;
+    } else if (signUpInputState.password.trim().length < 6) {
+      passwordRef.current?.focus();
+    } else if (signUpInputState.nickName.trim().length < 3) {
+      nickNameRef.current?.focus();
+    } else if (signUpInputState.name.trim().length < 2) {
+      nameRef.current?.focus();
+    } else {
+      const signComplet = await postSignupApi(signUpInputState);
+      console.log(signComplet.data);
+      localStorage.setItem('id', signUpInputState.email);
+      setUser({ ...signComplet.data });
+      alert(`${signUpInputState.name}님 반갑습니다!`);
+      navigate('/main');
+    }
+  };
+
   const changeInputHandler = (value: string, key: string) => {
     setSignUpInputState((prev) => ({ ...prev, [key]: value }));
   };
@@ -39,11 +74,20 @@ const Signup = () => {
   const checkEmail = async () => {
     const isEmail = await postEmailCheckApi(signUpInputState.email);
     if (!emailTypeCheck.bool) {
-      setEmailCheck({ bool: false, text: '이메일 형식을 확인해주세요' });
+      setEmailCheck({
+        bool: false,
+        text: '이메일 형식을 확인해주세요',
+      });
     } else if (emailTypeCheck.bool && !isEmail) {
-      setEmailCheck({ bool: false, text: '사용 가능한 이메일 입니다' });
+      setEmailCheck({
+        bool: false,
+        text: '사용 가능한 이메일 입니다',
+      });
     } else if (isEmail) {
-      setEmailCheck({ bool: false, text: '중복된 이메일 입니다' });
+      setEmailCheck({
+        bool: false,
+        text: '중복된 이메일 입니다',
+      });
     }
   };
 
@@ -128,6 +172,7 @@ const Signup = () => {
             onBlur={checkEmailType}
             value={signUpInputState.email}
             onChange={(e) => changeInputHandler(e.target.value, 'email')}
+            ref={emailRef}
           />
           <button className={styles.emailCheckBtn} onClick={checkEmail}>
             중복확인
@@ -139,6 +184,9 @@ const Signup = () => {
           type='password'
           className={styles.passwordInput}
           onBlur={checkPassword}
+          value={signUpInputState.password}
+          onChange={(e) => changeInputHandler(e.target.value, 'password')}
+          ref={passwordRef}
         />
 
         <div
@@ -159,6 +207,9 @@ const Signup = () => {
           type='text'
           className={styles.passwordInput}
           onBlur={checkNick}
+          value={signUpInputState.nickName}
+          onChange={(e) => changeInputHandler(e.target.value, 'nickName')}
+          ref={nickNameRef}
         />
 
         <input
@@ -166,6 +217,9 @@ const Signup = () => {
           type='text'
           className={styles.passwordInput}
           onBlur={checkName}
+          value={signUpInputState.name}
+          onChange={(e) => changeInputHandler(e.target.value, 'name')}
+          ref={nameRef}
         />
 
         <div
@@ -181,7 +235,9 @@ const Signup = () => {
           <span>{nameCheck.text}</span>
         </div>
 
-        <button className={styles.signUpBtn}>회원가입</button>
+        <button className={styles.signUpBtn} onClick={signupHandler}>
+          회원가입
+        </button>
       </div>
     </div>
   );
