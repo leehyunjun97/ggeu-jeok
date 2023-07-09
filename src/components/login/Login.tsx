@@ -34,7 +34,7 @@ const Login = () => {
         setLoginCheck(true);
       }
     } catch (error) {
-      console.log('아이디 비번 확인');
+      console.log(error);
     }
   };
 

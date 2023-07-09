@@ -34,4 +34,16 @@ const postSignupApi = async (signState: IUserInfo) => {
   }
 };
 
-export { getUsersApi, postEmailCheckApi, postSignupApi };
+const postUserSearchApi = async (search: string) => {
+  try {
+    const userList = await getUsersApi();
+    const searchList = userList.filter(
+      (item: any) => item.email === search || item.nickName === search
+    );
+    return searchList;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export { getUsersApi, postEmailCheckApi, postSignupApi, postUserSearchApi };

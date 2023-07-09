@@ -6,18 +6,6 @@
       "userId": 1234
     }
   ],
-  "test": [
-    {
-      "id": 1,
-      "title": "백엔드 수정",
-      "body": "json-server"
-    },
-    {
-      "id": 3,
-      "title": "백엔드 수정",
-      "body": "json-server"
-    }
-  ],
   "user": [
     {
       "id": 1,
@@ -60,6 +48,13 @@
       "nickName": "멍멍멍",
       "name": "박준영",
       "id": 6
+    },
+    {
+      "email": "mon2@naver.com",
+      "password": "123456",
+      "nickName": "멍멍멍",
+      "name": "최준영",
+      "id": 7
     }
   ]
 }

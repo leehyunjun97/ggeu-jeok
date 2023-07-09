@@ -19,6 +19,10 @@
   display: none;
 }
 
+.mainRightSection::-webkit-scrollbar {
+  display: none;
+}
+
 .scheduleSpan,
 .friendsListSpan {
   position: absolute;

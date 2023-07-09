@@ -45,8 +45,6 @@ const Signup = () => {
     }
   }, [emailCheck]);
 
-  console.log(emailTypeCheck.bool);
-
   const signupHandler = async () => {
     if (signUpInputState.email.trim() === '') {
       emailRef.current?.focus();
@@ -59,7 +57,6 @@ const Signup = () => {
       nameRef.current?.focus();
     } else {
       const signComplet = await postSignupApi(signUpInputState);
-      console.log(signComplet.data);
       localStorage.setItem('id', signUpInputState.email);
       setUser({ ...signComplet.data });
       alert(`${signUpInputState.name}님 반갑습니다!`);
@@ -97,13 +94,11 @@ const Signup = () => {
     const isRegExp = regExp.test(e.target.value);
 
     if (!isRegExp) {
-      console.log('이메일 유효성 불합격 :: ', regExp.test(e.target.value));
       setEmailTypeCheck({
         text: '- 이메일 형식을 확인해주세요',
         bool: isRegExp,
       });
     } else {
-      console.log('이메일 유효성 합격 :: ', regExp.test(e.target.value));
       setEmailTypeCheck({ text: '형식 확인 완료', bool: isRegExp });
     }
   };
