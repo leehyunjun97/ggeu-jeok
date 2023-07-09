@@ -1,0 +1,55 @@
+li {
+  list-style-type: none;
+  border: none;
+  background-color: #f0dcc2;
+  border-radius: 3px;
+  height: 75px;
+  margin-bottom: 10px;
+  line-height: 75px;
+  padding: 15px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgb(166, 166, 166);
+  display: flex;
+}
+
+li:hover {
+  background-color: #f1e2cd;
+  transform: rotate(1.2);
+  border-radius: 0px;
+}
+
+.imageSection {
+  width: 70px;
+  background-color: transparent;
+  margin-right: 3%;
+  margin-top: 5px;
+}
+
+.cardImg {
+  width: 60px;
+  border-radius: 50%;
+  box-shadow: 3px 3px 3px rgb(208, 198, 175);
+}
+
+.infoSection {
+  width: 70%;
+  display: block;
+  overflow: hidden;
+}
+
+.infoSection p {
+  margin: 0px;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.emailP {
+}
+
+.nickNameP {
+  font-size: 13.5px;
+  opacity: 0.5;
+}

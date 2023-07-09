@@ -3,33 +3,12 @@
   margin: 10px;
 }
 
-.ulList li {
-  list-style-type: none;
-  border: none;
-  background-color: #f0dcc2;
-  border-radius: 3px;
-  height: 55px;
-  margin-bottom: 10px;
-  line-height: 55px;
-  padding: 5px;
-  padding-left: 12px;
-  transition: all 150ms ease;
-  cursor: pointer;
-  box-shadow: 5px 5px 5px rgb(166, 166, 166);
-}
-
-.ulList li:hover {
-  background-color: #f1e2cd;
-  transform: rotate(1.2);
-  border-radius: 0px;
-}
-
 .plusLi {
   text-align: center;
+  display: block;
 }
 
 .plusIcon {
   color: white;
   font-size: 25px;
 }
-
