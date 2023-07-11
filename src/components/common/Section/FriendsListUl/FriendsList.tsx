@@ -5,6 +5,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import FriendAddModal from '../../Modal/FriendAddModal/FriendAddModal';
 import FriendInfoCard from '../../Card/FriendInfoCard/FriendInfoCard';
 import { IUserInfo } from '../../../../types/user';
+import { useSetRecoilState } from 'recoil';
+import { userSearch } from '../../../../recoil/search/userSearch';
 
 interface IProps {
   add?: string;
@@ -13,9 +15,13 @@ interface IProps {
 
 const FriendsList = ({ add, list }: IProps) => {
   const [isModal, setIsModal] = useState(false);
+  const setUserSearchRecoil = useSetRecoilState(userSearch);
 
   const modalHandler = () => {
     setIsModal(!isModal);
+    if (isModal) {
+      setUserSearchRecoil('');
+    }
   };
   return (
     <>
