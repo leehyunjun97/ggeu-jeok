@@ -56,5 +56,17 @@
       "name": "최준영",
       "id": 7
     }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "my_email": "dlguswns41@naver.com",
+      "friend_email": "monster@naver.com"
+    },
+    {
+      "id": 2,
+      "my_email": "dlguswns41@naver.com",
+      "friend_email": "mon@naver.com"
+    }
   ]
 }

@@ -12,7 +12,6 @@
   border-radius: 3px;
   position: relative;
   border: 1.7px solid black;
-  overflow: scroll;
 }
 
 .mainLeftSection::-webkit-scrollbar {

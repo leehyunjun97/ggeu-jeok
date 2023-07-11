@@ -8,6 +8,7 @@ import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
 
 const Header = () => {
   const [isModal, setIsModal] = useState(false);
+  const email = localStorage.getItem('id');
 
   const modalHandler = () => {
     setIsModal(!isModal);
@@ -35,7 +36,7 @@ const Header = () => {
           <button onClick={logoutHandler}>로그아웃</button>
         </div>
       </div>
-      <Outlet />
+      <Outlet context={{ email }} />
     </>
   );
 };

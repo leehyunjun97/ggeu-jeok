@@ -3,9 +3,9 @@ li {
   border: none;
   background-color: #f0dcc2;
   border-radius: 3px;
-  height: 75px;
+  height: 65px;
   margin-bottom: 10px;
-  line-height: 75px;
+  line-height: 65px;
   padding: 15px;
   transition: all 150ms ease;
   cursor: pointer;
@@ -44,9 +44,6 @@ li:hover {
   line-height: 20px;
   margin-top: 10px;
   font-weight: bold;
-}
-
-.emailP {
 }
 
 .nickNameP {
