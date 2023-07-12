@@ -16,18 +16,6 @@ const AlarmCard = () => {
           <button className={styles.refusalBtn}>거절</button>
         </section>
       </li>
-      <li className={styles.alarmCardBody}>
-        <section className={styles.btnSection}>
-          <button className={styles.accepBtn}>수락</button>
-          <button className={styles.refusalBtn}>거절</button>
-        </section>
-      </li>
-      <li className={styles.alarmCardBody}>
-        <section className={styles.btnSection}>
-          <button className={styles.accepBtn}>수락</button>
-          <button className={styles.refusalBtn}>거절</button>
-        </section>
-      </li>
     </>
   );
 };

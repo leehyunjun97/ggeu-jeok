@@ -23,11 +23,14 @@ const FriendsList = ({ add, list }: IProps) => {
       setUserSearchRecoil('');
     }
   };
+
   return (
     <>
       <ul className={styles.ulList}>
         {list &&
-          list.map((item) => <FriendInfoCard key={item.id} info={item} />)}
+          list.map((item) => (
+            <FriendInfoCard key={item.id} info={item} add={add} />
+          ))}
         {!add && (
           <li className={styles.plusLi} onClick={modalHandler}>
             <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />

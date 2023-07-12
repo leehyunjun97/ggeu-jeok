@@ -67,6 +67,16 @@
       "id": 2,
       "my_email": "dlguswns41@naver.com",
       "friend_email": "mon@naver.com"
+    },
+    {
+      "my_email": "dlguswns41@naver.com",
+      "friend_email": "admin",
+      "id": 3
+    },
+    {
+      "my_email": "dlguswns41@naver.com",
+      "friend_email": "lee",
+      "id": 4
     }
   ]
 }
