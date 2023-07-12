@@ -77,6 +77,11 @@
       "my_email": "dlguswns41@naver.com",
       "friend_email": "lee",
       "id": 4
+    },
+    {
+      "my_email": "admin",
+      "friend_email": "song@naver.com",
+      "id": 5
     }
   ]
 }

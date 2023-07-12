@@ -15,9 +15,13 @@ const postMytFriendsApi = async (email: string) => {
   try {
     const friendList = await getFriendsApi();
     const getUserList = await getUsersApi();
-    const myFriendsList = friendList.filter(
-      (item: any) => item.my_email === email
+    const myFriendsList = friendList.filter((item: any) =>
+      item.friend_email === email
+        ? ((item.friend_email = item.my_email), (item.my_email = email))
+        : item.my_email === email
     );
+
+    console.log(myFriendsList);
 
     const a = getUserList.filter((item: IUserInfo) =>
       myFriendsList.some((i: any) => i.friend_email === item.email)

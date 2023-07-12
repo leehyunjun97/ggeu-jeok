@@ -14,6 +14,7 @@ interface IProps {
 const FriendInfoCard = ({ info, add }: IProps) => {
   const { email }: IProps = useOutletContext();
 
+  // 알람을 먼저 보내야지 씨방새야
   const addFriendHandler = async () => {
     if (add) {
       if (window.confirm('친구추가 하시겠습니까?')) {
