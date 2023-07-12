@@ -21,10 +21,14 @@
   width: 80px;
   border: none;
   background-color: transparent;
-  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   transition: all 200ms ease;
   color: black;
   white-space: nowrap;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+.logoutBtn {
+  font-size: 20px;
 }

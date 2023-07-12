@@ -33,7 +33,9 @@ const Header = () => {
               size='xl'
             />
           </button>
-          <button onClick={logoutHandler}>로그아웃</button>
+          <button onClick={logoutHandler} className={styles.logoutBtn}>
+            로그아웃
+          </button>
         </div>
       </div>
       <Outlet context={{ email }} />
@@ -42,4 +44,3 @@ const Header = () => {
 };
 
 export default Header;
-  

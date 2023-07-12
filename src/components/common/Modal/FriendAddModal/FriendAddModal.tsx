@@ -6,12 +6,18 @@ import FriendsList from '../../Section/FriendsListUl/FriendsList';
 import { useFetchUserSearch } from './hooks/useFetchUserSearch';
 import { useSetRecoilState } from 'recoil';
 import { userSearch } from '../../../../recoil/search/userSearch';
+import { useOutletContext } from 'react-router-dom';
+
+type IProps = {
+  email: string;
+};
 
 const FriendAddModal = ({ closeModal }: any) => {
   const [userSearchState, setUserSearch] = useState('');
   const setUserSearchRecoil = useSetRecoilState(userSearch);
+  const email: IProps = useOutletContext();
 
-  const { data, isLoading } = useFetchUserSearch();
+  const { data, isLoading } = useFetchUserSearch(email);
 
   return (
     <>
@@ -27,6 +33,7 @@ const FriendAddModal = ({ closeModal }: any) => {
             style={{ marginRight: '15px', opacity: '0.7', cursor: 'pointer' }}
           />
           <input
+            placeholder='ex) monstamp'
             type='text'
             value={userSearchState}
             onChange={(e) => {

@@ -3,13 +3,17 @@ import { postUserSearchApi } from '../../../../../services/user/user';
 import { useRecoilValue } from 'recoil';
 import { userSearch } from '../../../../../recoil/search/userSearch';
 
-export const useFetchUserSearch = () => {
+type IProps = {
+  email: string;
+};
+
+export const useFetchUserSearch = ({ email }: IProps) => {
   const search = useRecoilValue(userSearch);
 
   const { data, isLoading } = useQuery(
     ['getSearchList', search],
     async () => {
-      const postComplet = await postUserSearchApi(search);
+      const postComplet = await postUserSearchApi(search, email);
       return postComplet;
     },
     {

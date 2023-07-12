@@ -34,12 +34,12 @@ const postSignupApi = async (signState: IUserInfo) => {
   }
 };
 
-const postUserSearchApi = async (search: string) => {
+const postUserSearchApi = async (search: string, email: string) => {
   try {
     const userList = await getUsersApi();
-    const searchList = userList.filter(
-      (item: any) => item.email === search || item.nickName === search
-    );
+    const searchList = userList
+      .filter((item: any) => item.email === search || item.nickName === search)
+      .filter((it: any) => it.email !== email);
     return searchList;
   } catch (error: any) {
     throw new Error(error.message);
