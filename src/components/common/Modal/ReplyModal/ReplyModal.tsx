@@ -15,7 +15,7 @@ const ReplyModal = ({ closeModal, addFriendHandler, text }: IProps) => {
           <p>{text}</p>
         </section>
         <section className={styles.replyBtnSection}>
-          <button>예</button>
+          <button onClick={addFriendHandler}>예</button>
           <button onClick={closeModal}>아니오</button>
         </section>
       </div>

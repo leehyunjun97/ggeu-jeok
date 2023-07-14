@@ -95,6 +95,17 @@
       "message": {
         "text": "친구 요청을 보냈습니다."
       }
+    },
+    {
+      "type": "friend request",
+      "data": {
+        "sender": "song@naver.com",
+        "receiver": "mon2@naver.com"
+      },
+      "message": {
+        "text": "친구 요청을 보냈습니다."
+      },
+      "id": 2
     }
   ]
 }

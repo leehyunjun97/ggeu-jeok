@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <>
-      {isModal && <AlarmModal closeModal={modalHandler} />}
+      {isModal && <AlarmModal closeModal={modalHandler} email={email} />}
       <div className={styles.header}>
         <Logo goMain={() => navigate('/main')} />
         <div className={styles.headerSide}>

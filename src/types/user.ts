@@ -5,3 +5,7 @@ export interface IUserInfo {
   nickName: string;
   name: string;
 }
+
+export interface IEmail {
+  email: string;
+}

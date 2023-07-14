@@ -3,24 +3,17 @@ import styles from './style/alarmModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import AlarmCard from '../../Card/AlarmCard/AlarmCard';
-import { getAlarmApi } from '../../../../services/alarm/alarm';
+import { postMyAlarmApi } from '../../../../services/alarm/alarm';
 
-const AlarmModal = ({ closeModal }: any) => {
-  const [alarmData, setAlarmData] = useState([]);
+const AlarmModal = ({ closeModal, email }: any) => {
+  const [alarmData, setAlarmData] = useState<any[]>([]);
 
   useEffect(() => {
     const myAlarmList = async () => {
-      setAlarmData(await getAlarmApi());
+      setAlarmData(await postMyAlarmApi(email));
     };
-
     myAlarmList();
-  }, []);
-
-  // {list &&
-  //   list.map((item) => (
-  //     <FriendInfoCard key={item.id} info={item} add={add} />
-  //   ))}
-
+  }, [email]);
   return (
     <>
       <div className={styles.modalBackground} onClick={closeModal}></div>

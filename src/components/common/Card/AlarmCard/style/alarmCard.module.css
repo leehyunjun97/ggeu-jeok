@@ -8,6 +8,25 @@
   position: relative;
   margin-bottom: 18px;
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+}
+
+.alarmCardBody:hover {
+  background-color: rgb(246, 234, 216);
+}
+
+.alarmContentSection {
+  margin-bottom: 30px;
+}
+
+.alarmContentSection p {
+  margin: 0px;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .btnSection {

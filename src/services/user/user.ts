@@ -43,16 +43,10 @@ const postUserSearchApi = async (search: string, email: string) => {
       .filter((item: any) => item.email === search || item.nickName === search)
       .filter((it: any) => it.email !== email);
 
-    //   const a = getUserList.filter((item: IUserInfo) =>
-    //   myFriendsList.some((i: any) => i.friend_email === item.email)
-    // );
-
     const a = await searchList.filter((item: IUserInfo) =>
       friendList.filter((i: any) => i.email !== item.email)
     );
 
-    console.log(searchList);
-    console.log(friendList);
     return a;
   } catch (error: any) {
     throw new Error(error.message);

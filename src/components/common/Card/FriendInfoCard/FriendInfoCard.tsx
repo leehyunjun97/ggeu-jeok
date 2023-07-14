@@ -3,8 +3,8 @@ import styles from './style/friendInfoCard.module.css';
 import bear from './bear.jpg';
 import { IUserInfo } from '../../../../types/user';
 import { useOutletContext } from 'react-router-dom';
-import { postAddFriendApi } from '../../../../services/friend/friend';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
+import { friendRequestApi } from '../../../../services/alarm/alarm';
 
 interface IProps {
   info: IUserInfo;
@@ -18,19 +18,15 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   const { email }: IProps = useOutletContext();
 
   const modalHandler = () => {
-    setIsModal(!isModal);
+    if (add) {
+      setIsModal(!isModal);
+    }
   };
 
-  // 알람을 먼저 보내야지 씨방새야
   const addFriendHandler = async () => {
-    if (add) {
-      if (window.confirm('친구요청을 보내시겠습니까?')) {
-        const postCom = await postAddFriendApi(email, info.email);
-        console.log(postCom);
-      } else {
-        return;
-      }
-    }
+    const postCom = await friendRequestApi(email, info.email);
+    console.log(postCom);
+    setIsModal(!isModal);
   };
 
   return (
@@ -39,7 +35,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
         <ReplyModal
           closeModal={modalHandler}
           addFriendHandler={addFriendHandler}
-          text='친구 요쳥을 보내시겠습니까?'
+          text='친구 요청을 보내시겠습니까?'
         />
       )}
 
