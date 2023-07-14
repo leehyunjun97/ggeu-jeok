@@ -14,6 +14,7 @@ const AlarmModal = ({ closeModal, email }: any) => {
     };
     myAlarmList();
   }, [email]);
+
   return (
     <>
       <div className={styles.modalBackground} onClick={closeModal}></div>
@@ -24,13 +25,17 @@ const AlarmModal = ({ closeModal, email }: any) => {
         <section className={styles.titleSection}>
           <h4>알림</h4>
         </section>
+
         <section className={styles.alarmSection}>
-          <ul style={{ padding: '25px' }}>
-            {alarmData &&
-              alarmData.map((item: any) => (
+          {alarmData ? (
+            <ul style={{ padding: '25px' }}>
+              {alarmData.map((item: any) => (
                 <AlarmCard key={item.id} alarm={item} closeModal={closeModal} />
               ))}
-          </ul>
+            </ul>
+          ) : (
+            <h2>알람없음</h2>
+          )}
         </section>
       </div>
     </>

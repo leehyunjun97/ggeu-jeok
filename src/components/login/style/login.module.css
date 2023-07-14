@@ -20,7 +20,7 @@
 
 .signupSpan {
   opacity: 0.5;
-  font-size: 11px;
+  font-size: 14px;
   position: absolute;
   top: 108px;
   right: 7px;
@@ -48,7 +48,7 @@
   text-align: left;
   width: 100%;
   height: 15px;
-  font-size: 10.5px;
+  font-size: 13px;
   color: red;
   margin-top: 10px;
 }
