@@ -48,4 +48,12 @@ const friendRequestApi = async (
   }
 };
 
-export { getAlarmApi, postMyAlarmApi, friendRequestApi };
+const removeAlarm = async (id: string) => {
+  try {
+    await axios.delete(`http://localhost:4000/alarm/${id}`);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export { getAlarmApi, postMyAlarmApi, friendRequestApi, removeAlarm };

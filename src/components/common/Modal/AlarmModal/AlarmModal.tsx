@@ -28,7 +28,7 @@ const AlarmModal = ({ closeModal, email }: any) => {
           <ul style={{ padding: '25px' }}>
             {alarmData &&
               alarmData.map((item: any) => (
-                <AlarmCard key={item.id} alarm={item} />
+                <AlarmCard key={item.id} alarm={item} closeModal={closeModal} />
               ))}
           </ul>
         </section>

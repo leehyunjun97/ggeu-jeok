@@ -64,16 +64,6 @@
       "friend_email": "monster@naver.com"
     },
     {
-      "id": 2,
-      "my_email": "dlguswns41@naver.com",
-      "friend_email": "mon@naver.com"
-    },
-    {
-      "my_email": "dlguswns41@naver.com",
-      "friend_email": "admin",
-      "id": 3
-    },
-    {
       "my_email": "dlguswns41@naver.com",
       "friend_email": "lee",
       "id": 4
@@ -82,6 +72,16 @@
       "my_email": "admin",
       "friend_email": "song@naver.com",
       "id": 5
+    },
+    {
+      "my_email": "song@naver.com",
+      "friend_email": "mon2@naver.com",
+      "id": 6
+    },
+    {
+      "my_email": "mon2@naver.com",
+      "friend_email": "mon@naver.com",
+      "id": 7
     }
   ],
   "alarm": [
@@ -95,17 +95,6 @@
       "message": {
         "text": "친구 요청을 보냈습니다."
       }
-    },
-    {
-      "type": "friend request",
-      "data": {
-        "sender": "song@naver.com",
-        "receiver": "mon2@naver.com"
-      },
-      "message": {
-        "text": "친구 요청을 보냈습니다."
-      },
-      "id": 2
     }
   ]
 }

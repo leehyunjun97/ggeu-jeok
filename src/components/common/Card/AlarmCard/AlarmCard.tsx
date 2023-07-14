@@ -1,7 +1,23 @@
-import React from 'react';
 import styles from './style/alarmCard.module.css';
+import { postAddFriendApi } from '../../../../services/friend/friend';
+import { removeAlarm } from '../../../../services/alarm/alarm';
 
-const AlarmCard = ({ alarm }: any) => {
+const AlarmCard = ({ alarm, closeModal }: any) => {
+  const addFriendHandler = async () => {
+    const postCom = await postAddFriendApi(
+      alarm.data.sender,
+      alarm.data.receiver
+    );
+    console.log(postCom);
+    removeAlarm(alarm.id);
+    closeModal();
+  };
+
+  const refusalHandler = async () => {
+    await removeAlarm(alarm.id);
+    closeModal();
+  };
+
   return (
     <>
       <li className={styles.alarmCardBody}>
@@ -10,8 +26,12 @@ const AlarmCard = ({ alarm }: any) => {
           <p>{alarm.message.text}</p>
         </section>
         <section className={styles.btnSection}>
-          <button className={styles.accepBtn}>수락</button>
-          <button className={styles.refusalBtn}>거절</button>
+          <button className={styles.accepBtn} onClick={addFriendHandler}>
+            수락
+          </button>
+          <button className={styles.refusalBtn} onClick={refusalHandler}>
+            거절
+          </button>
         </section>
       </li>
     </>
