@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './style/alarmModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import AlarmCard from '../../Card/AlarmCard/AlarmCard';
+import { getAlarmApi } from '../../../../services/alarm/alarm';
 
 const AlarmModal = ({ closeModal }: any) => {
+  const [alarmData, setAlarmData] = useState([]);
+
+  useEffect(() => {
+    const myAlarmList = async () => {
+      setAlarmData(await getAlarmApi());
+    };
+
+    myAlarmList();
+  }, []);
+
+  // {list &&
+  //   list.map((item) => (
+  //     <FriendInfoCard key={item.id} info={item} add={add} />
+  //   ))}
+
   return (
     <>
       <div className={styles.modalBackground} onClick={closeModal}></div>
@@ -15,9 +31,12 @@ const AlarmModal = ({ closeModal }: any) => {
         <section className={styles.titleSection}>
           <h4>알림</h4>
         </section>
-        <section className={styles.searchSection}>
+        <section className={styles.alarmSection}>
           <ul style={{ padding: '25px' }}>
-            <AlarmCard />
+            {alarmData &&
+              alarmData.map((item: any) => (
+                <AlarmCard key={item.id} alarm={item} />
+              ))}
           </ul>
         </section>
       </div>

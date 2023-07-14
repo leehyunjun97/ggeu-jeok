@@ -83,5 +83,18 @@
       "friend_email": "song@naver.com",
       "id": 5
     }
+  ],
+  "alarm": [
+    {
+      "id": 1,
+      "type": "friend request",
+      "data": {
+        "sender": "dlguswns41@navaer.com",
+        "receiver": "song@naver.com"
+      },
+      "message": {
+        "text": "친구 요청을 보냈습니다."
+      }
+    }
   ]
 }

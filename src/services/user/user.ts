@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { IUserInfo } from '../../types/user';
+import { postMytFriendsApi } from '../friend/friend';
 
 const getUsersApi = async () => {
   try {
@@ -37,10 +38,22 @@ const postSignupApi = async (signState: IUserInfo) => {
 const postUserSearchApi = async (search: string, email: string) => {
   try {
     const userList = await getUsersApi();
-    const searchList = userList
+    const friendList = await postMytFriendsApi(email);
+    const searchList = await userList
       .filter((item: any) => item.email === search || item.nickName === search)
       .filter((it: any) => it.email !== email);
-    return searchList;
+
+    //   const a = getUserList.filter((item: IUserInfo) =>
+    //   myFriendsList.some((i: any) => i.friend_email === item.email)
+    // );
+
+    const a = await searchList.filter((item: IUserInfo) =>
+      friendList.filter((i: any) => i.email !== item.email)
+    );
+
+    console.log(searchList);
+    console.log(friendList);
+    return a;
   } catch (error: any) {
     throw new Error(error.message);
   }

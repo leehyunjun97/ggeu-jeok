@@ -17,6 +17,7 @@ const FriendAddModal = ({ closeModal }: any) => {
   const setUserSearchRecoil = useSetRecoilState(userSearch);
   const email: IProps = useOutletContext();
 
+  // 리스트에 기존 친구목록 안들어가게
   const { data, isLoading } = useFetchUserSearch(email);
 
   return (

@@ -21,8 +21,6 @@ const postMytFriendsApi = async (email: string) => {
         : item.my_email === email
     );
 
-    console.log(myFriendsList);
-
     const a = getUserList.filter((item: IUserInfo) =>
       myFriendsList.some((i: any) => i.friend_email === item.email)
     );
