@@ -26,12 +26,13 @@ const friendRequestApi = async (sender: string, receiver: string) => {
           alarm: [
             ...receiverInfo.alarm,
             {
-              id: receiverInfo.alarm.id++,
+              id: receiverInfo.alarmIndex,
               email: senderInfo.email,
               nickName: senderInfo.nickName,
               message: '친구요청을 보냈습니다.',
             },
           ],
+          alarmIndex: (receiverInfo.alarmIndex += 1),
         }
       );
       return postComplet;

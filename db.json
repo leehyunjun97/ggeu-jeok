@@ -34,7 +34,15 @@
       "password": "123456",
       "nickName": "song",
       "name": "송윙스",
-      "alarm": []
+      "alarm": [
+        {
+          "id": 3,
+          "email": "gombo@naver.com",
+          "nickName": "steelo",
+          "message": "친구요청을 보냈습니다."
+        }
+      ],
+      "alarmIndex": 4
     },
     {
       "id": 3,
@@ -62,16 +70,14 @@
           "email": "gombo@naver.com",
           "nickName": "steelo",
           "name": "조깨철"
-        }
-      ],
-      "alarm": [
+        },
         {
-          "id": 2,
           "email": "steelo@naver.com",
           "nickName": "steelo",
-          "message": "친구요청을 보냈습니다"
+          "name": "조강현"
         }
-      ]
+      ],
+      "alarm": []
     },
     {
       "id": 5,
@@ -79,7 +85,13 @@
       "password": "123456",
       "nickName": "steelo",
       "name": "조강현",
-      "friend": []
+      "friend": [
+        {
+          "email": "admin",
+          "nickName": "ADMIN",
+          "name": "어드민"
+        }
+      ]
     },
     {
       "id": 6,
