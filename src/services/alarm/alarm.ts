@@ -12,22 +12,32 @@ const myAlarmApi = async (email: string) => {
   }
 };
 
-const friendRequestApi = async (
-  sender: string | undefined,
-  receiver: string
-) => {
+const friendRequestApi = async (sender: string, receiver: string) => {
   try {
-    const postComplet = await axios.post('http://localhost:4000/alarm', {
-      type: 'friend request',
-      data: {
-        sender,
-        receiver,
-      },
-      message: {
-        text: '친구 요청을 보냈습니다.',
-      },
-    });
-    return postComplet;
+    const senderInfo = await postEmailCheckApi(sender);
+    const receiverInfo = await postEmailCheckApi(receiver);
+
+    console.log(senderInfo);
+
+    const addFriendAlarm = async () => {
+      const postComplet = await axios.patch(
+        `http://localhost:4000/user/${receiverInfo.id}`,
+        {
+          alarm: [
+            ...receiverInfo.alarm,
+            {
+              id: receiverInfo.alarm.id++,
+              email: senderInfo.email,
+              nickName: senderInfo.nickName,
+              message: '친구요청을 보냈습니다.',
+            },
+          ],
+        }
+      );
+      return postComplet;
+    };
+
+    return addFriendAlarm();
   } catch (error: any) {
     throw new Error(error.message);
   }

@@ -30,11 +30,7 @@ const notIncludeMyUserList = async (email: string) => {
     const userList = await getUsersApi();
     const myFriendsList = await myFriendsListFunc();
 
-    return userList.filter((item: IUserInfo) =>
-      myFriendsList.some(
-        (it: any) => item.email !== email && it.email !== item.email
-      )
-    );
+    return userList.filter((item: IUserInfo) => item.email !== email);
   } catch (error: any) {
     throw new Error(error.message);
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style/friendInfoCard.module.css';
 import bear from './bear.jpg';
-import { IUserInfo } from '../../../../types/user';
+import { IEmail, IUserInfo } from '../../../../types/user';
 import { useOutletContext } from 'react-router-dom';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
 import { friendRequestApi } from '../../../../services/alarm/alarm';
@@ -9,13 +9,14 @@ import { friendRequestApi } from '../../../../services/alarm/alarm';
 interface IProps {
   info: IUserInfo;
   add?: string;
-  email?: string;
 }
 
 const FriendInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
 
-  const { email }: IProps = useOutletContext();
+  const { email }: IEmail = useOutletContext();
+
+  console.log(email);
 
   const modalHandler = () => {
     if (add) {
