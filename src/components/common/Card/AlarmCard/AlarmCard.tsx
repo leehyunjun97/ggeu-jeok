@@ -1,14 +1,16 @@
 import styles from './style/alarmCard.module.css';
 import { addFriendApi } from '../../../../services/friend/friend';
+import { removeAlarm } from '../../../../services/alarm/alarm';
 
 const AlarmCard = ({ alarm, closeModal, email }: any) => {
   const addFriendHandler = async () => {
     const postCom = await addFriendApi(email, alarm.email);
-    console.log(postCom);
+    removeAlarm(email, alarm.id);
     closeModal();
   };
 
   const refusalHandler = () => {
+    removeAlarm(email, alarm.id);
     closeModal();
   };
 

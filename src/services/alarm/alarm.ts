@@ -1,15 +1,6 @@
 import axios from 'axios';
 import { postEmailCheckApi } from '../user/user';
 
-const getAlarmApi = async () => {
-  try {
-    const getComplet = await axios.get('http://localhost:4000/alarm');
-    return getComplet.data;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
-
 const myAlarmApi = async (email: string) => {
   try {
     const getComplet = await postEmailCheckApi(email);
@@ -20,16 +11,6 @@ const myAlarmApi = async (email: string) => {
     throw new Error(error.message);
   }
 };
-
-// const getMyFriendsApi = async (email: string) => {
-//   try {
-//     const getComplet = await postEmailCheckApi(email);
-//     const myFriendsList = getComplet.friend;
-//     return myFriendsList;
-//   } catch (error: any) {
-//     throw new Error(error.message);
-//   }
-// };
 
 const friendRequestApi = async (
   sender: string | undefined,
@@ -52,12 +33,18 @@ const friendRequestApi = async (
   }
 };
 
-// const removeAlarm = async (id: string) => {
-//   try {
-//     await axios.delete(`http://localhost:4000/alarm/${id}`);
-//   } catch (error: any) {
-//     throw new Error(error.message);
-//   }
-// };
+const removeAlarm = async (email: string, id: string) => {
+  try {
+    const myInfo = await postEmailCheckApi(email);
 
-export { getAlarmApi, myAlarmApi, friendRequestApi};
+    const removeList = myInfo.alarm.filter((item: any) => item.id !== id);
+
+    await axios.patch(`http://localhost:4000/user/${myInfo.id}`, {
+      alarm: removeList,
+    });
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export { myAlarmApi, friendRequestApi, removeAlarm };
