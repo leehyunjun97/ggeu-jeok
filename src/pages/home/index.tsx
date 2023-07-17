@@ -6,7 +6,7 @@ import Logo from '../../components/common/Logo/Logo';
 const Home = () => {
   return (
     <div className={styles.main}>
-      <section className={styles.leftSection}>홈페이지소개</section>
+      <section className={styles.leftSection}></section>
       <section className={styles.rightSection}>
         <section className={styles.logoSection}>
           <Logo />

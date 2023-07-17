@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { IUserInfo } from '../../types/user';
-import { postMytFriendsApi } from '../friend/friend';
+import { IFriendInfo } from '../../types/friend';
 
 const getUsersApi = async () => {
   try {
@@ -21,6 +21,25 @@ const postEmailCheckApi = async (email: string) => {
   }
 };
 
+const notIncludeMyUserList = async (email: string) => {
+  try {
+    const myFriendsListFunc = async () => {
+      const list = await postEmailCheckApi(email);
+      return list.friend;
+    };
+
+    const userList = await getUsersApi();
+    const myFriendsList: any = myFriendsListFunc();
+
+    return userList.filter((item: IUserInfo) =>
+      myFriendsList.some(
+        (it: any) => item.email !== email && it.email !== item.email
+      )
+    );
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
 const postSignupApi = async (signState: IUserInfo) => {
   try {
     const postComplet = await axios.post('http://localhost:4000/user', {
@@ -35,22 +54,30 @@ const postSignupApi = async (signState: IUserInfo) => {
   }
 };
 
-const postUserSearchApi = async (search: string, email: string) => {
+// const postUserSearchApi = async (search: string, email: string) => {
+//   try {
+//     const userList = await getUsersApi();
+//     const friendList = await postMytFriendsApi(email);
+//     const searchList = await userList
+//       .filter((item: any) => item.email === search || item.nickName === search)
+//       .filter((it: any) => it.email !== email);
+
+//     const a = await searchList.filter((item: IUserInfo) =>
+//       friendList.filter((i: any) => i.email !== item.email)
+//     );
+
+//     return a;
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
+
+const userSearchApi = async (search: string, email: string) => {
   try {
-    const userList = await getUsersApi();
-    const friendList = await postMytFriendsApi(email);
-    const searchList = await userList
-      .filter((item: any) => item.email === search || item.nickName === search)
-      .filter((it: any) => it.email !== email);
-
-    const a = await searchList.filter((item: IUserInfo) =>
-      friendList.filter((i: any) => i.email !== item.email)
-    );
-
-    return a;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
+    const notMyList = async () => {
+      return await notIncludeMyUserList(email);
+    };
+  } catch (error) {}
 };
 
-export { getUsersApi, postEmailCheckApi, postSignupApi, postUserSearchApi };
+export { getUsersApi, postEmailCheckApi, postSignupApi };

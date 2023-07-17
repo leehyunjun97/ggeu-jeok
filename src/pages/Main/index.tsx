@@ -3,7 +3,7 @@ import styles from './style/main.module.css';
 import FriendsList from '../../components/common/Section/FriendsListUl/FriendsList';
 import SchedulesUl from '../../components/common/Section/SchedulesUl/SchedulesUl';
 import { useOutletContext } from 'react-router-dom';
-import { postMytFriendsApi } from '../../services/friend/friend';
+import { getMyFriendsApi } from '../../services/friend/friend';
 
 type IProps = {
   email: string;
@@ -15,7 +15,7 @@ const Main = () => {
 
   useEffect(() => {
     const myFriendsList = async () => {
-      setData(await postMytFriendsApi(email));
+      setData(await getMyFriendsApi(email));
     };
 
     myFriendsList();

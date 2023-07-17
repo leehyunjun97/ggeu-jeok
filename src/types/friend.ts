@@ -1,7 +1,5 @@
-export interface IFriend {
-  id?: string;
+export interface IFriendInfo {
   email: string;
-  password: string;
   nickName: string;
   name: string;
 }

@@ -18,7 +18,7 @@ const FriendAddModal = ({ closeModal }: any) => {
   const email: IProps = useOutletContext();
 
   // 리스트에 기존 친구목록 안들어가게
-  const { data, isLoading } = useFetchUserSearch(email);
+  // const { data, isLoading } = useFetchUserSearch(email);
 
   return (
     <>
@@ -48,7 +48,7 @@ const FriendAddModal = ({ closeModal }: any) => {
           />
         </section>
         <section className={styles.listSection}>
-          <FriendsList add={'add'} list={data} />
+          {/* <FriendsList add={'add'} list={data} /> */}
         </section>
       </div>
     </>
