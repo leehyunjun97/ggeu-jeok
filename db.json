@@ -12,7 +12,21 @@
       "email": "dlguswns41@naver.com",
       "password": "123456",
       "nickName": "monstamp",
-      "name": "이현준"
+      "name": "이현준",
+      "friend": [
+        {
+          "id": 1,
+          "email": "admin",
+          "nickName": "ADMIN",
+          "name": "어드민"
+        },
+        {
+          "id": 2,
+          "email": "admin2",
+          "nickName": "ADMIN2",
+          "name": "어드민2"
+        }
+      ]
     },
     {
       "id": 2,
@@ -36,9 +50,46 @@
       "name": "어드민",
       "friend": [
         {
+          "id": 1,
           "email": "dlguswns41@naver.com",
           "nickName": "monstamp",
           "name": "이현준"
+        },
+        {
+          "id": 2,
+          "email": "gombo@naver.com",
+          "nickName": "steelo",
+          "name": "조깨철"
+        }
+      ],
+      "alarm": [
+        {
+          "id": 1,
+          "email": "gombo@naver.com",
+          "nickName": "steelo",
+          "message": "친구요청을 보냈습니다"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "email": "steelo@naver.com",
+      "password": "123456",
+      "nickName": "steelo",
+      "name": "조강현",
+      "friend": []
+    },
+    {
+      "id": 6,
+      "email": "gombo@naver.com",
+      "password": "123456",
+      "nickName": "steelo",
+      "name": "조깨철",
+      "friend": [
+        {
+          "email": "admin",
+          "nickName": "ADMIN",
+          "name": "어드민"
         }
       ]
     }

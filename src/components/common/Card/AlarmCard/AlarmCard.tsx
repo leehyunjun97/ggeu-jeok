@@ -1,19 +1,14 @@
 import styles from './style/alarmCard.module.css';
-import { removeAlarm } from '../../../../services/alarm/alarm';
+import { addFriendApi } from '../../../../services/friend/friend';
 
-const AlarmCard = ({ alarm, closeModal }: any) => {
+const AlarmCard = ({ alarm, closeModal, email }: any) => {
   const addFriendHandler = async () => {
-    // const postCom = await postAddFriendApi(
-    //   alarm.data.sender,
-    //   alarm.data.receiver
-    // );
-    // console.log(postCom);
-    // removeAlarm(alarm.id);
-    // closeModal();
+    const postCom = await addFriendApi(email, alarm.email);
+    console.log(postCom);
+    closeModal();
   };
 
-  const refusalHandler = async () => {
-    await removeAlarm(alarm.id);
+  const refusalHandler = () => {
     closeModal();
   };
 
@@ -21,8 +16,8 @@ const AlarmCard = ({ alarm, closeModal }: any) => {
     <>
       <li className={styles.alarmCardBody}>
         <section className={styles.alarmContentSection}>
-          <p>{`${alarm.data.sender}님이`}</p>
-          <p>{alarm.message.text}</p>
+          <p>{`${alarm.nickName}(${alarm.email})님이`}</p>
+          <p>{alarm.message}</p>
         </section>
         <section className={styles.btnSection}>
           <button className={styles.accepBtn} onClick={addFriendHandler}>

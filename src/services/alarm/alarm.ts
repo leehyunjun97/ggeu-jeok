@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { postEmailCheckApi } from '../user/user';
 
 const getAlarmApi = async () => {
   try {
@@ -9,23 +10,26 @@ const getAlarmApi = async () => {
   }
 };
 
-const postMyAlarmApi = async (email: string) => {
+const myAlarmApi = async (email: string) => {
   try {
-    const getAlarmList = await getAlarmApi();
-    const myAlarm = getAlarmList.filter(
-      (item: any) => item.data.receiver === email
-    );
-
-    if (Array.isArray(myAlarm)) {
-      return myAlarm;
-    } else {
-      console.log('없어 이 스끼야');
-      return [];
-    }
+    const getComplet = await postEmailCheckApi(email);
+    const myAlarmList = getComplet.alarm;
+    console.log(getComplet);
+    return myAlarmList;
   } catch (error: any) {
     throw new Error(error.message);
   }
 };
+
+// const getMyFriendsApi = async (email: string) => {
+//   try {
+//     const getComplet = await postEmailCheckApi(email);
+//     const myFriendsList = getComplet.friend;
+//     return myFriendsList;
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
 
 const friendRequestApi = async (
   sender: string | undefined,
@@ -48,12 +52,12 @@ const friendRequestApi = async (
   }
 };
 
-const removeAlarm = async (id: string) => {
-  try {
-    await axios.delete(`http://localhost:4000/alarm/${id}`);
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
+// const removeAlarm = async (id: string) => {
+//   try {
+//     await axios.delete(`http://localhost:4000/alarm/${id}`);
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
 
-export { getAlarmApi, postMyAlarmApi, friendRequestApi, removeAlarm };
+export { getAlarmApi, myAlarmApi, friendRequestApi};

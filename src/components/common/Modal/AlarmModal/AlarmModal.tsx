@@ -3,14 +3,14 @@ import styles from './style/alarmModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import AlarmCard from '../../Card/AlarmCard/AlarmCard';
-import { postMyAlarmApi } from '../../../../services/alarm/alarm';
+import { myAlarmApi } from '../../../../services/alarm/alarm';
 
 const AlarmModal = ({ closeModal, email }: any) => {
-  const [alarmData, setAlarmData] = useState<any[]>([]);
+  const [alarmData, setAlarmData] = useState([]);
 
   useEffect(() => {
     const myAlarmList = async () => {
-      setAlarmData(await postMyAlarmApi(email));
+      setAlarmData(await myAlarmApi(email));
     };
     myAlarmList();
   }, [email]);
@@ -30,7 +30,12 @@ const AlarmModal = ({ closeModal, email }: any) => {
           {alarmData ? (
             <ul style={{ padding: '25px' }}>
               {alarmData.map((item: any) => (
-                <AlarmCard key={item.id} alarm={item} closeModal={closeModal} />
+                <AlarmCard
+                  key={item.id}
+                  alarm={item}
+                  closeModal={closeModal}
+                  email={email}
+                />
               ))}
             </ul>
           ) : (
