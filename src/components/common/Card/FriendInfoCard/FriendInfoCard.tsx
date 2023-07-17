@@ -5,9 +5,10 @@ import { IEmail, IUserInfo } from '../../../../types/user';
 import { useOutletContext } from 'react-router-dom';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
 import { friendRequestApi } from '../../../../services/alarm/alarm';
+import { IFriendInfo } from '../../../../types/friend';
 
 interface IProps {
-  info: IUserInfo;
+  info: IFriendInfo | IUserInfo;
   add?: string;
 }
 
@@ -15,8 +16,6 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
 
   const { email }: IEmail = useOutletContext();
-
-  console.log(email);
 
   const modalHandler = () => {
     if (add) {

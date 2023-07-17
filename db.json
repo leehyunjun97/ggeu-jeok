@@ -25,8 +25,15 @@
           "email": "admin2",
           "nickName": "ADMIN2",
           "name": "어드민2"
+        },
+        {
+          "email": "gombo@naver.com",
+          "nickName": "steelo",
+          "name": "조깨철"
         }
-      ]
+      ],
+      "alarm": [],
+      "alarmIndex": 2
     },
     {
       "id": 2,
@@ -34,15 +41,20 @@
       "password": "123456",
       "nickName": "song",
       "name": "송윙스",
-      "alarm": [
+      "alarm": [],
+      "alarmIndex": 5,
+      "friend": [
         {
-          "id": 3,
+          "email": "admin",
+          "nickName": "ADMIN",
+          "name": "어드민"
+        },
+        {
           "email": "gombo@naver.com",
           "nickName": "steelo",
-          "message": "친구요청을 보냈습니다."
+          "name": "조깨철"
         }
-      ],
-      "alarmIndex": 4
+      ]
     },
     {
       "id": 3,
@@ -75,9 +87,20 @@
           "email": "steelo@naver.com",
           "nickName": "steelo",
           "name": "조강현"
+        },
+        {
+          "email": "song@naver.com",
+          "nickName": "song",
+          "name": "송윙스"
+        },
+        {
+          "email": "lee@naver.com",
+          "nickName": "리현준",
+          "name": "리현준"
         }
       ],
-      "alarm": []
+      "alarm": [],
+      "alarmIndex": null
     },
     {
       "id": 5,
@@ -104,8 +127,36 @@
           "email": "admin",
           "nickName": "ADMIN",
           "name": "어드민"
+        },
+        {
+          "email": "song@naver.com",
+          "nickName": "song",
+          "name": "송윙스"
+        },
+        {
+          "email": "dlguswns41@naver.com",
+          "nickName": "monstamp",
+          "name": "이현준"
         }
-      ]
+      ],
+      "alarm": [],
+      "alarmIndex": 2
+    },
+    {
+      "id": 7,
+      "email": "lee@naver.com",
+      "password": "123456",
+      "nickName": "리현준",
+      "name": "리현준",
+      "friend": [
+        {
+          "email": "admin",
+          "nickName": "ADMIN",
+          "name": "어드민"
+        }
+      ],
+      "alarm": [],
+      "alarmIndex": 1
     }
   ]
 }

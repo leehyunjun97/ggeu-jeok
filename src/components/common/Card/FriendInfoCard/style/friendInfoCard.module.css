@@ -12,6 +12,7 @@ li {
   box-shadow: 5px 5px 5px rgb(166, 166, 166);
   display: flex;
   font-family: 'Jua', sans-serif;
+  text-align: left;
 }
 
 li:hover {

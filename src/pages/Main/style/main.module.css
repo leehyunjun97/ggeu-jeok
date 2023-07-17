@@ -12,6 +12,8 @@
   border-radius: 3px;
   position: relative;
   border: 1.7px solid black;
+  overflow: scroll;
+  text-align: right;
 }
 
 .mainLeftSection::-webkit-scrollbar {
@@ -24,8 +26,8 @@
 
 .scheduleSpan,
 .friendsListSpan {
-  position: absolute;
-  right: 3px;
+  position: sticky;
+  right: 5px;
   top: -24px;
   font-weight: bold;
   font-family: 'Nanum Pen Script', cursive;

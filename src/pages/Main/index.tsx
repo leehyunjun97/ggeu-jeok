@@ -4,6 +4,8 @@ import FriendsList from '../../components/common/Section/FriendsListUl/FriendsLi
 import SchedulesUl from '../../components/common/Section/SchedulesUl/SchedulesUl';
 import { useOutletContext } from 'react-router-dom';
 import { getMyFriendsApi } from '../../services/friend/friend';
+import { useRecoilState } from 'recoil';
+import { myFriendsList } from '../../recoil/friend/myFriend';
 
 type IProps = {
   email: string;
@@ -11,21 +13,23 @@ type IProps = {
 
 const Main = () => {
   const { email }: IProps = useOutletContext();
+  const [friendListRecoil, setFriendListRecoil] = useRecoilState(myFriendsList);
   const [data, setData] = useState();
 
   useEffect(() => {
     const myFriendsList = async () => {
       setData(await getMyFriendsApi(email));
+      setFriendListRecoil(await getMyFriendsApi(email));
     };
 
     myFriendsList();
-  }, [email]);
+  }, [email, setFriendListRecoil]);
 
   return (
     <div className={styles.main}>
       <section className={styles.mainLeftSection}>
         <span className={styles.friendsListSpan}>친구 목록</span>
-        <FriendsList list={data} />
+        <FriendsList />
       </section>
       <section className={styles.mainRightSection}>
         <span className={styles.scheduleSpan}>계획 일정</span>

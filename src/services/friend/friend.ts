@@ -33,7 +33,7 @@ const addFriendApi = async (my_email: string, friend_email: string) => {
     const friendInfo = await postEmailCheckApi(friend_email);
 
     const addFunc = async () => {
-      await axios.patch(`http://localhost:4000/user/${myInfo.id}`, {
+      const a = await axios.patch(`http://localhost:4000/user/${myInfo.id}`, {
         friend: [
           ...myInfo.friend,
           {
@@ -53,9 +53,11 @@ const addFriendApi = async (my_email: string, friend_email: string) => {
           },
         ],
       });
+
+      return a;
     };
 
-    addFunc();
+    return addFunc();
   } catch (error) {}
 };
 

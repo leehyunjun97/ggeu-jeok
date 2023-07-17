@@ -57,11 +57,13 @@ const userSearchApi = async (search: string, email: string) => {
 
     const list = await notMyList();
 
-    console.log(list);
-
-    return list.filter(
+    const a = list.filter(
       (item: IUserInfo) => item.email === search || item.nickName === search
     );
+
+    console.log(a);
+
+    return a;
   } catch (error: any) {
     throw new Error(error.message);
   }
