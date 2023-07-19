@@ -19,6 +19,7 @@ const FriendsList = ({ add, list }: IProps) => {
   const setUserSearchRecoil = useSetRecoilState(userSearch);
   const [friendListRecoil, setFriendListRecoil] = useRecoilState(myFriendsList);
 
+
   const modalHandler = () => {
     setIsModal(!isModal);
     if (isModal) {
@@ -29,13 +30,10 @@ const FriendsList = ({ add, list }: IProps) => {
   return (
     <>
       <ul className={styles.ulList}>
-        {!list
-          ? friendListRecoil.map((item) => (
-              <FriendInfoCard key={item.id} info={item} add={add} />
-            ))
-          : list.map((item) => (
-              <FriendInfoCard key={item.id} info={item} add={add} />
-            ))}
+        {!list &&
+          friendListRecoil.map((item) => (
+            <FriendInfoCard key={item.id} info={item} add={add} />
+          ))}
         {!add && (
           <li className={styles.plusLi} onClick={modalHandler}>
             <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />

@@ -82,7 +82,7 @@ const CreateRoom = () => {
         </div>
         <Label text='초대' />
         <div className={styles.invitationSection}>
-          <FriendsList />
+          <FriendsList list={[]} />
         </div>
       </div>
 

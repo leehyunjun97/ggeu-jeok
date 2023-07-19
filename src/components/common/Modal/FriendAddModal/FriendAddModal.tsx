@@ -7,6 +7,7 @@ import { useFetchUserSearch } from './hooks/useFetchUserSearch';
 import { useSetRecoilState } from 'recoil';
 import { userSearch } from '../../../../recoil/search/userSearch';
 import { useOutletContext } from 'react-router-dom';
+import FriendSearchList from '../../Section/FriendsListUl/FriendSearchList';
 
 type IProps = {
   email: string;
@@ -48,7 +49,8 @@ const FriendAddModal = ({ closeModal }: any) => {
           />
         </section>
         <section className={styles.listSection}>
-          <FriendsList add={'add'} list={data} />
+          {/* <FriendSearch add={'add'} list={data} /> */}
+          {<FriendSearchList list={data} />}
         </section>
       </div>
     </>
