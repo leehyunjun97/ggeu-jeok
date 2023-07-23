@@ -20,6 +20,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   const modalHandler = () => {
     if (add) {
       setIsModal(!isModal);
+      console.log(add);
     }
   };
 

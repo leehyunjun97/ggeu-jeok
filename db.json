@@ -139,8 +139,15 @@
           "name": "이현준"
         }
       ],
-      "alarm": [],
-      "alarmIndex": 2
+      "alarm": [
+        {
+          "id": 2,
+          "email": "monster@naver.com",
+          "nickName": "monster",
+          "message": "친구요청을 보냈습니다."
+        }
+      ],
+      "alarmIndex": 3
     },
     {
       "id": 7,

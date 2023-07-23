@@ -12,7 +12,7 @@ type IProps = {
   email: string;
 };
 
-const FriendAddModal = ({ closeModal }: any) => {
+const FriendAddModal = ({ closeModal, add }: any) => {
   const [userSearchState, setUserSearch] = useState('');
   const setUserSearchRecoil = useSetRecoilState(userSearch);
   const email: IProps = useOutletContext();

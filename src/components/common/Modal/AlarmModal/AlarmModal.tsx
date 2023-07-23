@@ -15,6 +15,8 @@ const AlarmModal = ({ closeModal, email }: any) => {
     myAlarmList();
   }, [email]);
 
+  console.log(alarmData.length);
+
   return (
     <>
       <div className={styles.modalBackground} onClick={closeModal}></div>
@@ -27,7 +29,7 @@ const AlarmModal = ({ closeModal, email }: any) => {
         </section>
 
         <section className={styles.alarmSection}>
-          {alarmData ? (
+          {alarmData.length > 0 ? (
             <ul style={{ padding: '25px' }}>
               {alarmData.map((item: any) => (
                 <AlarmCard
@@ -39,7 +41,7 @@ const AlarmModal = ({ closeModal, email }: any) => {
               ))}
             </ul>
           ) : (
-            <h2>알람없음</h2>
+            <h4 className={styles.zeroAlarm}>알람이 없습니다.</h4>
           )}
         </section>
       </div>
