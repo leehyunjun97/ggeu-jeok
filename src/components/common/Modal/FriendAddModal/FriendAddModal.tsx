@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './style/friendAddModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
-import FriendsList from '../../Section/FriendsListUl/FriendsList';
 import { useFetchUserSearch } from './hooks/useFetchUserSearch';
 import { useSetRecoilState } from 'recoil';
 import { userSearch } from '../../../../recoil/search/userSearch';

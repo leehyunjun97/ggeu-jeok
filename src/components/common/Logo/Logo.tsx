@@ -1,10 +1,15 @@
 import React from 'react';
 import styles from './style/logo.module.css';
 
-const Logo = ({ goMain }: any) => {
+interface IProps {
+  goMain?: any;
+  nickName?: any;
+}
+
+const Logo = ({ goMain, nickName }: IProps) => {
   return (
     <h2 className={styles.mainLogo} onClick={goMain}>
-      끄적끄적
+      {nickName && <span>{nickName}'s </span>}끄적끄적
     </h2>
   );
 };

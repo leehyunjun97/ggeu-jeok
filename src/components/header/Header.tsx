@@ -5,10 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { Outlet, useNavigate } from 'react-router-dom';
 import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from '../../recoil/user/user';
 
 const Header = () => {
   const [isModal, setIsModal] = useState(false);
   const email = localStorage.getItem('id');
+  const userInfoRecoil = useRecoilValue(userInfo);
 
   const modalHandler = () => {
     setIsModal(!isModal);
@@ -24,7 +27,10 @@ const Header = () => {
     <>
       {isModal && <AlarmModal closeModal={modalHandler} email={email} />}
       <div className={styles.header}>
-        <Logo goMain={() => navigate('/main')} />
+        <Logo
+          goMain={() => navigate('/main')}
+          nickName={userInfoRecoil.nickName}
+        />
         <div className={styles.headerSide}>
           <button onClick={modalHandler}>
             <FontAwesomeIcon

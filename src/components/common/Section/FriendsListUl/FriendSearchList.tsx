@@ -11,8 +11,9 @@ interface IProps {
 const FriendSearchList = ({ list }: IProps) => {
   const [isModal, setIsModal] = useState(false);
 
-  const modalHandler = () => {
+  const modalHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setIsModal(!isModal);
+    console.log(e.key);
   };
 
   return (
