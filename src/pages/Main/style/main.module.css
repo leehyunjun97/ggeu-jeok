@@ -1,6 +1,6 @@
 .main {
   display: flex;
-  height: 600px;
+  height: 87vh;
   margin: auto;
   margin-top: 17px;
   width: 99vw;
@@ -35,8 +35,8 @@
 }
 
 .mainLeftSection {
-  width: 400px;
+  width: 25%;
 }
 .mainRightSection {
-  width: 1200px;
+  width: 75%;
 }
