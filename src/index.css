@@ -6,6 +6,10 @@ body {
   background-color: #efe7de;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 span {
   font-family: 'Nanum Pen Script', cursive;
 }
