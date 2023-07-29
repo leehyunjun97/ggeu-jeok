@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
+import { IUserInfo } from '../../types/user';
 
-const userInfo = atom({
+const userInfo = atom<IUserInfo>({
   key: 'userInfo',
   default: {
     id: '',
@@ -8,7 +9,13 @@ const userInfo = atom({
     password: '',
     nickName: '',
     name: '',
+    friend: [],
   },
 });
 
-export { userInfo };
+const userRender = atom({
+  key: 'userRender',
+  default: false,
+});
+
+export { userInfo, userRender };

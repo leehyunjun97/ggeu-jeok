@@ -80,10 +80,10 @@ const CreateRoom = () => {
             meeting
           </button>
         </div>
-        <Label text='초대' />
+        {/* <Label text='초대' />
         <div className={styles.invitationSection}>
           <FriendsList list={[]} />
-        </div>
+        </div> */}
       </div>
 
       {isModal && (

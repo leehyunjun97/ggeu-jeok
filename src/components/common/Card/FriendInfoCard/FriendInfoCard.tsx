@@ -6,6 +6,8 @@ import { useOutletContext } from 'react-router-dom';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
 import { friendRequestApi } from '../../../../services/alarm/alarm';
 import { IFriendInfo } from '../../../../types/friend';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from '../../../../recoil/user/user';
 
 interface IProps {
   info: IFriendInfo | IUserInfo;
@@ -14,8 +16,9 @@ interface IProps {
 
 const FriendInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
+  const myinfo = useRecoilValue(userInfo);
 
-  const { email }: IEmail = useOutletContext();
+  // const { email }: IEmail = useOutletContext();
 
   const modalHandler = () => {
     if (add) {
@@ -25,7 +28,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   };
 
   const addFriendHandler = async () => {
-    const postCom = await friendRequestApi(email, info.email);
+    const postCom = await friendRequestApi(myinfo.email, info.email);
     console.log(postCom);
     setIsModal(!isModal);
   };

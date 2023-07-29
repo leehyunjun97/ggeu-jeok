@@ -29,7 +29,6 @@ const Login = () => {
 
         localStorage.setItem('id', findUser.email);
         setUser({ ...findUser });
-        console.log(findUser);
         navigate('/main');
       } else {
         setLoginCheck(true);

@@ -7,9 +7,12 @@ import NonUserRouter from './router/NonUserRouter';
 import Signup from './pages/signup/Signup';
 import ScheduleRouter from './router/ScheduleRouter';
 import CreateRoom from './pages/schedule/CreateRoom/CreateRoom';
-import Chat from './pages/chatTest/Chat';
 
 function App() {
+
+  
+  
+
   return (
     <>
       <Routes>
@@ -17,9 +20,6 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/signup' element={<Signup />} />
         </Route>
-
-        <Route path='/chat' element={<Chat />} />
-
         <Route path='/' element={<UserRouter />}>
           <Route path='/' element={<Header />}>
             <Route path='main' element={<Main />} />

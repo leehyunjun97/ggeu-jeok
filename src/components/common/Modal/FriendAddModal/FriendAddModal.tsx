@@ -5,20 +5,14 @@ import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useFetchUserSearch } from './hooks/useFetchUserSearch';
 import { useSetRecoilState } from 'recoil';
 import { userSearch } from '../../../../recoil/search/userSearch';
-import { useOutletContext } from 'react-router-dom';
 import FriendSearchList from '../../Section/FriendsListUl/FriendSearchList';
 
-type IProps = {
-  email: string;
-};
-
-const FriendAddModal = ({ closeModal, add }: any) => {
+const FriendAddModal = ({ closeModal }: any) => {
   const [userSearchState, setUserSearch] = useState('');
   const setUserSearchRecoil = useSetRecoilState(userSearch);
-  const email: IProps = useOutletContext();
+  // const email: IProps = useOutletContext();
 
-  // 리스트에 기존 친구목록 안들어가게
-  const { data, isLoading } = useFetchUserSearch(email);
+  const { data, isLoading } = useFetchUserSearch();
 
   return (
     <>

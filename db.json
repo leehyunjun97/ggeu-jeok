@@ -15,25 +15,19 @@
       "name": "이현준",
       "friend": [
         {
-          "id": 1,
+          "id": 4,
           "email": "admin",
           "nickName": "ADMIN",
           "name": "어드민"
         },
         {
-          "id": 2,
-          "email": "admin2",
-          "nickName": "ADMIN2",
-          "name": "어드민2"
-        },
-        {
-          "email": "gombo@naver.com",
-          "nickName": "steelo",
-          "name": "조깨철"
+          "email": "ediya@naver.com",
+          "nickName": "monstamp",
+          "name": "이디야"
         }
       ],
       "alarm": [],
-      "alarmIndex": 2
+      "alarmIndex": 3
     },
     {
       "id": 2,
@@ -43,18 +37,7 @@
       "name": "송윙스",
       "alarm": [],
       "alarmIndex": 5,
-      "friend": [
-        {
-          "email": "admin",
-          "nickName": "ADMIN",
-          "name": "어드민"
-        },
-        {
-          "email": "gombo@naver.com",
-          "nickName": "steelo",
-          "name": "조깨철"
-        }
-      ]
+      "friend": []
     },
     {
       "id": 3,
@@ -78,25 +61,9 @@
           "name": "이현준"
         },
         {
-          "id": 2,
-          "email": "gombo@naver.com",
-          "nickName": "steelo",
-          "name": "조깨철"
-        },
-        {
-          "email": "steelo@naver.com",
-          "nickName": "steelo",
-          "name": "조강현"
-        },
-        {
-          "email": "song@naver.com",
-          "nickName": "song",
-          "name": "송윙스"
-        },
-        {
-          "email": "lee@naver.com",
-          "nickName": "리현준",
-          "name": "리현준"
+          "email": "ediya@naver.com",
+          "nickName": "monstamp",
+          "name": "이디야"
         }
       ],
       "alarm": [],
@@ -108,13 +75,7 @@
       "password": "123456",
       "nickName": "steelo",
       "name": "조강현",
-      "friend": [
-        {
-          "email": "admin",
-          "nickName": "ADMIN",
-          "name": "어드민"
-        }
-      ]
+      "friend": []
     },
     {
       "id": 6,
@@ -122,23 +83,7 @@
       "password": "123456",
       "nickName": "steelo",
       "name": "조깨철",
-      "friend": [
-        {
-          "email": "admin",
-          "nickName": "ADMIN",
-          "name": "어드민"
-        },
-        {
-          "email": "song@naver.com",
-          "nickName": "song",
-          "name": "송윙스"
-        },
-        {
-          "email": "dlguswns41@naver.com",
-          "nickName": "monstamp",
-          "name": "이현준"
-        }
-      ],
+      "friend": [],
       "alarm": [
         {
           "id": 2,
@@ -155,15 +100,30 @@
       "password": "123456",
       "nickName": "리현준",
       "name": "리현준",
+      "friend": [],
+      "alarm": [],
+      "alarmIndex": 1
+    },
+    {
+      "id": 8,
+      "email": "ediya@naver.com",
+      "password": "123456",
+      "nickName": "monstamp",
+      "name": "이디야",
       "friend": [
         {
           "email": "admin",
           "nickName": "ADMIN",
           "name": "어드민"
+        },
+        {
+          "email": "dlguswns41@naver.com",
+          "nickName": "monstamp",
+          "name": "이현준"
         }
       ],
       "alarm": [],
-      "alarmIndex": 1
+      "alarmIndex": 2
     }
   ]
 }

@@ -5,21 +5,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { Outlet, useNavigate } from 'react-router-dom';
 import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 
 const Header = () => {
   const [isModal, setIsModal] = useState(false);
   const email = localStorage.getItem('id');
   const userInfoRecoil = useRecoilValue(userInfo);
+  const userInfoReset = useResetRecoilState(userInfo);
 
   const modalHandler = () => {
     setIsModal(!isModal);
   };
 
   const navigate = useNavigate();
+
   const logoutHandler = () => {
     localStorage.removeItem('id');
+    userInfoReset();
     navigate('/');
   };
 
@@ -29,7 +32,7 @@ const Header = () => {
       <div className={styles.header}>
         <Logo
           goMain={() => navigate('/main')}
-          nickName={userInfoRecoil.nickName}
+          nickName={userInfoRecoil.nickName ?? ''}
         />
         <div className={styles.headerSide}>
           <button onClick={modalHandler}>
@@ -44,7 +47,7 @@ const Header = () => {
           </button>
         </div>
       </div>
-      <Outlet context={{ email }} />
+      <Outlet />
     </>
   );
 };

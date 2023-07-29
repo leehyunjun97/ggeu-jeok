@@ -10,6 +10,17 @@ const getUsersApi = async () => {
   }
 };
 
+const getMyInfoApi = async (email: string) => {
+  try {
+    const getComplet = await axios.get(
+      `http://localhost:4000/user?email=${email}`
+    );
+    return getComplet;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 const postEmailCheckApi = async (email: string) => {
   try {
     const userList = await getUsersApi();
@@ -35,6 +46,7 @@ const notIncludeMyUserList = async (email: string) => {
     throw new Error(error.message);
   }
 };
+
 const postSignupApi = async (signState: IUserInfo) => {
   try {
     const postComplet = await axios.post('http://localhost:4000/user', {
@@ -49,24 +61,22 @@ const postSignupApi = async (signState: IUserInfo) => {
   }
 };
 
-const userSearchApi = async (search: string, email: string) => {
+const userSearchApi = async (search: string) => {
   try {
-    const notMyList = async () => {
-      return await notIncludeMyUserList(email);
-    };
-
-    const list = await notMyList();
-
-    const a = list.filter(
-      (item: IUserInfo) => item.email === search || item.nickName === search
+    const getSearchCom = await axios.get(
+      `http://localhost:4000/user?nickName=${search}`
     );
 
-    console.log(a);
-
-    return a;
+    return getSearchCom.data;
   } catch (error: any) {
     throw new Error(error.message);
   }
 };
 
-export { getUsersApi, postEmailCheckApi, postSignupApi, userSearchApi };
+export {
+  getUsersApi,
+  postEmailCheckApi,
+  postSignupApi,
+  userSearchApi,
+  getMyInfoApi,
+};

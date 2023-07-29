@@ -2,19 +2,23 @@ import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 import { userSearch } from '../../../../../recoil/search/userSearch';
 import { userSearchApi } from '../../../../../services/user/user';
+import { userInfo } from '../../../../../recoil/user/user';
 
-type IProps = {
-  email: string;
-};
-
-export const useFetchUserSearch = ({ email }: IProps) => {
+export const useFetchUserSearch = () => {
   const search = useRecoilValue(userSearch);
+  const myInfo = useRecoilValue(userInfo);
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     ['getSearchList', search],
     async () => {
-      const postComplet = await userSearchApi(search, email);
-      return postComplet;
+      const postComplet = await userSearchApi(search);
+
+      const filterId = myInfo.friend?.map((item) => item.id);
+      const aa = postComplet.filter(
+        (item: any) => !filterId?.includes(item.id)
+      );
+
+      return aa;
     },
     {
       enabled: !!search,
@@ -25,5 +29,5 @@ export const useFetchUserSearch = ({ email }: IProps) => {
     }
   );
 
-  return { data, isLoading };
+  return { data, isLoading, refetch };
 };

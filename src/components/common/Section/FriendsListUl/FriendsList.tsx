@@ -4,19 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import FriendAddModal from '../../Modal/FriendAddModal/FriendAddModal';
 import FriendInfoCard from '../../Card/FriendInfoCard/FriendInfoCard';
-import { IUserInfo } from '../../../../types/user';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userSearch } from '../../../../recoil/search/userSearch';
-import { myFriendsList } from '../../../../recoil/friend/myFriend';
+import { userInfo } from '../../../../recoil/user/user';
 
-interface IProps {
-  list?: IUserInfo[];
-}
-
-const FriendsList = ({ list }: IProps) => {
+const FriendsList = () => {
   const [isModal, setIsModal] = useState(false);
   const setUserSearchRecoil = useSetRecoilState(userSearch);
-  const friendListRecoil = useRecoilValue(myFriendsList);
+  const info = useRecoilValue(userInfo);
 
   const modalHandler = () => {
     setIsModal(!isModal);
@@ -28,8 +23,8 @@ const FriendsList = ({ list }: IProps) => {
   return (
     <>
       <ul className={styles.ulList}>
-        {!list &&
-          friendListRecoil.map((item) => (
+        {info.friend &&
+          info.friend.map((item) => (
             <FriendInfoCard key={item.id} info={item} />
           ))}
 

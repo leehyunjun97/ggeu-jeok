@@ -18,6 +18,7 @@ import { getUsersApi, postEmailCheckApi } from '../user/user';
 // };
 
 const getMyFriendsApi = async (email: string) => {
+  console.log(email);
   try {
     const getComplet = await postEmailCheckApi(email);
     const myFriendsList = getComplet.friend;
