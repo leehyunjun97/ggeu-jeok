@@ -10,7 +10,6 @@ import FriendSearchList from '../../Section/FriendsListUl/FriendSearchList';
 const FriendAddModal = ({ closeModal }: any) => {
   const [userSearchState, setUserSearch] = useState('');
   const setUserSearchRecoil = useSetRecoilState(userSearch);
-  // const email: IProps = useOutletContext();
 
   const { data, isLoading } = useFetchUserSearch();
 

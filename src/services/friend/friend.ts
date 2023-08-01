@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { IUserInfo } from '../../types/user';
-import { getUsersApi, postEmailCheckApi } from '../user/user';
+import { getMyInfoApi, getUsersApi, postEmailCheckApi } from '../user/user';
 
 // const postAddFriendApi = async (
 //   my_email: string | undefined,
@@ -28,16 +28,19 @@ const getMyFriendsApi = async (email: string) => {
   }
 };
 
-const addFriendApi = async (my_email: string, friend_email: string) => {
+const addFriendApi = async (myInfo: IUserInfo, friend_email: string) => {
   try {
-    const myInfo = await postEmailCheckApi(my_email);
+    // const myInfo = await postEmailCheckApi(my_email);
     const friendInfo = await postEmailCheckApi(friend_email);
+
+    // const myInfo = await getMyInfoApi(my_email);
 
     const addFunc = async () => {
       const a = await axios.patch(`http://localhost:4000/user/${myInfo.id}`, {
         friend: [
           ...myInfo.friend,
           {
+            id: friendInfo.id,
             email: friend_email,
             nickName: friendInfo.nickName,
             name: friendInfo.name,
@@ -48,7 +51,8 @@ const addFriendApi = async (my_email: string, friend_email: string) => {
         friend: [
           ...friendInfo.friend,
           {
-            email: my_email,
+            id: myInfo.id,
+            email: myInfo.email,
             nickName: myInfo.nickName,
             name: myInfo.name,
           },

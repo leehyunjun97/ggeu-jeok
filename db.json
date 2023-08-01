@@ -19,15 +19,10 @@
           "email": "admin",
           "nickName": "ADMIN",
           "name": "어드민"
-        },
-        {
-          "email": "ediya@naver.com",
-          "nickName": "monstamp",
-          "name": "이디야"
         }
       ],
       "alarm": [],
-      "alarmIndex": 3
+      "alarmIndex": 4
     },
     {
       "id": 2,
@@ -59,11 +54,6 @@
           "email": "dlguswns41@naver.com",
           "nickName": "monstamp",
           "name": "이현준"
-        },
-        {
-          "email": "ediya@naver.com",
-          "nickName": "monstamp",
-          "name": "이디야"
         }
       ],
       "alarm": [],
@@ -110,18 +100,7 @@
       "password": "123456",
       "nickName": "monstamp",
       "name": "이디야",
-      "friend": [
-        {
-          "email": "admin",
-          "nickName": "ADMIN",
-          "name": "어드민"
-        },
-        {
-          "email": "dlguswns41@naver.com",
-          "nickName": "monstamp",
-          "name": "이현준"
-        }
-      ],
+      "friend": [],
       "alarm": [],
       "alarmIndex": 2
     }

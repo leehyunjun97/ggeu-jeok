@@ -18,12 +18,9 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
   const myinfo = useRecoilValue(userInfo);
 
-  // const { email }: IEmail = useOutletContext();
-
   const modalHandler = () => {
     if (add) {
       setIsModal(!isModal);
-      console.log(add);
     }
   };
 

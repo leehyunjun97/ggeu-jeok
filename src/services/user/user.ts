@@ -15,6 +15,7 @@ const getMyInfoApi = async (email: string) => {
     const getComplet = await axios.get(
       `http://localhost:4000/user?email=${email}`
     );
+    console.log(getComplet.data[0]);
     return getComplet;
   } catch (error: any) {
     throw new Error(error.message);
@@ -31,21 +32,21 @@ const postEmailCheckApi = async (email: string) => {
   }
 };
 
-const notIncludeMyUserList = async (email: string) => {
-  try {
-    const myFriendsListFunc = async () => {
-      const list = await postEmailCheckApi(email);
-      return list.friend;
-    };
+// const notIncludeMyUserList = async (email: string) => {
+//   try {
+//     const myFriendsListFunc = async () => {
+//       const list = await postEmailCheckApi(email);
+//       return list.friend;
+//     };
 
-    const userList = await getUsersApi();
-    const myFriendsList = await myFriendsListFunc();
+//     const userList = await getUsersApi();
+//     const myFriendsList = await myFriendsListFunc();
 
-    return userList.filter((item: IUserInfo) => item.email !== email);
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
+//     return userList.filter((item: IUserInfo) => item.email !== email);
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
 
 const postSignupApi = async (signState: IUserInfo) => {
   try {
