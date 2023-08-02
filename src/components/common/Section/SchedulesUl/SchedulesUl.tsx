@@ -5,9 +5,10 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import ScheduleInfoCard from '../../Card/ScheduleInfoCard/ScheduleInfoCard';
 import { getRoomListApi } from '../../../../services/room/room';
+import { IRoomInfo } from '../../../../types/room';
 
 const SchedulesUl = () => {
-  const [roomData, setRoomData] = useState([]);
+  const [roomData, setRoomData] = useState<IRoomInfo[]>([]);
   const navigate = useNavigate();
 
   // const [alarmData, setAlarmData] = useState([]);
@@ -23,16 +24,14 @@ const SchedulesUl = () => {
     const getRoomList = async () => {
       const roomList = await getRoomListApi();
       setRoomData(roomList);
-      console.log(roomData);
     };
     getRoomList();
   }, []);
 
   return (
     <ul className={styles.ulList}>
-      <ScheduleInfoCard />
       {roomData &&
-        roomData.map((item: any) => <ScheduleInfoCard key={item.id} />)}
+        roomData.map((item) => <ScheduleInfoCard key={item.id} room={item} />)}
       <li
         className={styles.plusLi}
         onClick={() => navigate('/schedule/create')}
