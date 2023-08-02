@@ -41,7 +41,6 @@ const FriendAddModal = ({ closeModal }: any) => {
           />
         </section>
         <section className={styles.listSection}>
-          {/* <FriendSearch add={'add'} list={data} /> */}
           {<FriendSearchList list={data} />}
         </section>
       </div>

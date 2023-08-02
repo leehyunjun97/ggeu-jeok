@@ -1,24 +1,9 @@
 .ulList {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  justify-content: space-around;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   padding-left: 0px;
   margin-top: 5px;
-}
-
-.ulList li {
-  margin: 8px;
-  margin-top: 5px;
-  height: 200px;
-  list-style-type: none;
-  border: none;
-  background-color: #dcea9a;
-  border-radius: 2px;
   text-align: center;
-  line-height: 200px;
-  transition: all 150ms ease;
-  cursor: pointer;
-  box-shadow: 5px 5px 5px rgb(166, 166, 166);
 }
 
 .ulList li:hover {
@@ -28,12 +13,24 @@
 }
 
 .plusLi {
-  line-height: 300px;
+  margin: 8px;
+  margin-top: 5px;
+  height: 200px;
+  list-style-type: none;
+  border: none;
+  background-color: #dcea9a;
+  border-radius: 2px;
+  line-height: 210px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgb(166, 166, 166);
+  display: block;
+  text-align: center;
 }
 
 .plusIcon {
   color: white;
-  font-size: 40px;
+  font-size: 45px;
 }
 
 @media (max-width: 1000px) {
