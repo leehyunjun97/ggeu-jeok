@@ -1,21 +1,6 @@
 import axios from 'axios';
 import { IUserInfo } from '../../types/user';
-import { getMyInfoApi, getUsersApi, postEmailCheckApi } from '../user/user';
-
-// const postAddFriendApi = async (
-//   my_email: string | undefined,
-//   friend_email: string
-// ) => {
-//   try {
-//     const postComplet = await axios.post('http://localhost:4000/friends', {
-//       my_email,
-//       friend_email,
-//     });
-//     return postComplet;
-//   } catch (error: any) {
-//     throw new Error(error.message);
-//   }
-// };
+import { postEmailCheckApi } from '../user/user';
 
 const getMyFriendsApi = async (email: string) => {
   console.log(email);
@@ -30,10 +15,7 @@ const getMyFriendsApi = async (email: string) => {
 
 const addFriendApi = async (myInfo: IUserInfo, friend_email: string) => {
   try {
-    // const myInfo = await postEmailCheckApi(my_email);
     const friendInfo = await postEmailCheckApi(friend_email);
-
-    // const myInfo = await getMyInfoApi(my_email);
 
     const addFunc = async () => {
       const a = await axios.patch(`http://localhost:4000/user/${myInfo.id}`, {

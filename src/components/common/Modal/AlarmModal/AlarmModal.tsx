@@ -15,8 +15,6 @@ const AlarmModal = ({ closeModal, email }: any) => {
     myAlarmList();
   }, [email]);
 
-  console.log(alarmData.length);
-
   return (
     <>
       <div className={styles.modalBackground} onClick={closeModal}></div>
