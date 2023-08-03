@@ -1,20 +1,17 @@
 import styles from './style/alarmCard.module.css';
 import { addFriendApi } from '../../../../services/friend/friend';
 import { removeAlarm } from '../../../../services/alarm/alarm';
-import { myFriendsList } from '../../../../recoil/friend/myFriend';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfo, userRender } from '../../../../recoil/user/user';
 import { IUserInfo } from '../../../../types/user';
 
 const AlarmCard = ({ alarm, closeModal }: any) => {
-  // const setFriendListRecoil = useSetRecoilState(myFriendsList);
   const setUserRender = useSetRecoilState(userRender);
   const myInfo = useRecoilValue<IUserInfo>(userInfo);
 
   const addFriendHandler = async () => {
     const postCom = await addFriendApi(myInfo, alarm.email);
     console.log(postCom);
-    // setFriendListRecoil(postCom?.data.friend);
     removeAlarm(myInfo.email, alarm.id);
     setUserRender((prev) => !prev);
     closeModal();

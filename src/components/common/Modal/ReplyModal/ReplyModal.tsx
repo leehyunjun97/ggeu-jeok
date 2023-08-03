@@ -8,6 +8,7 @@ interface IProps {
 }
 
 const ReplyModal = ({ closeModal, addFriendHandler, text }: IProps) => {
+
   return (
     <>
       <div className={styles.modalSection}>
@@ -17,6 +18,21 @@ const ReplyModal = ({ closeModal, addFriendHandler, text }: IProps) => {
         <section className={styles.replyBtnSection}>
           <button onClick={addFriendHandler}>예</button>
           <button onClick={closeModal}>아니오</button>
+        </section>
+      </div>
+    </>
+  );
+};
+
+ReplyModal.SimpleModal = ({ closeModal, text }: IProps) => {
+  return (
+    <>
+      <div className={styles.modalSection}>
+        <section className={styles.titleSection}>
+          <p>{text}</p>
+        </section>
+        <section className={styles.replyBtnSection}>
+          <button onClick={closeModal}>예</button>
         </section>
       </div>
     </>

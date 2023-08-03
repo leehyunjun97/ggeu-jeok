@@ -16,6 +16,7 @@ interface IProps {
 
 const FriendInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
+  const [isSimpleModal, setIsSimpleModal] = useState(false);
   const myinfo = useRecoilValue(userInfo);
 
   const modalHandler = () => {
@@ -27,7 +28,10 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   const addFriendHandler = async () => {
     const postCom = await friendRequestApi(myinfo.email, info.email);
     console.log(postCom);
-    setIsModal(!isModal);
+
+    if (postCom.request.status === 200) {
+      setIsModal(!isModal);
+    }
   };
 
   return (
@@ -39,6 +43,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
           text='친구 요청을 보내시겠습니까?'
         />
       )}
+
 
       <li className={styles.cardBody} onClick={modalHandler}>
         <section className={styles.imageSection}>
