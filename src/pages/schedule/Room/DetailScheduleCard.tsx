@@ -5,6 +5,7 @@ const DetailScheduleCard = () => {
   return (
     <li className={styles.detailScheduleLiCard}>
       <p className={styles.cardTitle}>오늘은 이거</p>
+      <p className={styles.dateNumber}>7</p>
     </li>
   );
 };
