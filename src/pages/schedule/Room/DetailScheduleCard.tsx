@@ -1,11 +1,16 @@
 import React from 'react';
 import styles from './style/detailScheduleCard.module.css';
+import { IDateDetail } from '../../../types/room';
 
-const DetailScheduleCard = () => {
+interface IProps {
+  detailSchedule: IDateDetail;
+}
+
+const DetailScheduleCard = ({ detailSchedule }: IProps) => {
   return (
     <li className={styles.detailScheduleLiCard}>
-      <p className={styles.cardTitle}>오늘은 이거</p>
-      <p className={styles.dateNumber}>7</p>
+      <p className={styles.cardTitle}>{detailSchedule.subTitle}</p>
+      <p className={styles.dateNumber}>{detailSchedule.dateDetail}</p>
     </li>
   );
 };

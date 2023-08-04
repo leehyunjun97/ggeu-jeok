@@ -137,12 +137,12 @@
         {
           "id": 1,
           "dateDetail": "2023-08-02",
-          "subTite": ""
+          "subTitle": "오늘은 이거"
         },
         {
           "id": 2,
           "dateDetail": "2023-08-03",
-          "subTite": ""
+          "subTitle": "내일은 저거"
         }
       ]
     }
