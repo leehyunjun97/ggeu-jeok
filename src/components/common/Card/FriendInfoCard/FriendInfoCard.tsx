@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import styles from './style/friendInfoCard.module.css';
 import bear from './bear.jpg';
-import { IEmail, IUserInfo } from '../../../../types/user';
-import { useOutletContext } from 'react-router-dom';
+import { IUserInfo } from '../../../../types/user';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
 import { friendRequestApi } from '../../../../services/alarm/alarm';
 import { IFriendInfo } from '../../../../types/friend';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
+import { IMemberInfo } from '../../../../types/room';
 
 interface IProps {
-  info: IFriendInfo | IUserInfo;
+  info: IFriendInfo | IUserInfo | IMemberInfo;
   add?: string;
 }
 
 const FriendInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
-  const [isSimpleModal, setIsSimpleModal] = useState(false);
   const myinfo = useRecoilValue(userInfo);
 
   const modalHandler = () => {
-    if (add) {
+    if (add === 'friend') {
       setIsModal(!isModal);
     }
   };
@@ -43,7 +42,6 @@ const FriendInfoCard = ({ info, add }: IProps) => {
           text='친구 요청을 보내시겠습니까?'
         />
       )}
-
 
       <li className={styles.cardBody} onClick={modalHandler}>
         <section className={styles.imageSection}>

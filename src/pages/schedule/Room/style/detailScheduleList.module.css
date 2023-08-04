@@ -1,0 +1,34 @@
+.ulList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding-left: 0px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.ulList li:hover {
+  background-color: #c8b8d2;
+  transform: rotate(1.2);
+  border-radius: 0px;
+}
+
+.plusLi {
+  margin: 8px;
+  margin-top: 5px;
+  height: 200px;
+  list-style-type: none;
+  border: none;
+  background-color: #e0cfeb;
+  border-radius: 2px;
+  line-height: 210px;
+  transition: all 150ms ease;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgb(166, 166, 166);
+  display: block;
+  text-align: center;
+}
+
+.plusIcon {
+  color: white;
+  font-size: 45px;
+}

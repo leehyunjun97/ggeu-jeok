@@ -116,17 +116,20 @@
     {
       "id": 1,
       "title": "오랜만에 놀러가요잉",
+      "admin": "monstamp",
       "member": [
         {
           "id": 1,
-          "userName": "이현준",
-          "userNickName": "monstamp",
+          "name": "이현준",
+          "email": "dlguswns41@naver.com",
+          "nickName": "monstamp",
           "class": "admin"
         },
         {
           "id": 4,
-          "userName": "어드민",
-          "userNickName": "ADMIN",
+          "name": "어드민",
+          "email": "admin",
+          "nickName": "ADMIN",
           "class": "member"
         }
       ],

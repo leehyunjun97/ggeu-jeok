@@ -6,8 +6,8 @@
   width: 99vw;
 }
 
-.mainLeftSection,
-.mainRightSection {
+.roomLeftSection,
+.roomRightSection {
   margin: 20px;
   border-radius: 3px;
   position: relative;
@@ -17,11 +17,11 @@
   box-shadow: 1px 1px 3px 1px #929aab;
 }
 
-.mainLeftSection::-webkit-scrollbar {
+.roomLeftSection::-webkit-scrollbar {
   display: none;
 }
 
-.mainRightSection::-webkit-scrollbar {
+.roomRightSection::-webkit-scrollbar {
   display: none;
 }
 
@@ -35,9 +35,9 @@
   font-size: 18px;
 }
 
-.mainLeftSection {
-  width: 25%;
+.roomLeftSection {
+  width: 23%;
 }
-.mainRightSection {
-  width: 75%;
+.roomRightSection {
+  width: 78%;
 }

@@ -10,6 +10,7 @@
   border-radius: 1px;
   border: 1.7px solid black;
   position: relative;
+  box-shadow: 1px 1px 3px 1px #929aab;
 }
 
 .main button {

@@ -11,15 +11,6 @@ const SchedulesUl = () => {
   const [roomData, setRoomData] = useState<IRoomInfo[]>([]);
   const navigate = useNavigate();
 
-  // const [alarmData, setAlarmData] = useState([]);
-
-  // useEffect(() => {
-  //   const myAlarmList = async () => {
-  //     setAlarmData(await myAlarmApi(email));
-  //   };
-  //   myAlarmList();
-  // }, [email]);
-
   useEffect(() => {
     const getRoomList = async () => {
       const roomList = await getRoomListApi();

@@ -21,7 +21,7 @@ const FriendSearchList = ({ list }: IProps) => {
       <ul className={styles.ulList}>
         {list &&
           list.map((item) => (
-            <FriendInfoCard key={item.id} info={item} add='add' />
+            <FriendInfoCard key={item.id} info={item} add='friend' />
           ))}
       </ul>
       {isModal && <FriendAddModal closeModal={modalHandler} />}

@@ -1,11 +1,11 @@
-.scheduleLiCard {
+.detailScheduleLiCard {
   margin: 8px;
   margin-top: 5px;
   height: 200px;
   list-style-type: none;
   border: none;
-  background-color: #dcea9a;
-  border-radius: 8px;
+  background-color: #e0cfeb;
+  border-radius: 2px;
   transition: all 150ms ease;
   cursor: pointer;
   box-shadow: 5px 5px 5px rgb(166, 166, 166);
@@ -21,28 +21,4 @@
   color: #262626;
   font-family: 'Jua', sans-serif;
   line-height: 120px;
-}
-
-.period {
-  position: absolute;
-  color: #262626;
-  bottom: 0px;
-  left: 15px;
-  font-weight: bold;
-  opacity: 0.8;
-  font-size: 0.7vw;
-}
-
-.periodIcon {
-  margin-right: 5px;
-}
-
-.membersNumber {
-  position: absolute;
-  color: #262626;
-  bottom: 0px;
-  right: 15px;
-  font-weight: bold;
-  opacity: 0.8;
-  font-size: 0.7vw;
 }
