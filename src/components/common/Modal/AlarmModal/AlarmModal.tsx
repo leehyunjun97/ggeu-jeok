@@ -15,8 +15,14 @@ const AlarmModal = ({ closeModal, email }: any) => {
     myAlarmList();
   }, [email]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  };
+
   return (
-    <>
+    <div onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.modalBackground} onClick={closeModal}></div>
       <div className={styles.modalSection}>
         <button onClick={closeModal} className={styles.modalCloseBtn}>
@@ -43,7 +49,7 @@ const AlarmModal = ({ closeModal, email }: any) => {
           )}
         </section>
       </div>
-    </>
+    </div>
   );
 };
 export default AlarmModal;

@@ -13,8 +13,14 @@ const FriendAddModal = ({ closeModal }: any) => {
 
   const { data, isLoading } = useFetchUserSearch();
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  };
+
   return (
-    <>
+    <div onKeyDown={handleKeyDown} tabIndex={0}>
       <div className={styles.modalBackground} onClick={closeModal}></div>
       <div className={styles.modalSection}>
         <button onClick={closeModal} className={styles.modalCloseBtn}>
@@ -44,7 +50,7 @@ const FriendAddModal = ({ closeModal }: any) => {
           {<FriendSearchList list={data} />}
         </section>
       </div>
-    </>
+    </div>
   );
 };
 
