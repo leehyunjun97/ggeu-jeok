@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './style/roomMain.module.css';
 import MembersList from '../../../components/common/Section/FriendsListUl/MembersList';
-import { useRecoilValue } from 'recoil';
-import { roomInfo } from '../../../recoil/room/roomInfo';
 import DetailScheduleList from './DetailScheduleList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 
 const RoomMain = () => {
   return (
@@ -15,6 +15,9 @@ const RoomMain = () => {
       <section className={styles.roomRightSection}>
         <span className={styles.scheduleSpan}>계획 일정</span>
         <DetailScheduleList />
+        <button className={styles.chatToggleBtn}>
+          <FontAwesomeIcon icon={faComment} />
+        </button>
       </section>
     </div>
   );
