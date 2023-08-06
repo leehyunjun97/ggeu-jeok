@@ -4,6 +4,7 @@ import MembersList from '../../../components/common/Section/FriendsListUl/Member
 import DetailScheduleList from './DetailScheduleList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
+import RoomChattingDiv from './RoomChattingDiv';
 
 const RoomMain = () => {
   return (
@@ -15,6 +16,7 @@ const RoomMain = () => {
       <section className={styles.roomRightSection}>
         <span className={styles.scheduleSpan}>계획 일정</span>
         <DetailScheduleList />
+        <RoomChattingDiv />
         <button className={styles.chatToggleBtn}>
           <FontAwesomeIcon icon={faComment} />
         </button>

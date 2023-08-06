@@ -1,0 +1,20 @@
+.chatDiv {
+  z-index: 999;
+  position: fixed;
+  top: 8%;
+  right: 6%;
+  /* transform: translate(45%, -50%); */
+  width: 400px;
+  height: 600px;
+  background-color: #f7f2c7;
+  text-align: center;
+  justify-content: center;
+  border-radius: 1px;
+  border: 1px solid none;
+  overflow: scroll;
+  box-shadow: 1px 3px 3px 3px rgb(227, 218, 205);
+}
+
+.chatDiv::-webkit-scrollbar {
+  display: none;
+}
