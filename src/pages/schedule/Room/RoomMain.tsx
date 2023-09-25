@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './style/roomMain.module.css';
 import MembersList from '../../../components/common/Section/FriendsListUl/MembersList';
 import DetailScheduleList from './DetailScheduleList';
@@ -7,6 +7,12 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 import RoomChattingDiv from './RoomChattingDiv';
 
 const RoomMain = () => {
+  const [hide, setHide] = useState('block');
+
+  const chatBtnToggleHandler = () => {
+    hide === 'block' ? setHide('none') : setHide('block');
+  };
+
   return (
     <div className={styles.main}>
       <section className={styles.roomLeftSection}>
@@ -16,8 +22,8 @@ const RoomMain = () => {
       <section className={styles.roomRightSection}>
         <span className={styles.scheduleSpan}>계획 일정</span>
         <DetailScheduleList />
-        <RoomChattingDiv />
-        <button className={styles.chatToggleBtn}>
+        <RoomChattingDiv hide={hide} />
+        <button className={styles.chatToggleBtn} onClick={chatBtnToggleHandler}>
           <FontAwesomeIcon icon={faComment} />
         </button>
       </section>
