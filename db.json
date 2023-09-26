@@ -61,6 +61,12 @@
           "email": "dlguswns41@naver.com",
           "nickName": "monstamp",
           "name": "이현준"
+        },
+        {
+          "id": 8,
+          "email": "ediya@naver.com",
+          "nickName": "monstamp",
+          "name": "이디야"
         }
       ],
       "alarm": [],
@@ -107,9 +113,16 @@
       "password": "123456",
       "nickName": "monstamp",
       "name": "이디야",
-      "friend": [],
+      "friend": [
+        {
+          "id": 4,
+          "email": "admin",
+          "nickName": "ADMIN",
+          "name": "어드민"
+        }
+      ],
       "alarm": [],
-      "alarmIndex": 2
+      "alarmIndex": 3
     }
   ],
   "room": [

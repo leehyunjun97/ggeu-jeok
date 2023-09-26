@@ -17,6 +17,14 @@
   margin-right: 15px;
 }
 
+.logoutBtn:hover {
+  font-size: 22px;
+}
+
+.alarmBtn:hover {
+  font-size: 17px;
+}
+
 .headerSide button {
   height: 100%;
   width: 80px;

@@ -35,7 +35,7 @@ const Header = () => {
           nickName={userInfoRecoil.nickName ?? ''}
         />
         <div className={styles.headerSide}>
-          <button onClick={modalHandler}>
+          <button onClick={modalHandler} className={styles.alarmBtn}>
             <FontAwesomeIcon
               icon={faBell}
               style={{ color: '#000000' }}
