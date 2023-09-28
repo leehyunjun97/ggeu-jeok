@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
-// import FriendsList from '../../../components/common/Section/FriendsListUl/FriendsList';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import InvitationList from './InvitationList';
+import { IFriendInfo } from '../../../types/friend';
 
 const CreateRoom = () => {
   const [isModal, setIsModal] = useState(false);
@@ -16,9 +16,16 @@ const CreateRoom = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
+
   const modalHandler = () => {
     setIsModal(!isModal);
   };
+
+  const checkListFunction = (list: IFriendInfo[]) => {
+    setCheckList(list);
+  };
+
 
   return (
     <div className={styles.main}>
@@ -83,13 +90,14 @@ const CreateRoom = () => {
         </div>
         <Label text='멤버' />
         <div className={styles.invitationSection}>
-          <InvitationList />
+          <InvitationList checkListFunction={checkListFunction} />
         </div>
       </div>
 
       {isModal && (
         <MapModal closeModal={modalHandler} addr={addr} setAddr={setAddr} />
       )}
+      <button>생성</button>
     </div>
   );
 };
