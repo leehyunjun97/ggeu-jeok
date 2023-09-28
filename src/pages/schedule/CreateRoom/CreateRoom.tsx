@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
-import FriendsList from '../../../components/common/Section/FriendsListUl/FriendsList';
+// import FriendsList from '../../../components/common/Section/FriendsListUl/FriendsList';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import InvitationList from './InvitationList';
 
 const CreateRoom = () => {
   const [isModal, setIsModal] = useState(false);
@@ -82,8 +83,7 @@ const CreateRoom = () => {
         </div>
         <Label text='멤버' />
         <div className={styles.invitationSection}>
-          {/* <FriendsList list={[]} /> */}
-          <FriendsList />
+          <InvitationList />
         </div>
       </div>
 
