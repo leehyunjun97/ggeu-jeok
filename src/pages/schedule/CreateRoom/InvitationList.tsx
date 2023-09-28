@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
+import { IFriendInfo } from '../../../types/friend';
 
 const InvitationList = () => {
   const info = useRecoilValue(userInfo);
+  const [checkedList, setCheckList] = useState<Array<IFriendInfo>>([]);
 
-  console.log(info.friend);
+  const onCheckedItem = useCallback(
+    (checked: boolean, friend: IFriendInfo) => {
+      if (checked) {
+        setCheckList((prev) => [...prev, friend]);
+      } else if (!checked) {
+        setCheckList(checkedList.filter((i) => i.id !== friend.id));
+      }
+    },
+    [checkedList]
+  );
+
+  console.log(checkedList);
 
   return (
     <>
       {info.friend &&
         info.friend.map((item) => (
           <label key={item.id}>
-            <input type='checkbox' id={item.id} onChange={() => {}} />
+            <input
+              type='checkbox'
+              id={item.id}
+              onChange={(e) => {
+                onCheckedItem(e.target.checked, item);
+              }}
+            />
             <label htmlFor={item.id}>{item.email}</label>
           </label>
         ))}
