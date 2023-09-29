@@ -19,7 +19,7 @@ const AlarmCard = ({ alarm, closeModal }: any) => {
 
   const refusalHandler = () => {
     removeAlarm(myInfo.email, alarm.id);
-    closeModal();
+    setUserRender((prev) => !prev);
   };
 
   return (

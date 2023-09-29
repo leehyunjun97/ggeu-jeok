@@ -3,9 +3,9 @@
   border: none;
   background-color: #ffdeb2;
   border-radius: 3px;
-  height: 65px;
+  height: 55px;
   margin-bottom: 10px;
-  line-height: 65px;
+  line-height: 55px;
   padding: 15px;
   transition: all 150ms ease;
   cursor: pointer;
@@ -25,7 +25,6 @@ li:hover {
   width: 70px;
   background-color: transparent;
   margin-right: 3%;
-  margin-top: 5px;
 }
 
 .cardImg {
@@ -44,7 +43,7 @@ li:hover {
 .infoSection p {
   margin: 0px;
   height: 20px;
-  line-height: 20px;
+  line-height: 15px;
   margin-top: 10px;
   font-weight: bold;
 }

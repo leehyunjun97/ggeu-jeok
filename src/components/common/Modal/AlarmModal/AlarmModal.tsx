@@ -13,7 +13,7 @@ const AlarmModal = ({ closeModal, email }: any) => {
       setAlarmData(await myAlarmApi(email));
     };
     myAlarmList();
-  }, [email]);
+  }, [email, alarmData]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') {

@@ -5,7 +5,6 @@ const myAlarmApi = async (email: string) => {
   try {
     const getComplet = await postEmailCheckApi(email);
     const myAlarmList = getComplet.alarm;
-    console.log(getComplet);
     return myAlarmList;
   } catch (error: any) {
     throw new Error(error.message);

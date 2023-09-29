@@ -38,7 +38,7 @@
       "nickName": "song",
       "name": "송윙스",
       "alarm": [],
-      "alarmIndex": 6,
+      "alarmIndex": 8,
       "friend": []
     },
     {
@@ -70,7 +70,7 @@
         }
       ],
       "alarm": [],
-      "alarmIndex": null
+      "alarmIndex": 2
     },
     {
       "id": 5,
@@ -87,15 +87,8 @@
       "nickName": "steelo",
       "name": "조깨철",
       "friend": [],
-      "alarm": [
-        {
-          "id": 2,
-          "email": "monster@naver.com",
-          "nickName": "monster",
-          "message": "친구요청을 보냈습니다."
-        }
-      ],
-      "alarmIndex": 3
+      "alarm": [],
+      "alarmIndex": 6
     },
     {
       "id": 7,
@@ -121,15 +114,22 @@
           "name": "어드민"
         }
       ],
-      "alarm": [],
-      "alarmIndex": 3
+      "alarm": [
+        {
+          "id": 4,
+          "email": "song@naver.com",
+          "nickName": "song",
+          "message": "친구요청을 보냈습니다."
+        }
+      ],
+      "alarmIndex": 5
     }
   ],
   "room": [
     {
       "id": 1,
       "title": "오랜만에 놀러가요",
-      "admin": "monstamp",
+      "admin": "dlguswns41@naver.com",
       "member": [
         {
           "id": 1,
@@ -150,12 +150,56 @@
         {
           "id": 1,
           "dateDetail": "2023-08-02",
-          "subTitle": "오늘은 이거"
+          "subTitle": "오늘은 이거",
+          "content": {
+            "0": "00시",
+            "1": "01시"
+          }
         },
         {
           "id": 2,
           "dateDetail": "2023-08-03",
           "subTitle": "내일은 저거"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "즐거운 추석",
+      "admin": "dlguswns41@naver.com",
+      "member": [
+        {
+          "id": 1,
+          "name": "이현준",
+          "email": "dlguswns41@naver.com",
+          "nickName": "monstamp",
+          "class": "admin"
+        },
+        {
+          "id": 4,
+          "name": "어드민",
+          "email": "admin",
+          "nickName": "ADMIN",
+          "class": "member"
+        },
+        {
+          "id": 5,
+          "name": "조강현",
+          "email": "steelo@naver.com",
+          "nickName": "steelo",
+          "class": "member"
+        }
+      ],
+      "date": [
+        {
+          "id": 1,
+          "dateDetail": "2023-09-28",
+          "subTitle": "추석 전날"
+        },
+        {
+          "id": 2,
+          "dateDetail": "2023-09-29",
+          "subTitle": "추석 당일"
         }
       ]
     }

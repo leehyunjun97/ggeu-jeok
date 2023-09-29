@@ -23,9 +23,9 @@ const CreateRoom = () => {
   };
 
   const checkListFunction = (list: IFriendInfo[]) => {
+    console.log(list);
     setCheckList(list);
   };
-
 
   return (
     <div className={styles.main}>
