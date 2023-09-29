@@ -3,7 +3,10 @@ import styles from './style/friendInfoCard.module.css';
 import bear from './bear.jpg';
 import { IUserInfo } from '../../../../types/user';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
-import { friendRequestApi } from '../../../../services/alarm/alarm';
+import {
+  friendRequestApi,
+  friendRequestCheckApi,
+} from '../../../../services/alarm/alarm';
 import { IFriendInfo } from '../../../../types/friend';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
@@ -25,10 +28,17 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   };
 
   const addFriendHandler = async () => {
-    const postCom = await friendRequestApi(myinfo.email, info.email);
-    console.log(postCom);
+    const check = await friendRequestCheckApi(myinfo.email, info.email);
 
-    if (postCom.request.status === 200) {
+    if (check.length !== 1) {
+      const postCom = await friendRequestApi(myinfo.email, info.email);
+      console.log(postCom);
+
+      if (postCom.request.status === 200) {
+        setIsModal(!isModal);
+      }
+    } else {
+      alert('이미 요청을 보낸 상태입니다.');
       setIsModal(!isModal);
     }
   };

@@ -13,7 +13,6 @@ const FriendSearchList = ({ list }: IProps) => {
 
   const modalHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setIsModal(!isModal);
-    console.log(e.key);
   };
 
   return (

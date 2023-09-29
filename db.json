@@ -116,13 +116,13 @@
       ],
       "alarm": [
         {
-          "id": 4,
+          "id": 6,
           "email": "song@naver.com",
           "nickName": "song",
           "message": "친구요청을 보냈습니다."
         }
       ],
-      "alarmIndex": 5
+      "alarmIndex": 7
     }
   ],
   "room": [

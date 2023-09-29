@@ -16,8 +16,6 @@ const friendRequestApi = async (sender: string, receiver: string) => {
     const senderInfo = await postEmailCheckApi(sender);
     const receiverInfo = await postEmailCheckApi(receiver);
 
-    console.log(senderInfo);
-
     const addFriendAlarm = async () => {
       const postComplet = await axios.patch(
         `http://localhost:4000/user/${receiverInfo.id}`,
@@ -43,6 +41,14 @@ const friendRequestApi = async (sender: string, receiver: string) => {
   }
 };
 
+const friendRequestCheckApi = async (sender: string, receiver: string) => {
+  // 알람 받는 사람의 유저 정보
+  const receiverInfo = await postEmailCheckApi(receiver);
+
+  const check = receiverInfo.alarm.filter((item: any) => item.email === sender);
+  return check;
+};
+
 const removeAlarm = async (email: string, id: string) => {
   try {
     const myInfo = await postEmailCheckApi(email);
@@ -57,4 +63,4 @@ const removeAlarm = async (email: string, id: string) => {
   }
 };
 
-export { myAlarmApi, friendRequestApi, removeAlarm };
+export { myAlarmApi, friendRequestApi, removeAlarm, friendRequestCheckApi };
