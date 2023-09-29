@@ -119,7 +119,8 @@
           "id": 6,
           "email": "song@naver.com",
           "nickName": "song",
-          "message": "친구요청을 보냈습니다."
+          "message": "친구요청을 보냈습니다.",
+          "type": "friendRequest"
         }
       ],
       "alarmIndex": 7

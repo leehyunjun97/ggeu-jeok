@@ -22,24 +22,44 @@ const AlarmCard = ({ alarm, closeModal }: any) => {
     setUserRender((prev) => !prev);
   };
 
-  return (
-    <>
-      <li className={styles.alarmCardBody}>
-        <section className={styles.alarmContentSection}>
-          <p>{`${alarm.nickName}(${alarm.email})님이`}</p>
-          <p>{alarm.message}</p>
-        </section>
-        <section className={styles.btnSection}>
-          <button className={styles.accepBtn} onClick={addFriendHandler}>
-            수락
-          </button>
-          <button className={styles.refusalBtn} onClick={refusalHandler}>
-            거절
-          </button>
-        </section>
-      </li>
-    </>
-  );
+  if (alarm.type === 'friendRequest') {
+    return (
+      <>
+        <li className={styles.alarmCardBody}>
+          <section className={styles.alarmContentSection}>
+            <p>{`${alarm.nickName}(${alarm.email})님이`}</p>
+            <p>{alarm.message}</p>
+          </section>
+          <section className={styles.btnSection}>
+            <button className={styles.accepBtn} onClick={addFriendHandler}>
+              수락
+            </button>
+            <button className={styles.refusalBtn} onClick={refusalHandler}>
+              거절
+            </button>
+          </section>
+        </li>
+      </>
+    );
+  } else if (alarm.type === 'friendRequestRefusal') {
+    return (
+      <>
+        <li className={styles.alarmCardBody}>
+          <section className={styles.alarmContentSection}>
+            <p>{`${alarm.nickName}(${alarm.email})님이`}</p>
+            <p>{alarm.message}</p>
+          </section>
+          <section className={styles.btnSection}>
+            <button className={styles.refusalBtn} onClick={refusalHandler}>
+              확인
+            </button>
+          </section>
+        </li>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default AlarmCard;
