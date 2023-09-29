@@ -1,6 +1,9 @@
 import styles from './style/alarmCard.module.css';
 import { addFriendApi } from '../../../../services/friend/friend';
-import { removeAlarm } from '../../../../services/alarm/alarm';
+import {
+  friendRequestRefusalApi,
+  removeAlarm,
+} from '../../../../services/alarm/alarm';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfo, userRender } from '../../../../recoil/user/user';
 import { IUserInfo } from '../../../../types/user';
@@ -17,7 +20,13 @@ const AlarmCard = ({ alarm, closeModal }: any) => {
     closeModal();
   };
 
-  const refusalHandler = () => {
+  const refusalHandler = async () => {
+    const postCom = await friendRequestRefusalApi(myInfo.email, alarm.email);
+    removeAlarm(myInfo.email, alarm.id);
+    setUserRender((prev) => !prev);
+  };
+
+  const checkHandler = () => {
     removeAlarm(myInfo.email, alarm.id);
     setUserRender((prev) => !prev);
   };
@@ -50,7 +59,7 @@ const AlarmCard = ({ alarm, closeModal }: any) => {
             <p>{alarm.message}</p>
           </section>
           <section className={styles.btnSection}>
-            <button className={styles.refusalBtn} onClick={refusalHandler}>
+            <button className={styles.refusalBtn} onClick={checkHandler}>
               확인
             </button>
           </section>

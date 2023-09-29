@@ -38,7 +38,7 @@
       "nickName": "song",
       "name": "송윙스",
       "alarm": [],
-      "alarmIndex": 8,
+      "alarmIndex": 9,
       "friend": []
     },
     {
@@ -114,15 +114,7 @@
           "name": "어드민"
         }
       ],
-      "alarm": [
-        {
-          "id": 6,
-          "email": "song@naver.com",
-          "nickName": "song",
-          "message": "친구요청을 보냈습니다.",
-          "type": "friendRequest"
-        }
-      ],
+      "alarm": [],
       "alarmIndex": 7
     }
   ],

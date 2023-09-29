@@ -27,6 +27,38 @@ const friendRequestApi = async (sender: string, receiver: string) => {
               email: senderInfo.email,
               nickName: senderInfo.nickName,
               message: '친구요청을 보냈습니다.',
+              type: 'friendRequest',
+            },
+          ],
+          alarmIndex: (receiverInfo.alarmIndex += 1),
+        }
+      );
+      return postComplet;
+    };
+
+    return addFriendAlarm();
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+const friendRequestRefusalApi = async (sender: string, receiver: string) => {
+  try {
+    const senderInfo = await postEmailCheckApi(sender);
+    const receiverInfo = await postEmailCheckApi(receiver);
+
+    const addFriendAlarm = async () => {
+      const postComplet = await axios.patch(
+        `http://localhost:4000/user/${receiverInfo.id}`,
+        {
+          alarm: [
+            ...receiverInfo.alarm,
+            {
+              id: receiverInfo.alarmIndex,
+              email: senderInfo.email,
+              nickName: senderInfo.nickName,
+              message: '친구요청을 거절하였습니다.',
+              type: 'friendRequestRefusal',
             },
           ],
           alarmIndex: (receiverInfo.alarmIndex += 1),
@@ -63,4 +95,10 @@ const removeAlarm = async (email: string, id: string) => {
   }
 };
 
-export { myAlarmApi, friendRequestApi, removeAlarm, friendRequestCheckApi };
+export {
+  myAlarmApi,
+  friendRequestApi,
+  friendRequestRefusalApi,
+  removeAlarm,
+  friendRequestCheckApi,
+};
