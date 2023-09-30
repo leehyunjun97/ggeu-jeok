@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import ScheduleInfoCard from '../../Card/ScheduleInfoCard/ScheduleInfoCard';
 import { getRoomListApi } from '../../../../services/room/room';
-import { IMemberInfo, IRoomInfo } from '../../../../types/room';
+import { IRoomInfo } from '../../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 

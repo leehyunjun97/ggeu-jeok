@@ -6,7 +6,7 @@ import DetailScheduleCard from './DetailScheduleCard';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../recoil/room/roomInfo';
 
-const DetailScheduleList = () => {
+const DetailScheduleList = ({ showDetailHandler }: any) => {
   const getRoomInfo = useRecoilValue(roomInfo);
 
   console.log(getRoomInfo);
@@ -15,7 +15,7 @@ const DetailScheduleList = () => {
     <ul className={styles.ulList}>
       {getRoomInfo &&
         getRoomInfo.date.map((item) => (
-          <DetailScheduleCard key={item.id} detailSchedule={item} />
+          <DetailScheduleCard key={item.id} detailSchedule={item} showDetailHandler={showDetailHandler}/>
         ))}
       <li className={styles.plusLi}>
         <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />

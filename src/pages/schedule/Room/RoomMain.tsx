@@ -8,10 +8,17 @@ import RoomChattingDiv from './RoomChattingDiv';
 
 const RoomMain = () => {
   const [hide, setHide] = useState('block');
+  const [showDetail, setShowDetail] = useState(false);
 
   const chatBtnToggleHandler = () => {
     hide === 'block' ? setHide('none') : setHide('block');
   };
+
+  const showDetailHandler = () => {
+    setShowDetail(!showDetail);
+  };
+
+  console.log(showDetail);
 
   return (
     <div className={styles.main}>
@@ -21,7 +28,7 @@ const RoomMain = () => {
       </section>
       <section className={styles.roomRightSection}>
         <span className={styles.scheduleSpan}>계획 일정</span>
-        <DetailScheduleList />
+        <DetailScheduleList showDetailHandler={showDetailHandler} />
         <RoomChattingDiv hide={hide} />
         <button className={styles.chatToggleBtn} onClick={chatBtnToggleHandler}>
           <FontAwesomeIcon icon={faComment} />
