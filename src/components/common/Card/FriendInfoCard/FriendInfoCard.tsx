@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from './style/friendInfoCard.module.css';
-import bear from './bear.jpg';
 import { IUserInfo } from '../../../../types/user';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
 import {

@@ -31,10 +31,14 @@ const Signup = () => {
 
   const setUser = useSetRecoilState(userInfo);
 
+  const [img, setImg] = useState<File | null>(null);
+  const [imgSrc, setimgSrc] = useState<string | null>('');
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const nickNameRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
+  const imgRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
@@ -46,6 +50,27 @@ const Signup = () => {
       return () => clearTimeout(timer);
     }
   }, [emailCheck]);
+
+  const handleClick = () => {
+    imgRef?.current?.click();
+  };
+
+  const fileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.currentTarget;
+
+    if (target.files !== null) {
+      const file = target.files[0];
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setimgSrc(reader.result as string);
+      };
+
+      reader.readAsDataURL(file);
+
+      console.log(imgSrc);
+    }
+  };
 
   const signupHandler = async () => {
     if (signUpInputState.email.trim() === '') {
@@ -218,6 +243,26 @@ const Signup = () => {
           onChange={(e) => changeInputHandler(e.target.value, 'name')}
           ref={nameRef}
         />
+
+        <label htmlFor='file' className={styles.imgAttachLabel}>
+          사진첨부
+        </label>
+        <div className={styles.imgAttach} onClick={handleClick}>
+          {!imgSrc ? (
+            '+'
+          ) : (
+            <img className={styles.imgPriview} src={imgSrc as string} alt='' />
+          )}
+        </div>
+
+        <input
+          style={{ display: 'none' }}
+          ref={imgRef}
+          type='file'
+          accept='image/*'
+          onChange={fileHandler}
+        />
+        {/* <button onClick={deleteImage}>사진삭제</button> */}
 
         <div
           className={styles.errorMessageDiv}
