@@ -39,6 +39,9 @@ const postSignupApi = async (signState: IUserInfo) => {
       password: signState.password,
       nickName: signState.nickName,
       name: signState.name,
+      image: signState.image,
+      friend: [],
+      alarm: [],
     });
     return postComplet;
   } catch (error: any) {
