@@ -26,6 +26,7 @@ const addFriendApi = async (myInfo: IUserInfo, friend_email: string) => {
             email: friend_email,
             nickName: friendInfo.nickName,
             name: friendInfo.name,
+            image: friendInfo.image,
           },
         ],
       });
@@ -37,6 +38,7 @@ const addFriendApi = async (myInfo: IUserInfo, friend_email: string) => {
             email: myInfo.email,
             nickName: myInfo.nickName,
             name: myInfo.name,
+            image: myInfo.image,
           },
         ],
       });

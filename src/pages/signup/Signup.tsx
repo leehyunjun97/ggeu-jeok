@@ -12,6 +12,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from 'firebase/storage';
+import { storage } from '../../scripts/firebase';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>({
@@ -94,11 +95,25 @@ const Signup = () => {
     } else if (signUpInputState.name.trim().length < 2) {
       nameRef.current?.focus();
     } else {
-      const signComplet = await postSignupApi(signUpInputState);
-      localStorage.setItem('id', signUpInputState.email);
-      setUser({ ...signComplet.data });
-      alert(`${signUpInputState.name}님 반갑습니다!`);
-      navigate('/main');
+      if (img) {
+        const imgRef = ref(storage, `images/user/${signUpInputState.email}`);
+        await uploadBytes(imgRef, img).then(() => {
+          const uploadTask = uploadBytesResumable(imgRef, img);
+          getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+            const signComplet = await postSignupApi(signUpInputState);
+            localStorage.setItem('id', signUpInputState.email);
+            setUser({ ...signComplet.data });
+            alert(`${signUpInputState.name}님 반갑습니다!`);
+            navigate('/main');
+          });
+        });
+      } else {
+        const signComplet = await postSignupApi(signUpInputState);
+        localStorage.setItem('id', signUpInputState.email);
+        setUser({ ...signComplet.data });
+        alert(`${signUpInputState.name}님 반갑습니다!`);
+        navigate('/main');
+      }
     }
   };
 
