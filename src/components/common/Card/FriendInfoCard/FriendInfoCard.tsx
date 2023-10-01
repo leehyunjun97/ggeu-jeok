@@ -55,7 +55,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
 
       <li className={styles.cardBody} onClick={modalHandler}>
         <section className={styles.imageSection}>
-          <img src={bear} alt='' className={styles.cardImg} />
+          <img src={info.image} alt='' className={styles.cardImg} />
         </section>
         <section className={styles.infoSection}>
           <p className={styles.emailP}>{info.email}</p>

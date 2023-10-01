@@ -6,6 +6,7 @@ export interface IUserInfo {
   password: string;
   nickName: string;
   name: string;
+  image: string;
   friend: IFriendInfo[];
 }
 

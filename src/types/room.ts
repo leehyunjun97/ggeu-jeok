@@ -4,6 +4,7 @@ export interface IMemberInfo {
   email: string;
   nickName: string;
   class: string;
+  image: string;
 }
 
 export interface IDateDetail {

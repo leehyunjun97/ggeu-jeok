@@ -14,6 +14,7 @@ const Signup = () => {
     name: '',
     nickName: '',
     friend: [],
+    image: '',
   });
 
   const [emailCheck, setEmailCheck] = useState({

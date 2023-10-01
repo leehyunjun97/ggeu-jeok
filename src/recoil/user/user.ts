@@ -9,6 +9,7 @@ const userInfo = atom<IUserInfo>({
     password: '',
     nickName: '',
     name: '',
+    image: '',
     friend: [],
   },
 });

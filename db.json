@@ -13,12 +13,14 @@
       "password": "123456",
       "nickName": "monstamp",
       "name": "이현준",
+      "image": "https://firebasestorage.googleapis.com/v0/b/montamp-be910.appspot.com/o/images%2Fpost%2F6445466859e8fe8526f149b2_Fri%20May%2005%202023%2018%3A16%3A44%20GMT%2B0900%20(%ED%95%9C%EA%B5%AD%20%ED%91%9C%EC%A4%80%EC%8B%9C)?alt=media&token=3bc1cdc1-adfb-4d3e-89fa-4565859892c0&_gl=1*1td9fjo*_ga*MTY3Mjk4ODAwOC4xNjgzMjY3ODY3*_ga_CW55HF8NVT*MTY5NjEzOTE4Ny40LjEuMTY5NjE0MDQ0Ny41Ny4wLjA.",
       "friend": [
         {
           "id": 4,
           "email": "admin",
           "nickName": "ADMIN",
-          "name": "어드민"
+          "name": "어드민",
+          "image": "https://firebasestorage.googleapis.com/v0/b/montamp-be910.appspot.com/o/images%2Fpost%2F6445466859e8fe8526f149b2_Fri%20May%2005%202023%2018%3A26%3A00%20GMT%2B0900%20(%ED%95%9C%EA%B5%AD%20%ED%91%9C%EC%A4%80%EC%8B%9C)?alt=media&token=5909d758-8eea-4213-a29f-4bdad2f34f72&_gl=1*nru4ay*_ga*MTY3Mjk4ODAwOC4xNjgzMjY3ODY3*_ga_CW55HF8NVT*MTY5NjEzOTE4Ny40LjEuMTY5NjE0MDU2MS41OC4wLjA."
         }
       ],
       "alarm": [
@@ -37,8 +39,17 @@
       "password": "123456",
       "nickName": "song",
       "name": "송윙스",
-      "alarm": [],
-      "alarmIndex": 9,
+      "imgae": "",
+      "alarm": [
+        {
+          "id": 9,
+          "email": "song2@naver.com",
+          "nickName": "blur",
+          "message": "친구요청을 보냈습니다.",
+          "type": "friendRequest"
+        }
+      ],
+      "alarmIndex": 10,
       "friend": []
     },
     {
@@ -55,6 +66,7 @@
       "password": "admin",
       "nickName": "ADMIN",
       "name": "어드민",
+      "imgae": "",
       "friend": [
         {
           "id": 1,
@@ -116,6 +128,13 @@
       ],
       "alarm": [],
       "alarmIndex": 7
+    },
+    {
+      "email": "song2@naver.com",
+      "password": "123456",
+      "nickName": "blur",
+      "name": "블러",
+      "id": 9
     }
   ],
   "room": [
