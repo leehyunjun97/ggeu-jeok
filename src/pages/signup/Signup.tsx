@@ -60,17 +60,20 @@ const Signup = () => {
 
     if (target.files !== null) {
       const file = target.files[0];
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setimgSrc(reader.result as string);
-      };
-
-      reader.readAsDataURL(file);
-
-      console.log(imgSrc);
+      setImg(file);
     }
   };
+
+  useEffect(() => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setimgSrc(reader.result as string);
+    };
+
+    if (img) {
+      reader.readAsDataURL(img);
+    }
+  }, [img]);
 
   const signupHandler = async () => {
     if (signUpInputState.email.trim() === '') {
