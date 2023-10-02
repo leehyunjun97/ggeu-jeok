@@ -3,6 +3,7 @@ import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
 import ReactDatePicker from 'react-datepicker';
+import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +18,12 @@ const CreateRoom = () => {
   const [endDate, setEndDate] = useState(new Date());
 
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
+
+  const changeDateHandler = (dates: any) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
 
   const modalHandler = () => {
     setIsModal(!isModal);
@@ -41,39 +48,19 @@ const CreateRoom = () => {
         </div>
         <div className={styles.dateSection}>
           <div className={styles.dateSection2}>
-            <Label text='놀러 가는 날' />
-            {/* <input className={styles.dateInput} type='date' /> */}
+            <Label text='날짜' />
             <ReactDatePicker
-              dateFormat='yyyy년 MM월 dd일'
+              selectsRange={true}
               className={styles.dateInput}
+              locale={ko}
+              dateFormat='yyyy년 MM월 dd일'
               selected={startDate}
-              onChange={(date: Date) => setStartDate(date)}
-              selectsStart
-              minDate={new Date()}
               startDate={startDate}
               endDate={endDate}
-            />
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              className={styles.dateIcon}
-            />
-          </div>
-          <div className={styles.dateSection2}>
-            <Label text='집에 오는 날' />
-            {/* <input className={styles.dateInput} type='date' /> */}
-            <ReactDatePicker
-              dateFormat='yyyy년 MM월 dd일'
-              className={styles.dateInput}
-              selected={endDate}
-              onChange={(date: Date) => setEndDate(date)}
-              selectsEnd
               minDate={new Date()}
-              startDate={startDate}
-              endDate={endDate}
-            />
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              className={styles.dateIcon}
+              onChange={(dates) => {
+                changeDateHandler(dates);
+              }}
             />
           </div>
         </div>
