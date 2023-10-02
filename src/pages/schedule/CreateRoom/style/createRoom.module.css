@@ -119,3 +119,13 @@
 .invitationSection::-webkit-scrollbar {
   display: none;
 }
+
+.createBtn {
+  background-color: #c8ac88;
+  color: rgb(255 255 255);
+  border: 1px solid black;
+  width: 70%;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}

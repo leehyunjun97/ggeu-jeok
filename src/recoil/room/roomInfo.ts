@@ -7,6 +7,7 @@ const roomInfo = atom<IRoomInfo>({
     id: '',
     title: '',
     admin: '',
+    location: '',
     member: [],
     date: [],
   },

@@ -103,7 +103,6 @@ const Signup = () => {
             const signComplet = await postSignupApi(signUpInputState);
             localStorage.setItem('id', signUpInputState.email);
             setUser({ ...signComplet.data });
-            alert(`${signUpInputState.name}님 반갑습니다!`);
             navigate('/main');
           });
         });
@@ -111,7 +110,6 @@ const Signup = () => {
         const signComplet = await postSignupApi(signUpInputState);
         localStorage.setItem('id', signUpInputState.email);
         setUser({ ...signComplet.data });
-        alert(`${signUpInputState.name}님 반갑습니다!`);
         navigate('/main');
       }
     }

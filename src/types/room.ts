@@ -1,5 +1,5 @@
 export interface IMemberInfo {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   nickName: string;
@@ -14,9 +14,10 @@ export interface IDateDetail {
 }
 
 export interface IRoomInfo {
-  id: string;
+  id?: string;
   title: string;
   admin: string;
+  location: string;
   member: IMemberInfo[];
   date: IDateDetail[];
 }

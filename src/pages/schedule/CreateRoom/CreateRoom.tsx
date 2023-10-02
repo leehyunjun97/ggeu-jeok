@@ -1,23 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
 import ReactDatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
+import { IRoomInfo } from '../../../types/room';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from '../../../recoil/user/user';
 
 const CreateRoom = () => {
-  const [isModal, setIsModal] = useState(false);
-  const [addr, setAddr] = useState('');
+  // id?: string;
+  // title: string;
+  // admin: string;
+  // member: IMemberInfo[];
+  // date: IDateDetail[];
 
+  const info = useRecoilValue(userInfo);
+  const { id, name, email, nickName, image } = info;
+  const [roomInfo, setRoomInfo] = useState<IRoomInfo>({
+    title: '',
+    admin: info.email,
+    location: '',
+    member: [
+      {
+        id,
+        name,
+        email,
+        nickName,
+        class: 'admin',
+        image,
+      },
+    ],
+    date: [],
+  });
+
+  const [isModal, setIsModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
+
+  console.log(roomInfo);
+
+  const checkListFunction = (list: IFriendInfo[]) => {
+    setCheckList(list);
+  };
 
   const changeDateHandler = (dates: any) => {
     const [start, end] = dates;
@@ -29,10 +58,7 @@ const CreateRoom = () => {
     setIsModal(!isModal);
   };
 
-  const checkListFunction = (list: IFriendInfo[]) => {
-    console.log(list);
-    setCheckList(list);
-  };
+  const createRoomHandler = () => {};
 
   return (
     <div className={styles.main}>
@@ -44,6 +70,10 @@ const CreateRoom = () => {
             className={styles.roomTitleInput}
             placeholder='10글자 이내'
             type='text'
+            value={roomInfo.title}
+            onChange={(e) => {
+              setRoomInfo({ ...roomInfo, title: e.target.value });
+            }}
           />
         </div>
         <div className={styles.dateSection}>
@@ -69,7 +99,7 @@ const CreateRoom = () => {
           <input
             className={styles.locationInput}
             type='location'
-            value={addr}
+            value={roomInfo.location}
           />
           <button className={styles.meetingBtn} onClick={modalHandler}>
             meeting
@@ -82,9 +112,15 @@ const CreateRoom = () => {
       </div>
 
       {isModal && (
-        <MapModal closeModal={modalHandler} addr={addr} setAddr={setAddr} />
+        <MapModal
+          closeModal={modalHandler}
+          addr={roomInfo.location}
+          setAddr={(lo: string) => {
+            setRoomInfo({ ...roomInfo, location: lo });
+          }}
+        />
       )}
-      <button>생성</button>
+      <button className={styles.createBtn}>생성</button>
     </div>
   );
 };
