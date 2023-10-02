@@ -1,10 +1,7 @@
-export interface IMemberInfo {
-  id?: string;
-  name: string;
-  email: string;
-  nickName: string;
+import { IFriendInfo } from './friend';
+
+export interface IMemberInfo extends IFriendInfo {
   class: string;
-  image: string;
 }
 
 export interface IDateDetail {

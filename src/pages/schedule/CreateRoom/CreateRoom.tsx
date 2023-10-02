@@ -7,7 +7,7 @@ import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
-import { IRoomInfo } from '../../../types/room';
+import { IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 
@@ -19,21 +19,13 @@ const CreateRoom = () => {
   // date: IDateDetail[];
 
   const info = useRecoilValue(userInfo);
-  const { id, name, email, nickName, image } = info;
+  const [memberList, setMemberList] = useState<IMemberInfo[]>([]);
+
   const [roomInfo, setRoomInfo] = useState<IRoomInfo>({
     title: '',
     admin: info.email,
     location: '',
-    member: [
-      {
-        id,
-        name,
-        email,
-        nickName,
-        class: 'admin',
-        image,
-      },
-    ],
+    member: memberList,
     date: [],
   });
 
@@ -42,9 +34,8 @@ const CreateRoom = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
 
-  console.log(roomInfo);
-
   const checkListFunction = (list: IFriendInfo[]) => {
+    console.log(list);
     setCheckList(list);
   };
 

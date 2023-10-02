@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { IFriendInfo } from '../../../types/friend';
 
-const InvitationList = ({ checkListFunction }: any) => {
+const InvitationList = ({ checkListFunction, setList }: any) => {
   const info = useRecoilValue(userInfo);
   const [checkedList, setCheckList] = useState<Array<IFriendInfo>>([]);
 
@@ -15,6 +15,7 @@ const InvitationList = ({ checkListFunction }: any) => {
         setCheckList(checkedList.filter((i) => i.id !== friend.id));
       }
       checkListFunction(checkedList);
+      
     },
     [checkListFunction, checkedList]
   );
