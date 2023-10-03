@@ -35,9 +35,11 @@ const CreateRoom = () => {
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
 
   const checkListFunction = (list: IFriendInfo[]) => {
-    console.log(list);
+    // 하나씩 밀려들어감
     setCheckList(list);
   };
+
+  console.log(checkList);
 
   const changeDateHandler = (dates: any) => {
     const [start, end] = dates;
@@ -91,6 +93,7 @@ const CreateRoom = () => {
             className={styles.locationInput}
             type='location'
             value={roomInfo.location}
+            readOnly
           />
           <button className={styles.meetingBtn} onClick={modalHandler}>
             meeting
