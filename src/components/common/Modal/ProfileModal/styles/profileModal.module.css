@@ -1,0 +1,51 @@
+.modalBackground {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.modalSection {
+  z-index: 999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 580px;
+  background-color: #faf6f1;
+  text-align: center;
+  justify-content: center;
+  border-radius: 1px;
+  border: 2px solid black;
+  overflow: scroll;
+  box-shadow: 5px 5px 5px rgb(191, 146, 87);
+}
+
+.modalSection::-webkit-scrollbar {
+  display: none;
+}
+
+.titleSection {
+  margin-top: 35px;
+}
+
+.titleSection h4 {
+  margin-bottom: 0px;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 22px;
+}
+
+.modalCloseBtn {
+  background-color: transparent;
+  border: none;
+  color: black;
+  font-size: 18px;
+  cursor: pointer;
+  position: absolute;
+  right: -1px;
+  top: 2px;
+}

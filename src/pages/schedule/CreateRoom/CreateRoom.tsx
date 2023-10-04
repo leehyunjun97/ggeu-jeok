@@ -7,19 +7,12 @@ import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
-import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
+import { IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { dateStringHandler } from './service/date';
 
 const CreateRoom = () => {
-  // room type
-  // id?: string;
-  // title: string;
-  // admin: string;
-  // member: IMemberInfo[];
-  // date: IDateDetail[];
-
   const info = useRecoilValue(userInfo);
   const [memberList, setMemberList] = useState<IMemberInfo[]>([]);
 
@@ -29,6 +22,7 @@ const CreateRoom = () => {
     location: '',
     member: memberList,
     date: [],
+    talk: [],
   });
 
   // detail date 포맷
@@ -69,6 +63,7 @@ const CreateRoom = () => {
       const nowDate = new Date();
       nowDate.setDate(startDate.getDate() + i);
       roomInfo.date.push({
+        id: diffDay + 1,
         dateDetail: dateStringHandler(nowDate),
         subTitle: '',
         content: {},
@@ -77,8 +72,6 @@ const CreateRoom = () => {
 
     console.log(roomInfo.date);
   };
-
-  // date: [{ dateDetail: '', subTitle: '', content: { one: '' } }]
 
   const memberClassAddHandler = () => {
     checkList.forEach((item) => {

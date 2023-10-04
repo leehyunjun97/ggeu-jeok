@@ -13,9 +13,15 @@ export interface IDateDetailContent {
 }
 
 export interface IDateDetail {
+  id: number;
   dateDetail: string;
   subTitle: string;
   content: IDateDetailContent;
+}
+export interface ITalk {
+  message: string;
+  nickName: string;
+  date: string;
 }
 
 export interface IRoomInfo {
@@ -25,4 +31,5 @@ export interface IRoomInfo {
   location: string;
   member: IMemberInfo[];
   date: IDateDetail[];
+  talk: ITalk[];
 }

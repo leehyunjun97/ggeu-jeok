@@ -10,6 +10,7 @@ const roomInfo = atom<IRoomInfo>({
     location: '',
     member: [],
     date: [],
+    talk: [],
   },
 });
 

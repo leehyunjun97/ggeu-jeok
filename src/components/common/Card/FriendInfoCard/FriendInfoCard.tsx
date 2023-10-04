@@ -10,6 +10,7 @@ import { IFriendInfo } from '../../../../types/friend';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 import { IMemberInfo } from '../../../../types/room';
+import ProfileModal from '../../Modal/ProfileModal/ProfileModal';
 
 interface IProps {
   info: IFriendInfo | IUserInfo | IMemberInfo;
@@ -18,12 +19,19 @@ interface IProps {
 
 const FriendInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
+  const [isProfileModal, setIsProfileModal] = useState(false);
   const myinfo = useRecoilValue(userInfo);
 
   const modalHandler = () => {
     if (add === 'friend') {
       setIsModal(!isModal);
+    } else {
+      profileModalHandler();
     }
+  };
+
+  const profileModalHandler = () => {
+    setIsProfileModal(!isProfileModal);
   };
 
   const addFriendHandler = async () => {
@@ -51,6 +59,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
           text='친구 요청을 보내시겠습니까?'
         />
       )}
+      {isProfileModal && <ProfileModal closeModal={profileModalHandler} />}
 
       <li className={styles.cardBody} onClick={modalHandler}>
         <section className={styles.imageSection}>
