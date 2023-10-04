@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
@@ -7,11 +7,12 @@ import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
-import { IMemberInfo, IRoomInfo } from '../../../types/room';
+import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 
 const CreateRoom = () => {
+  // room type
   // id?: string;
   // title: string;
   // admin: string;
@@ -26,8 +27,18 @@ const CreateRoom = () => {
     admin: info.email,
     location: '',
     member: memberList,
-    date: [],
+    date: [{ dateDetail: '', subTitle: '', content: { one: '' } }],
   });
+
+  // detail date 포맷
+  // {
+  //   "dateDetail": "2023-08-02",
+  //   "subTitle": "오늘은 이거",
+  //   "content": {
+  //     "0시": "00시",
+  //     "1시": "01시"
+  //   }
+  // },
 
   const [isModal, setIsModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
@@ -39,8 +50,6 @@ const CreateRoom = () => {
     setCheckList(list);
   };
 
-  console.log(checkList);
-
   const changeDateHandler = (dates: any) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -51,7 +60,40 @@ const CreateRoom = () => {
     setIsModal(!isModal);
   };
 
-  const createRoomHandler = () => {};
+  const getDateDiff = () => {
+    const nowDate = new Date();
+    const date = startDate;
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const dateStr = `${year}-${month}-${day}`;
+
+    const diffDate = startDate.getTime() - endDate.getTime();
+    const diffDay = Math.abs(diffDate / (1000 * 60 * 60 * 24));
+
+    nowDate.setDate(startDate.getDate() + 1);
+
+    console.log(nowDate.getDate());
+  };
+
+  const memberClassAddHandler = () => {
+    checkList.forEach((item) => {
+      const { email, nickName, name, image } = item;
+      const obj1: IMemberInfo = {
+        email,
+        class: 'member',
+        nickName,
+        name,
+        image,
+      };
+      memberList.push(obj1);
+      console.log(memberList);
+    });
+  };
+
+  const createRoomHandler = () => {
+    getDateDiff();
+  };
 
   return (
     <div className={styles.main}>
@@ -114,7 +156,9 @@ const CreateRoom = () => {
           }}
         />
       )}
-      <button className={styles.createBtn}>생성</button>
+      <button className={styles.createBtn} onClick={createRoomHandler}>
+        생성
+      </button>
     </div>
   );
 };

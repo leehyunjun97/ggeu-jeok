@@ -4,10 +4,18 @@ export interface IMemberInfo extends IFriendInfo {
   class: string;
 }
 
+export interface IDateDetailContent {
+  one?: string;
+  two?: string;
+  three?: string;
+  four?: string;
+  five?: string;
+}
+
 export interface IDateDetail {
-  id: string;
   dateDetail: string;
   subTitle: string;
+  content: IDateDetailContent;
 }
 
 export interface IRoomInfo {
