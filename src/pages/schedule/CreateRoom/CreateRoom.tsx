@@ -10,6 +10,7 @@ import { IFriendInfo } from '../../../types/friend';
 import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
+import { dateStringHandler } from './service/date';
 
 const CreateRoom = () => {
   // room type
@@ -27,7 +28,7 @@ const CreateRoom = () => {
     admin: info.email,
     location: '',
     member: memberList,
-    date: [{ dateDetail: '', subTitle: '', content: { one: '' } }],
+    date: [],
   });
 
   // detail date 포맷
@@ -60,21 +61,24 @@ const CreateRoom = () => {
     setIsModal(!isModal);
   };
 
-  const getDateDiff = () => {
-    const nowDate = new Date();
-    const date = startDate;
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    const dateStr = `${year}-${month}-${day}`;
-
+  const dateDetailAddHandler = () => {
     const diffDate = startDate.getTime() - endDate.getTime();
     const diffDay = Math.abs(diffDate / (1000 * 60 * 60 * 24));
 
-    nowDate.setDate(startDate.getDate() + 1);
+    for (let i = 0; i <= diffDay; i++) {
+      const nowDate = new Date();
+      nowDate.setDate(startDate.getDate() + i);
+      roomInfo.date.push({
+        dateDetail: dateStringHandler(nowDate),
+        subTitle: '',
+        content: {},
+      });
+    }
 
-    console.log(nowDate.getDate());
+    console.log(roomInfo.date);
   };
+
+  // date: [{ dateDetail: '', subTitle: '', content: { one: '' } }]
 
   const memberClassAddHandler = () => {
     checkList.forEach((item) => {
@@ -92,7 +96,7 @@ const CreateRoom = () => {
   };
 
   const createRoomHandler = () => {
-    getDateDiff();
+    dateDetailAddHandler();
   };
 
   return (
