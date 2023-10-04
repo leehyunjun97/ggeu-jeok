@@ -14,11 +14,9 @@ const RoomMain = () => {
     hide === 'block' ? setHide('none') : setHide('block');
   };
 
-  const showDetailHandler = () => {
-    setShowDetail(!showDetail);
-  };
-
-  console.log(showDetail);
+  // const showDetailHandler = () => {
+  //   setShowDetail(!showDetail);
+  // };
 
   return (
     <div className={styles.main}>
@@ -28,7 +26,7 @@ const RoomMain = () => {
       </section>
       <section className={styles.roomRightSection}>
         <span className={styles.scheduleSpan}>계획 일정</span>
-        <DetailScheduleList showDetailHandler={showDetailHandler} />
+        <DetailScheduleList />
         <RoomChattingDiv hide={hide} />
         <button className={styles.chatToggleBtn} onClick={chatBtnToggleHandler}>
           <FontAwesomeIcon icon={faComment} />

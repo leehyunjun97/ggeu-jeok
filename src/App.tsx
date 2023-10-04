@@ -8,6 +8,7 @@ import Signup from './pages/signup/Signup';
 import ScheduleRouter from './router/ScheduleRouter';
 import CreateRoom from './pages/schedule/CreateRoom/CreateRoom';
 import RoomMain from './pages/schedule/Room/RoomMain';
+import DetailSchedule from './pages/schedule/Room/DetailSchedule';
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
             <Route path='/schedule/create' element={<CreateRoom />} />
             <Route path='schedule' element={<ScheduleRouter />}>
               <Route path='/schedule/:nickName/:id' element={<RoomMain />} />
+              <Route
+                path='/schedule/:nickName/:id/:date'
+                element={<DetailSchedule />}
+              />
             </Route>
           </Route>
         </Route>

@@ -7,20 +7,14 @@ import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../recoil/room/roomInfo';
 import { IDateDetail } from '../../../types/room';
 
-const DetailScheduleList = ({ showDetailHandler }: any) => {
+const DetailScheduleList = () => {
   const getRoomInfo = useRecoilValue(roomInfo);
-
-  console.log(getRoomInfo);
 
   return (
     <ul className={styles.ulList}>
       {getRoomInfo &&
         getRoomInfo.date.map((item: IDateDetail) => (
-          <DetailScheduleCard
-            key={item.dateDetail}
-            detailSchedule={item}
-            showDetailHandler={showDetailHandler}
-          />
+          <DetailScheduleCard key={item.dateDetail} detailSchedule={item} roomInfo={getRoomInfo}/>
         ))}
       <li className={styles.plusLi}>
         <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
