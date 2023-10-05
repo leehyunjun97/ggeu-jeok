@@ -5,6 +5,7 @@ export interface IMemberInfo extends IFriendInfo {
 }
 
 export interface IDateDetailContent {
+  [key: string]: string | undefined;
   one?: string;
   two?: string;
   three?: string;

@@ -1,7 +1,7 @@
 .chatDiv {
   z-index: 999;
   position: fixed;
-  top: 220px;
+  bottom: 7%;
   right: 6%;
   /* transform: translate(45%, -50%); */
   width: 400px;
@@ -17,4 +17,15 @@
 
 .chatDiv::-webkit-scrollbar {
   display: none;
+}
+
+.titleSection {
+  margin-top: 28px;
+}
+
+.titleSection h4 {
+  margin-bottom: 0px;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 22px;
+  opacity: 0.8;
 }

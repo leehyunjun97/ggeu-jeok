@@ -14,12 +14,13 @@ const MembersList = () => {
       <ul className={styles.ulList}>
         {getRoomInfo.member &&
           getRoomInfo.member.map((item) => (
+            // member라고 추가해서 정보에서 등급을 바꿀 수 있다던지..
             <FriendInfoCard key={item.id} info={item} />
           ))}
 
-        <li className={styles.plusLi}>
+        {/* <li className={styles.plusLi}>
           <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-        </li>
+        </li> */}
       </ul>
     </>
   );

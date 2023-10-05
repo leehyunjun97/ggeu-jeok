@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { IRoomInfo } from '../../types/room';
+import { IDateDetail, IRoomInfo } from '../../types/room';
 
 const roomInfo = atom<IRoomInfo>({
   key: 'roomInfo',
@@ -14,4 +14,14 @@ const roomInfo = atom<IRoomInfo>({
   },
 });
 
-export { roomInfo };
+const detailScheduleInfo = atom<IDateDetail>({
+  key: 'detailScheduleInfo',
+  default: {
+    id: 0,
+    dateDetail: '',
+    subTitle: '',
+    content: {},
+  },
+});
+
+export { roomInfo, detailScheduleInfo };

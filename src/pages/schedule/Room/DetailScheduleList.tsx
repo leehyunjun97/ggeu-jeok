@@ -9,12 +9,17 @@ import { IDateDetail } from '../../../types/room';
 
 const DetailScheduleList = () => {
   const getRoomInfo = useRecoilValue(roomInfo);
+  console.log(getRoomInfo);
 
   return (
     <ul className={styles.ulList}>
       {getRoomInfo &&
         getRoomInfo.date.map((item: IDateDetail) => (
-          <DetailScheduleCard key={item.dateDetail} detailSchedule={item} roomInfo={getRoomInfo}/>
+          <DetailScheduleCard
+            key={item.dateDetail}
+            detailSchedule={item}
+            roomInfo={getRoomInfo}
+          />
         ))}
       <li className={styles.plusLi}>
         <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
