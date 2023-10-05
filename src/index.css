@@ -3,7 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 
 body {
-  background-color: #efe7de;
+  /* background-color: #efe7de; */
+  /* background-image: url(./../public/assets/img/Smooth\ Notebook\ Paper.PNG); */
+  background-image: url(./../public/assets/img/Vellum\ Sketchbook\ Paper.PNG);
 }
 
 body::-webkit-scrollbar {

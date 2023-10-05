@@ -16,7 +16,8 @@
   transform: translate(-50%, -50%);
   width: 380px;
   height: 580px;
-  background-color: #faf6f1;
+  background-image: url(../../../../../../public/assets/img/Smooth\ Notebook\ Paper.PNG);
+
   text-align: center;
   justify-content: center;
   border-radius: 1px;

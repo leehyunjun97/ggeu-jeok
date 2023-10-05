@@ -1,6 +1,7 @@
 .header {
   display: flex;
-  background-color: #efe7de;
+  background-color: transparent;
+
   justify-content: space-between;
   border-bottom: 1.7px solid black;
   box-shadow: 0px 1.5px 0px 0px #929aab;

@@ -108,6 +108,10 @@
   border: 1px solid black;
 }
 
+.meetingBtn {
+  background-color: #bb9d75;
+}
+
 .invitationSection {
   height: 130px;
   width: 100%;
@@ -121,11 +125,22 @@
 }
 
 .createBtn {
-  background-color: #c8ac88;
+  background-color: #bad0b6;
   color: rgb(255 255 255);
-  border: 1px solid black;
+  border: 0.7px solid black;
+  border-radius: 8px;
   width: 70%;
-  height: 30px;
+  height: 45px;
   margin-left: auto;
   margin-right: auto;
+  font-size: 25px;
+  font-family: 'Nanum Pen Script', cursive;
+  padding: 0px;
+  position: absolute;
+  bottom: 35px;
+  left: 15%;
+}
+
+.createBtn:hover {
+  background-color: #a3bd9e;
 }
