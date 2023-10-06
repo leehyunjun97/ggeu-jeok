@@ -11,6 +11,13 @@ export interface IDateDetailContent {
   three?: string;
   four?: string;
   five?: string;
+  six?: string;
+  seven?: string;
+  aight?: string;
+  nine?: string;
+  ten?: string;
+  eleven?: string;
+  twelve?: string;
 }
 
 export interface IDateDetail {
