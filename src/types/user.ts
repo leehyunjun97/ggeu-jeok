@@ -2,6 +2,7 @@ import { IFriendInfo } from './friend';
 
 export interface IUserInfo {
   id?: string;
+  uuid: string;
   email: string;
   password: string;
   nickName: string;

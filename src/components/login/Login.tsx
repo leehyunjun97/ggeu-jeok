@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { getUsersApi } from '../../services/user/user';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
+import { objTransArr } from '../../utils/common/objectTransformArray';
+import { IUserInfo } from '../../types/user';
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState({
@@ -18,21 +20,23 @@ const Login = () => {
   const loginHandler = async () => {
     try {
       const userList = await getUsersApi();
-      const findUser = userList.find(
+      const findUser: any = objTransArr(userList).find(
         (item: any) =>
           item.email === loginInputState.email &&
           item.password === loginInputState.password
       );
 
-      if (findUser) {
-        setLoginCheck(false);
+      console.log(findUser);
 
-        localStorage.setItem('id', findUser.email);
-        setUser({ ...findUser });
-        navigate('/main');
-      } else {
-        setLoginCheck(true);
-      }
+      // if (findUser) {
+      //   setLoginCheck(false);
+
+      //   localStorage.setItem('id', findUser.uuid);
+      //   setUser(findUser);
+      //   navigate('/main');
+      // } else {
+      //   setLoginCheck(true);
+      // }
     } catch (error) {
       console.log(error);
     }

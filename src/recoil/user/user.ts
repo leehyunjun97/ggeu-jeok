@@ -5,6 +5,7 @@ const userInfo = atom<IUserInfo>({
   key: 'userInfo',
   default: {
     id: '',
+    uuid: '',
     email: '',
     password: '',
     nickName: '',

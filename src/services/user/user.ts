@@ -3,7 +3,7 @@ import { IUserInfo } from '../../types/user';
 
 const getUsersApi = async () => {
   try {
-    const getComplet = await axios.get(
+    const getComplet = await axios.get<{ data: { [key: string]: IUserInfo } }>(
       'https://ggeu-jeok-default-rtdb.firebaseio.com/user.json'
     );
     return getComplet.data;
@@ -15,7 +15,7 @@ const getUsersApi = async () => {
 const getMyInfoApi = async (email: string) => {
   try {
     const getComplet = await axios.get(
-      `http://localhost:4000/user?email=${email}`
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${email}.json`
     );
     console.log(getComplet.data[0]);
     return getComplet;

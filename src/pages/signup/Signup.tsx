@@ -15,9 +15,11 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { storage } from '../../scripts/firebase';
+import { objTransArr } from '../../utils/common/objectTransformArray';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>({
+    uuid: '',
     id: '',
     email: '',
     password: '',
@@ -123,8 +125,7 @@ const Signup = () => {
           ...signUpInputState,
           id: uuidv4(),
         });
-        localStorage.setItem('id', signUpInputState.email);
-        setUser({ ...signComplet.data });
+        localStorage.setItem('id', signComplet.data.name);
         navigate('/main');
       }
     }
@@ -136,14 +137,12 @@ const Signup = () => {
 
   const checkEmail = async () => {
     const data = await postEmailCheckApi(signUpInputState.email);
-    const isEmail = Object.keys(data)
-      .map((key) => ({
-        uuid: key,
-        ...data[key],
-      }))
-      .find((item: any) => item.email === signUpInputState.email);
+    const isEmail = objTransArr(data).find(
+      (item: any) => item.email === signUpInputState.email
+    );
 
-    console.log(isEmail);
+    console.log(objTransArr(data));
+
     if (!emailTypeCheck.bool) {
       setEmailCheck({
         bool: false,
