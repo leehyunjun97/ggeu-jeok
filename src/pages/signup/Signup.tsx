@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './style/signup.module.css';
-import { postEmailCheckApi, postSignupApi } from '../../services/user/user';
+import { postSignupApi, postEmailCheckApi } from '../../services/user/user';
 import Toast from '../../components/common/Toast/Toast';
 import { IUserInfo } from '../../types/user';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   getDownloadURL,
   ref,
@@ -16,6 +18,7 @@ import { storage } from '../../scripts/firebase';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>({
+    id: '',
     email: '',
     password: '',
     name: '',
@@ -37,6 +40,7 @@ const Signup = () => {
   const [nickNameCheck, setNickNameCheck] = useState({ text: '', bool: true });
   const [nameCheck, setNameCheck] = useState({ text: '', bool: true });
 
+  const [test, setTest] = useState(0);
   const setUser = useSetRecoilState(userInfo);
 
   const [img, setImg] = useState<File | null>(null);
@@ -85,6 +89,11 @@ const Signup = () => {
   }, [img, imgSrc]);
 
   const signupHandler = async () => {
+    console.log(uuidv4());
+    console.log({
+      ...signUpInputState,
+      id: uuidv4(),
+    });
     if (signUpInputState.email.trim() === '') {
       emailRef.current?.focus();
       return;
@@ -100,14 +109,20 @@ const Signup = () => {
         await uploadBytes(imgRef, img).then(() => {
           const uploadTask = uploadBytesResumable(imgRef, img);
           getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-            const signComplet = await postSignupApi(signUpInputState);
+            const signComplet = await postSignupApi({
+              ...signUpInputState,
+              id: uuidv4(),
+            });
             localStorage.setItem('id', signUpInputState.email);
             setUser({ ...signComplet.data });
             navigate('/main');
           });
         });
       } else {
-        const signComplet = await postSignupApi(signUpInputState);
+        const signComplet = await postSignupApi({
+          ...signUpInputState,
+          id: uuidv4(),
+        });
         localStorage.setItem('id', signUpInputState.email);
         setUser({ ...signComplet.data });
         navigate('/main');
@@ -120,7 +135,15 @@ const Signup = () => {
   };
 
   const checkEmail = async () => {
-    const isEmail = await postEmailCheckApi(signUpInputState.email);
+    const data = await postEmailCheckApi(signUpInputState.email);
+    const isEmail = Object.keys(data)
+      .map((key) => ({
+        uuid: key,
+        ...data[key],
+      }))
+      .find((item: any) => item.email === signUpInputState.email);
+
+    console.log(isEmail);
     if (!emailTypeCheck.bool) {
       setEmailCheck({
         bool: false,

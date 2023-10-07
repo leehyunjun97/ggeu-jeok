@@ -18,6 +18,8 @@ const DetailSchedule = () => {
     nickName: '',
   });
   const [newContent, setNewContent] = useState(detailSchedule.content);
+  const [newTitle, setNewTitle] = useState(detailSchedule.subTitle);
+  const [isTitle, setIsTitle] = useState(true);
 
   useEffect(() => {
     setRoomInfo(
@@ -27,6 +29,12 @@ const DetailSchedule = () => {
 
   console.log(newContent);
 
+  const updateContentHandler = () => {};
+
+  const subTitleToggle = () => {
+    setIsTitle(!isTitle);
+  };
+
   return (
     <div className={styles.main}>
       <section className={styles.roomLeftSection}>
@@ -35,7 +43,17 @@ const DetailSchedule = () => {
       </section>
       <section className={styles.roomRightSection}>
         <div className={styles.spanSection}>
-          <span className={styles.subTitle}>{detailSchedule.subTitle}</span>
+          {isTitle ? (
+            <span className={styles.subTitle} onClick={subTitleToggle}>
+              {detailSchedule.subTitle}
+            </span>
+          ) : (
+            <div>
+              <input type='text' value={newTitle} />
+              <button>수정</button>
+              <button onClick={subTitleToggle}>취소</button>
+            </div>
+          )}
           <span className={styles.scheduleSpan}>세부 일정</span>
         </div>
 
@@ -54,6 +72,17 @@ const DetailSchedule = () => {
                     setNewContent(dummyObj);
                   }}
                 />
+                <button
+                  className={styles.updateBtn}
+                  onClick={updateContentHandler}
+                  style={
+                    detailSchedule.content[key] === newContent[key]
+                      ? { display: 'none' }
+                      : { display: 'block' }
+                  }
+                >
+                  수정하기
+                </button>
               </div>
             </li>
           ))}

@@ -101,6 +101,7 @@
   width: 91%;
   height: 100%;
   margin-left: 2%;
+  position: relative;
 }
 
 .contentTextarea {
@@ -114,6 +115,14 @@
   font-family: 'Jua', sans-serif;
 }
 
-.contentTextarea:hover {
+.contentTextarea:focus {
   border-radius: 0px;
+}
+
+.updateBtn {
+  width: 80px;
+  height: 30px;
+  position: absolute;
+  bottom: 9px;
+  right: 9px;
 }
