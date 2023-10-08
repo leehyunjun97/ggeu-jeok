@@ -4,101 +4,101 @@ import { postEmailCheckApi } from '../user/user';
 const myAlarmApi = async (email: string) => {
   try {
     const getComplet = await postEmailCheckApi(email);
-    const myAlarmList = getComplet.alarm;
+    const myAlarmList = getComplet.data;
     return myAlarmList;
   } catch (error: any) {
     throw new Error(error.message);
   }
 };
 
-const friendRequestApi = async (sender: string, receiver: string) => {
-  try {
-    const senderInfo = await postEmailCheckApi(sender);
-    const receiverInfo = await postEmailCheckApi(receiver);
+// const friendRequestApi = async (sender: string, receiver: string) => {
+//   try {
+//     const senderInfo = await postEmailCheckApi(sender);
+//     const receiverInfo = await postEmailCheckApi(receiver);
 
-    const addFriendAlarm = async () => {
-      const postComplet = await axios.patch(
-        `http://localhost:4000/user/${receiverInfo.id}`,
-        {
-          alarm: [
-            ...receiverInfo.alarm,
-            {
-              id: receiverInfo.alarmIndex,
-              email: senderInfo.email,
-              nickName: senderInfo.nickName,
-              message: '친구요청을 보냈습니다.',
-              type: 'friendRequest',
-            },
-          ],
-          alarmIndex: (receiverInfo.alarmIndex += 1),
-        }
-      );
-      return postComplet;
-    };
+//     const addFriendAlarm = async () => {
+//       const postComplet = await axios.patch(
+//         `http://localhost:4000/user/${receiverInfo.id}`,
+//         {
+//           alarm: [
+//             ...receiverInfo.alarm,
+//             {
+//               id: receiverInfo.alarmIndex,
+//               email: senderInfo.email,
+//               nickName: senderInfo.nickName,
+//               message: '친구요청을 보냈습니다.',
+//               type: 'friendRequest',
+//             },
+//           ],
+//           alarmIndex: (receiverInfo.alarmIndex += 1),
+//         }
+//       );
+//       return postComplet;
+//     };
 
-    return addFriendAlarm();
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
+//     return addFriendAlarm();
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
 
-const friendRequestRefusalApi = async (sender: string, receiver: string) => {
-  try {
-    const senderInfo = await postEmailCheckApi(sender);
-    const receiverInfo = await postEmailCheckApi(receiver);
+// const friendRequestRefusalApi = async (sender: string, receiver: string) => {
+//   try {
+//     const senderInfo = await postEmailCheckApi(sender);
+//     const receiverInfo = await postEmailCheckApi(receiver);
 
-    const addFriendAlarm = async () => {
-      const postComplet = await axios.patch(
-        `http://localhost:4000/user/${receiverInfo.id}`,
-        {
-          alarm: [
-            ...receiverInfo.alarm,
-            {
-              id: receiverInfo.alarmIndex,
-              email: senderInfo.email,
-              nickName: senderInfo.nickName,
-              message: '친구요청을 거절하였습니다.',
-              type: 'friendRequestRefusal',
-            },
-          ],
-          alarmIndex: (receiverInfo.alarmIndex += 1),
-        }
-      );
-      return postComplet;
-    };
+//     const addFriendAlarm = async () => {
+//       const postComplet = await axios.patch(
+//         `http://localhost:4000/user/${receiverInfo.id}`,
+//         {
+//           alarm: [
+//             ...receiverInfo.alarm,
+//             {
+//               id: receiverInfo.alarmIndex,
+//               email: senderInfo.email,
+//               nickName: senderInfo.nickName,
+//               message: '친구요청을 거절하였습니다.',
+//               type: 'friendRequestRefusal',
+//             },
+//           ],
+//           alarmIndex: (receiverInfo.alarmIndex += 1),
+//         }
+//       );
+//       return postComplet;
+//     };
 
-    return addFriendAlarm();
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
+//     return addFriendAlarm();
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
 
-const friendRequestCheckApi = async (sender: string, receiver: string) => {
-  // 알람 받는 사람의 유저 정보
-  const receiverInfo = await postEmailCheckApi(receiver);
+// const friendRequestCheckApi = async (sender: string, receiver: string) => {
+//   // 알람 받는 사람의 유저 정보
+//   const receiverInfo = await postEmailCheckApi(receiver);
 
-  const check = receiverInfo.alarm.filter((item: any) => item.email === sender);
-  return check;
-};
+//   const check = receiverInfo.alarm.filter((item: any) => item.email === sender);
+//   return check;
+// };
 
-const removeAlarm = async (email: string, id: string) => {
-  try {
-    const myInfo = await postEmailCheckApi(email);
+// const removeAlarm = async (email: string, id: string) => {
+//   try {
+//     const myInfo = await postEmailCheckApi(email);
 
-    const removeList = myInfo.alarm.filter((item: any) => item.id !== id);
+//     const removeList = myInfo.alarm.filter((item: any) => item.id !== id);
 
-    await axios.patch(`http://localhost:4000/user/${myInfo.id}`, {
-      alarm: removeList,
-    });
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
+//     await axios.patch(`http://localhost:4000/user/${myInfo.id}`, {
+//       alarm: removeList,
+//     });
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
 
-export {
-  myAlarmApi,
-  friendRequestApi,
-  friendRequestRefusalApi,
-  removeAlarm,
-  friendRequestCheckApi,
-};
+// export {
+//   myAlarmApi,
+//   friendRequestApi,
+//   friendRequestRefusalApi,
+//   removeAlarm,
+//   friendRequestCheckApi,
+// };

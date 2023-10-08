@@ -4,7 +4,7 @@ import Logo from '../common/Logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { Outlet, useNavigate } from 'react-router-dom';
-import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
+// import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 
@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      {isModal && <AlarmModal closeModal={modalHandler} email={email} />}
+      {/* {isModal && <AlarmModal closeModal={modalHandler} email={email} />} */}
       <div className={styles.header}>
         <Logo
           goMain={() => navigate('/main')}
