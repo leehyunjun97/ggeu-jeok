@@ -32,33 +32,6 @@
   top: 40px;
 }
 
-.emailInput,
-.passwordInput {
-  background-color: rgb(250, 250, 250);
-  width: 95%;
-  height: 35px;
-  margin-bottom: 15px;
-  border: 1.5px solid black;
-  border-radius: 2px;
-  font-size: 12px;
-  padding-left: 10px;
-}
-
-.emailInput {
-  width: 68%;
-}
-
-.emailCheckBtn {
-  width: 22%;
-  height: 35px;
-  border: none;
-  border-radius: 5px;
-  background-color: rgb(215 162 185);
-  color: #fdfbf9;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 12px;
-}
 
 .signUpBtn {
   background-color: #75d777;
@@ -73,15 +46,7 @@
   transition: all 200ms ease;
 }
 
-.errorMessageDiv {
-  text-align: left;
-  width: 95%;
-  height: 15px;
-  font-size: 10.5px;
-  color: red;
-  margin-bottom: 10px;
-  display: none;
-}
+
 
 .imgAttachLabel {
   text-align: left;

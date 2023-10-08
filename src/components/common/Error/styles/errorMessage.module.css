@@ -1,0 +1,9 @@
+.errorMessageDiv {
+  text-align: left;
+  width: 95%;
+  height: 15px;
+  font-size: 10.5px;
+  color: red;
+  margin-bottom: 10px;
+  display: none;
+}

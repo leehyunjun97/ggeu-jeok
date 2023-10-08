@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import { v4 as uuidv4 } from 'uuid';
-
 import {
   getDownloadURL,
   ref,
@@ -16,6 +15,15 @@ import {
 } from 'firebase/storage';
 import { storage } from '../../scripts/firebase';
 import { objTransArr } from '../../utils/common/objectTransformArray';
+import {
+  isValidationCheck,
+  isVisibleDisplay,
+  isVisibleText,
+} from '../../utils/common/isValidation';
+import Input from '../../components/common/Input/Input';
+import Button from '../../components/common/Button/Button';
+import Label from '../../components/common/Label/Label';
+import ErrorMessage from '../../components/common/Error/ErrorMessage';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>({
@@ -29,25 +37,11 @@ const Signup = () => {
     image:
       'https://firebasestorage.googleapis.com/v0/b/montamp-be910.appspot.com/o/images%2Fdefault.png?alt=media&token=e67e268a-b4f5-498a-a68e-4cb5a38ebc2e&_gl=1*r2tf3r*_ga*MTY3Mjk4ODAwOC4xNjgzMjY3ODY3*_ga_CW55HF8NVT*MTY5NjE0NjcxNy42LjEuMTY5NjE0NzIyOS41OC4wLjA.',
   });
-
-  const [emailCheck, setEmailCheck] = useState({
-    text: '사용 가능한 이메일 입니다',
-    bool: true,
-  });
-  const [emailTypeCheck, setEmailTypeCheck] = useState({
-    text: '',
-    bool: true,
-  });
-  const [passwordCheck, setPasswordCheck] = useState({ text: '', bool: true });
-  const [nickNameCheck, setNickNameCheck] = useState({ text: '', bool: true });
-  const [nameCheck, setNameCheck] = useState({ text: '', bool: true });
-
-  const [test, setTest] = useState(0);
   const setUser = useSetRecoilState(userInfo);
-
   const [img, setImg] = useState<File | null>(null);
   const [imgSrc, setimgSrc] = useState<string | null>('');
-
+  const [visible, setVisible] = useState(false);
+  const [toastText, setToastText] = useState('');
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const nickNameRef = useRef<HTMLInputElement>(null);
@@ -55,15 +49,6 @@ const Signup = () => {
   const imgRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!emailCheck.bool) {
-      const timer = setTimeout(() => {
-        setEmailCheck({ ...emailCheck, bool: true });
-      }, 1300);
-      return () => clearTimeout(timer);
-    }
-  }, [emailCheck]);
 
   const handleClick = () => {
     imgRef?.current?.click();
@@ -91,11 +76,6 @@ const Signup = () => {
   }, [img, imgSrc]);
 
   const signupHandler = async () => {
-    console.log(uuidv4());
-    console.log({
-      ...signUpInputState,
-      id: uuidv4(),
-    });
     if (signUpInputState.email.trim() === '') {
       emailRef.current?.focus();
       return;
@@ -136,198 +116,139 @@ const Signup = () => {
   };
 
   const checkEmail = async () => {
+    if (!isValidationCheck(signUpInputState.email, 'email')) {
+      setVisible(true);
+      setToastText('이메일 형식을 확인해주세요');
+      return;
+    }
+
     const data = await postEmailCheckApi(signUpInputState.email);
     const isEmail = objTransArr(data).find(
       (item: any) => item.email === signUpInputState.email
     );
 
-    console.log(objTransArr(data));
-
-    if (!emailTypeCheck.bool) {
-      setEmailCheck({
-        bool: false,
-        text: '이메일 형식을 확인해주세요',
-      });
-    } else if (emailTypeCheck.bool && !isEmail) {
-      setEmailCheck({
-        bool: false,
-        text: '사용 가능한 이메일 입니다',
-      });
-    } else if (isEmail) {
-      setEmailCheck({
-        bool: false,
-        text: '중복된 이메일 입니다',
-      });
+    if (isEmail) {
+      setVisible(true);
+      setToastText('중복된 이메일 입니다');
+      return;
     }
-  };
 
-  const checkEmailType = (e: any) => {
-    const regExp =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,}$/i;
-    const isRegExp = regExp.test(e.target.value);
-
-    if (!isRegExp) {
-      setEmailTypeCheck({
-        text: '- 이메일 형식을 확인해주세요',
-        bool: isRegExp,
-      });
-    } else {
-      setEmailTypeCheck({ text: '형식 확인 완료', bool: isRegExp });
-    }
-  };
-
-  // 나중에 물어볼거 (어떻게 재사용하는지)
-  const checkPassword = (e: any) => {
-    if (e.target.value.trim().length < 6) {
-      setPasswordCheck({
-        text: '- 패스워드는 6자 이상 입력해주세요',
-        bool: false,
-      });
-    } else {
-      setPasswordCheck({
-        text: '- 형식 합격',
-        bool: true,
-      });
-    }
-  };
-
-  const checkNick = (e: any) => {
-    if (e.target.value.trim().length < 3) {
-      setNickNameCheck({
-        text: '- 닉네임은 3자 이상 입력해주세요',
-        bool: false,
-      });
-    } else {
-      setNickNameCheck({
-        text: '- 형식 합격',
-        bool: true,
-      });
-    }
-  };
-
-  const checkName = (e: any) => {
-    if (e.target.value.trim().length < 2) {
-      setNameCheck({
-        text: '- 이름을 입력해주세요',
-        bool: false,
-      });
-    } else {
-      setNameCheck({
-        text: '- 형식 합격',
-        bool: true,
-      });
-    }
-  };
-
-  const errorMessageDivHandler = (bool: boolean) => {
-    if (bool) {
-      return { display: 'none' };
-    } else {
-      return { display: 'block' };
-    }
+    setVisible(true);
+    setToastText('사용 가능한 이메일 입니다');
   };
 
   return (
-    <div className={styles.main}>
-      {!emailCheck.bool && <Toast text={emailCheck.text} />}
-      <span className={styles.signupTitleSpan}>SignUp</span>
-      <div className={styles.loginDiv}>
-        <section className={styles.emailSection}>
-          <input
-            placeholder='이메일'
-            type='email'
-            className={styles.emailInput}
-            onBlur={checkEmailType}
-            value={signUpInputState.email}
-            onChange={(e) => changeInputHandler(e.target.value, 'email')}
-            ref={emailRef}
+    <>
+      <div className={styles.main}>
+        <span className={styles.signupTitleSpan}>SignUp</span>
+        <div className={styles.loginDiv}>
+          <section className={styles.emailSection}>
+            <Input
+              placeholder='이메일'
+              style={{ width: '75%' }}
+              type='email'
+              value={signUpInputState.email}
+              onChange={(e) => changeInputHandler(e.target.value, 'email')}
+              inputRef={emailRef}
+            />
+            <Button
+              onClick={checkEmail}
+              text={'중복확인'}
+              className={'emailCheck'}
+            />
+          </section>
+
+          <Input
+            placeholder='비밀번호'
+            type='password'
+            value={signUpInputState.password}
+            onChange={(e) => changeInputHandler(e.target.value, 'password')}
+            inputRef={passwordRef}
           />
-          <button className={styles.emailCheckBtn} onClick={checkEmail}>
-            중복확인
-          </button>
-        </section>
 
-        <input
-          placeholder='비밀번호'
-          type='password'
-          className={styles.passwordInput}
-          onBlur={checkPassword}
-          value={signUpInputState.password}
-          onChange={(e) => changeInputHandler(e.target.value, 'password')}
-          ref={passwordRef}
-        />
+          <ErrorMessage
+            style={isVisibleDisplay(signUpInputState.email, 'email')}
+            text={isVisibleText(
+              signUpInputState.email,
+              'email',
+              '- 이메일 형식을 확인해주세요'
+            )}
+          />
+          <ErrorMessage
+            style={isVisibleDisplay(signUpInputState.password, 'password')}
+            text={isVisibleText(
+              signUpInputState.password,
+              'password',
+              '- 패스워드는 6자 이상 입력해주세요'
+            )}
+          />
 
-        <div
-          className={styles.errorMessageDiv}
-          style={errorMessageDivHandler(emailTypeCheck.bool)}
-        >
-          <span>{emailTypeCheck.text}</span>
+          <Input
+            placeholder='닉네임'
+            type='text'
+            value={signUpInputState.nickName}
+            onChange={(e) => changeInputHandler(e.target.value, 'nickName')}
+            inputRef={nickNameRef}
+          />
+
+          <Input
+            placeholder='이름'
+            type='text'
+            value={signUpInputState.name}
+            onChange={(e) => changeInputHandler(e.target.value, 'name')}
+            inputRef={nameRef}
+          />
+          <ErrorMessage
+            style={isVisibleDisplay(signUpInputState.nickName, 'nickName')}
+            text={isVisibleText(
+              signUpInputState.nickName,
+              'nickName',
+              '- 닉네임은 3자 이상 입력해주세요'
+            )}
+          />
+          <ErrorMessage
+            style={isVisibleDisplay(signUpInputState.name, 'name')}
+            text={isVisibleText(
+              signUpInputState.name,
+              'name',
+              '- 이름을 입력해주세요'
+            )}
+          />
+
+          <Label htmlFor={'file'} text={'사진첨부'} className={'photoUpload'} />
+
+          <div className={styles.imgAttach} onClick={handleClick}>
+            {!imgSrc ? (
+              '+'
+            ) : (
+              <img
+                className={styles.imgPriview}
+                src={imgSrc as string}
+                alt=''
+              />
+            )}
+          </div>
+
+          <Input
+            style={{ display: 'none' }}
+            inputRef={imgRef}
+            type='file'
+            accept='image/*'
+            onChange={fileHandler}
+          />
+          {/* <button onClick={deleteImage}>사진삭제</button> */}
+
+          <Button
+            onClick={signupHandler}
+            text={'회원가입'}
+            className={'signupBtn'}
+          />
         </div>
-        <div
-          className={styles.errorMessageDiv}
-          style={errorMessageDivHandler(passwordCheck.bool)}
-        >
-          <span>{passwordCheck.text}</span>
-        </div>
-
-        <input
-          placeholder='닉네임'
-          type='text'
-          className={styles.passwordInput}
-          onBlur={checkNick}
-          value={signUpInputState.nickName}
-          onChange={(e) => changeInputHandler(e.target.value, 'nickName')}
-          ref={nickNameRef}
-        />
-
-        <input
-          placeholder='이름'
-          type='text'
-          className={styles.passwordInput}
-          onBlur={checkName}
-          value={signUpInputState.name}
-          onChange={(e) => changeInputHandler(e.target.value, 'name')}
-          ref={nameRef}
-        />
-
-        <label htmlFor='file' className={styles.imgAttachLabel}>
-          사진첨부
-        </label>
-        <div className={styles.imgAttach} onClick={handleClick}>
-          {!imgSrc ? (
-            '+'
-          ) : (
-            <img className={styles.imgPriview} src={imgSrc as string} alt='' />
-          )}
-        </div>
-
-        <input
-          style={{ display: 'none' }}
-          ref={imgRef}
-          type='file'
-          accept='image/*'
-          onChange={fileHandler}
-        />
-        {/* <button onClick={deleteImage}>사진삭제</button> */}
-
-        <div
-          className={styles.errorMessageDiv}
-          style={errorMessageDivHandler(nickNameCheck.bool)}
-        >
-          <span>{nickNameCheck.text}</span>
-        </div>
-        <div
-          className={styles.errorMessageDiv}
-          style={errorMessageDivHandler(nameCheck.bool)}
-        >
-          <span>{nameCheck.text}</span>
-        </div>
-
-        <button className={styles.signUpBtn} onClick={signupHandler}>
-          회원가입
-        </button>
       </div>
-    </div>
+      {visible && (
+        <Toast text={toastText} visible={visible} setVisible={setVisible} />
+      )}
+    </>
   );
 };
 

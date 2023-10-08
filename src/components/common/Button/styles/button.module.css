@@ -1,0 +1,24 @@
+.basicBtn {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  color: #fdfbf9;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.emailCheck {
+  height: 35px;
+  width: 23%;
+  background-color: rgb(215 162 185);
+  font-size: 12px;
+}
+
+.signupBtn {
+  background-color: #75d777;
+  margin-top: 5%;
+  height: 35px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
