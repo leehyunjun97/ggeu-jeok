@@ -9,6 +9,7 @@ import { IUserInfo } from '../../types/user';
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
 import ErrorMessage from '../common/Error/ErrorMessage';
+import { enterKeyDownHandler } from '../../utils/common/keyDown';
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState({
@@ -59,11 +60,9 @@ const Login = () => {
   return (
     <div
       className={styles.loginDiv}
-      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-          loginHandler();
-        }
-      }}
+      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+        enterKeyDownHandler(e, loginHandler)
+      }
     >
       <Input
         placeholder='이메일'

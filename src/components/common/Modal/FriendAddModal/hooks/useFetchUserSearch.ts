@@ -3,6 +3,8 @@ import { useRecoilValue } from 'recoil';
 import { userSearch } from '../../../../../recoil/search/userSearch';
 import { userSearchApi } from '../../../../../services/user/user';
 import { userInfo } from '../../../../../recoil/user/user';
+import { objTransArr } from '../../../../../utils/common/objectTransformArray';
+import { IUserInfo } from '../../../../../types/user';
 
 export const useFetchUserSearch = () => {
   const search = useRecoilValue(userSearch);
@@ -13,19 +15,23 @@ export const useFetchUserSearch = () => {
     async () => {
       const postComplet = await userSearchApi(search);
 
-      const filterId = myInfo.friend?.map((item) => item.id);
-      const aa = postComplet.filter(
-        (item: any) => !filterId?.includes(item.id)
-      );
+      const userList: IUserInfo[] = objTransArr(postComplet);
 
-      return aa;
+      console.log(userList);
+
+      // const filterId = myInfo.friend?.map((item) => item.id);
+      // const aa = postComplet.filter(
+      //   (item: any) => !filterId?.includes(item.id)
+      // );
+
+      return userList;
     },
     {
       enabled: !!search,
       refetchOnWindowFocus: false,
       useErrorBoundary: true,
-      cacheTime: 5 * 10 * 1000,
-      staleTime: 5 * 10 * 1000,
+      // cacheTime: 5 * 10 * 1000,
+      // staleTime: 5 * 10 * 1000,
     }
   );
 

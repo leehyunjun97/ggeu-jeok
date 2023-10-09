@@ -18,12 +18,3 @@
 .loginBtn:hover {
   background-color: rgb(218, 197, 144);
 }
-
-.errorMessageDiv {
-  text-align: left;
-  width: 100%;
-  height: 15px;
-  font-size: 13px;
-  color: red;
-  margin-top: 10px;
-}

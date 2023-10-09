@@ -1,3 +1,4 @@
+import { IAlarm } from './alarm';
 import { IFriendInfo } from './friend';
 
 export interface IUserInfo {
@@ -9,6 +10,7 @@ export interface IUserInfo {
   name: string;
   image: string;
   friend?: IFriendInfo[];
+  alarm?: IAlarm[];
 }
 
 export interface IEmail {

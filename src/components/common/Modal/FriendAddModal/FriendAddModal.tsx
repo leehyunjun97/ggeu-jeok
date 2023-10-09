@@ -1,63 +1,76 @@
-// import React, { useState } from 'react';
-// import styles from './style/friendAddModal.module.css';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
-// import { useFetchUserSearch } from './hooks/useFetchUserSearch';
-// import { useSetRecoilState } from 'recoil';
-// import { userSearch } from '../../../../recoil/search/userSearch';
-// import FriendSearchList from '../../Section/FriendsListUl/FriendSearchList';
+import React, { useState, Dispatch, SetStateAction } from 'react';
+import styles from './style/friendAddModal.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useFetchUserSearch } from './hooks/useFetchUserSearch';
+import { useSetRecoilState } from 'recoil';
+import { userSearch } from '../../../../recoil/search/userSearch';
+import FriendSearchList from '../../Section/FriendsListUl/FriendSearchList';
+import Button from '../../Button/Button';
+import Label from '../../Label/Label';
+import {
+  enterKeyDownHandler,
+  escapeKeyDownHandler,
+} from '../../../../utils/common/keyDown';
+import Input from '../../Input/Input';
 
-// const FriendAddModal = ({ closeModal }: any) => {
-//   const [userSearchState, setUserSearch] = useState('');
-//   const setUserSearchRecoil = useSetRecoilState(userSearch);
+interface IFriendModalIProps {
+  isModal?: boolean;
+  setIsModal: Dispatch<SetStateAction<boolean>>;
+}
 
-//   const { data, isLoading } = useFetchUserSearch();
+const FriendAddModal = ({ isModal, setIsModal }: IFriendModalIProps) => {
+  const [userSearchState, setUserSearch] = useState('');
+  const setUserSearchRecoil = useSetRecoilState(userSearch);
 
-//   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-//     if (e.key === 'Escape') {
-//       closeModal();
-//     }
-//   };
+  const { data, isLoading } = useFetchUserSearch();
 
-//   return (
-//     <div onKeyDown={handleKeyDown} tabIndex={0}>
-//       <div className={styles.modalBackground} onClick={closeModal}></div>
-//       <div className={styles.modalSection}>
-//         <button onClick={closeModal} className={styles.modalCloseBtn}>
-//           <FontAwesomeIcon icon={faXmark} />
-//         </button>
-//         <section className={styles.searchSection}>
-//           <span className={styles.subTtile}>이메일or닉네임</span>
-//           <FontAwesomeIcon
-//             icon={faMagnifyingGlass}
-//             style={{ marginRight: '15px', opacity: '0.7', cursor: 'pointer' }}
-//           />
-//           <input
-//             placeholder='ex) monstamp'
-//             type='text'
-//             value={userSearchState}
-//             onChange={(e) => {
-//               setUserSearch(e.target.value);
-//             }}
-//             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-//               if (e.key === 'Enter') {
-//                 setUserSearchRecoil(userSearchState);
-//               }
-//             }}
-//           />
-//         </section>
-//         <section className={styles.listSection}>
-//           {<FriendSearchList list={data} />}
-//         </section>
-//       </div>
-//     </div>
-//   );
-// };
+  const modalHandler = () => {
+    setIsModal(!isModal);
+    if (isModal) {
+      setUserSearchRecoil('');
+    }
+  };
 
-// export default FriendAddModal;
+  const setUserSearchHandler = () => {
+    setUserSearchRecoil(userSearchState);
+  };
 
-import React from 'react';
-
-const FriendAddModal = () => <></>;
+  return (
+    <div
+      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+        escapeKeyDownHandler(e, modalHandler)
+      }
+      tabIndex={0}
+    >
+      <div className={styles.modalBackground} onClick={modalHandler}></div>
+      <div className={styles.modalSection}>
+        <Button.CloseButton onClick={modalHandler} />
+        <section className={styles.searchSection}>
+          <Label text={'닉네임'} className={'search'} />
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            style={{ marginRight: '15px', opacity: '0.7', cursor: 'pointer' }}
+          />
+          <Input
+            placeholder='ex) monstamp'
+            type='text'
+            value={userSearchState}
+            onChange={(e) => {
+              setUserSearch(e.target.value);
+            }}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+              enterKeyDownHandler(e, setUserSearchHandler)
+            }
+          />
+        </section>
+        <section className={styles.listSection}>
+          {/* data까지는 뽑아냄 */}
+          {/* {<FriendSearchList list={data} />} */}
+        </section>
+      </div>
+    </div>
+  );
+};
 
 export default FriendAddModal;

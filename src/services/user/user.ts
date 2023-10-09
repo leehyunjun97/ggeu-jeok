@@ -68,9 +68,8 @@ const postSignupApi = async (signState: IUserInfo) => {
 const userSearchApi = async (search: string) => {
   try {
     const getSearchCom = await axios.get(
-      `http://localhost:4000/user?nickName=${search}`
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/user.json?orderBy="nickName"&equalTo="${search}"`
     );
-
     return getSearchCom.data;
   } catch (error: any) {
     throw new Error(error.message);

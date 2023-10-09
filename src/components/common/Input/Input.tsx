@@ -10,6 +10,7 @@ interface IInputProps {
   inputRef?: React.RefObject<HTMLInputElement>;
   style?: React.CSSProperties;
   accept?: string;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 const Input = ({
@@ -21,6 +22,7 @@ const Input = ({
   inputRef,
   style,
   accept,
+  onKeyDown,
 }: IInputProps) => {
   return (
     <input
@@ -32,6 +34,7 @@ const Input = ({
       value={value}
       onChange={onChange}
       ref={inputRef}
+      onKeyDown={onKeyDown}
     />
   );
 };

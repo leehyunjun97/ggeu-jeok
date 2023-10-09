@@ -8,3 +8,11 @@
 .photoUpload {
   text-align: left;
 }
+
+.search {
+  text-align: right;
+  position: absolute;
+  right: 3px;
+  top: -24px;
+  font-weight: bold;
+}

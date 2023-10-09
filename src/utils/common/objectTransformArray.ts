@@ -1,5 +1,3 @@
-import { IUserInfo } from '../../types/user';
-
 export const objTransArr = <T>(data: { [key: string]: T }) => {
   return Object.keys(data).map((key) => ({
     uuid: key,

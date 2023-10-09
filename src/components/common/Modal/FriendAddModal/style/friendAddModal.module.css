@@ -26,17 +26,6 @@
   box-shadow: 5px 5px 5px rgb(191, 146, 87);
 }
 
-.modalCloseBtn {
-  background-color: transparent;
-  border: none;
-  color: black;
-  font-size: 18px;
-  cursor: pointer;
-  position: absolute;
-  right: -1px;
-  top: 2px;
-}
-
 .searchSection {
   height: 45px;
 }
@@ -71,7 +60,7 @@
   border-radius: 3px;
   position: relative;
   border: 1.7px solid black;
-  background-image: url(../../../../../../public/assets/img/Cream\ Laid\ Writing\ Paper.PNG);
+  background-image: url(../../../../../../public/assets/img/Vellum\ Sketchbook\ Paper.PNG);
 }
 
 .listSection {

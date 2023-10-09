@@ -7,6 +7,7 @@ import { IUserInfo } from '../types/user';
 
 const UserRouter = () => {
   const setUser = useSetRecoilState(userInfo);
+  const myInfo = useRecoilValue(userInfo);
   const navigate = useNavigate();
   const id = localStorage.getItem('id');
   const userRenderRecoil = useRecoilValue(userRender);
@@ -23,6 +24,8 @@ const UserRouter = () => {
           localStorage.removeItem('id');
           navigate('/');
         }
+
+        console.log(myInfo);
 
         getComplet.uuid = id;
         setUser(getComplet);
