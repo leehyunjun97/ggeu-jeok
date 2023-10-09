@@ -4,11 +4,15 @@ import styles from './styles/errorMessage.module.css';
 interface IErrorMessageProps {
   style: React.CSSProperties;
   text: string;
+  className?: string;
 }
 
-const ErrorMessage = ({ style, text }: IErrorMessageProps) => {
+const ErrorMessage = ({ style, text, className }: IErrorMessageProps) => {
   return (
-    <div className={styles.errorMessageDiv} style={style}>
+    <div
+      className={`${styles.errorMessageDiv} ${styles[`${className}`]}`}
+      style={style}
+    >
       <span>{text}</span>
     </div>
   );

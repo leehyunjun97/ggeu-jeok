@@ -6,38 +6,13 @@
   position: relative;
 }
 
-.emailInput,
-.passwordInput {
-  background-color: rgb(250, 250, 250);
-  width: 95%;
-  height: 35px;
-  margin-bottom: 15px;
-  border: 1.5px solid black;
-  border-radius: 2px;
-  font-size: 12px;
-  padding-left: 10px;
-}
-
 .signupSpan {
   opacity: 0.5;
-  font-size: 14px;
+  font-size: 12px;
   position: absolute;
   top: 108px;
   right: 7px;
   cursor: pointer;
-}
-
-.loginBtn {
-  background-color: rgb(238 199 152);
-  height: 35px;
-  margin-top: 25px;
-  border: 0.5px solid rgb(219, 219, 219);
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-  transition: all 300ms ease-out;
 }
 
 .loginBtn:hover {

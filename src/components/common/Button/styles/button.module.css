@@ -22,3 +22,17 @@
   cursor: pointer;
   transition: all 200ms ease;
 }
+
+.loginBtn {
+  background-color: rgb(238 199 152);
+  height: 35px;
+  margin-top: 25px;
+  border: 0.5px solid rgb(219, 219, 219);
+  border-radius: 12px;
+  font-size: 12px;
+  transition: all 300ms ease-out;
+}
+
+.loginBtn:hover {
+  background-color: rgb(218, 197, 144);
+}

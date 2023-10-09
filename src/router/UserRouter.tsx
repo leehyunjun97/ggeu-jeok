@@ -3,9 +3,10 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfo, userRender } from '../recoil/user/user';
 import { getMyInfoApi } from '../services/user/user';
+import { IUserInfo } from '../types/user';
 
 const UserRouter = () => {
-  const setInfo = useSetRecoilState(userInfo);
+  const setUser = useSetRecoilState(userInfo);
   const navigate = useNavigate();
   const id = localStorage.getItem('id');
   const userRenderRecoil = useRecoilValue(userRender);
@@ -15,30 +16,21 @@ const UserRouter = () => {
       try {
         if (!id) return;
 
-        const getComplet = await getMyInfoApi(id);
+        const getComplet: IUserInfo = await getMyInfoApi(id);
 
-        if (!!getComplet.data.length) return setInfo(getComplet.data[0]);
+        if (!getComplet) {
+          alert('잘못된 접근입니다.');
+          localStorage.removeItem('id');
+          navigate('/');
+        }
 
-        alert('잘못된 접근입니다.');
-        localStorage.removeItem('id');
-        navigate('/');
-
-        // if (id) {
-        //   const getComplet = await getMyInfoApi(id);
-
-        //   if (getComplet.data.length === 0) {
-        //     alert('잘못된 접근입니다.');
-        //     localStorage.removeItem('id');
-        //     navigate('/');
-        //   } else {
-        //     setInfo(getComplet.data[0]);
-        //   }
-        // }
+        getComplet.uuid = id;
+        setUser(getComplet);
       } catch (error) {}
     };
 
     getMyInfoHandler();
-  }, [id, setInfo, navigate, userRenderRecoil]);
+  }, [id, setUser, navigate, userRenderRecoil]);
 
   return <Outlet />;
 };

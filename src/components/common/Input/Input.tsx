@@ -22,7 +22,6 @@ const Input = ({
   style,
   accept,
 }: IInputProps) => {
-  console.log(inputRef);
   return (
     <input
       style={{ ...style }}

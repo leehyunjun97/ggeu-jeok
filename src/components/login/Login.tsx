@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import styles from './style/login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { getUsersApi } from '../../services/user/user';
+import { getLoginCheckApi, getUsersApi } from '../../services/user/user';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import { objTransArr } from '../../utils/common/objectTransformArray';
 import { IUserInfo } from '../../types/user';
+import Input from '../common/Input/Input';
+import Button from '../common/Button/Button';
+import ErrorMessage from '../common/Error/ErrorMessage';
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState({
@@ -19,29 +22,32 @@ const Login = () => {
 
   const loginHandler = async () => {
     try {
-      const userList = await getUsersApi();
-      const findUser: any = objTransArr(userList).find(
-        (item: any) =>
-          item.email === loginInputState.email &&
-          item.password === loginInputState.password
-      );
+      const findUser = await getLoginCheckApi(loginInputState.email);
 
-      console.log(findUser);
+      if (Object.keys(findUser).length === 0) {
+        setLoginCheck(true);
+        return;
+      }
 
-      // if (findUser) {
-      //   setLoginCheck(false);
+      const dataid = Object.keys(findUser)[0];
+      const myInfo: IUserInfo = findUser[dataid];
 
-      //   localStorage.setItem('id', findUser.uuid);
-      //   setUser(findUser);
-      //   navigate('/main');
-      // } else {
-      //   setLoginCheck(true);
-      // }
+      if (myInfo.password !== loginInputState.password) {
+        setLoginCheck(true);
+        return;
+      }
+
+      myInfo.uuid = dataid;
+
+      localStorage.setItem('id', dataid);
+      setUser(myInfo);
+      navigate('/main');
     } catch (error) {
       console.log(error);
     }
   };
 
+  // 따로 관리 하는법
   const errorMessageDivHandler = (bool: boolean) => {
     if (!bool) {
       return { display: 'none' };
@@ -59,16 +65,15 @@ const Login = () => {
         }
       }}
     >
-      <input
+      <Input
         placeholder='이메일'
         type='email'
-        className={styles.emailInput}
         value={loginInputState.email}
         onChange={(e) => {
           setLoginInputState((prev) => ({ ...prev, email: e.target.value }));
         }}
       />
-      <input
+      <Input
         placeholder='비밀번호'
         type='password'
         className={styles.passwordInput}
@@ -80,18 +85,14 @@ const Login = () => {
       <span className={styles.signupSpan} onClick={() => navigate('/signup')}>
         회원가입
       </span>
-      <button className={styles.loginBtn} onClick={loginHandler}>
-        로그인
-      </button>
-      <div
-        className={styles.errorMessageDiv}
+      <Button text={'로그인'} className={'loginBtn'} onClick={loginHandler} />
+
+      <ErrorMessage
         style={errorMessageDivHandler(loginCheck)}
-      >
-        <span>
-          아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시
-          확인해주세요.
-        </span>
-      </div>
+        className={'login'}
+        text='- 아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시
+        확인해주세요.'
+      />
     </div>
   );
 };

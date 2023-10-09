@@ -14,16 +14,16 @@ const SchedulesUl = () => {
   const info = useRecoilValue(userInfo);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const getRoomList = async () => {
-      const roomList = await getRoomListApi();
-      const myRoomList = roomList.filter((item: IRoomInfo) =>
-        item.member.find((it) => it.id === info.id)
-      );
-      setRoomData(myRoomList);
-    };
-    getRoomList();
-  }, [info.id]);
+  // useEffect(() => {
+  //   const getRoomList = async () => {
+  //     const roomList = await getRoomListApi();
+  //     const myRoomList = roomList.filter((item: IRoomInfo) =>
+  //       item.member.find((it) => it.id === info.id)
+  //     );
+  //     setRoomData(myRoomList);
+  //   };
+  //   getRoomList();
+  // }, [info.id]);
 
   return (
     <ul className={styles.ulList}>
