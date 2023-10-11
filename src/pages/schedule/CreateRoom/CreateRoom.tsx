@@ -75,8 +75,9 @@ const CreateRoom = () => {
 
   const memberClassAddHandler = () => {
     checkList.forEach((item) => {
-      const { email, nickName, name, image } = item;
+      const { email, nickName, name, image, id } = item;
       const obj1: IMemberInfo = {
+        id,
         email,
         class: 'member',
         nickName,

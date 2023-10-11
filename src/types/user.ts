@@ -2,15 +2,16 @@ import { IAlarm } from './alarm';
 import { IFriendInfo } from './friend';
 
 export interface IUserInfo {
-  id?: string;
-  uuid?: string;
+  id: string;
+  uuid: string;
   email: string;
   password: string;
   nickName: string;
   name: string;
   image: string;
   friend?: IFriendInfo[];
-  alarm?: IAlarm[];
+  alarm: IAlarm[];
+  alarmIndex: number;
 }
 
 export interface IEmail {

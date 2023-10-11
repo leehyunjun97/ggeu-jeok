@@ -66,7 +66,7 @@ const FriendAddModal = ({ isModal, setIsModal }: IFriendModalIProps) => {
         </section>
         <section className={styles.listSection}>
           {/* data까지는 뽑아냄 */}
-          {/* {<FriendSearchList list={data} />} */}
+          {<FriendSearchList list={data} />}
         </section>
       </div>
     </div>

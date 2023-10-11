@@ -35,18 +35,17 @@ const getMyInfoApi = async (id: string) => {
   }
 };
 
-const postEmailCheckApi = async (email: string) => {
-  try {
-    const userList = await getUsersApi();
-    // const isEmail = userList.find((item: any) => item.email === email);
-    return userList;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
+// const postEmailCheckApi = async (email: string) => {
+//   try {
+//     const userList = await getUsersApi();
+//     // const isEmail = userList.find((item: any) => item.email === email);
+//     return userList;
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
 
 const postSignupApi = async (signState: IUserInfo) => {
-  console.log(signState);
   try {
     const postComplet = await axios.post(
       'https://ggeu-jeok-default-rtdb.firebaseio.com/user.json',
@@ -57,6 +56,9 @@ const postSignupApi = async (signState: IUserInfo) => {
         nickName: signState.nickName,
         name: signState.name,
         image: signState.image,
+        friend: signState.friend,
+        alarm: signState.alarm,
+        alarmIndex: signState.alarmIndex,
       }
     );
     return postComplet;
@@ -78,7 +80,7 @@ const userSearchApi = async (search: string) => {
 
 export {
   getUsersApi,
-  postEmailCheckApi,
+  // postEmailCheckApi,
   postSignupApi,
   userSearchApi,
   getLoginCheckApi,

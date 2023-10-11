@@ -22,6 +22,7 @@ const postSignupApi = async (signState: IUserInfo) => {
       image: signState.image,
       friend: [],
       alarm: [],
+      alarmIndex: 0,
     });
     return postComplet;
   } catch (error: any) {

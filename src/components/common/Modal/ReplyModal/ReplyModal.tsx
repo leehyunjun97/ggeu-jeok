@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './style/replyModal.module.css';
 
 interface IProps {
-  closeModal: any;
+  isModal?: boolean;
+  setIsModal: Dispatch<SetStateAction<boolean>>;
   addFriendHandler?: any;
   text: string;
 }
 
-const ReplyModal = ({ closeModal, addFriendHandler, text }: IProps) => {
+const ReplyModal = ({
+  isModal,
+  setIsModal,
+  addFriendHandler,
+  text,
+}: IProps) => {
+  const modalHandler = () => {
+    setIsModal(!isModal);
+  };
 
   return (
     <>
@@ -17,14 +26,17 @@ const ReplyModal = ({ closeModal, addFriendHandler, text }: IProps) => {
         </section>
         <section className={styles.replyBtnSection}>
           <button onClick={addFriendHandler}>예</button>
-          <button onClick={closeModal}>아니오</button>
+          <button onClick={modalHandler}>아니오</button>
         </section>
       </div>
     </>
   );
 };
 
-ReplyModal.SimpleModal = ({ closeModal, text }: IProps) => {
+ReplyModal.SimpleModal = ({ isModal, setIsModal, text }: IProps) => {
+  const modalHandler = () => {
+    setIsModal(!isModal);
+  };
   return (
     <>
       <div className={styles.modalSection}>
@@ -32,7 +44,7 @@ ReplyModal.SimpleModal = ({ closeModal, text }: IProps) => {
           <p>{text}</p>
         </section>
         <section className={styles.replyBtnSection}>
-          <button onClick={closeModal}>예</button>
+          <button onClick={modalHandler}>예</button>
         </section>
       </div>
     </>

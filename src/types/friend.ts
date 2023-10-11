@@ -1,5 +1,5 @@
 export interface IFriendInfo {
-  id?: string;
+  id: string;
   email: string;
   nickName: string;
   name: string;

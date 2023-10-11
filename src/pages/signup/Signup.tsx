@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './style/signup.module.css';
-import { postSignupApi, postEmailCheckApi } from '../../services/user/user';
+import { getUsersApi, postSignupApi } from '../../services/user/user';
 import Toast from '../../components/common/Toast/Toast';
 import { IUserInfo } from '../../types/user';
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +34,8 @@ const Signup = () => {
     name: '',
     nickName: '',
     friend: [],
+    alarm: [],
+    alarmIndex: 0,
     image:
       'https://firebasestorage.googleapis.com/v0/b/montamp-be910.appspot.com/o/images%2Fdefault.png?alt=media&token=e67e268a-b4f5-498a-a68e-4cb5a38ebc2e&_gl=1*r2tf3r*_ga*MTY3Mjk4ODAwOC4xNjgzMjY3ODY3*_ga_CW55HF8NVT*MTY5NjE0NjcxNy42LjEuMTY5NjE0NzIyOS41OC4wLjA.',
   });
@@ -95,8 +97,8 @@ const Signup = () => {
               ...signUpInputState,
               id: uuidv4(),
             });
-            localStorage.setItem('id', signUpInputState.email);
-            setUser({ ...signComplet.data });
+
+            localStorage.setItem('id', signComplet.data['name']);
             navigate('/main');
           });
         });
@@ -105,7 +107,8 @@ const Signup = () => {
           ...signUpInputState,
           id: uuidv4(),
         });
-        localStorage.setItem('id', signComplet.data.name);
+
+        localStorage.setItem('id', signComplet.data['name']);
         navigate('/main');
       }
     }
@@ -122,7 +125,8 @@ const Signup = () => {
       return;
     }
 
-    const data = await postEmailCheckApi(signUpInputState.email);
+    // const data = await postEmailCheckApi(signUpInputState.email);
+    const data = await getUsersApi();
     const isEmail = objTransArr(data).find(
       (item: any) => item.email === signUpInputState.email
     );

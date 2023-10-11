@@ -4,19 +4,15 @@ import Logo from '../common/Logo/Logo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { Outlet, useNavigate } from 'react-router-dom';
-// import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
+import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 
 const Header = () => {
   const [isModal, setIsModal] = useState(false);
-  const email = localStorage.getItem('id');
+  // const email = localStorage.getItem('id');
   const userInfoRecoil = useRecoilValue(userInfo);
   const userInfoReset = useResetRecoilState(userInfo);
-
-  const modalHandler = () => {
-    setIsModal(!isModal);
-  };
 
   const navigate = useNavigate();
 
@@ -28,14 +24,23 @@ const Header = () => {
 
   return (
     <>
-      {/* {isModal && <AlarmModal closeModal={modalHandler} email={email} />} */}
+      {isModal && (
+        <AlarmModal
+          isModal={isModal}
+          setIsModal={setIsModal}
+          myInfo={userInfoRecoil}
+        />
+      )}
       <div className={styles.header}>
         <Logo
           goMain={() => navigate('/main')}
           nickName={userInfoRecoil.nickName ?? ''}
         />
         <div className={styles.headerSide}>
-          <button onClick={modalHandler} className={styles.alarmBtn}>
+          <button
+            onClick={() => setIsModal(!isModal)}
+            className={styles.alarmBtn}
+          >
             <FontAwesomeIcon
               icon={faBell}
               style={{ color: '#000000' }}

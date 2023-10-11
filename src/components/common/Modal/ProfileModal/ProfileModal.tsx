@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './styles/profileModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const ProfileModal = ({ closeModal }: any) => {
+interface IProfileModalIProps {
+  isProfileModal?: boolean;
+  setIsProfileModal: Dispatch<SetStateAction<boolean>>;
+}
+
+const ProfileModal = ({
+  isProfileModal,
+  setIsProfileModal,
+}: IProfileModalIProps) => {
+  const profileModalHandler = () => {
+    setIsProfileModal(!isProfileModal);
+  };
+
   return (
     <>
-      <div className={styles.modalBackground} onClick={closeModal}></div>
+      <div
+        className={styles.modalBackground}
+        onClick={profileModalHandler}
+      ></div>
       <div className={styles.modalSection}>
-        <button onClick={closeModal} className={styles.modalCloseBtn}>
+        <button onClick={profileModalHandler} className={styles.modalCloseBtn}>
           <FontAwesomeIcon icon={faXmark} />
         </button>
         <section className={styles.titleSection}>
