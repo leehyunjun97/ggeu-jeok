@@ -34,28 +34,6 @@ const getMyInfoApi = async (id: string) => {
   }
 };
 
-const postSignupApi = async (signState: IUserInfo) => {
-  try {
-    const postComplet = await axios.post(
-      'https://ggeu-jeok-default-rtdb.firebaseio.com/user.json',
-      {
-        id: signState.id,
-        email: signState.email,
-        password: signState.password,
-        nickName: signState.nickName,
-        name: signState.name,
-        image: signState.image,
-        friend: signState.friend,
-        alarm: signState.alarm,
-        alarmIndex: signState.alarmIndex,
-      }
-    );
-    return postComplet;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
-
 const userSearchApi = async (search: string) => {
   try {
     const getSearchCom = await axios.get(
@@ -67,10 +45,4 @@ const userSearchApi = async (search: string) => {
   }
 };
 
-export {
-  getUsersApi,
-  postSignupApi,
-  userSearchApi,
-  getLoginCheckApi,
-  getMyInfoApi,
-};
+export { getUsersApi, userSearchApi, getLoginCheckApi, getMyInfoApi };

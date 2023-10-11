@@ -10,7 +10,6 @@ import { userInfo } from '../../recoil/user/user';
 
 const Header = () => {
   const [isModal, setIsModal] = useState(false);
-  // const email = localStorage.getItem('id');
   const userInfoRecoil = useRecoilValue(userInfo);
   const userInfoReset = useResetRecoilState(userInfo);
 

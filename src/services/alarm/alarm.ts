@@ -17,6 +17,7 @@ const myAlarmsApi = async (uuid: string) => {
 const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
   try {
     const addFriendAlarm = async () => {
+      // 알람 구조 바꾸기
       if (receiver.alarmIndex === 0) {
         receiver.alarm = [];
       }
@@ -47,14 +48,13 @@ const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
   }
 };
 
-const removeAlarm = async (alarmId : number) => {
+const removeAlarm = async (alarmId: number) => {
   try {
-    const delCom = await axios.delete
-  } catch (error:any) {
+    const delCom = await axios.delete;
+  } catch (error: any) {
     throw new Error(error.message);
-    
   }
-}
+};
 
 // const friendRequestRefusalApi = async (sender: string, receiver: string) => {
 //   try {

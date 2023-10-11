@@ -51,7 +51,7 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
         <section className={styles.alarmSection}>
           {alarmData.length > 0 ? (
             <ul style={{ padding: '25px' }}>
-              {alarmData.map((item: any) => (
+              {alarmData.map((item: IAlarm) => (
                 <AlarmCard
                   key={item.id}
                   alarm={item}
