@@ -1,5 +1,5 @@
 import styles from './style/alarmCard.module.css';
-// import { addFriendApi } from '../../../../services/friend/friend';
+import { addFriendApi } from '../../../../services/friend/friend';
 import // friendRequestRefusalApi,
 // removeAlarm,
 '../../../../services/alarm/alarm';
@@ -7,6 +7,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfo, userRender } from '../../../../recoil/user/user';
 import { IUserInfo } from '../../../../types/user';
 import { IAlarm } from '../../../../types/alarm';
+import { getLoginCheckApi } from '../../../../services/user/user';
+import { objTransArr } from '../../../../utils/common/objectTransformArray';
 
 interface IAlarmCardProps {
   alarm: IAlarm;
@@ -16,11 +18,19 @@ interface IAlarmCardProps {
 
 const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
   const setUserRender = useSetRecoilState(userRender);
-  // const myInfo = useRecoilValue<IUserInfo>(userInfo);
 
   const addFriendHandler = async () => {
-    // const postCom = await addFriendApi(myInfo, alarm.email);
-    // console.log(postCom);
+    const data = await getLoginCheckApi(alarm.email);
+    const sendUser: IUserInfo[] = objTransArr(data);
+
+    if (!myInfo.friend) {
+      myInfo = { ...myInfo, friend: [] };
+    }
+    if (!sendUser[0].friend) {
+      sendUser[0] = { ...sendUser[0], friend: [] };
+    }
+
+    await addFriendApi(myInfo, sendUser[0]);
     // removeAlarm(myInfo.email, alarm.id);
     setUserRender((prev) => !prev);
     closeModal();
@@ -46,7 +56,9 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
             <p>{alarm.message}</p>
           </section>
           <section className={styles.btnSection}>
-            <button className={styles.accepBtn}>수락</button>
+            <button className={styles.accepBtn} onClick={addFriendHandler}>
+              수락
+            </button>
             <button className={styles.refusalBtn}>거절</button>
           </section>
         </li>

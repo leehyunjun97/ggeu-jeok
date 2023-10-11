@@ -9,7 +9,7 @@ export interface IUserInfo {
   nickName: string;
   name: string;
   image: string;
-  friend?: IFriendInfo[];
+  friend: IFriendInfo[];
   alarm: IAlarm[];
   alarmIndex: number;
 }

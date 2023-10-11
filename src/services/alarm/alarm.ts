@@ -16,13 +16,12 @@ const myAlarmsApi = async (uuid: string) => {
 
 const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
   try {
-    console.log(receiver);
     const addFriendAlarm = async () => {
       if (receiver.alarmIndex === 0) {
         receiver.alarm = [];
       }
 
-      const postComplet = await axios.patch(
+      const patchComplet = await axios.patch(
         `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${receiver.uuid}.json`,
         {
           ...receiver,
@@ -39,7 +38,7 @@ const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
           ],
         }
       );
-      return postComplet;
+      return patchComplet;
     };
 
     return addFriendAlarm();
@@ -47,6 +46,15 @@ const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
     throw new Error(error.message);
   }
 };
+
+const removeAlarm = async (alarmId : number) => {
+  try {
+    const delCom = await axios.delete
+  } catch (error:any) {
+    throw new Error(error.message);
+    
+  }
+}
 
 // const friendRequestRefusalApi = async (sender: string, receiver: string) => {
 //   try {
@@ -83,6 +91,6 @@ export {
   myAlarmsApi,
   friendRequestApi,
   // friendRequestRefusalApi,
-  // removeAlarm,
+  removeAlarm,
   // friendRequestCheckApi,
 };
