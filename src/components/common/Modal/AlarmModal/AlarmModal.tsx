@@ -1,14 +1,8 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './style/alarmModal.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import AlarmCard from '../../Card/AlarmCard/AlarmCard';
 import { escapeKeyDownHandler } from '../../../../utils/common/keyDown';
-import { myAlarmsApi } from '../../../../services/alarm/alarm';
 import { IAlarm } from '../../../../types/alarm';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { userInfo, userRender } from '../../../../recoil/user/user';
-import { objTransArr } from '../../../../utils/common/objectTransformArray';
 import { IUserInfo } from '../../../../types/user';
 import Button from '../../Button/Button';
 
@@ -19,20 +13,6 @@ interface IAlarmProps {
 }
 
 const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
-  const [alarmData, setAlarmData] = useState<IAlarm[]>([]);
-  // const myInfo = useRecoilValue(userInfo);
-
-  useEffect(() => {
-    const myAlarmList = async () => {
-      const getCom = await myAlarmsApi(myInfo.uuid);
-      if (!getCom) {
-        return;
-      }
-      setAlarmData(objTransArr(getCom));
-    };
-    myAlarmList();
-  }, [myInfo]);
-
   const modalHandler = () => {
     setIsModal(!isModal);
   };
@@ -52,9 +32,9 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
         </section>
 
         <section className={styles.alarmSection}>
-          {alarmData && alarmData.length > 0 ? (
+          {myInfo.alarm.length > 0 ? (
             <ul style={{ padding: '25px' }}>
-              {alarmData.map((item: IAlarm) => (
+              {myInfo.alarm.map((item: IAlarm) => (
                 <AlarmCard
                   key={item.uuid}
                   alarm={item}

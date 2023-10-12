@@ -11,6 +11,8 @@ const UserRouter = () => {
   const navigate = useNavigate();
   const id = localStorage.getItem('id');
   const userRenderRecoil = useRecoilValue(userRender);
+  console.log('myInfo');
+  console.log(myInfo);
 
   useEffect(() => {
     const getMyInfoHandler = async () => {
@@ -18,6 +20,8 @@ const UserRouter = () => {
         if (!id) return;
 
         const getComplet: IUserInfo = await getMyInfoApi(id);
+        console.log('GetCOm22');
+        console.log(getComplet);
 
         if (!getComplet) {
           alert('잘못된 접근입니다.');
@@ -26,6 +30,15 @@ const UserRouter = () => {
         }
 
         getComplet.uuid = id;
+
+        if (!getComplet.friend) {
+          getComplet.friend = [];
+        }
+
+        if (!getComplet.alarm) {
+          getComplet.alarm = [];
+        }
+
         setUser(getComplet);
       } catch (error) {}
     };

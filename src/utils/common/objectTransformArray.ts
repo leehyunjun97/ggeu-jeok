@@ -4,3 +4,9 @@ export const objTransArr = <T>(data: { [key: string]: T }) => {
     ...data[key],
   }));
 };
+
+export const objUuidAdd = <IUserInfo>(data: { [key: string]: IUserInfo }) => {
+  const key = Object.keys(data)[0];
+
+  return { ...data[key], uuid: key };
+};
