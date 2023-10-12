@@ -36,25 +36,14 @@
   bottom: 8px;
   right: 10px;
   height: 30px;
+  width: 60%;
+  text-align: right;
 }
 
-.accepBtn {
-  background-color: #75d777;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  font-size: 15px;
-  margin-right: 5px;
-  height: 80%;
-  cursor: pointer;
-}
-
-.refusalBtn {
-  background-color: #e46060;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  font-size: 15px;
-  height: 80%;
-  cursor: pointer;
+.createAtSection {
+  position: absolute;
+  left: 10px;
+  top: 11px;
+  opacity: 0.8;
+  font-size: 13px;
 }

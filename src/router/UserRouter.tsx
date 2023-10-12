@@ -25,8 +25,6 @@ const UserRouter = () => {
           navigate('/');
         }
 
-        console.log(myInfo);
-
         getComplet.uuid = id;
         setUser(getComplet);
       } catch (error) {}

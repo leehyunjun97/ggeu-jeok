@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <>
-      {isModal && <AlarmModal isModal={isModal} setIsModal={setIsModal} />}
+      {isModal && <AlarmModal isModal={isModal} setIsModal={setIsModal} myInfo={userInfoRecoil}/>}
       <div className={styles.header}>
         <Logo
           goMain={() => navigate('/main')}

@@ -10,7 +10,7 @@ import { IFriendInfo } from '../../../types/friend';
 import { IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
-import { dateStringHandler } from './service/date';
+import { dateStringHandler } from '../../../utils/common/date';
 
 const CreateRoom = () => {
   const info = useRecoilValue(userInfo);

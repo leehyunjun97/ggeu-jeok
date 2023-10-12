@@ -47,3 +47,29 @@
   right: -1px;
   top: 2px;
 }
+
+.accepBtn {
+  background-color: #75d777;
+  border-radius: 3px;
+  font-size: 15px;
+  margin-right: 5px;
+  width: 30%;
+  height: 80%;
+}
+
+.refusalBtn {
+  background-color: #e46060;
+  border-radius: 3px;
+  font-size: 15px;
+  width: 30%;
+  height: 80%;
+}
+
+/* .basicBtn {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  color: #fdfbf9;
+  font-weight: bold;
+  cursor: pointer;
+} */

@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 import { IMemberInfo } from '../../../../types/room';
 import ProfileModal from '../../Modal/ProfileModal/ProfileModal';
+import { fromEmail } from '../../../../utils/common/userFindAndTrans';
 
 interface IProps {
   info: IFriendInfo | IUserInfo | IMemberInfo;
@@ -28,10 +29,10 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   };
 
   const addFriendHandler = async () => {
-    // 알람 구조 재정의 파이어베이스 키값받아서 id
+    const sendUser: IUserInfo = await fromEmail(info.email);
 
-    const alarmOverCheck = (info as IUserInfo).alarm?.filter(
-      (item) => item.email === myinfo.email
+    const alarmOverCheck = sendUser.alarm.filter(
+      (item) => item.email === myinfo.email && item.type === 'friendRequest'
     );
 
     if (alarmOverCheck?.length >= 1) {
@@ -40,11 +41,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
       return;
     }
 
-    if (!(info as IUserInfo).alarm) {
-      (info as IUserInfo).alarm = [];
-    }
-
-    const postCom = await friendRequestApi(myinfo, info as IUserInfo);
+    const postCom = await friendRequestApi(myinfo, sendUser);
     setIsModal(!isModal);
   };
 
