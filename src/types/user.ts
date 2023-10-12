@@ -11,7 +11,6 @@ export interface IUserInfo {
   image: string;
   friend: IFriendInfo[];
   alarm: IAlarm[];
-  alarmIndex: number;
 }
 
 export interface IEmail {

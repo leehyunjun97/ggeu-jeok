@@ -13,7 +13,6 @@ const userInfo = atom<IUserInfo>({
     image: '',
     friend: [],
     alarm: [],
-    alarmIndex: 0,
   },
 });
 

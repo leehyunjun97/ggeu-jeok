@@ -5,17 +5,19 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import AlarmCard from '../../Card/AlarmCard/AlarmCard';
 import { escapeKeyDownHandler } from '../../../../utils/common/keyDown';
 import { myAlarmsApi } from '../../../../services/alarm/alarm';
-import { IUserInfo } from '../../../../types/user';
 import { IAlarm } from '../../../../types/alarm';
+import { useRecoilValue } from 'recoil';
+import { userInfo } from '../../../../recoil/user/user';
+import { objTransArr } from '../../../../utils/common/objectTransformArray';
 
 interface IAlarmProps {
   isModal: boolean;
   setIsModal: Dispatch<SetStateAction<boolean>>;
-  myInfo: IUserInfo;
 }
 
-const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
+const AlarmModal = ({ isModal, setIsModal }: IAlarmProps) => {
   const [alarmData, setAlarmData] = useState<IAlarm[]>([]);
+  const myInfo = useRecoilValue(userInfo);
 
   useEffect(() => {
     const myAlarmList = async () => {
@@ -23,7 +25,8 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
       if (!getCom) {
         return;
       }
-      setAlarmData(getCom);
+      const alarms: IAlarm[] = objTransArr(getCom);
+      setAlarmData(alarms);
     };
     myAlarmList();
   }, [myInfo.uuid]);
@@ -53,10 +56,9 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
             <ul style={{ padding: '25px' }}>
               {alarmData.map((item: IAlarm) => (
                 <AlarmCard
-                  key={item.id}
+                  key={item.uuid}
                   alarm={item}
                   closeModal={modalHandler}
-                  myInfo={myInfo}
                 />
               ))}
             </ul>

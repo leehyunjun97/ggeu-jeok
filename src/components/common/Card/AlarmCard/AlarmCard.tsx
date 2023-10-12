@@ -1,37 +1,36 @@
 import styles from './style/alarmCard.module.css';
 import { addFriendApi } from '../../../../services/friend/friend';
-import // friendRequestRefusalApi,
-// removeAlarm,
-'../../../../services/alarm/alarm';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfo, userRender } from '../../../../recoil/user/user';
 import { IUserInfo } from '../../../../types/user';
 import { IAlarm } from '../../../../types/alarm';
 import { getLoginCheckApi } from '../../../../services/user/user';
 import { objTransArr } from '../../../../utils/common/objectTransformArray';
+import { removeAlarm } from '../../../../services/alarm/alarm';
 
 interface IAlarmCardProps {
   alarm: IAlarm;
   closeModal: () => void;
-  myInfo: IUserInfo;
 }
 
-const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
+const AlarmCard = ({ alarm, closeModal }: IAlarmCardProps) => {
   const setUserRender = useSetRecoilState(userRender);
+  const myInfo = useRecoilValue(userInfo);
 
   const addFriendHandler = async () => {
     const data = await getLoginCheckApi(alarm.email);
     const sendUser: IUserInfo[] = objTransArr(data);
 
+
     if (!myInfo.friend) {
-      myInfo = { ...myInfo, friend: [] };
+      myInfo.friend = [];
     }
     if (!sendUser[0].friend) {
       sendUser[0] = { ...sendUser[0], friend: [] };
     }
 
     await addFriendApi(myInfo, sendUser[0]);
-    // removeAlarm(myInfo.email, alarm.id);
+    removeAlarm(myInfo.uuid, alarm.uuid);
     setUserRender((prev) => !prev);
     closeModal();
   };

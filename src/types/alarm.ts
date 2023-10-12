@@ -9,9 +9,10 @@
 export type alarmType = 'friendRequest' | 'friendRequestRefusal' | 'roomInvite';
 
 export interface IAlarm {
-  id: number;
+  uuid: string;
   email: string;
   nickName: string;
   message: string;
   type: alarmType;
+  create_at: Date;
 }

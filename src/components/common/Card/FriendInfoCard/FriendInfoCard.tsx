@@ -21,7 +21,6 @@ const FriendInfoCard = ({ info, add }: IProps) => {
 
   const cardClickHandler = () => {
     if (add === 'friend') {
-      console.log('hi');
       setIsModal(!isModal);
     } else {
       setIsProfileModal(!isProfileModal);
@@ -29,16 +28,20 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   };
 
   const addFriendHandler = async () => {
+    // 알람 구조 재정의 파이어베이스 키값받아서 id
+
     const alarmOverCheck = (info as IUserInfo).alarm?.filter(
       (item) => item.email === myinfo.email
     );
-
-    console.log(alarmOverCheck);
 
     if (alarmOverCheck?.length >= 1) {
       alert('이미 요청을 보낸 상태입니다.');
       setIsModal(!isModal);
       return;
+    }
+
+    if (!(info as IUserInfo).alarm) {
+      (info as IUserInfo).alarm = [];
     }
 
     const postCom = await friendRequestApi(myinfo, info as IUserInfo);

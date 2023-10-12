@@ -17,24 +17,18 @@ const myAlarmsApi = async (uuid: string) => {
 const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
   try {
     const addFriendAlarm = async () => {
-      // 알람 구조 바꾸기
-      if (receiver.alarmIndex === 0) {
-        receiver.alarm = [];
-      }
-
       const patchComplet = await axios.patch(
         `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${receiver.uuid}.json`,
         {
           ...receiver,
-          alarmIndex: (receiver.alarmIndex += 1),
           alarm: [
             ...receiver.alarm,
             {
-              id: receiver.alarmIndex,
               email: sender.email,
               nickName: sender.nickName,
               message: '친구요청을 보냈습니다.',
               type: 'friendRequest',
+              create_at: new Date(),
             },
           ],
         }
@@ -48,9 +42,12 @@ const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
   }
 };
 
-const removeAlarm = async (alarmId: number) => {
+const removeAlarm = async (info_uuid: string, alarm_uuid: string) => {
   try {
-    const delCom = await axios.delete;
+    const delCom = await axios.delete(
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${info_uuid}/alarm/${alarm_uuid}.json`
+    );
+    console.log(delCom);
   } catch (error: any) {
     throw new Error(error.message);
   }
