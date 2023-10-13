@@ -33,7 +33,7 @@ export interface ITalk {
 }
 
 export interface IRoomInfo {
-  id?: string;
+  uuid?: string;
   title: string;
   admin: string;
   location: string;
@@ -41,5 +41,5 @@ export interface IRoomInfo {
   date: IDateDetail[];
   talk: ITalk[];
   create_at?: Date;
-  dDay? : Date;
+  dDay?: Date;
 }

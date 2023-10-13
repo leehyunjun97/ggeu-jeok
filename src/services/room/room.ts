@@ -4,7 +4,9 @@ import { IRoomInfo } from '../../types/room';
 
 const getRoomListApi = async () => {
   try {
-    const getComplet = await axios.get(`http://localhost:4000/room`);
+    const getComplet = await axios.get(
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/room.json`
+    );
     return getComplet.data;
   } catch (error: any) {
     throw new Error(error.message);

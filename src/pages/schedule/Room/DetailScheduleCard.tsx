@@ -17,7 +17,7 @@ const DetailScheduleCard = ({ detailSchedule, roomInfo }: IProps) => {
   const showDetailHandler = () => {
     setDetailRoom(detailSchedule);
     navigate(
-      `/schedule/${roomInfo.admin}/${roomInfo.id}/${detailSchedule.dateDetail}`
+      `/schedule/${roomInfo.admin}/${roomInfo.uuid}/${detailSchedule.dateDetail}`
     );
   };
 

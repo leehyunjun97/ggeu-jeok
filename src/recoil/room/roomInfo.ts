@@ -4,7 +4,7 @@ import { IDateDetail, IRoomInfo } from '../../types/room';
 const roomInfo = atom<IRoomInfo>({
   key: 'roomInfo',
   default: {
-    id: '',
+    uuid: '',
     title: '',
     admin: '',
     location: '',

@@ -97,6 +97,7 @@ const CreateRoom = () => {
     try {
       const postCom = await postCreateRoomApi(roomInfo);
       if (postCom.status === 200) {
+        // setRoomInfo 해주기
       }
     } catch (error: any) {
       throw new Error(error.message);
