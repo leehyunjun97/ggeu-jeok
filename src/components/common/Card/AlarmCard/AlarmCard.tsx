@@ -47,7 +47,7 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
     if (delCom.status === 200) {
       setUserRender((prev) => !prev);
     }
-  };
+  };                                     
 
   return (
     <>

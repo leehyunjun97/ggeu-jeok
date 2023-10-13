@@ -17,14 +17,13 @@ export const useFetchUserSearch = () => {
 
       const userList: IUserInfo[] = objTransArr(postComplet);
 
-      console.log(userList);
+      const friendsId = myInfo.friend?.map((item) => item.id);
 
-      // const filterId = myInfo.friend?.map((item) => item.id);
-      // const aa = postComplet.filter(
-      //   (item: any) => !filterId?.includes(item.id)
-      // );
+      const filterUsers = userList.filter(
+        (item) => !friendsId?.includes(item.id)
+      );
 
-      return userList;
+      return filterUsers;
     },
     {
       enabled: !!search,
