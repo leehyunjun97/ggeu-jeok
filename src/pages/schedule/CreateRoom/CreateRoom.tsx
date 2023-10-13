@@ -17,6 +17,7 @@ import {
   defaultRoomInfo,
 } from '../../../constants/room/createRoom';
 import Toast from '../../../components/common/Toast/Toast';
+import { postCreateRoomApi } from '../../../services/room/room';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -30,7 +31,6 @@ const CreateRoom = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
-  // const [memberList, setMemberList] = useState<IMemberInfo[]>([]);
 
   const roomTitleRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +53,7 @@ const CreateRoom = () => {
       const nowDate = new Date();
       nowDate.setDate(startDate.getDate() + i);
       roomInfo.date.push({
-        id: diffDay + 1,
+        id: i + 1,
         dateDetail: dateStringHandler(nowDate),
         subTitle: '제목을 정해주세요!',
         content: defaultContent(),
@@ -64,7 +64,6 @@ const CreateRoom = () => {
   const memberClassAddHandler = () => {
     const memberList: IMemberInfo[] = [];
 
-    // setMemberList([]);
     memberList.push(createMemberInfoObj(myInfo, 'admin'));
     checkList.forEach((item) => {
       memberList.push(createMemberInfoObj(item, 'member'));
@@ -72,7 +71,7 @@ const CreateRoom = () => {
     return memberList;
   };
 
-  const createRoomHandler = () => {
+  const createRoomHandler = async () => {
     if (roomInfo.title.trim().length < 2) {
       setToastText('방 제목을 입력해주세요');
       setVisible(!visible);
@@ -92,6 +91,16 @@ const CreateRoom = () => {
     roomInfo.admin = myInfo.email;
     roomInfo.member = memberClassAddHandler();
     dateDetailAddHandler();
+    roomInfo.create_at = new Date();
+    roomInfo.dDay = startDate;
+
+    try {
+      const postCom = await postCreateRoomApi(roomInfo);
+      if (postCom.status === 200) {
+      }
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
   };
 
   return (
@@ -143,11 +152,15 @@ const CreateRoom = () => {
         </div>
         <Label text='멤버' />
         <div className={styles.invitationSection}>
-          <InvitationList
-            setCheckList={setCheckList}
-            checkList={checkList}
-            myInfo={myInfo}
-          />
+          {!myInfo.friend.length ? (
+            <span>친구 만들어</span>
+          ) : (
+            <InvitationList
+              setCheckList={setCheckList}
+              checkList={checkList}
+              myInfo={myInfo}
+            />
+          )}
         </div>
       </div>
 

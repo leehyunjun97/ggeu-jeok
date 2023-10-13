@@ -40,4 +40,6 @@ export interface IRoomInfo {
   member: IMemberInfo[];
   date: IDateDetail[];
   talk: ITalk[];
+  create_at?: Date;
+  dDay? : Date;
 }
