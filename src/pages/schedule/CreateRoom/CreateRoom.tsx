@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
@@ -11,39 +11,28 @@ import { IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { dateStringHandler } from '../../../utils/common/date';
+import {
+  createMemberInfoObj,
+  defaultContent,
+  defaultRoomInfo,
+} from '../../../constants/room/createRoom';
+import Toast from '../../../components/common/Toast/Toast';
 
 const CreateRoom = () => {
-  const info = useRecoilValue(userInfo);
-  const [memberList, setMemberList] = useState<IMemberInfo[]>([]);
+  const myInfo = useRecoilValue(userInfo);
 
-  const [roomInfo, setRoomInfo] = useState<IRoomInfo>({
-    title: '',
-    admin: info.email,
-    location: '',
-    member: memberList,
-    date: [],
-    talk: [],
-  });
-
-  // detail date 포맷
-  // {
-  //   "dateDetail": "2023-08-02",
-  //   "subTitle": "오늘은 이거",
-  //   "content": {
-  //     "0시": "00시",
-  //     "1시": "01시"
-  //   }
-  // },
+  const [roomInfo, setRoomInfo] = useState<IRoomInfo>(defaultRoomInfo());
 
   const [isModal, setIsModal] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [toastText, setToastText] = useState('');
+
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
+  // const [memberList, setMemberList] = useState<IMemberInfo[]>([]);
 
-  const checkListFunction = (list: IFriendInfo[]) => {
-    // 하나씩 밀려들어감
-    setCheckList(list);
-  };
+  const roomTitleRef = useRef<HTMLInputElement>(null);
 
   const changeDateHandler = (dates: any) => {
     const [start, end] = dates;
@@ -56,6 +45,7 @@ const CreateRoom = () => {
   };
 
   const dateDetailAddHandler = () => {
+    roomInfo.date = [];
     const diffDate = startDate.getTime() - endDate.getTime();
     const diffDay = Math.abs(diffDate / (1000 * 60 * 60 * 24));
 
@@ -65,31 +55,42 @@ const CreateRoom = () => {
       roomInfo.date.push({
         id: diffDay + 1,
         dateDetail: dateStringHandler(nowDate),
-        subTitle: '',
-        content: {},
+        subTitle: '제목을 정해주세요!',
+        content: defaultContent(),
       });
     }
-
-    console.log(roomInfo.date);
   };
 
   const memberClassAddHandler = () => {
+    const memberList: IMemberInfo[] = [];
+
+    // setMemberList([]);
+    memberList.push(createMemberInfoObj(myInfo, 'admin'));
     checkList.forEach((item) => {
-      const { email, nickName, name, image, id } = item;
-      const obj1: IMemberInfo = {
-        id,
-        email,
-        class: 'member',
-        nickName,
-        name,
-        image,
-      };
-      memberList.push(obj1);
-      console.log(memberList);
+      memberList.push(createMemberInfoObj(item, 'member'));
     });
+    return memberList;
   };
 
   const createRoomHandler = () => {
+    if (roomInfo.title.trim().length < 2) {
+      setToastText('방 제목을 입력해주세요');
+      setVisible(!visible);
+      roomTitleRef.current?.focus();
+      return;
+    }
+    if (roomInfo.location === '') {
+      setToastText('지역을 선택해주세요');
+      setVisible(!visible);
+      return;
+    }
+    if (!checkList.length) {
+      setToastText('멤버를 추가해주세요');
+      setVisible(!visible);
+      return;
+    }
+    roomInfo.admin = myInfo.email;
+    roomInfo.member = memberClassAddHandler();
     dateDetailAddHandler();
   };
 
@@ -107,6 +108,7 @@ const CreateRoom = () => {
             onChange={(e) => {
               setRoomInfo({ ...roomInfo, title: e.target.value });
             }}
+            ref={roomTitleRef}
           />
         </div>
         <div className={styles.dateSection}>
@@ -141,10 +143,17 @@ const CreateRoom = () => {
         </div>
         <Label text='멤버' />
         <div className={styles.invitationSection}>
-          <InvitationList checkListFunction={checkListFunction} />
+          <InvitationList
+            setCheckList={setCheckList}
+            checkList={checkList}
+            myInfo={myInfo}
+          />
         </div>
       </div>
 
+      <button className={styles.createBtn} onClick={createRoomHandler}>
+        생성
+      </button>
       {isModal && (
         <MapModal
           closeModal={modalHandler}
@@ -154,9 +163,9 @@ const CreateRoom = () => {
           }}
         />
       )}
-      <button className={styles.createBtn} onClick={createRoomHandler}>
-        생성
-      </button>
+      {visible && (
+        <Toast text={toastText} visible={visible} setVisible={setVisible} />
+      )}
     </div>
   );
 };

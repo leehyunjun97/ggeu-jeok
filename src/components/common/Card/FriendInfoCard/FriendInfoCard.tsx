@@ -9,8 +9,6 @@ import { userInfo } from '../../../../recoil/user/user';
 import { IMemberInfo } from '../../../../types/room';
 import ProfileModal from '../../Modal/ProfileModal/ProfileModal';
 import { fromEmail } from '../../../../utils/common/userFindAndTrans';
-import { getLoginCheckApi } from '../../../../services/user/user';
-import { objTransArr } from '../../../../utils/common/objectTransformArray';
 
 interface IProps {
   info: IFriendInfo | IUserInfo | IMemberInfo;

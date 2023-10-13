@@ -1,30 +1,35 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, Dispatch, SetStateAction } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { IFriendInfo } from '../../../types/friend';
+import { IUserInfo } from '../../../types/user';
 
-const InvitationList = ({ checkListFunction }: any) => {
-  const info = useRecoilValue(userInfo);
-  const [checkedList, setCheckList] = useState<Array<IFriendInfo>>([]);
+interface IInvitaionProps {
+  setCheckList: Dispatch<SetStateAction<IFriendInfo[]>>;
+  checkList: IFriendInfo[];
+  myInfo: IUserInfo;
+}
 
+const InvitationList = ({
+  setCheckList,
+  checkList,
+  myInfo,
+}: IInvitaionProps) => {
   const onCheckedItem = useCallback(
     (checked: boolean, friend: IFriendInfo) => {
       if (checked) {
         setCheckList((prev) => [...prev, friend]);
       } else if (!checked) {
-        setCheckList(checkedList.filter((i) => i.id !== friend.id));
+        setCheckList(checkList.filter((item) => item.id !== friend.id));
       }
-      checkListFunction(checkedList);
     },
-    [checkListFunction, checkedList]
+    [checkList, setCheckList]
   );
-
-  console.log(checkedList);
 
   return (
     <>
-      {info.friend &&
-        info.friend.map((item) => (
+      {myInfo.friend &&
+        myInfo.friend.map((item) => (
           <label key={item.id}>
             <input
               type='checkbox'

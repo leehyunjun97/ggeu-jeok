@@ -22,8 +22,6 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
   const setUserRender = useSetRecoilState(userRender);
 
   const addFriendHandler = async () => {
-    alert('누름');
-
     const sendUser = await fromEmail(alarm.email);
 
     const fatchCom: IUserInfo = await addFriendApi(myInfo, sendUser);
@@ -47,7 +45,7 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
     if (delCom.status === 200) {
       setUserRender((prev) => !prev);
     }
-  };                                     
+  };
 
   return (
     <>
