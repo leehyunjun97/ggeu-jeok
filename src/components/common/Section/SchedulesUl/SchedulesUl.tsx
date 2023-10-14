@@ -15,9 +15,6 @@ const SchedulesUl = () => {
   const info = useRecoilValue(userInfo);
   const navigate = useNavigate();
 
-  // 로컬스토리지에 룸 데이터베이스 키 저장
-  // 스케쥴라우터에서 새로고침해도 그 키로 다시 불러오기
-
   useEffect(() => {
     const getRoomList = async () => {
       const data = await getRoomListApi();
@@ -42,6 +39,12 @@ const SchedulesUl = () => {
       >
         <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
       </li> */}
+      <li
+        className={styles.plusLi}
+        onClick={() => navigate('/schedule/create')}
+      >
+        <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
+      </li>
     </ul>
   );
 };

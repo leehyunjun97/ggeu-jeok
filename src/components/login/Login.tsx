@@ -50,11 +50,7 @@ const Login = () => {
 
   // 따로 관리 하는법
   const errorMessageDivHandler = (bool: boolean) => {
-    if (!bool) {
-      return { display: 'none' };
-    } else {
-      return { display: 'block' };
-    }
+    return !bool ? 'displayNone' : 'displayBlock';
   };
 
   return (

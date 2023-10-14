@@ -21,7 +21,6 @@ import { postCreateRoomApi } from '../../../services/room/room';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
-
   const [roomInfo, setRoomInfo] = useState<IRoomInfo>(defaultRoomInfo());
 
   const [isModal, setIsModal] = useState(false);
@@ -46,8 +45,14 @@ const CreateRoom = () => {
 
   const dateDetailAddHandler = () => {
     roomInfo.date = [];
+    const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
     const diffDate = startDate.getTime() - endDate.getTime();
-    const diffDay = Math.abs(diffDate / (1000 * 60 * 60 * 24));
+    const diffDay = Math.abs(diffDate / MILLISECONDS_IN_A_DAY);
+
+    const a = Array.from({ length: diffDay });
+
+    // a.map((it)=> {})
+    // a.map((it) => item)
 
     for (let i = 0; i <= diffDay; i++) {
       const nowDate = new Date();
@@ -59,6 +64,7 @@ const CreateRoom = () => {
         content: defaultContent(),
       });
     }
+    // console.log(roomInfo.date);
   };
 
   const memberClassAddHandler = () => {
@@ -72,36 +78,36 @@ const CreateRoom = () => {
   };
 
   const createRoomHandler = async () => {
-    if (roomInfo.title.trim().length < 2) {
-      setToastText('방 제목을 입력해주세요');
-      setVisible(!visible);
-      roomTitleRef.current?.focus();
-      return;
-    }
-    if (roomInfo.location === '') {
-      setToastText('지역을 선택해주세요');
-      setVisible(!visible);
-      return;
-    }
-    if (!checkList.length) {
-      setToastText('멤버를 추가해주세요');
-      setVisible(!visible);
-      return;
-    }
-    roomInfo.admin = myInfo.email;
-    roomInfo.member = memberClassAddHandler();
+    // if (roomInfo.title.trim().length < 2) {
+    //   setToastText('방 제목을 입력해주세요');
+    //   setVisible(!visible);
+    //   roomTitleRef.current?.focus();
+    //   return;
+    // }
+    // if (roomInfo.location === '') {
+    //   setToastText('지역을 선택해주세요');
+    //   setVisible(!visible);
+    //   return;
+    // }
+    // if (!checkList.length) {
+    //   setToastText('멤버를 추가해주세요');
+    //   setVisible(!visible);
+    //   return;
+    // }
+    // roomInfo.admin = myInfo.email;
+    // roomInfo.member = memberClassAddHandler();
+    // dateDetailAddHandler();
+    // roomInfo.create_at = new Date();
+    // roomInfo.dDay = startDate;
+    // try {
+    //   const postCom = await postCreateRoomApi(roomInfo);
+    //   if (postCom.status === 200) {
+    //     // setRoomInfo 해주기
+    //   }
+    // } catch (error: any) {
+    //   throw new Error(error.message);
+    // }
     dateDetailAddHandler();
-    roomInfo.create_at = new Date();
-    roomInfo.dDay = startDate;
-
-    try {
-      const postCom = await postCreateRoomApi(roomInfo);
-      if (postCom.status === 200) {
-        // setRoomInfo 해주기
-      }
-    } catch (error: any) {
-      throw new Error(error.message);
-    }
   };
 
   return (

@@ -7,13 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  getDownloadURL,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from 'firebase/storage';
-import { storage } from '../../scripts/firebase';
 import { objTransArr } from '../../utils/common/objectTransformArray';
 import {
   isValidationCheck,
@@ -26,6 +19,7 @@ import Label from '../../components/common/Label/Label';
 import ErrorMessage from '../../components/common/Error/ErrorMessage';
 import { postSignupApi } from '../../services/sign/sign';
 import { initialSignUpInputState } from '../../constants/sign/sign';
+import { imgUpload } from '../../utils/common/imageUpload';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>(
@@ -69,7 +63,7 @@ const Signup = () => {
     }
   }, [img, imgSrc]);
 
-  const signupHandler = async () => {
+  const signupHandler = () => {
     if (signUpInputState.email.trim() === '') {
       emailRef.current?.focus();
       return;
@@ -80,30 +74,20 @@ const Signup = () => {
     } else if (signUpInputState.name.trim().length < 2) {
       nameRef.current?.focus();
     } else {
-      if (img) {
-        const imgRef = ref(storage, `images/user/${signUpInputState.email}`);
-        await uploadBytes(imgRef, img).then(() => {
-          const uploadTask = uploadBytesResumable(imgRef, img);
-          getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-            const signComplet = await postSignupApi({
-              ...signUpInputState,
-              id: uuidv4(),
-            });
-
-            localStorage.setItem('id', signComplet.data['name']);
-            navigate('/main');
-          });
-        });
-      } else {
-        const signComplet = await postSignupApi({
-          ...signUpInputState,
-          id: uuidv4(),
-        });
-
-        localStorage.setItem('id', signComplet.data['name']);
-        navigate('/main');
-      }
+      img
+        ? imgUpload(`images/user/${signUpInputState.email}`, img, signup)
+        : signup();
     }
+  };
+
+  const signup = async () => {
+    const signComplet = await postSignupApi({
+      ...signUpInputState,
+      id: uuidv4(),
+    });
+
+    localStorage.setItem('id', signComplet.data['name']);
+    navigate('/main');
   };
 
   const changeInputHandler = (value: string | null, key: string) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles/errorMessage.module.css';
 
 interface IErrorMessageProps {
-  style: React.CSSProperties;
+  style: string;
   text: string;
   className?: string;
 }
@@ -10,8 +10,9 @@ interface IErrorMessageProps {
 const ErrorMessage = ({ style, text, className }: IErrorMessageProps) => {
   return (
     <div
-      className={`${styles.errorMessageDiv} ${styles[`${className}`]}`}
-      style={style}
+      className={`${styles.errorMessageDiv} ${styles[`${style}`]} ${
+        styles[`${className}`]
+      }`}
     >
       <span>{text}</span>
     </div>

@@ -12,3 +12,11 @@
   margin-top: 5px;
   padding-left: 3px;
 }
+
+.displayBlock {
+  display: block;
+}
+
+.displayNone {
+  display: none;
+}
