@@ -22,7 +22,6 @@ export const isValidationCheck = (value: string, type: validationType) => {
   }
 };
 
-// Todo: style 말고 className으로 받게
 export const isVisibleDisplay = (value: string, type: validationType) => {
   return isValidationCheck(value, type) ? 'displayNone' : 'displayBlock';
 };

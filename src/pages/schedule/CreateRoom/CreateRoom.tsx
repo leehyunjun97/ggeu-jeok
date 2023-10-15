@@ -7,7 +7,7 @@ import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
-import { IMemberInfo, IRoomInfo } from '../../../types/room';
+import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { dateStringHandler } from '../../../utils/common/date';
@@ -44,27 +44,25 @@ const CreateRoom = () => {
   };
 
   const dateDetailAddHandler = () => {
-    roomInfo.date = [];
+    setRoomInfo((prev) => ({ ...prev, date: [] }));
     const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
     const diffDate = startDate.getTime() - endDate.getTime();
     const diffDay = Math.abs(diffDate / MILLISECONDS_IN_A_DAY);
 
-    const a = Array.from({ length: diffDay });
+    const arr = Array.from(Array(diffDay + 1), (_, index) => index++);
 
-    // a.map((it)=> {})
-    // a.map((it) => item)
-
-    for (let i = 0; i <= diffDay; i++) {
+    const dateDetailArray: IDateDetail[] = arr.map((it) => {
       const nowDate = new Date();
-      nowDate.setDate(startDate.getDate() + i);
-      roomInfo.date.push({
-        id: i + 1,
+      nowDate.setDate(startDate.getDate() + it);
+      const dateObj = {
+        id: it + 1,
         dateDetail: dateStringHandler(nowDate),
         subTitle: '제목을 정해주세요!',
         content: defaultContent(),
-      });
-    }
-    // console.log(roomInfo.date);
+      };
+      return dateObj;
+    });
+    setRoomInfo((prev) => ({ ...prev, date: dateDetailArray }));
   };
 
   const memberClassAddHandler = () => {
