@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
@@ -44,7 +44,6 @@ const CreateRoom = () => {
   };
 
   const dateDetailAddHandler = () => {
-    setRoomInfo((prev) => ({ ...prev, date: [] }));
     const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
     const diffDate = startDate.getTime() - endDate.getTime();
     const diffDay = Math.abs(diffDate / MILLISECONDS_IN_A_DAY);
@@ -65,6 +64,8 @@ const CreateRoom = () => {
     setRoomInfo((prev) => ({ ...prev, date: dateDetailArray }));
   };
 
+  // console.log(roomInfo.date);
+
   const memberClassAddHandler = () => {
     const memberList: IMemberInfo[] = [];
 
@@ -76,36 +77,47 @@ const CreateRoom = () => {
   };
 
   const createRoomHandler = async () => {
-    // if (roomInfo.title.trim().length < 2) {
-    //   setToastText('방 제목을 입력해주세요');
-    //   setVisible(!visible);
-    //   roomTitleRef.current?.focus();
-    //   return;
-    // }
-    // if (roomInfo.location === '') {
-    //   setToastText('지역을 선택해주세요');
-    //   setVisible(!visible);
-    //   return;
-    // }
-    // if (!checkList.length) {
-    //   setToastText('멤버를 추가해주세요');
-    //   setVisible(!visible);
-    //   return;
-    // }
-    // roomInfo.admin = myInfo.email;
-    // roomInfo.member = memberClassAddHandler();
-    // dateDetailAddHandler();
-    // roomInfo.create_at = new Date();
-    // roomInfo.dDay = startDate;
-    // try {
-    //   const postCom = await postCreateRoomApi(roomInfo);
-    //   if (postCom.status === 200) {
-    //     // setRoomInfo 해주기
-    //   }
-    // } catch (error: any) {
-    //   throw new Error(error.message);
-    // }
+    if (roomInfo.title.trim().length < 2) {
+      setToastText('방 제목을 입력해주세요');
+      setVisible(!visible);
+      roomTitleRef.current?.focus();
+      return;
+    }
+    if (roomInfo.location === '') {
+      setToastText('지역을 선택해주세요');
+      setVisible(!visible);
+      return;
+    }
+    if (!checkList.length) {
+      setToastText('멤버를 추가해주세요');
+      setVisible(!visible);
+      return;
+    }
+
     dateDetailAddHandler();
+
+    // todo
+    // info 값들 다 뽑아 내고 얘가 마지막 setState
+    // 생성 버튼 한 번 더 누르면 그제서야 값 잘들어감
+    setRoomInfo((prev) => ({
+      ...prev,
+      admin: myInfo.email,
+      member: memberClassAddHandler(),
+      create_at: new Date(),
+      dDay: startDate,
+    }));
+
+    console.log(roomInfo);
+
+    try {
+      const postCom = await postCreateRoomApi(roomInfo);
+      if (postCom.status === 200) {
+        // recoil setRoomInfo 해주기
+        console.log(postCom);
+      }
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
   };
 
   return (
@@ -155,7 +167,7 @@ const CreateRoom = () => {
             meeting
           </button>
         </div>
-        <Label text='멤버' />
+        <Label text='멤버 초대' />
         <div className={styles.invitationSection}>
           {!myInfo.friend.length ? (
             <span>친구 만들어</span>
