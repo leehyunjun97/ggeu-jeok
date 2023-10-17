@@ -61,7 +61,7 @@ const CreateRoom = () => {
       };
       return dateObj;
     });
-    setRoomInfo((prev) => ({ ...prev, date: dateDetailArray }));
+    return dateDetailArray;
   };
 
   // console.log(roomInfo.date);
@@ -94,23 +94,20 @@ const CreateRoom = () => {
       return;
     }
 
-    dateDetailAddHandler();
+    const date = dateDetailAddHandler();
+    const member = memberClassAddHandler();
 
-    // todo
-    // info 값들 다 뽑아 내고 얘가 마지막 setState
-    // 생성 버튼 한 번 더 누르면 그제서야 값 잘들어감
-    setRoomInfo((prev) => ({
-      ...prev,
+    const payload = {
+      ...roomInfo,
       admin: myInfo.email,
-      member: memberClassAddHandler(),
+      member,
       create_at: new Date(),
       dDay: startDate,
-    }));
-
-    console.log(roomInfo);
+      date,
+    };
 
     try {
-      const postCom = await postCreateRoomApi(roomInfo);
+      const postCom = await postCreateRoomApi(payload);
       if (postCom.status === 200) {
         // recoil setRoomInfo 해주기
         console.log(postCom);

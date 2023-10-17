@@ -9,7 +9,6 @@ import { IDateDetail } from '../../../types/room';
 
 const DetailScheduleList = () => {
   const getRoomInfo = useRecoilValue(roomInfo);
-  console.log(getRoomInfo);
 
   return (
     <ul className={styles.ulList}>

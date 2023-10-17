@@ -18,27 +18,26 @@ const SchedulesUl = () => {
   useEffect(() => {
     const getRoomList = async () => {
       const data = await getRoomListApi();
-      const roomList = objTransArr(data);
-      // const myRoomList = roomList.filter((item: IRoomInfo) =>
-      //   item.member.find((it) => it.id === info.id)
-      // );
-      // setRoomData(myRoomList);
 
-      console.log(roomList);
+      if (!data) return;
+
+      const roomList: IRoomInfo[] = objTransArr(data);
+      const myRoomList = roomList.filter((item: IRoomInfo) =>
+        item.member.find((it) => it.id === info.id)
+      );
+
+      setRoomData(myRoomList);
     };
     getRoomList();
-  }, []);
+  }, [info.id]);
 
   return (
     <ul className={styles.ulList}>
-      {/* {roomData &&
-        roomData.map((item) => <ScheduleInfoCard key={item.id} room={item} />)}
-      <li
-        className={styles.plusLi}
-        onClick={() => navigate('/schedule/create')}
-      >
-        <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-      </li> */}
+      {roomData &&
+        roomData.map((item) => (
+          <ScheduleInfoCard key={item.uuid} room={item} />
+        ))}
+
       <li
         className={styles.plusLi}
         onClick={() => navigate('/schedule/create')}

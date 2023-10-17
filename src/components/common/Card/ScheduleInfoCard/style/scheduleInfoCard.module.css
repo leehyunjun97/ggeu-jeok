@@ -40,9 +40,9 @@
 .membersNumber {
   position: absolute;
   color: #262626;
-  bottom: 0px;
-  right: 15px;
+  bottom: 15px;
+  right: 16px;
   font-weight: bold;
   opacity: 0.8;
-  font-size: 0.7vw;
+  font-size: 0.9vw;
 }

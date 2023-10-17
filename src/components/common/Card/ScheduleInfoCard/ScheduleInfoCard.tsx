@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { roomInfo } from '../../../../recoil/room/roomInfo';
 
-interface IProps {
+interface IScheduleCardProps {
   room: IRoomInfo;
 }
 
-const ScheduleInfoCard = ({ room }: IProps) => {
+const ScheduleInfoCard = ({ room }: IScheduleCardProps) => {
   const setRommInfo = useSetRecoilState(roomInfo);
   const navigate = useNavigate();
 

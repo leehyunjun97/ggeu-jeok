@@ -7,12 +7,9 @@ import { IUserInfo } from '../types/user';
 
 const UserRouter = () => {
   const setUser = useSetRecoilState(userInfo);
-  const myInfo = useRecoilValue(userInfo);
   const navigate = useNavigate();
   const id = localStorage.getItem('id');
   const userRenderRecoil = useRecoilValue(userRender);
-  console.log('myInfo');
-  console.log(myInfo);
 
   useEffect(() => {
     const getMyInfoHandler = async () => {
@@ -20,8 +17,6 @@ const UserRouter = () => {
         if (!id) return;
 
         const getComplet: IUserInfo = await getMyInfoApi(id);
-        console.log('GetCOm22');
-        console.log(getComplet);
 
         if (!getComplet) {
           alert('잘못된 접근입니다.');
