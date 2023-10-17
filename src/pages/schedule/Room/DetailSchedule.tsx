@@ -2,17 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styles from './style/detailSchedule.module.css';
 import MembersList from '../../../components/common/Section/FriendsListUl/MembersList';
 import { useRecoilValue } from 'recoil';
-import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
 import { userInfo } from '../../../recoil/user/user';
 import { IMemberInfo } from '../../../types/room';
 import { useLocation } from 'react-router-dom';
 import { defaultMemberInfoState } from '../../../constants/room/member';
 
 const DetailSchedule = () => {
-  // const detailSchedule = useRecoilValue(detailScheduleInfo);
-  // const detailSchedule = useLocation().state;
-  // const roomInfoState = useRecoilValue(roomInfo);
-
   const myInfo = useRecoilValue(userInfo);
   const detailSchedule = useLocation().state.detailSchedule;
   const roomInfo = useLocation().state.roomInfo;
