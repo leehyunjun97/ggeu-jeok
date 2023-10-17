@@ -8,7 +8,7 @@ import Signup from './pages/signup/Signup';
 import ScheduleRouter from './router/ScheduleRouter';
 import CreateRoom from './pages/schedule/CreateRoom/CreateRoom';
 import RoomMain from './pages/schedule/Room/RoomMain';
-import DetailSchedule from './pages/schedule/Room/DetailSchedule';
+import DetailSchedule from './pages/schedule/DetailRoom/DetailSchedule';
 
 function App() {
   return (

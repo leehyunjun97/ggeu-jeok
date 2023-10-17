@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style/roomMain.module.css';
 import MembersList from '../../../components/common/Section/FriendsListUl/MembersList';
-import DetailScheduleList from './DetailScheduleList';
+import DetailScheduleList from '../../../components/common/Section/DetailScheduleListUI/DetailScheduleList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import RoomChattingDiv from '../../../components/Chat/ChattingDiv';

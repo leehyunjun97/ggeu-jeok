@@ -64,8 +64,6 @@ const CreateRoom = () => {
     return dateDetailArray;
   };
 
-  // console.log(roomInfo.date);
-
   const memberClassAddHandler = () => {
     const memberList: IMemberInfo[] = [];
 

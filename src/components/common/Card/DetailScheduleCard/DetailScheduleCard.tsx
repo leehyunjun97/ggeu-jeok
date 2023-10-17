@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style/detailScheduleCard.module.css';
-import { IDateDetail, IRoomInfo } from '../../../types/room';
+import { IDateDetail, IRoomInfo } from '../../../../types/room';
 import { useNavigate } from 'react-router-dom';
 
 interface IProps {

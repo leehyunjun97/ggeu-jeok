@@ -27,8 +27,6 @@ const DetailSchedule = () => {
     );
   }, [myInfo.email, roomInfo.member]);
 
-  const updateContentHandler = () => {};
-
   const subTitleToggle = () => {
     setIsTitle(!isTitle);
   };
@@ -59,7 +57,7 @@ const DetailSchedule = () => {
           <span className={styles.scheduleSpan}>세부 일정</span>
         </div>
 
-        <ul className={styles.contentSection}>
+        {/* <ul className={styles.contentSection}>
           {Object.keys(detailSchedule.content).map((key) => (
             <li key={key} className={styles.contentLi}>
               <div className={styles.contentLeftSection}>{key}</div>
@@ -88,7 +86,7 @@ const DetailSchedule = () => {
               </div>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </section>
     </div>
   );
