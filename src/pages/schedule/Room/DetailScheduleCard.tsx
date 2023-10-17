@@ -12,12 +12,18 @@ interface IProps {
 
 const DetailScheduleCard = ({ detailSchedule, roomInfo }: IProps) => {
   const navigate = useNavigate();
-  const setDetailRoom = useSetRecoilState(detailScheduleInfo);
+  // const setDetailRoom = useSetRecoilState(detailScheduleInfo);
 
   const showDetailHandler = () => {
-    setDetailRoom(detailSchedule);
+    // setDetailRoom(detailSchedule);
     navigate(
-      `/schedule/${roomInfo.admin}/${roomInfo.uuid}/${detailSchedule.dateDetail}`
+      `/schedule/${roomInfo.admin}/${roomInfo.uuid}/${detailSchedule.dateDetail}`,
+      {
+        state: {
+          detailSchedule: detailSchedule,
+          roomInfo: roomInfo,
+        },
+      }
     );
   };
 

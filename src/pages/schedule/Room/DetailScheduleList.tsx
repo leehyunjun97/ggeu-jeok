@@ -5,19 +5,23 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import DetailScheduleCard from './DetailScheduleCard';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../recoil/room/roomInfo';
-import { IDateDetail } from '../../../types/room';
+import { IDateDetail, IRoomInfo } from '../../../types/room';
 
-const DetailScheduleList = () => {
-  const getRoomInfo = useRecoilValue(roomInfo);
+interface IDetailScheduleListProps {
+  roomInfo: IRoomInfo;
+}
+
+const DetailScheduleList = ({ roomInfo }: IDetailScheduleListProps) => {
+  // const getRoomInfo = useRecoilValue(roomInfo);
 
   return (
     <ul className={styles.ulList}>
-      {getRoomInfo &&
-        getRoomInfo.date.map((item: IDateDetail) => (
+      {roomInfo &&
+        roomInfo.date.map((item: IDateDetail) => (
           <DetailScheduleCard
             key={item.dateDetail}
             detailSchedule={item}
-            roomInfo={getRoomInfo}
+            roomInfo={roomInfo}
           />
         ))}
       <li className={styles.plusLi}>

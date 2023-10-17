@@ -5,15 +5,21 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../../recoil/room/roomInfo';
 import FriendInfoCard from '../../Card/FriendInfoCard/FriendInfoCard';
+import { IRoomInfo } from '../../../../types/room';
 
-const MembersList = () => {
-  const getRoomInfo = useRecoilValue(roomInfo);
+interface IMembersListProps {
+  roomInfo: IRoomInfo;
+}
+
+const MembersList = ({ roomInfo }: IMembersListProps) => {
+  // const getRoomInfo = useRecoilValue(roomInfo);
+  console.log(roomInfo);
 
   return (
     <>
       <ul className={styles.ulList}>
-        {getRoomInfo.member &&
-          getRoomInfo.member.map((item) => (
+        {roomInfo.member &&
+          roomInfo.member.map((item) => (
             // member라고 추가해서 정보에서 등급을 바꿀 수 있다던지..
             <FriendInfoCard key={item.id} info={item} />
           ))}

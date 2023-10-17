@@ -17,7 +17,7 @@ const ScheduleInfoCard = ({ room }: IScheduleCardProps) => {
 
   const goingRoomHandler = () => {
     setRommInfo(room);
-    navigate(`/schedule/${room.admin}/${room.uuid}`);
+    navigate(`/schedule/${room.admin}/${room.uuid}`, { state: room });
   };
 
   return (

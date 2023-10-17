@@ -5,30 +5,32 @@ import { useRecoilValue } from 'recoil';
 import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
 import { userInfo } from '../../../recoil/user/user';
 import { IMemberInfo } from '../../../types/room';
+import { useLocation } from 'react-router-dom';
+import { defaultMemberInfoState } from '../../../constants/room/member';
 
 const DetailSchedule = () => {
-  const detailSchedule = useRecoilValue(detailScheduleInfo);
-  const roomInfoState = useRecoilValue(roomInfo);
+  // const detailSchedule = useRecoilValue(detailScheduleInfo);
+  // const detailSchedule = useLocation().state;
+  // const roomInfoState = useRecoilValue(roomInfo);
+
   const myInfo = useRecoilValue(userInfo);
-  const [myRoomInfo, setRoomInfo] = useState<IMemberInfo>({
-    id: '',
-    class: '',
-    email: '',
-    image: '',
-    name: '',
-    nickName: '',
-  });
+  const detailSchedule = useLocation().state.detailSchedule;
+  const roomInfo = useLocation().state.roomInfo;
+
+  const [myProfile, setMyProfile] = useState<IMemberInfo>(
+    defaultMemberInfoState
+  );
   const [newContent, setNewContent] = useState(detailSchedule.content);
   const [newTitle, setNewTitle] = useState(detailSchedule.subTitle);
   const [isTitle, setIsTitle] = useState(true);
 
   useEffect(() => {
-    setRoomInfo(
-      roomInfoState.member.filter((item) => item.email === myInfo.email)[0]
+    setMyProfile(
+      roomInfo.member.filter(
+        (item: IMemberInfo) => item.email === myInfo.email
+      )[0]
     );
-  }, [myInfo.email, roomInfoState.member]);
-
-  console.log(newContent);
+  }, [myInfo.email, roomInfo.member]);
 
   const updateContentHandler = () => {};
 
@@ -40,7 +42,7 @@ const DetailSchedule = () => {
     <div className={styles.main}>
       <section className={styles.roomLeftSection}>
         <span className={styles.friendsListSpan}>멤버 목록</span>
-        <MembersList />
+        <MembersList roomInfo={roomInfo} />
       </section>
       <section className={styles.roomRightSection}>
         <div className={styles.spanSection}>
@@ -50,7 +52,11 @@ const DetailSchedule = () => {
             </span>
           ) : (
             <div>
-              <input type='text' value={newTitle} />
+              <input
+                type='text'
+                value={newTitle}
+                readOnly={myProfile.class === 'member'}
+              />
               <button>수정</button>
               <button onClick={subTitleToggle}>취소</button>
             </div>
@@ -66,7 +72,7 @@ const DetailSchedule = () => {
                 <textarea
                   className={styles.contentTextarea}
                   value={newContent[key]}
-                  readOnly={myRoomInfo.class === 'member'}
+                  readOnly={myProfile && myProfile.class === 'member'}
                   onChange={(e) => {
                     const dummyObj = { ...newContent };
                     dummyObj[key] = e.target.value;
