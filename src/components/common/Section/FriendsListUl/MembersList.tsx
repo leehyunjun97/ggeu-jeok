@@ -15,7 +15,7 @@ const MembersList = ({ roomInfo }: IMembersListProps) => {
   return (
     <>
       <ul className={styles.ulList}>
-        {roomInfo.member &&
+        {roomInfo &&
           roomInfo.member.map((item) => (
             // member라고 추가해서 정보에서 등급을 바꿀 수 있다던지..
             <FriendInfoCard key={item.id} info={item} />

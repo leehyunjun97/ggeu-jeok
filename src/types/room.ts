@@ -1,5 +1,7 @@
 import { IFriendInfo } from './friend';
 
+export type TMemberClass = 'admin' | 'member';
+
 export interface IMemberInfo extends IFriendInfo {
   class: string;
 }

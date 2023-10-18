@@ -30,10 +30,13 @@ function App() {
               />
             </Route>
           </Route>
+          <Route Component={RouteNoMatch} />
         </Route>
       </Routes>
     </>
   );
 }
+
+const RouteNoMatch = () => <div>잘못된 경로로 접근하셨습니다.</div>;
 
 export default App;

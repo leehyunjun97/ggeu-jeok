@@ -10,7 +10,7 @@ import Span from '../../../components/common/Span/Span';
 
 const RoomMain = () => {
   const [hide, setHide] = useState(false);
-  const roomInfo = useLocation().state.roomInfo;
+  const roomInfo = useLocation().state?.roomInfo;
 
   return (
     <div className={styles.main}>

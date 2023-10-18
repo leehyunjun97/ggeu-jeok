@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
@@ -10,14 +10,14 @@ import { IFriendInfo } from '../../../types/friend';
 import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
-import { dateStringHandler } from '../../../utils/common/date';
+import { dateStringHandler, dffday } from '../../../utils/common/date';
 import {
-  createMemberInfoObj,
   defaultContent,
   defaultRoomInfo,
 } from '../../../constants/room/createRoom';
 import Toast from '../../../components/common/Toast/Toast';
 import { postCreateRoomApi } from '../../../services/room/room';
+import { createMemberInfoObj } from '../../../utils/room/createRoom';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -44,9 +44,7 @@ const CreateRoom = () => {
   };
 
   const dateDetailAddHandler = () => {
-    const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
-    const diffDate = startDate.getTime() - endDate.getTime();
-    const diffDay = Math.abs(diffDate / MILLISECONDS_IN_A_DAY);
+    const diffDay = dffday(startDate, endDate);
 
     const arr = Array.from(Array(diffDay + 1), (_, index) => index++);
 
@@ -108,7 +106,7 @@ const CreateRoom = () => {
       const postCom = await postCreateRoomApi(payload);
       if (postCom.status === 200) {
         // recoil setRoomInfo 해주기
-        console.log(postCom);
+        console.log(postCom.data);
       }
     } catch (error: any) {
       throw new Error(error.message);
