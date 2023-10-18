@@ -14,7 +14,11 @@ const UserRouter = () => {
   useEffect(() => {
     const getMyInfoHandler = async () => {
       try {
-        if (!id) return;
+        if (!id) {
+          alert('잘못된 접근입니다.');
+          navigate('/');
+          return;
+        }
 
         const getComplet: IUserInfo = await getMyInfoApi(id);
 

@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userInfo } from '../recoil/user/user';
 
 const NonUserRouter = () => {
-  const info = useRecoilValue(userInfo);
+  const id = localStorage.getItem('id');
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (info.id) {
+    if (id) {
+      alert('잘못된 접근입니다');
       navigate('/main');
-    } else {
     }
-  }, [info, navigate]);
+  }, [id, navigate]);
 
   return <Outlet />;
 };

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/home';
 import UserRouter from './router/UserRouter';
 import Main from './pages/Main';
@@ -9,10 +9,11 @@ import ScheduleRouter from './router/ScheduleRouter';
 import CreateRoom from './pages/schedule/CreateRoom/CreateRoom';
 import RoomMain from './pages/schedule/Room/RoomMain';
 import DetailSchedule from './pages/schedule/DetailRoom/DetailSchedule';
+import NoMatchRouter from './router/NoMatchRouter';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Routes>
         <Route path='/' element={<NonUserRouter />}>
           <Route path='/' element={<Home />} />
@@ -30,13 +31,14 @@ function App() {
               />
             </Route>
           </Route>
-          <Route Component={RouteNoMatch} />
+          <Route
+            path='*'
+            element={<NoMatchRouter />}
+          />
         </Route>
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
-
-const RouteNoMatch = () => <div>잘못된 경로로 접근하셨습니다.</div>;
 
 export default App;
