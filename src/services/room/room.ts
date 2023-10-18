@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { roomInfo } from '../../recoil/room/roomInfo';
-import { IRoomInfo } from '../../types/room';
+import { IDateDetail, IRoomInfo } from '../../types/room';
 
 const getRoomListApi = async () => {
   try {
@@ -25,4 +25,22 @@ const postCreateRoomApi = async (roomInfo: IRoomInfo) => {
   }
 };
 
-export { getRoomListApi, postCreateRoomApi };
+const updateDetailDateContentsApi = async (
+  roomInfo: IRoomInfo,
+  detailDates: IDateDetail[]
+) => {
+  try {
+    const patchCom = await axios.patch(
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${roomInfo.uuid}.json`,
+      {
+        ...roomInfo,
+        date: [...detailDates],
+      }
+    );
+    return patchCom;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export { getRoomListApi, postCreateRoomApi, updateDetailDateContentsApi };

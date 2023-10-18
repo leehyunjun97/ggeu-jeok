@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 const RoomMain = () => {
   const [hide, setHide] = useState(false);
-  const roomInfo = useLocation().state;
+  const roomInfo = useLocation().state.roomInfo;
 
   return (
     <div className={styles.main}>

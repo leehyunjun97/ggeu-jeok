@@ -11,6 +11,7 @@ interface IInputProps {
   style?: React.CSSProperties;
   accept?: string;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  readOnly?: boolean;
 }
 
 const Input = ({
@@ -23,6 +24,7 @@ const Input = ({
   style,
   accept,
   onKeyDown,
+  readOnly,
 }: IInputProps) => {
   return (
     <input
@@ -35,6 +37,7 @@ const Input = ({
       onChange={onChange}
       ref={inputRef}
       onKeyDown={onKeyDown}
+      readOnly={readOnly}
     />
   );
 };

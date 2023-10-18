@@ -1,26 +1,22 @@
 import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { roomInfo } from '../recoil/room/roomInfo';
+import { myRoomProfile } from '../recoil/room/roomInfo';
 import { userInfo } from '../recoil/user/user';
-import { getRoomListApi } from '../services/room/room';
-import { IRoomInfo } from '../types/room';
+import { IMemberInfo, IRoomInfo } from '../types/room';
 
 const ScheduleRouter = () => {
-  const setInfo = useSetRecoilState(roomInfo);
+  const setMyProfile = useSetRecoilState(myRoomProfile);
   const myInfo = useRecoilValue(userInfo);
+  const roomInfo: IRoomInfo = useLocation().state.roomInfo;
 
-  // 방 초기화 방지
-  // useEffect(() => {
-  //   const getRoomList = async () => {
-  //     const roomList = await getRoomListApi();
-  //     const myRoomList = roomList.filter((item: IRoomInfo) =>
-  //       item.member.find((it) => it.id === myInfo.id)
-  //     );
-  //     setInfo(myRoomList);
-  //   };
-  //   getRoomList();
-  // }, [setInfo, myInfo.id]);
+  useEffect(() => {
+    setMyProfile(
+      roomInfo.member.filter(
+        (item: IMemberInfo) => item.email === myInfo.email
+      )[0]
+    );
+  }, [myInfo.email, roomInfo.member, setMyProfile]);
 
   return <Outlet />;
 };

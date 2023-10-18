@@ -126,3 +126,8 @@
   bottom: 9px;
   right: 9px;
 }
+
+.newTitleInputSection {
+  width: 40%;
+  text-align: left;
+}

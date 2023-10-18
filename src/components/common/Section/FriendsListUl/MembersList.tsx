@@ -12,9 +12,6 @@ interface IMembersListProps {
 }
 
 const MembersList = ({ roomInfo }: IMembersListProps) => {
-  // const getRoomInfo = useRecoilValue(roomInfo);
-  console.log(roomInfo);
-
   return (
     <>
       <ul className={styles.ulList}>

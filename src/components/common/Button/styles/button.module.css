@@ -73,3 +73,17 @@
   font-weight: bold;
   cursor: pointer;
 } */
+
+.newTitleUpdateBtn {
+  width: 15%;
+  height: 31px;
+  margin-left: 5px;
+  background-color: #75d777;
+}
+
+.newTitleBtn {
+  width: 15%;
+  height: 31px;
+  margin-left: 5px;
+  background-color: #e46060;
+}

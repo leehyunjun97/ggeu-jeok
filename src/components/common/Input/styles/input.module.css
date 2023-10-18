@@ -12,3 +12,11 @@
 .custom {
   width: 100px;
 }
+
+.newTitle {
+  width: 60%;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 3px;
+}

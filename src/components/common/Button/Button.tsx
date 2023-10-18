@@ -29,17 +29,21 @@ Button.CloseButton = ({ onClick }: IButtonProps) => {
   );
 };
 
-Button.ReplyButton = ({ onClick, refusalOnClick }: IButtonProps) => {
+Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
   return (
     <>
       <button
-        className={`${styles.accepBtn} ${styles.basicBtn}`}
+        className={`${styles.accepBtn} ${styles.basicBtn} ${
+          styles[`${className}`]
+        }`}
         onClick={onClick}
       >
         수락
       </button>
       <button
-        className={`${styles.refusalBtn} ${styles.basicBtn}`}
+        className={`${styles.refusalBtn} ${styles.basicBtn} ${
+          styles[`${className}`]
+        }`}
         onClick={refusalOnClick}
       >
         거절

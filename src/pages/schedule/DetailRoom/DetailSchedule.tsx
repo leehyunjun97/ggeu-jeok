@@ -6,6 +6,7 @@ import { userInfo } from '../../../recoil/user/user';
 import { IMemberInfo } from '../../../types/room';
 import { useLocation } from 'react-router-dom';
 import { defaultMemberInfoState } from '../../../constants/room/member';
+import TitleSection from './TitleSection';
 
 const DetailSchedule = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -16,20 +17,14 @@ const DetailSchedule = () => {
     defaultMemberInfoState
   );
   const [newContent, setNewContent] = useState(detailSchedule.content);
-  const [newTitle, setNewTitle] = useState(detailSchedule.subTitle);
-  const [isTitle, setIsTitle] = useState(true);
 
-  useEffect(() => {
-    setMyProfile(
-      roomInfo.member.filter(
-        (item: IMemberInfo) => item.email === myInfo.email
-      )[0]
-    );
-  }, [myInfo.email, roomInfo.member]);
-
-  const subTitleToggle = () => {
-    setIsTitle(!isTitle);
-  };
+  // useEffect(() => {
+  //   setMyProfile(
+  //     roomInfo.member.filter(
+  //       (item: IMemberInfo) => item.email === myInfo.email
+  //     )[0]
+  //   );
+  // }, [myInfo.email, roomInfo.member]);
 
   return (
     <div className={styles.main}>
@@ -38,24 +33,7 @@ const DetailSchedule = () => {
         <MembersList roomInfo={roomInfo} />
       </section>
       <section className={styles.roomRightSection}>
-        <div className={styles.spanSection}>
-          {isTitle ? (
-            <span className={styles.subTitle} onClick={subTitleToggle}>
-              {detailSchedule.subTitle}
-            </span>
-          ) : (
-            <div>
-              <input
-                type='text'
-                value={newTitle}
-                readOnly={myProfile.class === 'member'}
-              />
-              <button>수정</button>
-              <button onClick={subTitleToggle}>취소</button>
-            </div>
-          )}
-          <span className={styles.scheduleSpan}>세부 일정</span>
-        </div>
+        <TitleSection myProfile={myProfile} />
 
         {/* <ul className={styles.contentSection}>
           {Object.keys(detailSchedule.content).map((key) => (
