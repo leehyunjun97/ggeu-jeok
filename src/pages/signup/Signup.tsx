@@ -4,8 +4,6 @@ import { getUsersApi } from '../../services/user/user';
 import Toast from '../../components/common/Toast/Toast';
 import { IUserInfo } from '../../types/user';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { userInfo } from '../../recoil/user/user';
 import { v4 as uuidv4 } from 'uuid';
 import { objTransArr } from '../../utils/common/objectTransformArray';
 import {
@@ -20,16 +18,17 @@ import ErrorMessage from '../../components/common/Error/ErrorMessage';
 import { postSignupApi } from '../../services/sign/sign';
 import { initialSignUpInputState } from '../../constants/sign/sign';
 import { imgUpload } from '../../utils/common/imageUpload';
+import Span from '../../components/common/Span/Span';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>(
     initialSignUpInputState
   );
-  const setUser = useSetRecoilState(userInfo);
   const [img, setImg] = useState<File | null>(null);
   const [imgSrc, setimgSrc] = useState<string | null>('');
   const [visible, setVisible] = useState(false);
   const [toastText, setToastText] = useState('');
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const nickNameRef = useRef<HTMLInputElement>(null);
@@ -101,7 +100,6 @@ const Signup = () => {
       return;
     }
 
-    // const data = await postEmailCheckApi(signUpInputState.email);
     const data = await getUsersApi();
     const isEmail = objTransArr(data).find(
       (item: any) => item.email === signUpInputState.email
@@ -118,7 +116,12 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <div className={styles.empty}>
+      <Span.GoBackSpan
+        text={'뒤로가기'}
+        className={'backSpan'}
+        style={{ top: '-25px', left: '5px' }}
+      />
       <div className={styles.main}>
         <span className={styles.signupTitleSpan}>SignUp</span>
         <div className={styles.loginDiv}>
@@ -228,7 +231,7 @@ const Signup = () => {
       {visible && (
         <Toast text={toastText} visible={visible} setVisible={setVisible} />
       )}
-    </>
+    </div>
   );
 };
 

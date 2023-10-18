@@ -1,0 +1,29 @@
+.basicSpan {
+  font-weight: bold;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 18px;
+}
+
+.sectionsSpan {
+  position: sticky;
+  right: 5px;
+  top: -24px;
+}
+
+.backSpan {
+  position: absolute;
+  left: 25px;
+  cursor: pointer;
+}
+
+.goSpan {
+  position: absolute;
+  right: 25px;
+  cursor: pointer;
+}
+
+.subTitle {
+  left: 5px;
+  font-size: 22px;
+  cursor: pointer;
+}

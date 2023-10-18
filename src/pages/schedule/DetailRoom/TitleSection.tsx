@@ -6,6 +6,7 @@ import Input from '../../../components/common/Input/Input';
 import Button from '../../../components/common/Button/Button';
 import { updateDetailDateContentsApi } from '../../../services/room/room';
 import Toast from '../../../components/common/Toast/Toast';
+import Span from '../../../components/common/Span/Span';
 
 interface IProps {
   myProfile: IMemberInfo;
@@ -22,6 +23,11 @@ const TitleSection = ({ myProfile }: IProps) => {
   const [isTitle, setIsTitle] = useState(true);
 
   const subTitleToggle = () => {
+    if (myProfile.class === 'member') {
+      setVisible(!visible);
+      setToastText('관리자만 수정 가능합니다!');
+      return;
+    }
     setNewTitle(detailSchedule.subTitle);
     setIsTitle(!isTitle);
   };
@@ -51,9 +57,13 @@ const TitleSection = ({ myProfile }: IProps) => {
   return (
     <div className={styles.spanSection}>
       {isTitle ? (
-        <span className={styles.subTitle} onClick={subTitleToggle}>
-          {detailSchedule.subTitle}
-        </span>
+        <>
+          <Span.Title
+            text={detailSchedule.subTitle}
+            className={`subTitle`}
+            onClick={subTitleToggle}
+          />
+        </>
       ) : (
         <div className={styles.newTitleInputSection}>
           <Input
@@ -75,7 +85,8 @@ const TitleSection = ({ myProfile }: IProps) => {
           />
         </div>
       )}
-      <span className={styles.scheduleSpan}>세부 일정</span>
+      <Span text={'세부 일정'} className={'sectionsSpan'} />
+
       {visible && (
         <Toast text={toastText} visible={visible} setVisible={setVisible} />
       )}

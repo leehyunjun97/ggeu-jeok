@@ -1,3 +1,10 @@
+.empty {
+  position: relative;
+  width: 380px;
+  margin: auto;
+  margin-top: 50px;
+}
+
 .main {
   display: flex;
   width: 380px;
@@ -32,7 +39,6 @@
   top: 40px;
 }
 
-
 .signUpBtn {
   background-color: #75d777;
   font-weight: bold;
@@ -45,8 +51,6 @@
   cursor: pointer;
   transition: all 200ms ease;
 }
-
-
 
 .imgAttachLabel {
   text-align: left;

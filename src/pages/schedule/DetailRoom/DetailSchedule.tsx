@@ -7,29 +7,21 @@ import { IMemberInfo } from '../../../types/room';
 import { useLocation } from 'react-router-dom';
 import { defaultMemberInfoState } from '../../../constants/room/member';
 import TitleSection from './TitleSection';
+import { myRoomProfile } from '../../../recoil/room/roomInfo';
+import Span from '../../../components/common/Span/Span';
 
 const DetailSchedule = () => {
-  const myInfo = useRecoilValue(userInfo);
   const detailSchedule = useLocation().state.detailSchedule;
   const roomInfo = useLocation().state.roomInfo;
 
-  const [myProfile, setMyProfile] = useState<IMemberInfo>(
-    defaultMemberInfoState
-  );
+  const myProfile = useRecoilValue(myRoomProfile);
   const [newContent, setNewContent] = useState(detailSchedule.content);
-
-  // useEffect(() => {
-  //   setMyProfile(
-  //     roomInfo.member.filter(
-  //       (item: IMemberInfo) => item.email === myInfo.email
-  //     )[0]
-  //   );
-  // }, [myInfo.email, roomInfo.member]);
 
   return (
     <div className={styles.main}>
+      <Span.GoBackSpan text={'뒤로가기'} className={'backSpan'} />
       <section className={styles.roomLeftSection}>
-        <span className={styles.friendsListSpan}>멤버 목록</span>
+        <Span text={'멤버 목록'} className={'sectionsSpan'} />
         <MembersList roomInfo={roomInfo} />
       </section>
       <section className={styles.roomRightSection}>

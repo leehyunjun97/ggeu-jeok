@@ -25,16 +25,6 @@
   display: none;
 }
 
-.scheduleSpan,
-.friendsListSpan {
-  position: sticky;
-  right: 5px;
-  top: -24px;
-  font-weight: bold;
-  font-family: 'Nanum Pen Script', cursive;
-  font-size: 18px;
-}
-
 .roomLeftSection {
   width: 23%;
 }
