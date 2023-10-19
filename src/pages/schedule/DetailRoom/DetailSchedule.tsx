@@ -23,7 +23,7 @@ const DetailSchedule = () => {
     const detailDate =
       room && room.date.filter((item) => item.dateDetail === detailDatePath);
 
-    if (!!detailDate) {
+    if (!!!detailDate.length) {
       alert('잘못된 접근입니다.');
       navigate('/main');
       return;
