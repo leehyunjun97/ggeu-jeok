@@ -33,7 +33,6 @@ const UserRouter = () => {
         if (!getComplet.friend) {
           getComplet.friend = [];
         }
-
         if (!getComplet.alarm) {
           getComplet.alarm = [];
         }

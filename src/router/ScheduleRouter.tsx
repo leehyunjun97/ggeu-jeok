@@ -12,26 +12,22 @@ const ScheduleRouter = () => {
   const navigate = useNavigate();
   const roomInfo: IRoomInfo = location.state?.roomInfo;
 
-  // useEffect(() => {
-  //   if (!location.state) {
-  //     const room_uuid = location.pathname.split('/')[3];
-  //     console.log(room_uuid);
-  //     if (!room_uuid) alert('잘못된 접근!');
-  //     return;
-  //   }
-
-  //   if (location.state) {
-  //     const room_uuid = location.pathname.split('/')[3];
-  //   }
-  // }, [location.state]);
+  //recoil로 할지 state로 할지
+  useEffect(() => {
+    //state에 값이 없을 때
+    if (!location.state) {
+      const room_uuid = location.pathname.split('/')[3];
+    }
+  }, [location.state, location.pathname]);
 
   useEffect(() => {
     setMyProfile(
-      roomInfo.member.filter(
-        (item: IMemberInfo) => item.email === myInfo.email
-      )[0]
+      roomInfo &&
+        roomInfo.member.filter(
+          (item: IMemberInfo) => item.email === myInfo.email
+        )[0]
     );
-  }, [myInfo.email, roomInfo.member, setMyProfile]);
+  }, [myInfo.email, roomInfo, setMyProfile]);
 
   return <Outlet />;
 };

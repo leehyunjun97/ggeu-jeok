@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { roomInfo } from '../../recoil/room/roomInfo';
-import { IDateDetail, IRoomInfo } from '../../types/room';
+import { IDateDetail, IDateDetailContent, IRoomInfo } from '../../types/room';
 
 const getRoomListApi = async () => {
   try {
@@ -43,4 +43,37 @@ const updateDetailDateContentsApi = async (
   }
 };
 
-export { getRoomListApi, postCreateRoomApi, updateDetailDateContentsApi };
+// 그 이외의(기존) 콘텐츠들이랑 바꾸려는 콘텐츠 넣고
+const updateDetailDateContentsByOneApi = async (
+  roomInfo: IRoomInfo,
+  detailDates: IDateDetail[],
+  content: IDateDetailContent
+) => {
+  try {
+    const patchCom = await axios.patch(
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${roomInfo.uuid}.json`,
+      {
+        ...roomInfo,
+        date: [
+          ...detailDates,
+          {
+            id: 1,
+            dateDetail: '2023-10-20',
+            subTitle: '제목',
+            content,
+          },
+        ],
+      }
+    );
+    return patchCom;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export {
+  getRoomListApi,
+  postCreateRoomApi,
+  updateDetailDateContentsApi,
+  updateDetailDateContentsByOneApi,
+};

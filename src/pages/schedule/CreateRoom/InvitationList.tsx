@@ -1,6 +1,4 @@
-import React, { useCallback, useState, Dispatch, SetStateAction } from 'react';
-import { useRecoilValue } from 'recoil';
-import { userInfo } from '../../../recoil/user/user';
+import React, { useCallback, Dispatch, SetStateAction } from 'react';
 import { IFriendInfo } from '../../../types/friend';
 import { IUserInfo } from '../../../types/user';
 

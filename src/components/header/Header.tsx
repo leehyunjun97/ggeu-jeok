@@ -63,6 +63,7 @@ const Header = () => {
         <ProfileModal
           isProfileModal={isProfileModal}
           setIsProfileModal={setIsProfileModal}
+          my={true}
         />
       )}
       <Outlet />

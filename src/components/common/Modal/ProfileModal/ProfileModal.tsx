@@ -6,11 +6,13 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 interface IProfileModalIProps {
   isProfileModal?: boolean;
   setIsProfileModal: Dispatch<SetStateAction<boolean>>;
+  my?: boolean;
 }
 
 const ProfileModal = ({
   isProfileModal,
   setIsProfileModal,
+  my,
 }: IProfileModalIProps) => {
   const profileModalHandler = () => {
     setIsProfileModal(!isProfileModal);
@@ -27,7 +29,7 @@ const ProfileModal = ({
           <FontAwesomeIcon icon={faXmark} />
         </button>
         <section className={styles.titleSection}>
-          <h4>친구 정보</h4>
+          <h4>{my ? '내' : '친구'} 정보</h4>
         </section>
       </div>
     </>

@@ -9,13 +9,13 @@ import { defaultMemberInfoState } from '../../../constants/room/member';
 import TitleSection from './TitleSection';
 import { myRoomProfile } from '../../../recoil/room/roomInfo';
 import Span from '../../../components/common/Span/Span';
+import ContentSection from './ContentSection';
 
 const DetailSchedule = () => {
-  const detailSchedule = useLocation().state.detailSchedule;
+  // const detailSchedule = useLocation().state.detailSchedule;
   const roomInfo = useLocation().state.roomInfo;
 
   const myProfile = useRecoilValue(myRoomProfile);
-  const [newContent, setNewContent] = useState(detailSchedule.content);
 
   return (
     <div className={styles.main}>
@@ -26,6 +26,7 @@ const DetailSchedule = () => {
       </section>
       <section className={styles.roomRightSection}>
         <TitleSection myProfile={myProfile} />
+        <ContentSection myProfile={myProfile} />
 
         {/* <ul className={styles.contentSection}>
           {Object.keys(detailSchedule.content).map((key) => (
