@@ -24,8 +24,6 @@ const ScheduleRouter = () => {
 
         const getComplet: IRoomInfo = await getMyRoomInfoApi(room_uuid);
 
-        console.log(getComplet);
-
         if (!getComplet) {
           alert('잘못된 접근입니다.');
           localStorage.removeItem('room_id');

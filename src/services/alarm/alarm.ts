@@ -92,10 +92,4 @@ const removeAlarm = async (info: IUserInfo, alarms: IAlarm[]) => {
   }
 };
 
-export {
-  myAlarmsApi,
-  friendRequestApi,
-  friendRequestRefusalApi,
-  removeAlarm,
-  // friendRequestCheckApi,
-};
+export { myAlarmsApi, friendRequestApi, friendRequestRefusalApi, removeAlarm };

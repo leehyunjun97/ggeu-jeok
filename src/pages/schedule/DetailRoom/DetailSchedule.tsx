@@ -11,6 +11,8 @@ import {
 import Span from '../../../components/common/Span/Span';
 import ContentSection from './ContentSection';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { IDateDetail } from '../../../types/room';
+import { getMyDateDetailInfoApi } from '../../../services/room/room';
 const DetailSchedule = () => {
   const room = useRecoilValue(roomInfo);
   const myProfile = useRecoilValue(myRoomProfile);
@@ -20,17 +22,27 @@ const DetailSchedule = () => {
     useRecoilState(detailScheduleInfo);
 
   useEffect(() => {
-    const detailDate =
-      room && room.date.filter((item) => item.dateDetail === detailDatePath);
+    const getMyDetailHandler = async () => {
+      try {
+        const getComplet = await getMyDateDetailInfoApi(
+          room.uuid,
+          detailDatePath
+        );
 
-    if (!!!detailDate.length) {
-      alert('잘못된 접근입니다.');
-      navigate('/main');
-      return;
-    }
+        const key = Object.keys(getComplet) as unknown as string;
+        const data: IDateDetail = getComplet[key];
 
-    setDetailSchedule(detailDate[0]);
-  }, [detailDatePath, navigate, room, setDetailSchedule]);
+        if (!data) {
+          alert('잘못된 접근입니다.');
+          navigate('/main');
+          return;
+        }
+
+        setDetailSchedule(data);
+      } catch (error) {}
+    };
+    getMyDetailHandler();
+  }, [detailDatePath, navigate, room.uuid, setDetailSchedule]);
 
   return (
     <div className={styles.main}>

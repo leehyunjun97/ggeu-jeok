@@ -24,6 +24,17 @@ const getMyRoomInfoApi = async (room_id: string) => {
   }
 };
 
+const getMyDateDetailInfoApi = async (room_uuid: string, date: string) => {
+  try {
+    const getComplet = await axios.get(
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${room_uuid}/date.json?orderBy="dateDetail"&equalTo="${date}"`
+    );
+    return getComplet.data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 const postCreateRoomApi = async (roomInfo: IRoomInfo) => {
   try {
     const postComplet = await axios.post(
@@ -57,6 +68,7 @@ const updateDetailDateContentsApi = async (
 export {
   getRoomListApi,
   getMyRoomInfoApi,
+  getMyDateDetailInfoApi,
   postCreateRoomApi,
   updateDetailDateContentsApi,
 };
