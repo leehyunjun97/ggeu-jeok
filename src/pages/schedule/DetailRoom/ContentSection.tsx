@@ -10,16 +10,18 @@ import {
   updateDetailDateContentsApi,
   updateDetailDateContentsByOneApi,
 } from '../../../services/room/room';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
+import Toast from '../../../components/common/Toast/Toast';
 
 interface IProps {
   myProfile: IMemberInfo;
 }
 
 const ContentSection = ({ myProfile }: IProps) => {
-  const detailSchedule: IDateDetail = useLocation().state.detailSchedule;
-  const roomInfo = useLocation().state.roomInfo;
-
-  console.log(detailSchedule.content);
+  const [detailSchedule, setDetailSchedule] =
+    useRecoilState(detailScheduleInfo);
+  const room = useRecoilValue(roomInfo);
 
   const [newContent, setNewContent] = useState<IDateDetailContent>(
     detailSchedule.content
@@ -40,14 +42,18 @@ const ContentSection = ({ myProfile }: IProps) => {
       },
     };
 
-    const otherData: IDateDetail[] = roomInfo.date.filter(
+    const otherData: IDateDetail[] = room.date.filter(
       (item: IDateDetail) => item.id !== detailSchedule.id
     );
     otherData.push(newDetail);
 
-    const patchCom = await updateDetailDateContentsApi(roomInfo, otherData);
+    const patchCom = await updateDetailDateContentsApi(room, otherData);
+
     if (patchCom.status === 200) {
-      detailSchedule.content[key] = newContent;
+      console.log(patchCom);
+      setDetailSchedule({ ...detailSchedule, content: newDetail.content });
+      setVisible(!visible);
+      setToastText('수정되었습니다!');
     }
   };
 
@@ -81,6 +87,9 @@ const ContentSection = ({ myProfile }: IProps) => {
           </div>
         </li>
       ))}
+      {visible && (
+        <Toast text={toastText} visible={visible} setVisible={setVisible} />
+      )}
     </ul>
   );
 };

@@ -6,18 +6,18 @@ import DetailScheduleCard from '../../Card/DetailScheduleCard/DetailScheduleCard
 import { IDateDetail, IRoomInfo } from '../../../../types/room';
 
 interface IDetailScheduleListProps {
-  roomInfo: IRoomInfo;
+  room: IRoomInfo;
 }
 
-const DetailScheduleList = ({ roomInfo }: IDetailScheduleListProps) => {
+const DetailScheduleList = ({ room }: IDetailScheduleListProps) => {
   return (
     <ul className={styles.ulList}>
-      {roomInfo &&
-        roomInfo.date.map((item: IDateDetail) => (
+      {room &&
+        room.date.map((item: IDateDetail) => (
           <DetailScheduleCard
             key={item.dateDetail}
             detailSchedule={item}
-            roomInfo={roomInfo}
+            room={room}
           />
         ))}
       <li className={styles.plusLi}>

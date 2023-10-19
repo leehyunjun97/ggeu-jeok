@@ -7,14 +7,17 @@ import Button from '../../../components/common/Button/Button';
 import { updateDetailDateContentsApi } from '../../../services/room/room';
 import Toast from '../../../components/common/Toast/Toast';
 import Span from '../../../components/common/Span/Span';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
 
 interface IProps {
   myProfile: IMemberInfo;
 }
 
 const TitleSection = ({ myProfile }: IProps) => {
-  const detailSchedule: IDateDetail = useLocation().state.detailSchedule;
-  const roomInfo = useLocation().state.roomInfo;
+  const [detailSchedule, setDetailSchedule] =
+    useRecoilState(detailScheduleInfo);
+  const room = useRecoilValue(roomInfo);
 
   const [visible, setVisible] = useState(false);
   const [toastText, setToastText] = useState('');
@@ -40,14 +43,14 @@ const TitleSection = ({ myProfile }: IProps) => {
     };
 
     // 지금 id 이외의 detailDate 리스트
-    const otherData: IDateDetail[] = roomInfo.date.filter(
+    const otherData: IDateDetail[] = room.date.filter(
       (item: IDateDetail) => item.id !== detailSchedule.id
     );
     otherData.push(newDetail);
 
-    const patchCom = await updateDetailDateContentsApi(roomInfo, otherData);
+    const patchCom = await updateDetailDateContentsApi(room, otherData);
     if (patchCom.status === 200) {
-      detailSchedule.subTitle = newTitle;
+      setDetailSchedule({ ...detailSchedule, subTitle: newTitle });
       subTitleToggle();
       setVisible(!visible);
       setToastText('수정되었습니다!');

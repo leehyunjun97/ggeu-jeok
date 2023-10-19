@@ -7,13 +7,12 @@ import { IMemberInfo } from '../../../types/room';
 import { useLocation } from 'react-router-dom';
 import { defaultMemberInfoState } from '../../../constants/room/member';
 import TitleSection from './TitleSection';
-import { myRoomProfile } from '../../../recoil/room/roomInfo';
+import { myRoomProfile, roomInfo } from '../../../recoil/room/roomInfo';
 import Span from '../../../components/common/Span/Span';
 import ContentSection from './ContentSection';
 
 const DetailSchedule = () => {
-  // const detailSchedule = useLocation().state.detailSchedule;
-  const roomInfo = useLocation().state.roomInfo;
+  const room = useRecoilValue(roomInfo);
 
   const myProfile = useRecoilValue(myRoomProfile);
 
@@ -22,7 +21,7 @@ const DetailSchedule = () => {
       <Span.GoBackSpan text={'뒤로가기'} className={'backSpan'} />
       <section className={styles.roomLeftSection}>
         <Span text={'멤버 목록'} className={'sectionsSpan'} />
-        <MembersList roomInfo={roomInfo} />
+        <MembersList room={room} />
       </section>
       <section className={styles.roomRightSection}>
         <TitleSection myProfile={myProfile} />

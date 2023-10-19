@@ -2,25 +2,23 @@ import React from 'react';
 import styles from './style/detailScheduleCard.module.css';
 import { IDateDetail, IRoomInfo } from '../../../../types/room';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { detailScheduleInfo } from '../../../../recoil/room/roomInfo';
 
 interface IProps {
   detailSchedule: IDateDetail;
-  roomInfo: IRoomInfo;
+  room: IRoomInfo;
 }
 
-const DetailScheduleCard = ({ detailSchedule, roomInfo }: IProps) => {
+const DetailScheduleCard = ({ detailSchedule, room }: IProps) => {
   const navigate = useNavigate();
+  const setDetailSchedule = useSetRecoilState(detailScheduleInfo);
 
   const showDetailHandler = () => {
     navigate(
-      `/schedule/${roomInfo.admin}/${roomInfo.uuid}/${detailSchedule.dateDetail}`,
-      {
-        state: {
-          detailSchedule: detailSchedule,
-          roomInfo: roomInfo,
-        },
-      }
+      `/schedule/${room.admin}/${room.uuid}/${detailSchedule.dateDetail}`
     );
+    setDetailSchedule(detailSchedule);
   };
 
   return (

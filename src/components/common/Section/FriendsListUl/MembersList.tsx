@@ -8,15 +8,15 @@ import FriendInfoCard from '../../Card/FriendInfoCard/FriendInfoCard';
 import { IRoomInfo } from '../../../../types/room';
 
 interface IMembersListProps {
-  roomInfo: IRoomInfo;
+  room: IRoomInfo;
 }
 
-const MembersList = ({ roomInfo }: IMembersListProps) => {
+const MembersList = ({ room }: IMembersListProps) => {
   return (
     <>
       <ul className={styles.ulList}>
-        {roomInfo &&
-          roomInfo.member.map((item) => (
+        {room &&
+          room.member.map((item) => (
             // member라고 추가해서 정보에서 등급을 바꿀 수 있다던지..
             <FriendInfoCard key={item.id} info={item} />
           ))}
