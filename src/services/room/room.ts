@@ -13,6 +13,17 @@ const getRoomListApi = async () => {
   }
 };
 
+const getMyRoomInfoApi = async (room_id: string) => {
+  try {
+    const getComplet = await axios.get<IRoomInfo>(
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${room_id}.json`
+    );
+    return getComplet.data;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 const postCreateRoomApi = async (roomInfo: IRoomInfo) => {
   try {
     const postComplet = await axios.post(
@@ -43,37 +54,9 @@ const updateDetailDateContentsApi = async (
   }
 };
 
-// 그 이외의(기존) 콘텐츠들이랑 바꾸려는 콘텐츠 넣고
-const updateDetailDateContentsByOneApi = async (
-  roomInfo: IRoomInfo,
-  detailDates: IDateDetail[],
-  content: IDateDetailContent
-) => {
-  try {
-    const patchCom = await axios.patch(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${roomInfo.uuid}.json`,
-      {
-        ...roomInfo,
-        date: [
-          ...detailDates,
-          {
-            id: 1,
-            dateDetail: '2023-10-20',
-            subTitle: '제목',
-            content,
-          },
-        ],
-      }
-    );
-    return patchCom;
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
-
 export {
   getRoomListApi,
+  getMyRoomInfoApi,
   postCreateRoomApi,
   updateDetailDateContentsApi,
-  updateDetailDateContentsByOneApi,
 };

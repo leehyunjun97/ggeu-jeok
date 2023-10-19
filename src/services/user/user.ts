@@ -25,7 +25,7 @@ const getLoginCheckApi = async (email: string) => {
 
 const getMyInfoApi = async (id: string) => {
   try {
-    const getComplet = await axios.get(
+    const getComplet = await axios.get<IUserInfo>(
       `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${id}.json`
     );
     return getComplet.data;

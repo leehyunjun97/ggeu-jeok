@@ -13,7 +13,6 @@ interface IScheduleCardProps {
 
 const ScheduleInfoCard = ({ room }: IScheduleCardProps) => {
   const setRoomInfo = useSetRecoilState(roomInfo);
-
   const navigate = useNavigate();
 
   const goingRoomHandler = () => {

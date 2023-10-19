@@ -48,7 +48,7 @@ export interface ITalk {
 }
 
 export interface IRoomInfo {
-  uuid?: string;
+  uuid: string;
   title: string;
   admin: string;
   location: string;

@@ -7,10 +7,9 @@ export const defaultContent = () => {
   return content;
 };
 
-
-
 export const defaultRoomInfo = () => {
   return {
+    uuid: '',
     title: '',
     admin: '',
     location: '',

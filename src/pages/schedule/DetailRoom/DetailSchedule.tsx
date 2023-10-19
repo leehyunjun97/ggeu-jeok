@@ -1,20 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './style/detailSchedule.module.css';
 import MembersList from '../../../components/common/Section/FriendsListUl/MembersList';
-import { useRecoilValue } from 'recoil';
-import { userInfo } from '../../../recoil/user/user';
-import { IMemberInfo } from '../../../types/room';
-import { useLocation } from 'react-router-dom';
-import { defaultMemberInfoState } from '../../../constants/room/member';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import TitleSection from './TitleSection';
-import { myRoomProfile, roomInfo } from '../../../recoil/room/roomInfo';
+import {
+  detailScheduleInfo,
+  myRoomProfile,
+  roomInfo,
+} from '../../../recoil/room/roomInfo';
 import Span from '../../../components/common/Span/Span';
 import ContentSection from './ContentSection';
-
+import { useLocation, useNavigate } from 'react-router-dom';
 const DetailSchedule = () => {
   const room = useRecoilValue(roomInfo);
-
   const myProfile = useRecoilValue(myRoomProfile);
+  const detailDatePath = useLocation().pathname.split('/')[4];
+  const navigate = useNavigate();
+  const [detailSchedule, setDetailSchedule] =
+    useRecoilState(detailScheduleInfo);
+
+  useEffect(() => {
+    const detailDate =
+      room && room.date.filter((item) => item.dateDetail === detailDatePath);
+
+    if (!!detailDate) {
+      alert('잘못된 접근입니다.');
+      navigate('/main');
+      return;
+    }
+
+    setDetailSchedule(detailDate[0]);
+  }, [detailDatePath, navigate, room, setDetailSchedule]);
 
   return (
     <div className={styles.main}>
@@ -24,39 +40,12 @@ const DetailSchedule = () => {
         <MembersList room={room} />
       </section>
       <section className={styles.roomRightSection}>
-        <TitleSection myProfile={myProfile} />
-        <ContentSection myProfile={myProfile} />
-
-        {/* <ul className={styles.contentSection}>
-          {Object.keys(detailSchedule.content).map((key) => (
-            <li key={key} className={styles.contentLi}>
-              <div className={styles.contentLeftSection}>{key}</div>
-              <div className={styles.contentRightSection}>
-                <textarea
-                  className={styles.contentTextarea}
-                  value={newContent[key]}
-                  readOnly={myProfile && myProfile.class === 'member'}
-                  onChange={(e) => {
-                    const dummyObj = { ...newContent };
-                    dummyObj[key] = e.target.value;
-                    setNewContent(dummyObj);
-                  }}
-                />
-                <button
-                  className={styles.updateBtn}
-                  onClick={updateContentHandler}
-                  style={
-                    detailSchedule.content[key] === newContent[key]
-                      ? { display: 'none' }
-                      : { display: 'block' }
-                  }
-                >
-                  수정하기
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul> */}
+        {detailSchedule && (
+          <>
+            <TitleSection myProfile={myProfile} />
+            <ContentSection myProfile={myProfile} />
+          </>
+        )}
       </section>
     </div>
   );

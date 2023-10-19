@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './style/detailSchedule.module.css';
 import {
   IDateDetail,
@@ -6,10 +6,7 @@ import {
   IMemberInfo,
 } from '../../../types/room';
 import { useLocation } from 'react-router-dom';
-import {
-  updateDetailDateContentsApi,
-  updateDetailDateContentsByOneApi,
-} from '../../../services/room/room';
+import { updateDetailDateContentsApi } from '../../../services/room/room';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
 import Toast from '../../../components/common/Toast/Toast';
@@ -22,6 +19,13 @@ const ContentSection = ({ myProfile }: IProps) => {
   const [detailSchedule, setDetailSchedule] =
     useRecoilState(detailScheduleInfo);
   const room = useRecoilValue(roomInfo);
+
+  // 정렬 필요..
+  // useEffect(() => {
+  //   Object.keys(detailSchedule.content).forEach((key: string) => {
+  //     console.log(Number(key.replace('시', '')));
+  //   });
+  // }, []);
 
   const [newContent, setNewContent] = useState<IDateDetailContent>(
     detailSchedule.content

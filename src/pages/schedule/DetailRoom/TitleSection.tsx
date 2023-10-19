@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import styles from './style/detailSchedule.module.css';
-import { useLocation } from 'react-router-dom';
 import { IDateDetail, IMemberInfo } from '../../../types/room';
 import Input from '../../../components/common/Input/Input';
 import Button from '../../../components/common/Button/Button';
 import { updateDetailDateContentsApi } from '../../../services/room/room';
 import Toast from '../../../components/common/Toast/Toast';
 import Span from '../../../components/common/Span/Span';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
 
 interface IProps {
