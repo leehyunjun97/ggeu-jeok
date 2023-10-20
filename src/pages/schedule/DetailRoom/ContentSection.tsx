@@ -61,6 +61,8 @@ const ContentSection = ({ myProfile }: IProps) => {
     }
   };
 
+  const updateContentsHandler = async () => {};
+
   return (
     <>
       <ul className={styles.contentSection}>

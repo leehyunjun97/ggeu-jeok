@@ -133,7 +133,9 @@
 }
 
 .allUpdateBtn {
-  width: 200px;
-  height: 200px;
+  width: 73px;
+  height: 45px;
   position: fixed;
+  bottom: 28px;
+  right: 30px;
 }

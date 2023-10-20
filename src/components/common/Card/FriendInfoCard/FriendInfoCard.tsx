@@ -68,6 +68,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
         <ProfileModal
           isProfileModal={isProfileModal}
           setIsProfileModal={setIsProfileModal}
+          friendInfo={info}
         />
       )}
     </>

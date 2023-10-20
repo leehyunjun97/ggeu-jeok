@@ -14,7 +14,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 380px;
+  width: 360px;
   height: 580px;
   background-image: url(../../../../../../public/assets/img/Smooth\ Notebook\ Paper.PNG);
   text-align: center;
@@ -23,6 +23,7 @@
   border: 2px solid black;
   overflow: scroll;
   box-shadow: 5px 5px 5px rgb(191, 146, 87);
+  font-family: 'Nanum Pen Script', cursive;
 }
 
 .modalSection::-webkit-scrollbar {
@@ -35,7 +36,6 @@
 
 .titleSection h4 {
   margin-bottom: 0px;
-  font-family: 'Nanum Pen Script', cursive;
   font-size: 22px;
 }
 
@@ -48,4 +48,50 @@
   position: absolute;
   right: -1px;
   top: 2px;
+}
+
+/* profile info */
+
+.profileSection {
+  height: 85%;
+  margin-top: 4%;
+  text-align: center;
+}
+
+.imgSection {
+  height: 40%;
+}
+
+.profileImg {
+  max-width: auto;
+  height: 100%;
+  border: none;
+  border-radius: 15px;
+}
+
+.infoSection {
+  height: 15%;
+  width: 50%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.nickName {
+  width: 100%;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.emailNameDiv {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  margin-top: 5px;
+}
+
+.email,
+.name {
+  opacity: 0.7;
+  font-size: 18px;
 }
