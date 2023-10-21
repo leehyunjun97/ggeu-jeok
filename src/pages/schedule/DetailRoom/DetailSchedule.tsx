@@ -32,7 +32,9 @@ const DetailSchedule = () => {
         }
 
         setDetailSchedule(data);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
     room.uuid && getMyDetailHandler();
   }, [detailDatePath, navigate, room.uuid, setDetailSchedule]);

@@ -19,7 +19,6 @@ interface IProps {
 const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
   const [detailSchedule, setDetailSchedule] =
     useRecoilState(detailScheduleInfo);
-
   const room = useRecoilValue(roomInfo);
 
   useEffect(() => {
@@ -34,6 +33,7 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
     room.uuid && getContent();
   }, [detailDatePath, room.uuid]);
 
+  // todo
   // 정렬 필요..
   // useEffect(() => {
   //   Object.keys(detailSchedule.content).forEach((key: string) => {
