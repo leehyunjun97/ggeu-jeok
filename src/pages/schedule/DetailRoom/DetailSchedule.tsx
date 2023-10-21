@@ -11,8 +11,7 @@ import {
 import Span from '../../../components/common/Span/Span';
 import ContentSection from './ContentSection';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { IDateDetail } from '../../../types/room';
-import { getMyDateDetailInfoApi } from '../../../services/room/room';
+import { getDetailInfoApi } from '../../../utils/room/myDateDetail';
 const DetailSchedule = () => {
   const room = useRecoilValue(roomInfo);
   const myProfile = useRecoilValue(myRoomProfile);
@@ -24,13 +23,7 @@ const DetailSchedule = () => {
   useEffect(() => {
     const getMyDetailHandler = async () => {
       try {
-        const getComplet = await getMyDateDetailInfoApi(
-          room.uuid,
-          detailDatePath
-        );
-
-        const key = Object.keys(getComplet) as unknown as string;
-        const data: IDateDetail = getComplet[key];
+        const data = await getDetailInfoApi(room.uuid, detailDatePath);
 
         if (!data) {
           alert('잘못된 접근입니다.');
@@ -41,7 +34,7 @@ const DetailSchedule = () => {
         setDetailSchedule(data);
       } catch (error) {}
     };
-    getMyDetailHandler();
+    room.uuid && getMyDetailHandler();
   }, [detailDatePath, navigate, room.uuid, setDetailSchedule]);
 
   return (
@@ -55,7 +48,10 @@ const DetailSchedule = () => {
         {detailSchedule && (
           <>
             <TitleSection myProfile={myProfile} />
-            <ContentSection myProfile={myProfile} />
+            <ContentSection
+              myProfile={myProfile}
+              detailDatePath={detailDatePath}
+            />
           </>
         )}
       </section>

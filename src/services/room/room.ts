@@ -26,9 +26,12 @@ const getMyRoomInfoApi = async (room_id: string) => {
 
 const getMyDateDetailInfoApi = async (room_uuid: string, date: string) => {
   try {
-    const getComplet = await axios.get(
+    const getComplet = await axios.get<{
+      [key: string]: IDateDetail;
+    }>(
       `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${room_uuid}/date.json?orderBy="dateDetail"&equalTo="${date}"`
     );
+
     return getComplet.data;
   } catch (error: any) {
     throw new Error(error.message);

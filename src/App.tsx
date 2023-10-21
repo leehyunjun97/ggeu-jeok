@@ -24,7 +24,6 @@ function App() {
             <Route path='main' element={<Main />} />
             <Route path='/schedule/create' element={<CreateRoom />} />
             <Route path='schedule' element={<ScheduleRouter />}>
-              <Route path='/schedule/*' element={<ScheduleRouter />} />
               <Route path='/schedule/:nickName/:id' element={<RoomMain />} />
               <Route
                 path='/schedule/:nickName/:id/:date'

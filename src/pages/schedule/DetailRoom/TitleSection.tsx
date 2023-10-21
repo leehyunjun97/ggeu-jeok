@@ -8,6 +8,7 @@ import Toast from '../../../components/common/Toast/Toast';
 import Span from '../../../components/common/Span/Span';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
+import { aa } from './dododo';
 
 interface IProps {
   myProfile: IMemberInfo;
@@ -41,19 +42,12 @@ const TitleSection = ({ myProfile }: IProps) => {
       subTitle: newTitle,
     };
 
-    // 지금 id 이외의 detailDate 리스트
-    const otherData: IDateDetail[] = room.date.filter(
-      (item: IDateDetail) => item.id !== detailSchedule.id
-    );
-    otherData.push(newDetail);
-
-    const patchCom = await updateDetailDateContentsApi(room, otherData);
-    if (patchCom.status === 200) {
+    aa(room, detailSchedule.id, newDetail, () => {
       setDetailSchedule({ ...detailSchedule, subTitle: newTitle });
       subTitleToggle();
       setVisible(!visible);
       setToastText('수정되었습니다!');
-    }
+    });
   };
 
   return (

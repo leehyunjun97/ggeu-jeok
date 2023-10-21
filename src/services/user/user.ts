@@ -6,6 +6,7 @@ const getUsersApi = async () => {
     const getComplet = await axios.get<{ data: { [key: string]: IUserInfo } }>(
       'https://ggeu-jeok-default-rtdb.firebaseio.com/user.json'
     );
+
     return getComplet.data;
   } catch (error: any) {
     throw new Error(error.message);
