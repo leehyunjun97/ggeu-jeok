@@ -52,3 +52,4 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
   );
 };
 export default AlarmModal;
+// 룸 기능 다했습니다.
