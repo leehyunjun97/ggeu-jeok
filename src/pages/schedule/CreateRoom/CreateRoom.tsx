@@ -44,8 +44,7 @@ const CreateRoom = () => {
   };
 
   const dateDetailAddHandler = () => {
-    const diffDay = dffday(startDate, endDate);
-
+    const diffDay = dffday(startDate, endDate || startDate);
     const arr = Array.from(Array(diffDay + 1), (_, index) => index++);
 
     const dateDetailArray: IDateDetail[] = arr.map((it) => {
