@@ -13,6 +13,7 @@ import {
   escapeKeyDownHandler,
 } from '../../../../utils/common/keyDown';
 import Input from '../../Input/Input';
+import Potal from '../Potal/Potal';
 
 interface IFriendModalIProps {
   isModal?: boolean;
@@ -37,38 +38,46 @@ const FriendAddModal = ({ isModal, setIsModal }: IFriendModalIProps) => {
   };
 
   return (
-    <div
-      onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-        escapeKeyDownHandler(e, modalHandler)
+    <Potal
+      children={
+        <div
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+            escapeKeyDownHandler(e, modalHandler)
+          }
+          tabIndex={0}
+        >
+          <div className={styles.modalBackground} onClick={modalHandler}></div>
+          <div className={styles.modalSection}>
+            <Button.CloseButton onClick={modalHandler} />
+            <section className={styles.searchSection}>
+              <Label text={'닉네임'} className={'search'} />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                style={{
+                  marginRight: '15px',
+                  opacity: '0.7',
+                  cursor: 'pointer',
+                }}
+              />
+              <Input
+                placeholder='ex) monstamp'
+                type='text'
+                value={userSearchState}
+                onChange={(e) => {
+                  setUserSearch(e.target.value);
+                }}
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                  enterKeyDownHandler(e, setUserSearchHandler)
+                }
+              />
+            </section>
+            <section className={styles.listSection}>
+              {<FriendSearchList list={data} />}
+            </section>
+          </div>
+        </div>
       }
-      tabIndex={0}
-    >
-      <div className={styles.modalBackground} onClick={modalHandler}></div>
-      <div className={styles.modalSection}>
-        <Button.CloseButton onClick={modalHandler} />
-        <section className={styles.searchSection}>
-          <Label text={'닉네임'} className={'search'} />
-          <FontAwesomeIcon
-            icon={faMagnifyingGlass}
-            style={{ marginRight: '15px', opacity: '0.7', cursor: 'pointer' }}
-          />
-          <Input
-            placeholder='ex) monstamp'
-            type='text'
-            value={userSearchState}
-            onChange={(e) => {
-              setUserSearch(e.target.value);
-            }}
-            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-              enterKeyDownHandler(e, setUserSearchHandler)
-            }
-          />
-        </section>
-        <section className={styles.listSection}>
-          {<FriendSearchList list={data} />}
-        </section>
-      </div>
-    </div>
+    />
   );
 };
 

@@ -3,6 +3,7 @@ import styles from './style/mapModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import Potal from '../Potal/Potal';
 
 declare global {
   interface Window {
@@ -103,58 +104,69 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
   }, [map.ispanTo]);
 
   return (
-    <>
-      <div className={styles.modalBackground} onClick={closeModal}></div>
-      <div className={styles.modalSection}>
-        <button onClick={closeModal} className={styles.modalCloseBtn}>
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
-        <section className={styles.titleSection}>
-          <h4>지도</h4>
-        </section>
-        <section className={styles.searchSection}>
-          <FontAwesomeIcon
-            icon={faMagnifyingGlass}
-            style={{ marginRight: '15px', opacity: '0.7', cursor: 'pointer' }}
-          />
-          <input type='text' value={addr} readOnly />
-        </section>
-        <Map
-          ref={mapRef}
-          isPanto={map.ispanTo}
-          className={styles.mapSection}
-          center={{ lat: map?.center?.lat, lng: map?.center?.lng }}
-          onClick={(_t, mouseEvent) => {
-            setPosition({
-              lat: mouseEvent.latLng.getLat(),
-              lng: mouseEvent.latLng.getLng(),
-            });
-            transAddr(mouseEvent.latLng.getLng(), mouseEvent.latLng.getLat());
-          }}
-        >
-          {position && <MapMarker position={position} />}
-        </Map>
+    <Potal
+      children={
+        <>
+          <div className={styles.modalBackground} onClick={closeModal}></div>
+          <div className={styles.modalSection}>
+            <button onClick={closeModal} className={styles.modalCloseBtn}>
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+            <section className={styles.titleSection}>
+              <h4>지도</h4>
+            </section>
+            <section className={styles.searchSection}>
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                style={{
+                  marginRight: '15px',
+                  opacity: '0.7',
+                  cursor: 'pointer',
+                }}
+              />
+              <input type='text' value={addr} readOnly />
+            </section>
+            <Map
+              ref={mapRef}
+              isPanto={map.ispanTo}
+              className={styles.mapSection}
+              center={{ lat: map?.center?.lat, lng: map?.center?.lng }}
+              onClick={(_t, mouseEvent) => {
+                setPosition({
+                  lat: mouseEvent.latLng.getLat(),
+                  lng: mouseEvent.latLng.getLng(),
+                });
+                transAddr(
+                  mouseEvent.latLng.getLng(),
+                  mouseEvent.latLng.getLat()
+                );
+              }}
+            >
+              {position && <MapMarker position={position} />}
+            </Map>
 
-        <button
-          className={styles.currentBtn}
-          onClick={() => {
-            const map = mapRef.current;
-            console.log(map);
+            <button
+              className={styles.currentBtn}
+              onClick={() => {
+                const map = mapRef.current;
+                console.log(map);
 
-            setMap((prev) => ({
-              ...prev,
-              center: {
-                lat: 0,
-                lng: 0,
-              },
-            }));
-            getCurrentPosition();
-          }}
-        >
-          현위치
-        </button>
-      </div>
-    </>
+                setMap((prev) => ({
+                  ...prev,
+                  center: {
+                    lat: 0,
+                    lng: 0,
+                  },
+                }));
+                getCurrentPosition();
+              }}
+            >
+              현위치
+            </button>
+          </div>
+        </>
+      }
+    />
   );
 };
 

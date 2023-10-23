@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 import { IFriendInfo } from '../../../../types/friend';
 import ProfileSection from './ProfileSection';
+import Potal from '../Potal/Potal';
 
 interface IProfileModalIProps {
   isProfileModal?: boolean;
@@ -28,25 +29,32 @@ const ProfileModal = ({
   const myInfo = useRecoilValue(userInfo);
 
   return (
-    <>
-      <div
-        className={styles.modalBackground}
-        onClick={profileModalHandler}
-      ></div>
-      <div className={styles.modalSection}>
-        <button onClick={profileModalHandler} className={styles.modalCloseBtn}>
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
-        <section className={styles.titleSection}>
-          <h4>{my ? '내' : '친구'} 정보</h4>
-        </section>
-        {my ? (
-          <ProfileSection myinfo={myInfo} />
-        ) : (
-          <ProfileSection friendInfo={friendInfo} />
-        )}
-      </div>
-    </>
+    <Potal
+      children={
+        <>
+          <div
+            className={styles.modalBackground}
+            onClick={profileModalHandler}
+          ></div>
+          <div className={styles.modalSection}>
+            <button
+              onClick={profileModalHandler}
+              className={styles.modalCloseBtn}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+            <section className={styles.titleSection}>
+              <h4>{my ? '내' : '친구'} 정보</h4>
+            </section>
+            {my ? (
+              <ProfileSection myinfo={myInfo} />
+            ) : (
+              <ProfileSection friendInfo={friendInfo} />
+            )}
+          </div>
+        </>
+      }
+    />
   );
 };
 
