@@ -16,7 +16,7 @@ const BackgroundLoading = () => {
 
 BackgroundLoading.Section = () => {
   return (
-    <div className={styles.loadingSection}>
+    <div className={styles.loadingSection} style={{ top: '54%' }}>
       <img src={sectionmg} alt='' />
     </div>
   );

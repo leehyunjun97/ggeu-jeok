@@ -10,13 +10,15 @@ interface IButtonProps {
   text?: string;
   className?: string;
   disable?: boolean;
+  style?: React.CSSProperties;
 }
 
-const Button = ({ onClick, text, className, disable }: IButtonProps) => {
+const Button = ({ onClick, text, className, disable, style }: IButtonProps) => {
   return (
     <button
       onClick={onClick}
       className={`${styles[`${className}`]} ${styles.basicBtn}`}
+      style={{ ...style }}
       disabled={disable}
     >
       {text}

@@ -108,3 +108,12 @@
   bottom: 35px;
   left: 14%;
 }
+
+.contentsUpdateBtn {
+  width: 80px;
+  height: 30px;
+  position: absolute;
+  bottom: 9px;
+  right: 9px;
+  background-color: #bad0b6;
+}

@@ -12,9 +12,12 @@ import Toast from '../../../components/common/Toast/Toast';
 import { getDetailInfoApi } from '../../../utils/room/myDateDetail';
 import {
   updateContents,
+  updateContentsFunc,
   updateState,
 } from '../../../utils/room/updateContents';
 import { noneOrBlock } from '../../../utils/common/displayNoneBlock';
+import BackgroundLoading from '../../../components/common/Loading/BackgroundLoading';
+import Button from '../../../components/common/Button/Button';
 
 interface IProps {
   myProfile: IMemberInfo;
@@ -26,6 +29,7 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
     useRecoilState(detailScheduleInfo);
 
   const room = useRecoilValue(roomInfo);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getContent = async () => {
@@ -47,23 +51,18 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
   const [toastText, setToastText] = useState('');
 
   const updateContentByOneHandler = async (newContent: IDateDetailContent) => {
+    setIsLoading(true);
     const newDetail: IDateDetail = {
       ...detailSchedule,
       content: updateContents(newContent, detailSchedule),
     };
 
-    const otherData: IDateDetail[] = room.date.filter(
-      (item) => item.id !== detailSchedule.id
-    );
-    otherData.push(newDetail);
-
-    const patchCom = await updateDetailDateContentsApi(room, otherData);
-
-    if (patchCom.status === 200) {
+    updateContentsFunc(room, detailSchedule.id, newDetail, () => {
       setDetailSchedule({ ...detailSchedule, content: newDetail.content });
       setVisible(!visible);
+      setIsLoading(false);
       setToastText('수정되었습니다!');
-    }
+    });
   };
 
   const updateContentsHandler = async () => {};
@@ -83,16 +82,16 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
                   setNewContent(updateState(newContent, item, e))
                 }
               />
-              <button
-                className={styles.updateBtn}
+              <Button
+                text={'수정하기'}
+                className={'contentsUpdateBtn'}
                 onClick={() => updateContentByOneHandler(newContent[index])}
                 style={noneOrBlock(
                   detailSchedule.content[index].text,
                   newContent[index].text
                 )}
-              >
-                수정하기
-              </button>
+                disable={isLoading}
+              />
             </div>
           </li>
         ))}
@@ -101,6 +100,7 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
         )}
       </ul>
       <button className={styles.allUpdateBtn}>전체 수정</button>
+      {isLoading && <BackgroundLoading />}
     </>
   );
 };
