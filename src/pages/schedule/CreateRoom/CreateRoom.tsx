@@ -18,6 +18,7 @@ import {
 import Toast from '../../../components/common/Toast/Toast';
 import { postCreateRoomApi } from '../../../services/room/room';
 import { createMemberInfoObj } from '../../../utils/room/createRoom';
+import Button from '../../../components/common/Button/Button';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -25,6 +26,7 @@ const CreateRoom = () => {
 
   const [isModal, setIsModal] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [toastText, setToastText] = useState('');
 
   const [startDate, setStartDate] = useState(new Date());
@@ -90,6 +92,8 @@ const CreateRoom = () => {
       return;
     }
 
+    setIsLoading(true);
+
     const date = dateDetailAddHandler();
     const member = memberClassAddHandler();
 
@@ -105,10 +109,13 @@ const CreateRoom = () => {
     try {
       const postCom = await postCreateRoomApi(payload);
       if (postCom.status === 200) {
-        // recoil setRoomInfo 해주기
+        // recoil setRoomInfo 해주기 아직 네비게이션 안됨
+        setIsLoading(false);
         console.log(postCom.data);
       }
     } catch (error: any) {
+      setIsLoading(!isLoading);
+      alert('방 생성 에러');
       throw new Error(error.message);
     }
   };
@@ -174,9 +181,12 @@ const CreateRoom = () => {
         </div>
       </div>
 
-      <button className={styles.createBtn} onClick={createRoomHandler}>
-        생성
-      </button>
+      <Button
+        className='roomCreateBtn'
+        onClick={createRoomHandler}
+        disable={isLoading}
+        text={'생성'}
+      />
       {isModal && (
         <MapModal
           closeModal={modalHandler}

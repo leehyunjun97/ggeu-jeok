@@ -17,12 +17,13 @@ const Login = () => {
     password: '',
   });
   const [loginCheck, setLoginCheck] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const setUser = useSetRecoilState(userInfo);
-
   const navigate = useNavigate();
 
   const loginHandler = async () => {
     try {
+      setIsLoading(true);
       const findUser = await getLoginCheckApi(loginInputState.email);
 
       if (Object.keys(findUser).length === 0) {
@@ -34,6 +35,7 @@ const Login = () => {
       const myInfo: IUserInfo = findUser[dataid];
 
       if (myInfo.password !== loginInputState.password) {
+        setIsLoading(false);
         setLoginCheck(true);
         return;
       }
@@ -44,7 +46,8 @@ const Login = () => {
       setUser(myInfo);
       navigate('/main');
     } catch (error) {
-      console.log(error);
+      setIsLoading(!isLoading);
+      alert('로그인 에러');
     }
   };
 
@@ -80,7 +83,12 @@ const Login = () => {
       <span className={styles.signupSpan} onClick={() => navigate('/signup')}>
         회원가입
       </span>
-      <Button text={'로그인'} className={'loginBtn'} onClick={loginHandler} />
+      <Button
+        text={'로그인'}
+        className={'loginBtn'}
+        onClick={loginHandler}
+        disable={isLoading}
+      />
 
       <ErrorMessage
         style={errorMessageDivHandler(loginCheck)}

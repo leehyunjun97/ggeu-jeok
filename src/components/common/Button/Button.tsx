@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles/button.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface IButtonProps {
@@ -8,13 +9,15 @@ interface IButtonProps {
   refusalOnClick?: React.MouseEventHandler<HTMLButtonElement>;
   text?: string;
   className?: string;
+  disable?: boolean;
 }
 
-const Button = ({ onClick, text, className }: IButtonProps) => {
+const Button = ({ onClick, text, className, disable }: IButtonProps) => {
   return (
     <button
       onClick={onClick}
       className={`${styles[`${className}`]} ${styles.basicBtn}`}
+      disabled={disable}
     >
       {text}
     </button>
@@ -59,6 +62,17 @@ Button.CheckButton = ({ onClick }: IButtonProps) => {
       onClick={onClick}
     >
       확인
+    </button>
+  );
+};
+
+Button.AlarmButton = ({ onClick }: IButtonProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`${styles.headerBtn} ${styles.alarmBtn} ${styles.basicBtn}`}
+    >
+      <FontAwesomeIcon icon={faBell} style={{ color: '#000000' }} size='xl' />
     </button>
   );
 };

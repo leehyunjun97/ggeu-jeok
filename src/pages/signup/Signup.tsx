@@ -27,6 +27,7 @@ const Signup = () => {
   const [img, setImg] = useState<File | null>(null);
   const [imgSrc, setimgSrc] = useState<string | null>('');
   const [visible, setVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [toastText, setToastText] = useState('');
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -80,13 +81,19 @@ const Signup = () => {
   };
 
   const signup = async () => {
-    const signComplet = await postSignupApi({
-      ...signUpInputState,
-      id: uuidv4(),
-    });
+    try {
+      setIsLoading(!isLoading);
+      const signComplet = await postSignupApi({
+        ...signUpInputState,
+        id: uuidv4(),
+      });
 
-    localStorage.setItem('id', signComplet.data['name']);
-    navigate('/main');
+      localStorage.setItem('id', signComplet.data['name']);
+      navigate('/main');
+    } catch (error) {
+      setIsLoading(!isLoading);
+      alert('회원가입 오류');
+    }
   };
 
   const changeInputHandler = (value: string | null, key: string) => {
@@ -219,12 +226,12 @@ const Signup = () => {
             accept='image/*'
             onChange={fileHandler}
           />
-          {/* <button onClick={deleteImage}>사진삭제</button> */}
 
           <Button
             onClick={signupHandler}
             text={'회원가입'}
             className={'signupBtn'}
+            disable={isLoading}
           />
         </div>
       </div>
