@@ -19,6 +19,7 @@ import Toast from '../../../components/common/Toast/Toast';
 import { postCreateRoomApi } from '../../../services/room/room';
 import { createMemberInfoObj } from '../../../utils/room/createRoom';
 import Button from '../../../components/common/Button/Button';
+import BackgroundLoading from '../../../components/common/Loading/BackgroundLoading';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -199,6 +200,7 @@ const CreateRoom = () => {
       {visible && (
         <Toast text={toastText} visible={visible} setVisible={setVisible} />
       )}
+      {isLoading && <BackgroundLoading />}
     </div>
   );
 };

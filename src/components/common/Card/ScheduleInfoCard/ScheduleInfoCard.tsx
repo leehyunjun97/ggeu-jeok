@@ -34,4 +34,6 @@ const ScheduleInfoCard = ({ room }: IScheduleCardProps) => {
   );
 };
 
+ScheduleInfoCard.Default = () => {};
+
 export default ScheduleInfoCard;

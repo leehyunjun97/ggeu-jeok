@@ -19,6 +19,7 @@ import { postSignupApi } from '../../services/sign/sign';
 import { initialSignUpInputState } from '../../constants/sign/sign';
 import { imgUpload } from '../../utils/common/imageUpload';
 import Span from '../../components/common/Span/Span';
+import BackgroundLoading from '../../components/common/Loading/BackgroundLoading';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>(
@@ -238,6 +239,7 @@ const Signup = () => {
       {visible && (
         <Toast text={toastText} visible={visible} setVisible={setVisible} />
       )}
+      {isLoading && <BackgroundLoading />}
     </div>
   );
 };

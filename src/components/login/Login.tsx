@@ -10,6 +10,7 @@ import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
 import ErrorMessage from '../common/Error/ErrorMessage';
 import { enterKeyDownHandler } from '../../utils/common/keyDown';
+import BackgroundLoading from '../common/Loading/BackgroundLoading';
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState({
@@ -96,6 +97,8 @@ const Login = () => {
         text='- 아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시
         확인해주세요.'
       />
+
+      {isLoading && <BackgroundLoading />}
     </div>
   );
 };

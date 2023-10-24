@@ -38,6 +38,15 @@ const SchedulesUl = () => {
           <ScheduleInfoCard key={item.uuid} room={item} />
         ))}
 
+      {roomData && (
+        <li
+          className={styles.plusLi}
+          onClick={() => navigate('/schedule/create')}
+        >
+          <p className={styles.noRoom}>방을 생성해보세요!</p>
+        </li>
+      )}
+
       <li
         className={styles.plusLi}
         onClick={() => navigate('/schedule/create')}

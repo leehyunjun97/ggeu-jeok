@@ -33,6 +33,15 @@
   font-size: 45px;
 }
 
+.noRoom {
+  color: rgb(63, 80, 69);
+  height: 30px;
+  font-weight: 400;
+  font-size: 1.3vw;
+  font-family: 'Jua', sans-serif;
+  line-height: 180px;
+}
+
 @media (max-width: 1000px) {
   .ulList {
     grid-template-columns: 1fr 1fr 1fr;
