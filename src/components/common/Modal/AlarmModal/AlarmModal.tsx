@@ -5,7 +5,7 @@ import { escapeKeyDownHandler } from '../../../../utils/common/keyDown';
 import { IAlarm } from '../../../../types/alarm';
 import { IUserInfo } from '../../../../types/user';
 import Button from '../../Button/Button';
-import Potal from '../Potal/Potal';
+import Portal from '../Portal/Portal';
 
 interface IAlarmProps {
   isModal: boolean;
@@ -19,7 +19,8 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
   };
 
   return (
-    <Potal
+    <Portal
+      id='modal'
       children={
         <div
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>

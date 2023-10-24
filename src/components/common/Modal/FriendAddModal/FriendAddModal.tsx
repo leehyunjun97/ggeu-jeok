@@ -13,7 +13,7 @@ import {
   escapeKeyDownHandler,
 } from '../../../../utils/common/keyDown';
 import Input from '../../Input/Input';
-import Potal from '../Potal/Potal';
+import Portal from '../Portal/Portal';
 
 interface IFriendModalIProps {
   isModal?: boolean;
@@ -38,7 +38,8 @@ const FriendAddModal = ({ isModal, setIsModal }: IFriendModalIProps) => {
   };
 
   return (
-    <Potal
+    <Portal
+      id='modal'
       children={
         <div
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>

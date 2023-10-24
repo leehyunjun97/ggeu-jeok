@@ -3,7 +3,8 @@ import styles from './style/mapModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import Potal from '../Potal/Potal';
+import Portal from '../Portal/Portal';
+import Button from '../../Button/Button';
 
 declare global {
   interface Window {
@@ -104,14 +105,13 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
   }, [map.ispanTo]);
 
   return (
-    <Potal
+    <Portal
+      id='modal'
       children={
         <>
           <div className={styles.modalBackground} onClick={closeModal}></div>
           <div className={styles.modalSection}>
-            <button onClick={closeModal} className={styles.modalCloseBtn}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
+            <Button.CloseButton onClick={closeModal} />
             <section className={styles.titleSection}>
               <h4>지도</h4>
             </section>
@@ -149,7 +149,6 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
               className={styles.currentBtn}
               onClick={() => {
                 const map = mapRef.current;
-                console.log(map);
 
                 setMap((prev) => ({
                   ...prev,

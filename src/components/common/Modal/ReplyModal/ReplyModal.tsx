@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styles from './style/replyModal.module.css';
-import Potal from '../Potal/Potal';
+import Portal from '../Portal/Portal';
 
 interface IProps {
   isModal?: boolean;
@@ -20,7 +20,8 @@ const ReplyModal = ({
   };
 
   return (
-    <Potal
+    <Portal
+      id='modal'
       children={
         <>
           <div className={styles.modalSection}>
@@ -43,7 +44,8 @@ ReplyModal.SimpleModal = ({ isModal, setIsModal, text }: IProps) => {
     setIsModal(!isModal);
   };
   return (
-    <Potal
+    <Portal
+      id='modal'
       children={
         <>
           <div className={styles.modalSection}>

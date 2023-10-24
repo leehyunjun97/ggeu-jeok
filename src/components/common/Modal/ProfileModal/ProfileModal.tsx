@@ -1,13 +1,12 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './styles/profileModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { IUserInfo } from '../../../../types/user';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 import { IFriendInfo } from '../../../../types/friend';
 import ProfileSection from './ProfileSection';
-import Potal from '../Potal/Potal';
+import Portal from '../Portal/Portal';
 
 interface IProfileModalIProps {
   isProfileModal?: boolean;
@@ -29,7 +28,8 @@ const ProfileModal = ({
   const myInfo = useRecoilValue(userInfo);
 
   return (
-    <Potal
+    <Portal
+      id='modal'
       children={
         <>
           <div
@@ -46,11 +46,7 @@ const ProfileModal = ({
             <section className={styles.titleSection}>
               <h4>{my ? '내' : '친구'} 정보</h4>
             </section>
-            {my ? (
-              <ProfileSection myinfo={myInfo} />
-            ) : (
-              <ProfileSection friendInfo={friendInfo} />
-            )}
+            <ProfileSection info={my ? myInfo : friendInfo} />
           </div>
         </>
       }
