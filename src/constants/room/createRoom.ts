@@ -1,8 +1,10 @@
+import { IDateDetailContent } from '../../types/room';
+
 export const defaultContent = () => {
-  let content = {};
-  for (let i = 0; i <= 24; i++) {
-    content = { ...content, [`${i}시`]: `${i}시` };
-  }
+  const arr = Array.from(Array(25), (_, index) => index++);
+  const content: IDateDetailContent[] = arr.map((item) => {
+    return { id: item, hour: `${item}시`, text: '제목을 입력해주세요!' };
+  });
 
   return content;
 };

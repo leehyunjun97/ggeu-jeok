@@ -10,6 +10,11 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
 import Toast from '../../../components/common/Toast/Toast';
 import { getDetailInfoApi } from '../../../utils/room/myDateDetail';
+import {
+  updateContents,
+  updateState,
+} from '../../../utils/room/updateContents';
+import { noneOrBlock } from '../../../utils/common/displayNoneBlock';
 
 interface IProps {
   myProfile: IMemberInfo;
@@ -34,31 +39,17 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
     room.uuid && getContent();
   }, [detailDatePath, room.uuid]);
 
-  // 정렬 필요..
-  // useEffect(() => {
-  //   Object.keys(detailSchedule.content).forEach((key: string) => {
-  //     console.log(Number(key.replace('시', '')));
-  //   });
-  // }, []);
-
-  const [newContent, setNewContent] = useState<IDateDetailContent>(
+  const [newContent, setNewContent] = useState<IDateDetailContent[]>(
     detailSchedule.content
   );
 
   const [visible, setVisible] = useState(false);
   const [toastText, setToastText] = useState('');
 
-  // TODO ::
-  const updateContentByOneHandler = async (
-    newContent: string | undefined,
-    key: string
-  ) => {
+  const updateContentByOneHandler = async (newContent: IDateDetailContent) => {
     const newDetail: IDateDetail = {
       ...detailSchedule,
-      content: {
-        ...detailSchedule.content,
-        [key]: newContent,
-      },
+      content: updateContents(newContent, detailSchedule),
     };
 
     const otherData: IDateDetail[] = room.date.filter(
@@ -80,35 +71,31 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
   return (
     <>
       <ul className={styles.contentSection}>
-        {Object.keys(detailSchedule.content).length !== 0 &&
-          Object.keys(detailSchedule.content).map((key) => (
-            <li key={key} className={styles.contentLi}>
-              <div className={styles.contentLeftSection}>{key}</div>
-              <div className={styles.contentRightSection}>
-                <textarea
-                  className={styles.contentTextarea}
-                  value={newContent[key]}
-                  readOnly={myProfile && myProfile.class === 'member'}
-                  onChange={(e) => {
-                    setNewContent({ ...newContent, [key]: e.target.value });
-                  }}
-                />
-                <button
-                  className={styles.updateBtn}
-                  onClick={() => {
-                    updateContentByOneHandler(newContent[key], key);
-                  }}
-                  style={
-                    detailSchedule.content[key] === newContent[key]
-                      ? { display: 'none' }
-                      : { display: 'block' }
-                  }
-                >
-                  수정하기
-                </button>
-              </div>
-            </li>
-          ))}
+        {detailSchedule?.content?.map((item, index) => (
+          <li key={item.hour} className={styles.contentLi}>
+            <div className={styles.contentLeftSection}>{item.hour}</div>
+            <div className={styles.contentRightSection}>
+              <textarea
+                className={styles.contentTextarea}
+                value={newContent[index].text}
+                readOnly={myProfile && myProfile.class === 'member'}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setNewContent(updateState(newContent, item, e))
+                }
+              />
+              <button
+                className={styles.updateBtn}
+                onClick={() => updateContentByOneHandler(newContent[index])}
+                style={noneOrBlock(
+                  detailSchedule.content[index].text,
+                  newContent[index].text
+                )}
+              >
+                수정하기
+              </button>
+            </div>
+          </li>
+        ))}
         {visible && (
           <Toast text={toastText} visible={visible} setVisible={setVisible} />
         )}
