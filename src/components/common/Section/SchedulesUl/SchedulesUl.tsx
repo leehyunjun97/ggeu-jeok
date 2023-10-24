@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/schedulesUl.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import ScheduleInfoCard from '../../Card/ScheduleInfoCard/ScheduleInfoCard';
 import { getRoomListApi } from '../../../../services/room/room';
@@ -9,6 +7,7 @@ import { IRoomInfo } from '../../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 import { objTransArr } from '../../../../utils/common/objectTransformArray';
+import DefaultScheduleCard from '../../Card/ScheduleInfoCard/DefaultScheduleCard';
 
 const SchedulesUl = () => {
   const [roomData, setRoomData] = useState<IRoomInfo[]>([]);
@@ -38,21 +37,10 @@ const SchedulesUl = () => {
           <ScheduleInfoCard key={item.uuid} room={item} />
         ))}
 
-      {roomData && (
-        <li
-          className={styles.plusLi}
-          onClick={() => navigate('/schedule/create')}
-        >
-          <p className={styles.noRoom}>방을 생성해보세요!</p>
-        </li>
+      {!roomData.length && (
+        <DefaultScheduleCard onClick={() => navigate('/schedule/create')} />
       )}
-
-      <li
-        className={styles.plusLi}
-        onClick={() => navigate('/schedule/create')}
-      >
-        <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-      </li>
+      <DefaultScheduleCard.Add onClick={() => navigate('/schedule/create')} />
     </ul>
   );
 };

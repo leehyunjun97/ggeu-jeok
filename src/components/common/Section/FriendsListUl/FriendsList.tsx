@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styles from './style/friendList.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import FriendAddModal from '../../Modal/FriendAddModal/FriendAddModal';
 import FriendInfoCard from '../../Card/FriendInfoCard/FriendInfoCard';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
+import DefaultInfoCard from '../../Card/FriendInfoCard/DefaultInfoCard';
 
 const FriendsList = () => {
   const [isModal, setIsModal] = useState(false);
@@ -19,9 +18,14 @@ const FriendsList = () => {
             <FriendInfoCard key={item.id} info={item} />
           ))}
 
-        <li className={styles.plusLi} onClick={() => setIsModal(!isModal)}>
+        {/* <li className={styles.plusLi} onClick={() => setIsModal(!isModal)}>
           <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-        </li>
+        </li> */}
+
+        {!info.friend?.length && (
+          <DefaultInfoCard onClick={() => setIsModal(!isModal)} />
+        )}
+        <DefaultInfoCard.Add onClick={() => setIsModal(!isModal)} />
       </ul>
       {isModal && <FriendAddModal isModal={isModal} setIsModal={setIsModal} />}
     </>
