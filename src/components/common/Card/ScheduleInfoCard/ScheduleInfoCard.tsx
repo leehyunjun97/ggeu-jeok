@@ -23,7 +23,6 @@ const ScheduleInfoCard = ({ room }: IScheduleCardProps) => {
   return (
     <li className={styles.scheduleLiCard} onClick={goingRoomHandler}>
       <p className={styles.cardTitle}>{room.title}</p>
-      <p>{}</p>
       <p className={styles.membersNumber}>
         <FontAwesomeIcon icon={faUser} /> {room.member.length}
       </p>

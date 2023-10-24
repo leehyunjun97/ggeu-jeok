@@ -14,6 +14,7 @@ import {
   updateContents,
   updateState,
 } from '../../../utils/room/updateContents';
+import { noneOrBlock } from '../../../utils/common/displayNoneBlock';
 
 interface IProps {
   myProfile: IMemberInfo;
@@ -70,36 +71,31 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
   return (
     <>
       <ul className={styles.contentSection}>
-        {detailSchedule.content.length !== 0 &&
-          detailSchedule.content.map((item, index) => (
-            <li key={item.hour} className={styles.contentLi}>
-              <div className={styles.contentLeftSection}>{item.hour}</div>
-              <div className={styles.contentRightSection}>
-                <textarea
-                  className={styles.contentTextarea}
-                  value={newContent[index].text}
-                  readOnly={myProfile && myProfile.class === 'member'}
-                  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-                    setNewContent(updateState(newContent, item, e));
-                  }}
-                />
-                <button
-                  className={styles.updateBtn}
-                  onClick={() => {
-                    updateContentByOneHandler(newContent[index]);
-                  }}
-                  style={
-                    detailSchedule.content[index].text ===
-                    newContent[index].text
-                      ? { display: 'none' }
-                      : { display: 'block' }
-                  }
-                >
-                  수정하기
-                </button>
-              </div>
-            </li>
-          ))}
+        {detailSchedule?.content?.map((item, index) => (
+          <li key={item.hour} className={styles.contentLi}>
+            <div className={styles.contentLeftSection}>{item.hour}</div>
+            <div className={styles.contentRightSection}>
+              <textarea
+                className={styles.contentTextarea}
+                value={newContent[index].text}
+                readOnly={myProfile && myProfile.class === 'member'}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setNewContent(updateState(newContent, item, e))
+                }
+              />
+              <button
+                className={styles.updateBtn}
+                onClick={() => updateContentByOneHandler(newContent[index])}
+                style={noneOrBlock(
+                  detailSchedule.content[index].text,
+                  newContent[index].text
+                )}
+              >
+                수정하기
+              </button>
+            </div>
+          </li>
+        ))}
         {visible && (
           <Toast text={toastText} visible={visible} setVisible={setVisible} />
         )}
