@@ -8,7 +8,7 @@ export const dateStringHandler = (date: Date) => {
   return dateStr;
 };
 
-export const dffday = (startDate: Date, endDate: Date) => {
+export const dffDay = (startDate: Date, endDate: Date) => {
   const diffDate = startDate.getTime() - endDate.getTime();
   const diffDay = Math.abs(diffDate / MILLISECONDS_IN_A_DAY);
   return diffDay;

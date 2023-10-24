@@ -20,7 +20,7 @@ const detailScheduleInfo = atom<IDateDetail>({
     id: 0,
     dateDetail: '',
     subTitle: '',
-    content: {},
+    content: [],
   },
 });
 

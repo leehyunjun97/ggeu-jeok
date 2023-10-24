@@ -10,7 +10,7 @@ import { IFriendInfo } from '../../../types/friend';
 import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
-import { dateStringHandler, dffday } from '../../../utils/common/date';
+import { dateStringHandler, dffDay } from '../../../utils/common/date';
 import {
   defaultContent,
   defaultRoomInfo,
@@ -44,8 +44,7 @@ const CreateRoom = () => {
   };
 
   const dateDetailAddHandler = () => {
-    const diffDay = dffday(startDate, endDate);
-
+    const diffDay = dffDay(startDate, endDate || startDate);
     const arr = Array.from(Array(diffDay + 1), (_, index) => index++);
 
     const dateDetailArray: IDateDetail[] = arr.map((it) => {
