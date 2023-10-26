@@ -19,3 +19,15 @@ export const imgUpload = async (
     });
   });
 };
+
+export const imgFileHandler = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  setImg: React.Dispatch<React.SetStateAction<File | null>>
+) => {
+  const target = e.currentTarget;
+
+  if (target.files !== null) {
+    const file = target.files[0];
+    setImg(file);
+  }
+};

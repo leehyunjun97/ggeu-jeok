@@ -17,7 +17,7 @@ import Label from '../../components/common/Label/Label';
 import ErrorMessage from '../../components/common/Error/ErrorMessage';
 import { postSignupApi } from '../../services/sign/sign';
 import { initialSignUpInputState } from '../../constants/sign/sign';
-import { imgUpload } from '../../utils/common/imageUpload';
+import { imgFileHandler, imgUpload } from '../../utils/common/imageUpload';
 import Span from '../../components/common/Span/Span';
 
 const Signup = () => {
@@ -39,15 +39,6 @@ const Signup = () => {
 
   const handleClick = () => {
     imgRef?.current?.click();
-  };
-
-  const fileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.currentTarget;
-
-    if (target.files !== null) {
-      const file = target.files[0];
-      setImg(file);
-    }
   };
 
   useEffect(() => {
@@ -217,7 +208,7 @@ const Signup = () => {
             inputRef={imgRef}
             type='file'
             accept='image/*'
-            onChange={fileHandler}
+            onChange={(e) => imgFileHandler(e, setImg)}
           />
           {/* <button onClick={deleteImage}>사진삭제</button> */}
 

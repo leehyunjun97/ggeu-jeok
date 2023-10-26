@@ -46,4 +46,22 @@ const userSearchApi = async (search: string) => {
   }
 };
 
-export { getUsersApi, userSearchApi, getLoginCheckApi, getMyInfoApi };
+const imgUpdateApi = async (uuid: string, src: string) => {
+  try {
+    const putCom = await axios.put(
+      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${uuid}/image.json`,
+      `"${src}"`
+    );
+    return putCom;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
+export {
+  getUsersApi,
+  userSearchApi,
+  getLoginCheckApi,
+  getMyInfoApi,
+  imgUpdateApi,
+};
