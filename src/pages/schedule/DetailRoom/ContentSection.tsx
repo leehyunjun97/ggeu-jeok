@@ -76,7 +76,7 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
             <div className={styles.contentRightSection}>
               <textarea
                 className={styles.contentTextarea}
-                value={newContent[index].text}
+                value={newContent[index]?.text}
                 readOnly={myProfile && myProfile.class === 'member'}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                   setNewContent(updateState(newContent, item, e))
@@ -87,8 +87,8 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
                 className={'contentsUpdateBtn'}
                 onClick={() => updateContentByOneHandler(newContent[index])}
                 style={noneOrBlock(
-                  detailSchedule.content[index].text,
-                  newContent[index].text
+                  detailSchedule.content[index]?.text,
+                  newContent[index]?.text
                 )}
                 disable={isLoading}
               />

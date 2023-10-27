@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../../recoil/room/roomInfo';
-import FriendInfoCard from '../../Card/FriendInfoCard/FriendInfoCard';
+import UserInfoCard from '../../Card/UserInfoCard/UserInfoCard';
 import { IRoomInfo } from '../../../../types/room';
 
 interface IMembersListProps {
@@ -18,7 +18,7 @@ const MembersList = ({ room }: IMembersListProps) => {
         {room &&
           room.member.map((item) => (
             // member라고 추가해서 정보에서 등급을 바꿀 수 있다던지..
-            <FriendInfoCard key={item.id} info={item} />
+            <UserInfoCard key={item.id} info={item} />
           ))}
 
         {/* <li className={styles.plusLi}>

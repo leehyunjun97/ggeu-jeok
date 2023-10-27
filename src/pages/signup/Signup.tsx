@@ -83,7 +83,7 @@ const Signup = () => {
 
   const signup = async () => {
     try {
-      setIsLoading(!isLoading);
+      setIsLoading(true);
       const signComplet = await postSignupApi({
         ...signUpInputState,
         id: uuidv4(),
@@ -92,8 +92,9 @@ const Signup = () => {
       localStorage.setItem('id', signComplet.data['name']);
       navigate('/main');
     } catch (error) {
-      setIsLoading(!isLoading);
       alert('회원가입 오류');
+    } finally {
+      setIsLoading(false);
     }
   };
 

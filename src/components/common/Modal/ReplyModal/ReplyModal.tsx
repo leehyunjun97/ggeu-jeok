@@ -8,6 +8,7 @@ interface IProps {
   setIsModal: Dispatch<SetStateAction<boolean>>;
   addFriendHandler?: any;
   text: string;
+  isLoading: boolean;
 }
 
 const ReplyModal = ({
@@ -15,6 +16,7 @@ const ReplyModal = ({
   setIsModal,
   addFriendHandler,
   text,
+  isLoading,
 }: IProps) => {
   const modalHandler = () => {
     setIsModal(!isModal);
@@ -30,7 +32,11 @@ const ReplyModal = ({
               <p>{text}</p>
             </section>
             <section className={styles.replyBtnSection}>
-              <Button onClick={addFriendHandler} text={'예'} />
+              <Button
+                onClick={addFriendHandler}
+                text={'예'}
+                disable={isLoading}
+              />
               <Button onClick={modalHandler} text={'아니오'} />
             </section>
           </div>
