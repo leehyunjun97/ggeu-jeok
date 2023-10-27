@@ -12,21 +12,17 @@ interface IDefaultCardProps {
 const DefaultInfoCard = ({ onClick, add }: IDefaultCardProps) => {
   return (
     <li className={styles.cardBody}>
-      {add ? (
-        <Button
-          children={
+      <Button
+        text={
+          add ? (
             <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-          }
-          onClick={onClick}
-          className={'liCardBtn'}
-        />
-      ) : (
-        <Button
-          text={'친구를 추가해보세요!'}
-          onClick={onClick}
-          className={'liCardBtn'}
-        />
-      )}
+          ) : (
+            '친구를 추가해보세요!'
+          )
+        }
+        onClick={onClick}
+        className={'liCardBtn'}
+      />
     </li>
   );
 };

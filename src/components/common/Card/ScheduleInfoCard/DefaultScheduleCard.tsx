@@ -12,21 +12,17 @@ interface IDefaultCardProps {
 const DefaultScheduleCard = ({ onClick, add }: IDefaultCardProps) => {
   return (
     <li className={styles.scheduleLiCard}>
-      {add ? (
-        <Button
-          children={
+      <Button
+        text={
+          add ? (
             <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-          }
-          onClick={onClick}
-          className={'liCardBtn'}
-        />
-      ) : (
-        <Button
-          text={'방을 생성해보세요!'}
-          onClick={onClick}
-          className={'liCardBtn'}
-        />
-      )}
+          ) : (
+            '방을 생성해보세요!'
+          )
+        }
+        onClick={onClick}
+        className={'liCardBtn'}
+      />
     </li>
   );
 };

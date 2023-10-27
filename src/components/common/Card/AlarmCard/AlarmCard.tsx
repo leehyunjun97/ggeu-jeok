@@ -27,9 +27,13 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
   const addFriendHandler = async () => {
     try {
       setIsLoading(true);
+
       const sendUser = await fromEmail(alarm.email);
-      const fatchComMy = await addFriendApi(myInfo, sendUser);
-      const fatchComYou = await addFriendApi(sendUser, myInfo);
+
+      const [fatchComMy, fatchComYou] = await Promise.all([
+        await addFriendApi(myInfo, sendUser),
+        await addFriendApi(sendUser, myInfo),
+      ]);
 
       if (fatchComMy.status !== 200 && fatchComYou.status !== 200) {
         return;
@@ -70,13 +74,11 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
     try {
       setIsLoading(true);
       const alarms = myInfo.alarm.filter((item) => item.uuid !== alarm.uuid);
-      const delCom = await removeAlarm(myInfo, alarms);
-      if (delCom.status === 200) {
-        setUserRender((prev) => !prev);
-      }
+      await removeAlarm(myInfo, alarms);
     } catch (error) {
       alert('알람 확인 에러');
     } finally {
+      setUserRender((prev) => !prev);
       setIsLoading(false);
     }
   };
