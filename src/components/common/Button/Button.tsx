@@ -7,7 +7,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 interface IButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   refusalOnClick?: React.MouseEventHandler<HTMLButtonElement>;
-  text?: string;
+  text?: string | React.ReactNode;
   className?: string;
   disable?: boolean;
   style?: React.CSSProperties;

@@ -30,6 +30,10 @@ const SchedulesUl = () => {
     getRoomList();
   }, [info.id]);
 
+  const goCreateRoom = () => {
+    navigate('/schedule/create');
+  };
+
   return (
     <ul className={styles.ulList}>
       {roomData &&
@@ -37,14 +41,9 @@ const SchedulesUl = () => {
           <ScheduleInfoCard key={item.uuid} room={item} />
         ))}
 
-      {!roomData.length && (
-        <DefaultScheduleCard onClick={() => navigate('/schedule/create')} />
-      )}
+      {!roomData.length && <DefaultScheduleCard onClick={goCreateRoom} />}
 
-      <DefaultScheduleCard
-        onClick={() => navigate('/schedule/create')}
-        add={true}
-      />
+      <DefaultScheduleCard onClick={goCreateRoom} add={true} />
     </ul>
   );
 };
