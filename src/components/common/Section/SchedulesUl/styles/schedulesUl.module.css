@@ -6,31 +6,11 @@
   text-align: center;
 }
 
-.ulList li:hover {
+.ulList li:hover,
+.ulList button:hover {
   background-color: #d2df8f;
   transform: rotate(1.5);
   border-radius: 0px;
-}
-
-.plusLi {
-  margin: 8px;
-  margin-top: 5px;
-  height: 200px;
-  list-style-type: none;
-  border: none;
-  background-color: #dcea9a;
-  border-radius: 2px;
-  line-height: 210px;
-  transition: all 150ms ease;
-  cursor: pointer;
-  box-shadow: 5px 5px 5px rgb(166, 166, 166);
-  display: block;
-  text-align: center;
-}
-
-.plusIcon {
-  color: white;
-  font-size: 45px;
 }
 
 @media (max-width: 1000px) {

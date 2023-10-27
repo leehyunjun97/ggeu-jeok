@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './style/friendInfoCard.module.css';
+import styles from './style/userInfoCard.module.css';
 import { IUserInfo } from '../../../../types/user';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
 import { friendRequestApi } from '../../../../services/alarm/alarm';
@@ -9,16 +9,22 @@ import { userInfo } from '../../../../recoil/user/user';
 import { IMemberInfo } from '../../../../types/room';
 import ProfileModal from '../../Modal/ProfileModal/ProfileModal';
 import { fromEmail } from '../../../../utils/common/userFindAndTrans';
+import BackgroundLoading from '../../Loading/BackgroundLoading';
+import Toast from '../../Toast/Toast';
 
 interface IProps {
   info: IFriendInfo | IUserInfo | IMemberInfo;
   add?: string;
 }
 
-const FriendInfoCard = ({ info, add }: IProps) => {
+const UserInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
   const [isProfileModal, setIsProfileModal] = useState(false);
   const myinfo = useRecoilValue(userInfo);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [toastText, setToastText] = useState('');
 
   const cardClickHandler = () => {
     if (add === 'friend') {
@@ -29,20 +35,31 @@ const FriendInfoCard = ({ info, add }: IProps) => {
   };
 
   const addFriendHandler = async () => {
-    const sendUser: IUserInfo = await fromEmail(info.email);
+    try {
+      setIsLoading(true);
+      const sendUser: IUserInfo = await fromEmail(info.email);
 
-    const alarmOverCheck = sendUser.alarm.filter(
-      (item) => item.email === myinfo.email && item.type === 'friendRequest'
-    );
+      const alarmOverCheck = sendUser.alarm.filter(
+        (item) => item.email === myinfo.email && item.type === 'friendRequest'
+      );
 
-    if (alarmOverCheck?.length >= 1) {
-      alert('이미 요청을 보낸 상태입니다.');
-      setIsModal(!isModal);
-      return;
+      if (alarmOverCheck?.length >= 1) {
+        alert('이미 요청을 보낸 상태입니다.');
+        setIsModal(!isModal);
+        return;
+      }
+
+      const postCom = await friendRequestApi(myinfo, sendUser);
+      if (postCom.status === 200) {
+        setToastText('친구요청 보내기 완료!');
+        setVisible(!visible);
+        setIsModal(!isModal);
+      }
+    } catch (error) {
+      alert('알람 에러!');
+    } finally {
+      setIsLoading(false);
     }
-
-    const postCom = await friendRequestApi(myinfo, sendUser);
-    setIsModal(!isModal);
   };
 
   return (
@@ -62,6 +79,7 @@ const FriendInfoCard = ({ info, add }: IProps) => {
           setIsModal={setIsModal}
           addFriendHandler={addFriendHandler}
           text='친구 요청을 보내시겠습니까?'
+          isLoading={isLoading}
         />
       )}
       {isProfileModal && (
@@ -71,8 +89,12 @@ const FriendInfoCard = ({ info, add }: IProps) => {
           friendInfo={info}
         />
       )}
+      {visible && (
+        <Toast text={toastText} visible={visible} setVisible={setVisible} />
+      )}
+      {isLoading && <BackgroundLoading />}
     </>
   );
 };
 
-export default FriendInfoCard;
+export default UserInfoCard;

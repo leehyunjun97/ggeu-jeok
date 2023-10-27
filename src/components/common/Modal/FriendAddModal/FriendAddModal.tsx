@@ -14,6 +14,7 @@ import {
 } from '../../../../utils/common/keyDown';
 import Input from '../../Input/Input';
 import Portal from '../Portal/Portal';
+import BackgroundLoading from '../../Loading/BackgroundLoading';
 
 interface IFriendModalIProps {
   isModal?: boolean;
@@ -73,7 +74,8 @@ const FriendAddModal = ({ isModal, setIsModal }: IFriendModalIProps) => {
               />
             </section>
             <section className={styles.listSection}>
-              {<FriendSearchList list={data} />}
+              {isLoading && <BackgroundLoading.Section />}
+              <FriendSearchList list={data} />
             </section>
           </div>
         </div>

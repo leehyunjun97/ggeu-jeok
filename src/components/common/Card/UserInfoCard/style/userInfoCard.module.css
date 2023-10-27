@@ -15,7 +15,15 @@
   text-align: left;
 }
 
-li:hover {
+.defaultLi {
+  width: 100%;
+  text-align: center;
+  display: block;
+  line-height: 65px;
+}
+
+li:hover,
+.defaultLi:hover {
   background-color: #ead0b0;
   transform: rotate(1.2);
   border-radius: 0px;
@@ -52,4 +60,18 @@ li:hover {
 .nickNameP {
   font-size: 13.5px;
   opacity: 0.5;
+}
+
+.plusIcon {
+  color: white;
+  font-size: 25px;
+}
+
+.cardTitle {
+  height: 30px;
+  font-weight: 400;
+  font-size: 1.5vw;
+  color: #46423df3;
+  font-family: 'Jua', sans-serif;
+  line-height: 35px;
 }

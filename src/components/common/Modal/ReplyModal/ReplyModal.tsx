@@ -1,12 +1,14 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styles from './style/replyModal.module.css';
 import Portal from '../Portal/Portal';
+import Button from '../../Button/Button';
 
 interface IProps {
   isModal?: boolean;
   setIsModal: Dispatch<SetStateAction<boolean>>;
   addFriendHandler?: any;
   text: string;
+  isLoading: boolean;
 }
 
 const ReplyModal = ({
@@ -14,6 +16,7 @@ const ReplyModal = ({
   setIsModal,
   addFriendHandler,
   text,
+  isLoading,
 }: IProps) => {
   const modalHandler = () => {
     setIsModal(!isModal);
@@ -29,8 +32,12 @@ const ReplyModal = ({
               <p>{text}</p>
             </section>
             <section className={styles.replyBtnSection}>
-              <button onClick={addFriendHandler}>예</button>
-              <button onClick={modalHandler}>아니오</button>
+              <Button
+                onClick={addFriendHandler}
+                text={'예'}
+                disable={isLoading}
+              />
+              <Button onClick={modalHandler} text={'아니오'} />
             </section>
           </div>
         </>
@@ -53,7 +60,7 @@ ReplyModal.SimpleModal = ({ isModal, setIsModal, text }: IProps) => {
               <p>{text}</p>
             </section>
             <section className={styles.replyBtnSection}>
-              <button onClick={modalHandler}>예</button>
+              <Button onClick={modalHandler} text={'예'} />
             </section>
           </div>
         </>

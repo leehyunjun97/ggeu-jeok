@@ -19,6 +19,7 @@ import { postSignupApi } from '../../services/sign/sign';
 import { initialSignUpInputState } from '../../constants/sign/sign';
 import { imgUpload } from '../../utils/common/imageUpload';
 import Span from '../../components/common/Span/Span';
+import BackgroundLoading from '../../components/common/Loading/BackgroundLoading';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>(
@@ -27,6 +28,7 @@ const Signup = () => {
   const [img, setImg] = useState<File | null>(null);
   const [imgSrc, setimgSrc] = useState<string | null>('');
   const [visible, setVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [toastText, setToastText] = useState('');
 
   const emailRef = useRef<HTMLInputElement>(null);
@@ -80,13 +82,20 @@ const Signup = () => {
   };
 
   const signup = async () => {
-    const signComplet = await postSignupApi({
-      ...signUpInputState,
-      id: uuidv4(),
-    });
+    try {
+      setIsLoading(true);
+      const signComplet = await postSignupApi({
+        ...signUpInputState,
+        id: uuidv4(),
+      });
 
-    localStorage.setItem('id', signComplet.data['name']);
-    navigate('/main');
+      localStorage.setItem('id', signComplet.data['name']);
+      navigate('/main');
+    } catch (error) {
+      alert('회원가입 오류');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const changeInputHandler = (value: string | null, key: string) => {
@@ -219,18 +228,19 @@ const Signup = () => {
             accept='image/*'
             onChange={fileHandler}
           />
-          {/* <button onClick={deleteImage}>사진삭제</button> */}
 
           <Button
             onClick={signupHandler}
             text={'회원가입'}
             className={'signupBtn'}
+            disable={isLoading}
           />
         </div>
       </div>
       {visible && (
         <Toast text={toastText} visible={visible} setVisible={setVisible} />
       )}
+      {isLoading && <BackgroundLoading />}
     </div>
   );
 };

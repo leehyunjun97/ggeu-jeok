@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styles from './style/friendList.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import FriendAddModal from '../../Modal/FriendAddModal/FriendAddModal';
-import FriendInfoCard from '../../Card/FriendInfoCard/FriendInfoCard';
+import UserInfoCard from '../../Card/UserInfoCard/UserInfoCard';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
+import DefaultInfoCard from '../../Card/UserInfoCard/DefaultInfoCard';
 
 const FriendsList = () => {
   const [isModal, setIsModal] = useState(false);
@@ -15,13 +14,13 @@ const FriendsList = () => {
     <>
       <ul className={styles.ulList}>
         {info.friend &&
-          info.friend.map((item) => (
-            <FriendInfoCard key={item.id} info={item} />
-          ))}
+          info.friend.map((item) => <UserInfoCard key={item.id} info={item} />)}
 
-        <li className={styles.plusLi} onClick={() => setIsModal(!isModal)}>
-          <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-        </li>
+        {!info.friend?.length && (
+          <DefaultInfoCard onClick={() => setIsModal(!isModal)} />
+        )}
+
+        <DefaultInfoCard onClick={() => setIsModal(!isModal)} add={true} />
       </ul>
       {isModal && <FriendAddModal isModal={isModal} setIsModal={setIsModal} />}
     </>

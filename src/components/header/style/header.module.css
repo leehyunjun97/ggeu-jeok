@@ -18,28 +18,3 @@
   text-align: right;
   margin-right: 15px;
 }
-
-.logoutBtn:hover {
-  font-size: 22px;
-}
-
-.alarmBtn:hover {
-  font-size: 17px;
-}
-
-.headerSide button {
-  height: 100%;
-  width: 80px;
-  border: none;
-  background-color: transparent;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 200ms ease;
-  color: black;
-  white-space: nowrap;
-  font-family: 'Nanum Pen Script', cursive;
-}
-
-.logoutBtn {
-  font-size: 20px;
-}

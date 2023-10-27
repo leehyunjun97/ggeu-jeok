@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import styles from './style/login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { getLoginCheckApi, getUsersApi } from '../../services/user/user';
+import { getLoginCheckApi } from '../../services/user/user';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
-import { objTransArr } from '../../utils/common/objectTransformArray';
 import { IUserInfo } from '../../types/user';
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
 import ErrorMessage from '../common/Error/ErrorMessage';
 import { enterKeyDownHandler } from '../../utils/common/keyDown';
+import BackgroundLoading from '../common/Loading/BackgroundLoading';
 
 const Login = () => {
   const [loginInputState, setLoginInputState] = useState({
@@ -17,12 +17,13 @@ const Login = () => {
     password: '',
   });
   const [loginCheck, setLoginCheck] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const setUser = useSetRecoilState(userInfo);
-
   const navigate = useNavigate();
 
   const loginHandler = async () => {
     try {
+      setIsLoading(true);
       const findUser = await getLoginCheckApi(loginInputState.email);
 
       if (Object.keys(findUser).length === 0) {
@@ -44,7 +45,9 @@ const Login = () => {
       setUser(myInfo);
       navigate('/main');
     } catch (error) {
-      console.log(error);
+      alert('로그인 에러');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -80,7 +83,12 @@ const Login = () => {
       <span className={styles.signupSpan} onClick={() => navigate('/signup')}>
         회원가입
       </span>
-      <Button text={'로그인'} className={'loginBtn'} onClick={loginHandler} />
+      <Button
+        text={'로그인'}
+        className={'loginBtn'}
+        onClick={loginHandler}
+        disable={isLoading}
+      />
 
       <ErrorMessage
         style={errorMessageDivHandler(loginCheck)}
@@ -88,6 +96,8 @@ const Login = () => {
         text='- 아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시
         확인해주세요.'
       />
+
+      {isLoading && <BackgroundLoading />}
     </div>
   );
 };

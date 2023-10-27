@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles/button.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface IButtonProps {
@@ -8,15 +9,28 @@ interface IButtonProps {
   refusalOnClick?: React.MouseEventHandler<HTMLButtonElement>;
   text?: string;
   className?: string;
+  disable?: boolean;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 
-const Button = ({ onClick, text, className }: IButtonProps) => {
+const Button = ({
+  onClick,
+  text,
+  className,
+  disable,
+  style,
+  children,
+}: IButtonProps) => {
   return (
     <button
       onClick={onClick}
       className={`${styles[`${className}`]} ${styles.basicBtn}`}
+      style={{ ...style }}
+      disabled={disable}
     >
       {text}
+      {children}
     </button>
   );
 };
@@ -29,7 +43,12 @@ Button.CloseButton = ({ onClick }: IButtonProps) => {
   );
 };
 
-Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
+Button.ReplyButton = ({
+  onClick,
+  refusalOnClick,
+  className,
+  disable,
+}: IButtonProps) => {
   return (
     <>
       <button
@@ -37,6 +56,7 @@ Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
           styles[`${className}`]
         }`}
         onClick={onClick}
+        disabled={disable}
       >
         수락
       </button>
@@ -45,6 +65,7 @@ Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
           styles[`${className}`]
         }`}
         onClick={refusalOnClick}
+        disabled={disable}
       >
         거절
       </button>
@@ -52,13 +73,25 @@ Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
   );
 };
 
-Button.CheckButton = ({ onClick }: IButtonProps) => {
+Button.CheckButton = ({ onClick, disable }: IButtonProps) => {
   return (
     <button
       className={`${styles.refusalBtn} ${styles.basicBtn}`}
       onClick={onClick}
+      disabled={disable}
     >
       확인
+    </button>
+  );
+};
+
+Button.AlarmButton = ({ onClick }: IButtonProps) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`${styles.headerBtn} ${styles.alarmBtn} ${styles.basicBtn}`}
+    >
+      <FontAwesomeIcon icon={faBell} style={{ color: '#000000' }} size='xl' />
     </button>
   );
 };
