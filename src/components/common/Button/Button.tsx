@@ -11,9 +11,17 @@ interface IButtonProps {
   className?: string;
   disable?: boolean;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 
-const Button = ({ onClick, text, className, disable, style }: IButtonProps) => {
+const Button = ({
+  onClick,
+  text,
+  className,
+  disable,
+  style,
+  children,
+}: IButtonProps) => {
   return (
     <button
       onClick={onClick}
@@ -22,6 +30,7 @@ const Button = ({ onClick, text, className, disable, style }: IButtonProps) => {
       disabled={disable}
     >
       {text}
+      {children}
     </button>
   );
 };

@@ -18,14 +18,11 @@ const FriendsList = () => {
             <FriendInfoCard key={item.id} info={item} />
           ))}
 
-        {/* <li className={styles.plusLi} onClick={() => setIsModal(!isModal)}>
-          <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-        </li> */}
-
         {!info.friend?.length && (
           <DefaultInfoCard onClick={() => setIsModal(!isModal)} />
         )}
-        <DefaultInfoCard.Add onClick={() => setIsModal(!isModal)} />
+
+        <DefaultInfoCard onClick={() => setIsModal(!isModal)} add={true} />
       </ul>
       {isModal && <FriendAddModal isModal={isModal} setIsModal={setIsModal} />}
     </>

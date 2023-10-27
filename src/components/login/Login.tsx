@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styles from './style/login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { getLoginCheckApi, getUsersApi } from '../../services/user/user';
+import { getLoginCheckApi } from '../../services/user/user';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
-import { objTransArr } from '../../utils/common/objectTransformArray';
 import { IUserInfo } from '../../types/user';
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
@@ -36,7 +35,6 @@ const Login = () => {
       const myInfo: IUserInfo = findUser[dataid];
 
       if (myInfo.password !== loginInputState.password) {
-        setIsLoading(false);
         setLoginCheck(true);
         return;
       }
@@ -47,8 +45,9 @@ const Login = () => {
       setUser(myInfo);
       navigate('/main');
     } catch (error) {
-      setIsLoading(!isLoading);
       alert('로그인 에러');
+    } finally {
+      setIsLoading(false);
     }
   };
 

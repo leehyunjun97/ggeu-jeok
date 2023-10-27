@@ -99,19 +99,6 @@
   padding: 3px;
 }
 
-.meetingBtn {
-  position: absolute;
-  top: 33px;
-  right: 0px;
-  font-weight: 550;
-  background-color: #c8ac88;
-  color: rgb(255 255 255);
-  border: 1px solid black;
-}
-
-.meetingBtn {
-  background-color: #bb9d75;
-}
 
 .invitationSection {
   height: 130px;

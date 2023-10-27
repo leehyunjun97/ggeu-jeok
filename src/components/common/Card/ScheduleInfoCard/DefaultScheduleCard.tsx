@@ -2,27 +2,32 @@ import React from 'react';
 import styles from './style/scheduleInfoCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Button from '../../Button/Button';
 
 interface IDefaultCardProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  add?: boolean;
 }
 
-const DefaultScheduleCard = ({ onClick }: IDefaultCardProps) => {
+const DefaultScheduleCard = ({ onClick, add }: IDefaultCardProps) => {
   return (
-    <button className={styles.scheduleLiCard} onClick={onClick}>
-      <p className={`${styles.cardTitle} ${styles.defaultCardTitle}`}>
-        방을 생성해보세요!
-      </p>
-    </button>
+    <li className={styles.scheduleLiCard}>
+      {add ? (
+        <Button
+          children={
+            <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
+          }
+          onClick={onClick}
+          className={'liCardBtn'}
+        />
+      ) : (
+        <Button
+          text={'방을 생성해보세요!'}
+          onClick={onClick}
+          className={'liCardBtn'}
+        />
+      )}
+    </li>
   );
 };
-
-DefaultScheduleCard.Add = ({ onClick }: IDefaultCardProps) => {
-  return (
-    <button className={styles.scheduleLiCard} onClick={onClick}>
-      <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-    </button>
-  );
-};
-
 export default DefaultScheduleCard;

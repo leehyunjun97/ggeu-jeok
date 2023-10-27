@@ -40,7 +40,11 @@ const SchedulesUl = () => {
       {!roomData.length && (
         <DefaultScheduleCard onClick={() => navigate('/schedule/create')} />
       )}
-      <DefaultScheduleCard.Add onClick={() => navigate('/schedule/create')} />
+
+      <DefaultScheduleCard
+        onClick={() => navigate('/schedule/create')}
+        add={true}
+      />
     </ul>
   );
 };

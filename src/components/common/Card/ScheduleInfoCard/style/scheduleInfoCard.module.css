@@ -23,12 +23,6 @@
   line-height: 120px;
 }
 
-.defaultCardTitle {
-  line-height: 10px;
-  font-size: 1.5vw;
-  color: #46423df3;
-}
-
 .period {
   position: absolute;
   color: #262626;

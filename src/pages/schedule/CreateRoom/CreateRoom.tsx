@@ -110,13 +110,13 @@ const CreateRoom = () => {
       const postCom = await postCreateRoomApi(payload);
       if (postCom.status === 200) {
         // recoil setRoomInfo 해주기 아직 네비게이션 안됨
-        setIsLoading(false);
         console.log(postCom.data);
       }
     } catch (error: any) {
-      setIsLoading(!isLoading);
       alert('방 생성 에러');
       throw new Error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -163,9 +163,11 @@ const CreateRoom = () => {
             value={roomInfo.location}
             readOnly
           />
-          <button className={styles.meetingBtn} onClick={modalHandler}>
-            meeting
-          </button>
+          <Button
+            text={'meeting'}
+            onClick={modalHandler}
+            className={'meetingBtn'}
+          />
         </div>
         <Label text='멤버 초대' />
         <div className={styles.invitationSection}>

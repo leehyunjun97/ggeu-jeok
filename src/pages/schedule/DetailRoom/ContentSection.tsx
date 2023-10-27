@@ -99,7 +99,7 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
           <Toast text={toastText} visible={visible} setVisible={setVisible} />
         )}
       </ul>
-      <button className={styles.allUpdateBtn}>전체 수정</button>
+      <Button text={'전체 수정'} onClick={() => {}} />
       {isLoading && <BackgroundLoading />}
     </>
   );

@@ -8,6 +8,7 @@ import RoomChattingDiv from '../../../components/Chat/ChattingDiv';
 import Span from '../../../components/common/Span/Span';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../recoil/room/roomInfo';
+import Button from '../../../components/common/Button/Button';
 
 const RoomMain = () => {
   const [hide, setHide] = useState(false);
@@ -25,9 +26,12 @@ const RoomMain = () => {
         <Span text={'계획 일정'} className={'sectionsSpan'} />
         <DetailScheduleList room={room} />
         <RoomChattingDiv hide={hide} />
-        <button className={styles.chatToggleBtn} onClick={() => setHide(!hide)}>
-          <FontAwesomeIcon icon={faComment} />
-        </button>
+        
+        <Button
+          children={<FontAwesomeIcon icon={faComment} />}
+          onClick={() => setHide(!hide)}
+          className='chatToggleBtn'
+        />
       </section>
     </div>
   );
