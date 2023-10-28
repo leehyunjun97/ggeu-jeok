@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './style/scheduleInfoCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { IRoomInfo } from '../../../../types/room';
 import { useNavigate } from 'react-router-dom';

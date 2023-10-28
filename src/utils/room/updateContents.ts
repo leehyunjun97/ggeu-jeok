@@ -1,4 +1,5 @@
-import { IDateDetail, IDateDetailContent } from '../../types/room';
+import { updateDetailDateContentsApi } from '../../services/room/room';
+import { IDateDetail, IDateDetailContent, IRoomInfo } from '../../types/room';
 
 export const updateState = (
   data: IDateDetailContent[],
@@ -29,4 +30,23 @@ export const updateContents = (
   orderContents.push(newContent);
 
   return orderContents.sort((a, b) => a.id - b.id);
+};
+
+export const updateContentsFunc = async (
+  list: IRoomInfo,
+  filterId: number,
+  assignObj: IDateDetail,
+  isSuccessFn: () => void
+) => {
+  const otherData: IDateDetail[] = list.date.filter(
+    (item) => item.id !== filterId
+  );
+
+  otherData.push(assignObj);
+
+  const patchCom = await updateDetailDateContentsApi(list, otherData);
+
+  if (patchCom.status === 200) {
+    isSuccessFn();
+  }
 };

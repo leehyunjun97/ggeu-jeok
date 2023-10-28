@@ -19,8 +19,7 @@ const addFriendApi = async (myInfo: IUserInfo, friendInfo: IUserInfo) => {
         ],
       }
     );
-
-    return fatchCom.data;
+    return fatchCom;
   } catch (error: any) {
     throw new Error(error.message);
   }

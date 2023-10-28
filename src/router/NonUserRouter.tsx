@@ -7,7 +7,6 @@ const NonUserRouter = () => {
 
   useEffect(() => {
     if (id) {
-      alert('잘못된 접근입니다');
       navigate('/main');
     }
   }, [id, navigate]);

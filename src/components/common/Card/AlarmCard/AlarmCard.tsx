@@ -11,6 +11,8 @@ import {
 import { dateStringHandler } from '../../../../utils/common/date';
 import Button from '../../Button/Button';
 import { fromEmail } from '../../../../utils/common/userFindAndTrans';
+import { useState } from 'react';
+import BackgroundLoading from '../../Loading/BackgroundLoading';
 
 interface IAlarmCardProps {
   alarm: IAlarm;
@@ -20,30 +22,64 @@ interface IAlarmCardProps {
 
 const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
   const setUserRender = useSetRecoilState(userRender);
+  const [isLoading, setIsLoading] = useState(false);
 
   const addFriendHandler = async () => {
-    const sendUser = await fromEmail(alarm.email);
+    try {
+      setIsLoading(true);
 
-    const fatchCom: IUserInfo = await addFriendApi(myInfo, sendUser);
-    await addFriendApi(sendUser, myInfo);
-    setUserRender((prev) => !prev);
-    closeModal();
+      const sendUser = await fromEmail(alarm.email);
 
-    const alarms = fatchCom.alarm.filter((item) => item.uuid !== alarm.uuid);
-    const delCom = await removeAlarm(fatchCom, alarms);
+      const [fatchComMy, fatchComYou] = await Promise.all([
+        await addFriendApi(myInfo, sendUser),
+        await addFriendApi(sendUser, myInfo),
+      ]);
+
+      if (fatchComMy.status !== 200 && fatchComYou.status !== 200) {
+        return;
+      }
+
+      const alarms = fatchComMy.data.alarm.filter(
+        (item: IAlarm) => item.uuid !== alarm.uuid
+      );
+      const delCom = await removeAlarm(fatchComMy.data, alarms);
+
+      if (delCom.status === 200) {
+        setUserRender((prev) => !prev);
+        closeModal();
+      }
+    } catch (error) {
+      alert('알람 수락 에러!');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const refusalHandler = async () => {
-    const sendUser = await fromEmail(alarm.email);
-    const postCom = await friendRequestRefusalApi(myInfo, sendUser);
-    checkHandler();
+    try {
+      setIsLoading(true);
+      const sendUser = await fromEmail(alarm.email);
+      const postCom = await friendRequestRefusalApi(myInfo, sendUser);
+      if (postCom.status === 200) {
+        alarmProcessingHandler();
+      }
+    } catch (error) {
+      alert('알람 거절 에러!');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const checkHandler = async () => {
-    const alarms = myInfo.alarm.filter((item) => item.uuid !== alarm.uuid);
-    const delCom = await removeAlarm(myInfo, alarms);
-    if (delCom.status === 200) {
+  const alarmProcessingHandler = async () => {
+    try {
+      setIsLoading(true);
+      const alarms = myInfo.alarm.filter((item) => item.uuid !== alarm.uuid);
+      await removeAlarm(myInfo, alarms);
+    } catch (error) {
+      alert('알람 확인 에러');
+    } finally {
       setUserRender((prev) => !prev);
+      setIsLoading(false);
     }
   };
 
@@ -59,16 +95,21 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
             <Button.ReplyButton
               onClick={addFriendHandler}
               refusalOnClick={refusalHandler}
+              disable={isLoading}
             />
           )}
           {alarm.type === 'friendRequestRefusal' && (
-            <Button.CheckButton onClick={checkHandler} />
+            <Button.CheckButton
+              onClick={alarmProcessingHandler}
+              disable={isLoading}
+            />
           )}
         </section>
         <span className={styles.createAtSection}>
           {dateStringHandler(alarm.create_at)}
         </span>
       </li>
+      {isLoading && <BackgroundLoading />}
     </>
   );
 };

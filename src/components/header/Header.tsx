@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import styles from './style/header.module.css';
 import Logo from '../common/Logo/Logo';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { Outlet, useNavigate } from 'react-router-dom';
 import AlarmModal from '../common/Modal/AlarmModal/AlarmModal';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import ProfileModal from '../common/Modal/ProfileModal/ProfileModal';
+import Button from '../common/Button/Button';
 
 const Header = () => {
   const [isModal, setIsModal] = useState(false);
@@ -31,25 +30,20 @@ const Header = () => {
           nickName={userInfoRecoil.nickName ?? ''}
         />
         <div className={styles.headerSide}>
-          <button
+          <Button.AlarmButton
             onClick={() => setIsModal(!isModal)}
-            className={styles.alarmBtn}
-          >
-            <FontAwesomeIcon
-              icon={faBell}
-              style={{ color: '#000000' }}
-              size='xl'
-            />
-          </button>
-          <button
+            className='headerBtn'
+          />
+          <Button
             onClick={() => setIsProfileModal(!isProfileModal)}
-            className={styles.logoutBtn}
-          >
-            내정보
-          </button>
-          <button onClick={logoutHandler} className={styles.logoutBtn}>
-            로그아웃
-          </button>
+            text='내정보'
+            className='headerBtn'
+          />
+          <Button
+            onClick={logoutHandler}
+            text='로그아웃'
+            className='headerBtn'
+          />
         </div>
       </div>
       {isModal && (

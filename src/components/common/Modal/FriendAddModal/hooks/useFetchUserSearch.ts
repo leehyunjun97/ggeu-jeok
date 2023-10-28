@@ -23,7 +23,7 @@ export const useFetchUserSearch = () => {
         (item) => !friendsId?.includes(item.id)
       );
 
-      return filterUsers;
+      return filterUsers.filter((item) => myInfo.id !== item.id);
     },
     {
       enabled: !!search,
