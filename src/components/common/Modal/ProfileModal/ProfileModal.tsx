@@ -46,7 +46,7 @@ const ProfileModal = ({
             <section className={styles.titleSection}>
               <h4>{my ? '내' : '친구'} 정보</h4>
             </section>
-            <ProfileSection info={my ? myInfo : friendInfo} />
+            <ProfileSection info={my ? myInfo : friendInfo} my={my}/>
           </div>
         </>
       }
