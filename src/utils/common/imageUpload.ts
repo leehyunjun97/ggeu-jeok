@@ -24,10 +24,10 @@ export const imgFileHandler = (
   e: React.ChangeEvent<HTMLInputElement>,
   setImg: React.Dispatch<React.SetStateAction<File | null>>
 ) => {
-  const target = e.currentTarget;
+  const files = e.currentTarget.files;
 
-  if (target.files !== null) {
-    const file = target.files[0];
+  if (files !== null) {
+    const file = files[0];
     setImg(file);
   }
 };

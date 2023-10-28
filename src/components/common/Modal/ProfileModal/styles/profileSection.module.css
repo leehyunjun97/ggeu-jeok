@@ -54,14 +54,6 @@
   font-size: 18px;
 }
 
-.updateBtn,
-.updateCancelBtn {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.updateBtn {
-  right: 84px;
+.btnSection{
+  height: 30px;
 }

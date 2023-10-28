@@ -7,6 +7,8 @@ import { imgFileHandler } from '../../../../utils/common/imageUpload';
 import { imgUpdateApi } from '../../../../services/user/user';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
+import Button from '../../Button/Button';
+import Toast from '../../Toast/Toast';
 
 interface IProfileProps {
   info?: IUserInfo | IFriendInfo;
@@ -17,6 +19,8 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
   const [img, setImg] = useState<File | null>(null);
   const [imgSrc, setimgSrc] = useState<string | null>(null);
   const setInfo = useSetRecoilState(userInfo);
+  const [visible, setVisible] = useState(false);
+  const [toastText, setToastText] = useState('');
 
   const imgRef = useRef<HTMLInputElement>(null);
 
@@ -32,10 +36,10 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
       setimgSrc(reader.result as string);
     };
 
-    if (img) {
-      reader.readAsDataURL(img);
-      setimgSrc(imgSrc);
-    }
+    if (!img) return;
+
+    reader.readAsDataURL(img);
+    setimgSrc(imgSrc);
   }, [img, imgSrc]);
 
   const imgUpdateHandler = async () => {
@@ -43,17 +47,14 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
       const uuid = (info as IUserInfo).uuid;
       const putCom = await imgUpdateApi(uuid, imgSrc!);
       if (putCom.status === 200) {
-        alert('수정성공');
+        setVisible(!visible);
+        setToastText('수정 성공!');
         setInfo((prev) => ({ ...prev, image: imgSrc! }));
         setimgSrc('');
       }
     } catch (error) {
       alert('이미지 업로드 에러!');
     }
-  };
-
-  const updateCancelHandler = () => {
-    setimgSrc('');
   };
 
   return (
@@ -90,17 +91,16 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
         </div>
       </section>
       {imgSrc && (
-        <>
-          <button className={styles.updateBtn} onClick={imgUpdateHandler}>
-            정보수정
-          </button>
-          <button
-            className={styles.updateCancelBtn}
-            onClick={updateCancelHandler}
-          >
-            수정취소
-          </button>
-        </>
+        <section className={styles.btnSection}>
+          <Button.ReplyButton
+            onClick={imgUpdateHandler}
+            refusalOnClick={() => setimgSrc('')}
+            type='profile'
+          />
+        </section>
+      )}
+      {visible && (
+        <Toast text={toastText} visible={visible} setVisible={setVisible} />
       )}
     </section>
   );

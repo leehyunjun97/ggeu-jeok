@@ -87,3 +87,21 @@
   margin-left: 5px;
   background-color: #e46060;
 }
+
+.updateBtn,
+.updateCancelBtn {
+  width: 80px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+  background-color: #75d777;
+}
+
+.updateBtn {
+  right: 95px;
+}
+
+.updateCancelBtn {
+  background-color: #e46060;
+}

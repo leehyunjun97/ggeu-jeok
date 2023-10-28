@@ -8,6 +8,7 @@ interface IButtonProps {
   refusalOnClick?: React.MouseEventHandler<HTMLButtonElement>;
   text?: string;
   className?: string;
+  type?: string;
 }
 
 const Button = ({ onClick, text, className }: IButtonProps) => {
@@ -29,7 +30,12 @@ Button.CloseButton = ({ onClick }: IButtonProps) => {
   );
 };
 
-Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
+Button.ReplyButton = ({
+  onClick,
+  refusalOnClick,
+  className,
+  type,
+}: IButtonProps) => {
   return (
     <>
       <button
@@ -38,7 +44,7 @@ Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
         }`}
         onClick={onClick}
       >
-        수락
+        {type === 'profile' ? '수정' : '수락'}
       </button>
       <button
         className={`${styles.refusalBtn} ${styles.basicBtn} ${
@@ -46,7 +52,7 @@ Button.ReplyButton = ({ onClick, refusalOnClick, className }: IButtonProps) => {
         }`}
         onClick={refusalOnClick}
       >
-        거절
+        {type === 'profile' ? '수정취소' : '거절'}
       </button>
     </>
   );
