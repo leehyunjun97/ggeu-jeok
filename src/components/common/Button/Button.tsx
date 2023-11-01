@@ -75,9 +75,10 @@ Button.ReplyButton = ({
   );
 };
 
-Button.CheckButton = ({ onClick, disable }: IButtonProps) => {
+Button.CheckButton = ({ onClick, disable, style }: IButtonProps) => {
   return (
     <button
+      style={{ ...style }}
       className={`${styles.refusalBtn} ${styles.basicBtn}`}
       onClick={onClick}
       disabled={disable}

@@ -1,0 +1,13 @@
+.basic {
+  background-color: rgb(250, 250, 250);
+  width: 100%;
+  height: 100%;
+  margin-bottom: 15px;
+  border: 1.5px solid black;
+  border-radius: 2px;
+  font-size: 12px;
+  padding-left: 10px;
+  resize: none;
+  padding: 15px;
+  font-family: 'Jua', sans-serif;
+}

@@ -150,3 +150,12 @@
   font-size: 2.5vh;
   color: #46423df3;
 }
+
+.messageBtn {
+  background-color: #d9d9d9;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 15%;
+  height: 30%;
+}
