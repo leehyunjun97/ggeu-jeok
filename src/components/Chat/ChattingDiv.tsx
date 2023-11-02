@@ -1,15 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './styles/roomChattingDiv.module.css';
-import Textarea from '../common/Textarea/Textarea';
-import Button from '../common/Button/Button';
-import { imgSrc } from '../../constants/sign/sign';
+import { useRecoilState } from 'recoil';
+import { roomInfo } from '../../recoil/room/roomInfo';
+import { IChat } from '../../types/chat';
+import { getMessageApi } from '../../services/chat/chat';
+import ChatInputSection from './ChatInputSection';
+import ChatCard from './ChatCard';
 
 interface IProps {
   hide: boolean;
 }
 
 const RoomChattingDiv = ({ hide }: IProps) => {
-  const [message, setMessage] = useState('');
+  const [room, setRoomInfo] = useRecoilState(roomInfo);
+  const [chatList, setChatList] = useState<IChat[]>();
+  const chatBodyRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    chatBodyRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const getCom = await getMessageApi('-random_uuid');
+
+        console.log(getCom);
+
+        if (!getCom) return;
+
+        setChatList(getCom);
+      } catch (error) {
+        alert('message error');
+      }
+    };
+    getMessages();
+  }, []);
 
   return (
     <div
@@ -19,54 +45,11 @@ const RoomChattingDiv = ({ hide }: IProps) => {
       <section className={styles.titleSection}>
         <h4>채팅방</h4>
       </section>
-      <ul className={styles.bodySection}>
-        <li className={styles.chatCardLi}>
-          <div
-            className={styles.chatContentBox}
-            style={{ justifyContent: 'flex-end' }}
-          >
-            <span className={styles.chatDate}>오전 11:10</span>
-            <div className={styles.speechBubble}>안녕하세요</div>
-          </div>
-        </li>
-
-        <li className={styles.chatCardLi}>
-          <div className={styles.chatContentBox}>
-            <section className={styles.youImgSection}>
-              <img className={styles.youImg} src={imgSrc} alt='' />
-            </section>
-            <div className={`${styles.speechBubble} ${styles.you}`}>
-              안녕 반가워
-            </div>
-            <span className={`${styles.chatDate} ${styles.chatDateYou}`}>
-              오전 11:10
-            </span>
-          </div>
-        </li>
-
-        <li className={styles.chatCardLi}>
-          <div className={styles.chatContentBox}>
-            <section className={styles.youImgSection}>
-              <img className={styles.youImg} src={imgSrc} alt='' />
-            </section>
-            <div className={`${styles.speechBubble} ${styles.you}`}>
-              <p>
-                dsvlkasdjvasdasdasdasdasdasddsvlkasdjvasdasdasdasdasdasddsvlkasdjvasdasdasdasdasdasddsvlkasdjvasdasdasdasdasdasd
-              </p>
-            </div>
-            <span className={`${styles.chatDate} ${styles.chatDateYou}`}>
-              오전 11:10
-            </span>
-          </div>
-        </li>
+      <ul className={styles.bodySection} ref={chatBodyRef}>
+        {!!chatList?.length &&
+          chatList?.map((item) => <ChatCard key={item.id} chat={item} />)}
       </ul>
-      <section className={styles.inputSection}>
-        <Textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <Button text={'전송'} onClick={() => {}} className={'messageBtn'} />
-      </section>
+      <ChatInputSection />
     </div>
   );
 };

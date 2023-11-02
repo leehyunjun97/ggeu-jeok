@@ -1,11 +1,11 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { GithubAuthProvider } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
+import { getStorage } from 'firebase/storage';
 
-// Your web app's Firebase configuration
 const firebaseDataConfig = {
-  apiKey: 'AIzaSyDNl_MuC0LYKt9NW1o-lr4O0DMuYIV-Ims',
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: 'ggeu-jeok.firebaseapp.com',
   projectId: 'ggeu-jeok',
   storageBucket: 'ggeu-jeok.appspot.com',
@@ -13,5 +13,8 @@ const firebaseDataConfig = {
   appId: '1:553281665277:web:b1ca9904fd034d35fa6694',
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseDataConfig);
+export const storage = getStorage(app);
+export const provider = new GithubAuthProvider();
+export const db = getFirestore(app);
+export const database = getDatabase(app);

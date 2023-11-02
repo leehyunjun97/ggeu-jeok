@@ -4,7 +4,7 @@ import {
   uploadBytes,
   uploadBytesResumable,
 } from 'firebase/storage';
-import { storage } from '../../scripts/firebase';
+import { storage } from '../../scripts/databaseFirebase';
 
 export const imgUpload = async (
   storageUrl: string,
