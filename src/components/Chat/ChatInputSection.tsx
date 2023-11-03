@@ -8,7 +8,11 @@ const ChatInputSection = () => {
 
   return (
     <section className={styles.inputSection}>
-      <Textarea value={message} onChange={(e) => setMessage(e.target.value)} />
+      <Textarea
+        placeholder={'shift+enter 전송'}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
       <Button text={'전송'} onClick={() => {}} className={'messageBtn'} />
     </section>
   );

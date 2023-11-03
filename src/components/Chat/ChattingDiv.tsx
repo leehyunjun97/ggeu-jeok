@@ -6,6 +6,8 @@ import { IChat } from '../../types/chat';
 import { getMessageApi } from '../../services/chat/chat';
 import ChatInputSection from './ChatInputSection';
 import ChatCard from './ChatCard';
+import { onSnapshot } from 'firebase/firestore';
+import { getSortedQuery, putIdAndSentAt } from '../../utils/chat/chat';
 
 interface IProps {
   hide: boolean;
@@ -17,15 +19,9 @@ const RoomChattingDiv = ({ hide }: IProps) => {
   const chatBodyRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
-    chatBodyRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-
-  useEffect(() => {
     const getMessages = async () => {
       try {
         const getCom = await getMessageApi('-random_uuid');
-
-        console.log(getCom);
 
         if (!getCom) return;
 
@@ -36,6 +32,18 @@ const RoomChattingDiv = ({ hide }: IProps) => {
     };
     getMessages();
   }, []);
+
+  useEffect(() => {
+    const sortedQuery = getSortedQuery('-random_uuid');
+    onSnapshot(sortedQuery, (querySnapshot) => {
+      setChatList(putIdAndSentAt(querySnapshot));
+    });
+  }, []);
+
+  useEffect(() => {
+    const ref = chatBodyRef.current?.lastElementChild;
+    ref?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatList]);
 
   return (
     <div
@@ -49,6 +57,7 @@ const RoomChattingDiv = ({ hide }: IProps) => {
         {!!chatList?.length &&
           chatList?.map((item) => <ChatCard key={item.id} chat={item} />)}
       </ul>
+
       <ChatInputSection />
     </div>
   );
