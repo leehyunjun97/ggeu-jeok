@@ -11,3 +11,11 @@ export const escapeKeyDownHandler = (
 ) => {
   e.key === 'Escape' && handlerFunction();
 };
+
+export const shiftEnterKeyDownHandler = (
+  e: React.KeyboardEvent<HTMLTextAreaElement>,
+  handlerFunction: () => void
+) => {
+  e.shiftKey && e.key === 'Enter' && handlerFunction();
+  return;
+};

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './styles/roomChattingDiv.module.css';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../recoil/room/roomInfo';
 import { IChat } from '../../types/chat';
 import { getMessageApi } from '../../services/chat/chat';
@@ -14,14 +14,14 @@ interface IProps {
 }
 
 const RoomChattingDiv = ({ hide }: IProps) => {
-  const [room, setRoomInfo] = useRecoilState(roomInfo);
+  const room = useRecoilValue(roomInfo);
   const [chatList, setChatList] = useState<IChat[]>();
   const chatBodyRef = useRef<HTMLUListElement | null>(null);
 
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const getCom = await getMessageApi('-random_uuid');
+        const getCom = await getMessageApi(room.uuid);
 
         if (!getCom) return;
 
@@ -31,14 +31,14 @@ const RoomChattingDiv = ({ hide }: IProps) => {
       }
     };
     getMessages();
-  }, []);
+  }, [room.uuid]);
 
   useEffect(() => {
-    const sortedQuery = getSortedQuery('-random_uuid');
+    const sortedQuery = getSortedQuery(room.uuid);
     onSnapshot(sortedQuery, (querySnapshot) => {
       setChatList(putIdAndSentAt(querySnapshot));
     });
-  }, []);
+  }, [room.uuid]);
 
   useEffect(() => {
     const ref = chatBodyRef.current?.lastElementChild;
@@ -48,7 +48,7 @@ const RoomChattingDiv = ({ hide }: IProps) => {
   return (
     <div
       className={styles.chatDiv}
-      // style={hide ? { display: 'block' } : { display: 'none' }}
+      style={hide ? { display: 'block' } : { display: 'none' }}
     >
       <section className={styles.titleSection}>
         <h4>채팅방</h4>
