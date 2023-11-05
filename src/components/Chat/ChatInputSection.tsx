@@ -40,6 +40,7 @@ const ChatInputSection = () => {
         text={'전송'}
         onClick={messagePushHandler}
         className={'messageBtn'}
+        disable={isLoading}
       />
     </section>
   );
