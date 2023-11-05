@@ -26,7 +26,7 @@ const RoomMain = () => {
         <Span text={'계획 일정'} className={'sectionsSpan'} />
         <DetailScheduleList room={room} />
         <RoomChattingDiv hide={hide} />
-        
+
         <Button
           children={<FontAwesomeIcon icon={faComment} />}
           onClick={() => setHide(!hide)}
