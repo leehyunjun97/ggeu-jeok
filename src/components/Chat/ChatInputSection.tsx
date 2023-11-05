@@ -11,15 +11,18 @@ import { shiftEnterKeyDownHandler } from '../../utils/common/keyDown';
 const ChatInputSection = () => {
   const myInfo = useRecoilValue(userInfo);
   const room = useRecoilValue(roomInfo);
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
 
   const messagePushHandler = async () => {
     try {
       if (message.trim().length === 0) return;
+      setIsLoading(true);
       await messagePushApi(message, myInfo, room.uuid);
     } catch (error) {
       alert('message push error!');
     } finally {
+      setIsLoading(false);
       setMessage('');
     }
   };
@@ -31,6 +34,7 @@ const ChatInputSection = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => shiftEnterKeyDownHandler(e, messagePushHandler)}
+        disable={isLoading}
       />
       <Button
         text={'전송'}

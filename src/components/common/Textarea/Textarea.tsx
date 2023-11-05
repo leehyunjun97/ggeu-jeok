@@ -8,6 +8,7 @@ interface ITextareaProps {
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
+  disable?: boolean;
 }
 
 const Textarea = ({
@@ -17,6 +18,7 @@ const Textarea = ({
   onChange,
   placeholder,
   onKeyDown,
+  disable,
 }: ITextareaProps) => {
   return (
     <textarea
@@ -26,6 +28,7 @@ const Textarea = ({
       readOnly={readonly}
       onChange={onChange}
       onKeyDown={onKeyDown}
+      disabled={disable}
     />
   );
 };
