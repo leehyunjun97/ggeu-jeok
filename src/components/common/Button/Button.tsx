@@ -9,10 +9,11 @@ interface IButtonProps {
   refusalOnClick?: React.MouseEventHandler<HTMLButtonElement>;
   text?: string | React.ReactNode;
   className?: string;
-  type?: string;
   disable?: boolean;
   style?: React.CSSProperties;
   children?: React.ReactNode;
+  accepText?: string;
+  refusaaText?: string;
 }
 
 const Button = ({
@@ -48,8 +49,9 @@ Button.ReplyButton = ({
   onClick,
   refusalOnClick,
   className,
-  type,
   disable,
+  accepText,
+  refusaaText,
 }: IButtonProps) => {
   return (
     <>
@@ -60,7 +62,7 @@ Button.ReplyButton = ({
         onClick={onClick}
         disabled={disable}
       >
-        {type === 'profile' ? '수정' : '수락'}
+        {accepText}
       </button>
       <button
         className={`${styles.refusalBtn} ${styles.basicBtn} ${
@@ -69,7 +71,7 @@ Button.ReplyButton = ({
         onClick={refusalOnClick}
         disabled={disable}
       >
-        {type === 'profile' ? '수정취소' : '거절'}
+        {refusaaText}
       </button>
     </>
   );

@@ -32,12 +32,12 @@ const ReplyModal = ({
               <p>{text}</p>
             </section>
             <section className={styles.replyBtnSection}>
-              <Button
+              <Button.ReplyButton
                 onClick={addFriendHandler}
-                text={'예'}
-                disable={isLoading}
+                refusalOnClick={modalHandler}
+                accepText='예'
+                refusaaText='아니오'
               />
-              <Button onClick={modalHandler} text={'아니오'} />
             </section>
           </div>
         </>

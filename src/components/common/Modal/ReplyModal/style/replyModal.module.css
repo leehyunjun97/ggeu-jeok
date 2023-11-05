@@ -22,8 +22,9 @@
   margin-bottom: 30px;
 }
 
-.replyBtnSection button {
-  width: 80px;
-  margin-right: 10px;
-  cursor: pointer;
+.replyBtnSection {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: 30px;
 }

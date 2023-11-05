@@ -96,6 +96,8 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
               onClick={addFriendHandler}
               refusalOnClick={refusalHandler}
               disable={isLoading}
+              accepText='수락'
+              refusaaText='거절'
             />
           )}
           {alarm.type === 'friendRequestRefusal' && (

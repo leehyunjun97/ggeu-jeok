@@ -5,7 +5,6 @@ import { IUserInfo } from '../../types/user';
 
 const getMessageApi = async (room_uuid: string) => {
   try {
-    console.log(room_uuid);
     const sortedQuery = getSortedQuery(room_uuid);
     const querySnapshot = await getDocs(sortedQuery);
 
