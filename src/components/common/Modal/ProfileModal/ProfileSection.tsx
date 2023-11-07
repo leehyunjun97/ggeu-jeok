@@ -98,11 +98,11 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
       </section>
       {imgSrc && (
         <section className={styles.btnSection}>
-          <Button.ReplyButton
-            onClick={imgUpdateHandler}
-            canecelOnClick={() => setimgSrc('')}
-            successText='수정하기'
-            cancelText='수정취소'
+          <Button.ActiveButton onClick={imgUpdateHandler} text={'수정하기'} />
+          <Button.ActiveButton
+            onClick={() => setimgSrc('')}
+            text={'수정취소'}
+            isActive='cancel'
           />
         </section>
       )}

@@ -16,15 +16,12 @@ import {
   defaultRoomInfo,
 } from '../../../constants/room/createRoom';
 import Toast from '../../../components/common/Toast/Toast';
-import {
-  getMyRoomInfoApi,
-  postCreateRoomApi,
-} from '../../../services/room/room';
+import { postCreateRoomApi } from '../../../services/room/room';
 import { createMemberInfoObj } from '../../../utils/room/createRoom';
 import Button from '../../../components/common/Button/Button';
 import BackgroundLoading from '../../../components/common/Loading/BackgroundLoading';
 import { useNavigate } from 'react-router-dom';
-import { roomInfo } from '../../../recoil/room/roomInfo';
+import Input from '../../../components/common/Input/Input';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -38,7 +35,6 @@ const CreateRoom = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
-  const setRoomRecoil = useSetRecoilState(roomInfo);
   const navigate = useNavigate();
 
   const roomTitleRef = useRef<HTMLInputElement>(null);
@@ -116,8 +112,6 @@ const CreateRoom = () => {
     try {
       const postCom = await postCreateRoomApi(payload);
       if (postCom.status === 200) {
-        const room = await getMyRoomInfoApi(postCom.data.name);
-        setRoomRecoil(room);
         navigate(`/main`);
       }
     } catch (error: any) {
@@ -134,16 +128,16 @@ const CreateRoom = () => {
       <div className={styles.formSection}>
         <div className={styles.roomTitleSection}>
           <Label text='방 제목' />
-          <input
-            className={styles.roomTitleInput}
-            placeholder='10글자 이내'
-            type='text'
+          <Input
+            style={{ width: '60%' }}
+            placeholder={'10글자 이내'}
+            type={'text'}
             value={room.title}
             onChange={(e) => {
               const title = e.target.value;
               if (title.length <= 10) setRoomInfo({ ...room, title });
             }}
-            ref={roomTitleRef}
+            inputRef={roomTitleRef}
           />
         </div>
         <div className={styles.dateSection}>
@@ -166,12 +160,8 @@ const CreateRoom = () => {
         </div>
         <div className={styles.locationSection}>
           <Label text='지역' />
-          <input
-            className={styles.locationInput}
-            type='location'
-            value={room.location}
-            readOnly
-          />
+
+          <Input type={'location'} value={room.location} readOnly={true} />
           <Button
             text={'meeting'}
             onClick={modalHandler}
@@ -181,7 +171,7 @@ const CreateRoom = () => {
         <Label text='멤버 초대' />
         <div className={styles.invitationSection}>
           {!myInfo.friend.length ? (
-            <span>친구 만들어</span>
+            <span>친구를 추가해주세요</span>
           ) : (
             <InvitationList
               setCheckList={setCheckList}

@@ -12,8 +12,7 @@ interface IButtonProps {
   disable?: boolean;
   style?: React.CSSProperties;
   children?: React.ReactNode;
-  successText?: string;
-  cancelText?: string;
+  isActive?: string;
 }
 
 const Button = ({
@@ -37,55 +36,31 @@ const Button = ({
   );
 };
 
-Button.CloseButton = ({ onClick }: IButtonProps) => {
+Button.ActiveButton = ({
+  onClick,
+  disable,
+  style,
+  isActive = 'success',
+  text,
+}: IButtonProps) => {
   return (
-    <button onClick={onClick} className={styles.modalCloseBtn}>
-      <FontAwesomeIcon icon={faXmark} />
+    <button
+      style={{ ...style }}
+      className={`${
+        isActive === 'success' ? styles.successBtn : styles.cancelBtn
+      } ${styles.basicBtn}`}
+      onClick={onClick}
+      disabled={disable}
+    >
+      {text}
     </button>
   );
 };
 
-Button.ReplyButton = ({
-  onClick,
-  canecelOnClick,
-  className,
-  disable,
-  successText,
-  cancelText,
-}: IButtonProps) => {
+Button.CloseButton = ({ onClick }: IButtonProps) => {
   return (
-    <>
-      <button
-        className={`${styles.successBtn} ${styles.basicBtn} ${
-          styles[`${className}`]
-        }`}
-        onClick={onClick}
-        disabled={disable}
-      >
-        {successText}
-      </button>
-      <button
-        className={`${styles.cancelBtn} ${styles.basicBtn} ${
-          styles[`${className}`]
-        }`}
-        onClick={canecelOnClick}
-        disabled={disable}
-      >
-        {cancelText}
-      </button>
-    </>
-  );
-};
-
-Button.CheckButton = ({ onClick, disable, style }: IButtonProps) => {
-  return (
-    <button
-      style={{ ...style }}
-      className={`${styles.cancelBtn} ${styles.basicBtn}`}
-      onClick={onClick}
-      disabled={disable}
-    >
-      확인
+    <button onClick={onClick} className={styles.modalCloseBtn}>
+      <FontAwesomeIcon icon={faXmark} />
     </button>
   );
 };

@@ -92,18 +92,25 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
         </section>
         <section className={styles.btnSection}>
           {alarm.type === 'friendRequest' && (
-            <Button.ReplyButton
-              onClick={addFriendHandler}
-              canecelOnClick={refusalHandler}
-              disable={isLoading}
-              successText='수락'
-              cancelText='거절'
-            />
+            <>
+              <Button.ActiveButton
+                onClick={addFriendHandler}
+                disable={isLoading}
+                text={'수락'}
+              />
+              <Button.ActiveButton
+                onClick={refusalHandler}
+                disable={isLoading}
+                text={'거절'}
+                isActive='cancel'
+              />
+            </>
           )}
           {alarm.type === 'friendRequestRefusal' && (
-            <Button.CheckButton
+            <Button
               onClick={alarmProcessingHandler}
               disable={isLoading}
+              text={'확인'}
             />
           )}
         </section>
