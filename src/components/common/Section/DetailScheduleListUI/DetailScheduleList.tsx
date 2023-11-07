@@ -20,9 +20,6 @@ const DetailScheduleList = ({ room }: IDetailScheduleListProps) => {
             room={room}
           />
         ))}
-      <li className={styles.plusLi}>
-        <FontAwesomeIcon icon={faPlus} className={styles.plusIcon} />
-      </li>
     </ul>
   );
 };

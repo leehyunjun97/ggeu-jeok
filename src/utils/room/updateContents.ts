@@ -38,13 +38,11 @@ export const updateContentsFunc = async (
   assignObj: IDateDetail,
   isSuccessFn: () => void
 ) => {
-  const otherData: IDateDetail[] = list.date.filter(
-    (item) => item.id !== filterId
-  );
+  const dates = list.date.map((item) => {
+    return item.id === filterId ? assignObj : item;
+  });
 
-  otherData.push(assignObj);
-
-  const patchCom = await updateDetailDateContentsApi(list, otherData);
+  const patchCom = await updateDetailDateContentsApi(list, dates);
 
   if (patchCom.status === 200) {
     isSuccessFn();

@@ -9,7 +9,7 @@ import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 import Button from '../../Button/Button';
 import Toast from '../../Toast/Toast';
-
+import { onErrorImg } from '../../../../constants/images/defaultImg';
 interface IProfileProps {
   info?: IUserInfo | IFriendInfo;
   my?: boolean;
@@ -67,6 +67,7 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
               src={imgSrc || info?.image}
               alt='profile'
               onClick={handleClick}
+              onError={onErrorImg}
             />
             <Input
               style={{ display: 'none' }}
@@ -80,7 +81,12 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
             />
           </>
         ) : (
-          <img className={styles.profileImg} src={info?.image} alt='profile' />
+          <img
+            className={styles.profileImg}
+            src={info?.image}
+            alt='profile'
+            onError={onErrorImg}
+          />
         )}
       </section>
       <section className={styles.infoSection}>

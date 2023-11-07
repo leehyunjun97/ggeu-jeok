@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './styles/roomChattingDiv.module.css';
 import Textarea from '../common/Textarea/Textarea';
 import Button from '../common/Button/Button';
@@ -13,6 +13,7 @@ const ChatInputSection = () => {
   const room = useRecoilValue(roomInfo);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const messagePushHandler = async () => {
     try {
@@ -24,6 +25,7 @@ const ChatInputSection = () => {
     } finally {
       setIsLoading(false);
       setMessage('');
+      messageRef.current?.focus();
     }
   };
 
@@ -35,6 +37,7 @@ const ChatInputSection = () => {
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => shiftEnterKeyDownHandler(e, messagePushHandler)}
         disable={isLoading}
+        areaRef={messageRef}
       />
       <Button
         text={'전송'}

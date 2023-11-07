@@ -9,6 +9,7 @@ interface ITextareaProps {
   onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
   disable?: boolean;
+  areaRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 const Textarea = ({
@@ -19,6 +20,7 @@ const Textarea = ({
   placeholder,
   onKeyDown,
   disable,
+  areaRef,
 }: ITextareaProps) => {
   return (
     <textarea
@@ -29,6 +31,7 @@ const Textarea = ({
       onChange={onChange}
       onKeyDown={onKeyDown}
       disabled={disable}
+      ref={areaRef}
     />
   );
 };

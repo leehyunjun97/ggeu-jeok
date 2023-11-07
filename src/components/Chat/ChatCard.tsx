@@ -4,6 +4,7 @@ import { IChat } from '../../types/chat';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import { timeStringHandler } from '../../utils/common/date';
+import { onErrorImg } from '../../constants/images/defaultImg';
 
 interface IChatCardProps {
   chat: IChat;
@@ -30,7 +31,12 @@ const ChatCard = ({ chat }: IChatCardProps) => {
         ) : (
           <div className={styles.chatContentBox}>
             <section className={styles.youImgSection}>
-              <img className={styles.youImg} src={chat.image} alt='' />
+              <img
+                className={styles.youImg}
+                src={chat.image}
+                alt=''
+                onError={onErrorImg}
+              />
             </section>
             <section className={styles.nicknAndContentSection}>
               <span className={styles.nicknameSpan}>{chat.nickName}</span>
