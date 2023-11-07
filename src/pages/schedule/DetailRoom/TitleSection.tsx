@@ -67,8 +67,8 @@ const TitleSection = ({ myProfile }: IProps) => {
           <Input
             type={'text'}
             onChange={(e) => {
-              const value = e.target.value;
-              if (value.length <= 10) setNewTitle(value);
+              const textLimit = e.target.value;
+              if (textLimit.length <= 10) setNewTitle(textLimit);
             }}
             value={newTitle}
             readOnly={myProfile.class === 'member'}

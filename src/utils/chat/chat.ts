@@ -8,7 +8,7 @@ const getSortedQuery = (room_uuid: string) => {
   return sortedQuery;
 };
 
-const putIdAndSentAt = (querySnapshot: DocumentData) => {
+const addIdAndSentAtToSnapshot = (querySnapshot: DocumentData) => {
   let chatList: DocumentData[] = [];
 
   chatList = querySnapshot.docs.map((doc: DocumentData) => {
@@ -22,4 +22,4 @@ const putIdAndSentAt = (querySnapshot: DocumentData) => {
   return chatList as IChat[];
 };
 
-export { getSortedQuery, putIdAndSentAt };
+export { getSortedQuery, addIdAndSentAtToSnapshot };

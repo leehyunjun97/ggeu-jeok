@@ -100,9 +100,9 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
         <section className={styles.btnSection}>
           <Button.ReplyButton
             onClick={imgUpdateHandler}
-            refusalOnClick={() => setimgSrc('')}
-            accepText='수정하기'
-            refusaaText='수정취소'
+            canecelOnClick={() => setimgSrc('')}
+            successText='수정하기'
+            cancelText='수정취소'
           />
         </section>
       )}

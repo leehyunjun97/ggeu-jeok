@@ -7,14 +7,20 @@ import { getMessageApi } from '../../services/chat/chat';
 import ChatInputSection from './ChatInputSection';
 import ChatCard from './ChatCard';
 import { onSnapshot } from 'firebase/firestore';
-import { getSortedQuery, putIdAndSentAt } from '../../utils/chat/chat';
+import {
+  getSortedQuery,
+  addIdAndSentAtToSnapshot,
+} from '../../utils/chat/chat';
+import { userInfo } from '../../recoil/user/user';
+import OtherChatCard from './OtherChatCard';
 
 interface IProps {
   hide: boolean;
 }
 
-const RoomChattingDiv = ({ hide}: IProps) => {
+const RoomChattingDiv = ({ hide }: IProps) => {
   const room = useRecoilValue(roomInfo);
+  const myInfo = useRecoilValue(userInfo);
   const [chatList, setChatList] = useState<IChat[]>();
   const chatBodyRef = useRef<HTMLUListElement | null>(null);
 
@@ -39,7 +45,7 @@ const RoomChattingDiv = ({ hide}: IProps) => {
     if (!room.uuid) return;
     const sortedQuery = getSortedQuery(room.uuid);
     onSnapshot(sortedQuery, (querySnapshot) => {
-      setChatList(putIdAndSentAt(querySnapshot));
+      setChatList(addIdAndSentAtToSnapshot(querySnapshot));
     });
   }, [room.uuid]);
 
@@ -58,7 +64,13 @@ const RoomChattingDiv = ({ hide}: IProps) => {
       </section>
       <ul className={styles.bodySection} ref={chatBodyRef}>
         {!!chatList?.length &&
-          chatList?.map((item) => <ChatCard key={item.id} chat={item} />)}
+          chatList?.map((item) => {
+            return item.user_uuid === myInfo.uuid ? (
+              <ChatCard key={item.id} chat={item} />
+            ) : (
+              <OtherChatCard key={item.id} chat={item} />
+            );
+          })}
       </ul>
 
       <ChatInputSection />

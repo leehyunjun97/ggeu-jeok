@@ -62,7 +62,7 @@
   top: 2px;
 }
 
-.accepBtn {
+.successBtn {
   background-color: #75d777;
   border-radius: 3px;
   font-size: 15px;
@@ -71,7 +71,7 @@
   height: 80%;
 }
 
-.refusalBtn {
+.cancelBtn {
   background-color: #e46060;
   border-radius: 3px;
   font-size: 15px;

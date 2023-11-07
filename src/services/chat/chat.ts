@@ -1,5 +1,8 @@
 import { addDoc, collection, getDocs } from 'firebase/firestore';
-import { getSortedQuery, putIdAndSentAt } from '../../utils/chat/chat';
+import {
+  getSortedQuery,
+  addIdAndSentAtToSnapshot,
+} from '../../utils/chat/chat';
 import { db } from '../../scripts/databaseFirebase';
 import { IUserInfo } from '../../types/user';
 
@@ -8,7 +11,7 @@ const getMessageApi = async (room_uuid: string) => {
     const sortedQuery = getSortedQuery(room_uuid);
     const querySnapshot = await getDocs(sortedQuery);
 
-    return putIdAndSentAt(querySnapshot);
+    return addIdAndSentAtToSnapshot(querySnapshot);
   } catch (error: any) {
     alert('message error!');
     throw new Error(error.message);

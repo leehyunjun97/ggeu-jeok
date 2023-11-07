@@ -140,9 +140,8 @@ const CreateRoom = () => {
             type='text'
             value={room.title}
             onChange={(e) => {
-              const value = e.target.value;
-              if (value.length <= 10)
-                setRoomInfo({ ...room, title: e.target.value });
+              const title = e.target.value;
+              if (title.length <= 10) setRoomInfo({ ...room, title });
             }}
             ref={roomTitleRef}
           />
@@ -203,8 +202,8 @@ const CreateRoom = () => {
         <MapModal
           closeModal={modalHandler}
           addr={room.location}
-          setAddr={(lo: string) => {
-            setRoomInfo({ ...room, location: lo });
+          setAddr={(location: string) => {
+            setRoomInfo({ ...room, location });
           }}
         />
       )}

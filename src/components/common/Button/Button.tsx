@@ -6,14 +6,14 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface IButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  refusalOnClick?: React.MouseEventHandler<HTMLButtonElement>;
+  canecelOnClick?: React.MouseEventHandler<HTMLButtonElement>;
   text?: string | React.ReactNode;
   className?: string;
   disable?: boolean;
   style?: React.CSSProperties;
   children?: React.ReactNode;
-  accepText?: string;
-  refusaaText?: string;
+  successText?: string;
+  cancelText?: string;
 }
 
 const Button = ({
@@ -47,31 +47,31 @@ Button.CloseButton = ({ onClick }: IButtonProps) => {
 
 Button.ReplyButton = ({
   onClick,
-  refusalOnClick,
+  canecelOnClick,
   className,
   disable,
-  accepText,
-  refusaaText,
+  successText,
+  cancelText,
 }: IButtonProps) => {
   return (
     <>
       <button
-        className={`${styles.accepBtn} ${styles.basicBtn} ${
+        className={`${styles.successBtn} ${styles.basicBtn} ${
           styles[`${className}`]
         }`}
         onClick={onClick}
         disabled={disable}
       >
-        {accepText}
+        {successText}
       </button>
       <button
-        className={`${styles.refusalBtn} ${styles.basicBtn} ${
+        className={`${styles.cancelBtn} ${styles.basicBtn} ${
           styles[`${className}`]
         }`}
-        onClick={refusalOnClick}
+        onClick={canecelOnClick}
         disabled={disable}
       >
-        {refusaaText}
+        {cancelText}
       </button>
     </>
   );
@@ -81,7 +81,7 @@ Button.CheckButton = ({ onClick, disable, style }: IButtonProps) => {
   return (
     <button
       style={{ ...style }}
-      className={`${styles.refusalBtn} ${styles.basicBtn}`}
+      className={`${styles.cancelBtn} ${styles.basicBtn}`}
       onClick={onClick}
       disabled={disable}
     >

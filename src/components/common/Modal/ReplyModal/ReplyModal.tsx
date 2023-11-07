@@ -34,9 +34,9 @@ const ReplyModal = ({
             <section className={styles.replyBtnSection}>
               <Button.ReplyButton
                 onClick={addFriendHandler}
-                refusalOnClick={modalHandler}
-                accepText='예'
-                refusaaText='아니오'
+                canecelOnClick={modalHandler}
+                successText='예'
+                cancelText='아니오'
               />
             </section>
           </div>

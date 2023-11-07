@@ -94,10 +94,10 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
           {alarm.type === 'friendRequest' && (
             <Button.ReplyButton
               onClick={addFriendHandler}
-              refusalOnClick={refusalHandler}
+              canecelOnClick={refusalHandler}
               disable={isLoading}
-              accepText='수락'
-              refusaaText='거절'
+              successText='수락'
+              cancelText='거절'
             />
           )}
           {alarm.type === 'friendRequestRefusal' && (

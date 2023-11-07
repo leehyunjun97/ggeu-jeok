@@ -146,7 +146,7 @@ const Signup = () => {
               text={'중복확인'}
               className={'emailCheck'}
               disable={emailDisable}
-              style={emailDisable ? { opacity: '0.5' } : { opacity: '1' }}
+              style={{ opacity: emailDisable ? '0.5' : '1' }}
             />
           </section>
 
