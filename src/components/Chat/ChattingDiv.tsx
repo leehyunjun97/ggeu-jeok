@@ -57,7 +57,7 @@ const RoomChattingDiv = ({ hide }: IProps) => {
   return (
     <div
       className={styles.chatDiv}
-      style={hide ? { display: 'block' } : { display: 'none' }}
+      style={{ display: hide ? 'none' : 'block' }}
     >
       <section className={styles.titleSection}>
         <h4>채팅방</h4>
