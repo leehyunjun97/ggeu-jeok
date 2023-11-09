@@ -35,13 +35,6 @@ li:hover,
   margin-right: 3%;
 }
 
-.cardImg {
-  width: 60px;
-  height: 60px;
-  border-radius: 40%;
-  box-shadow: 3px 3px 3px rgb(208, 198, 175);
-}
-
 .infoSection {
   width: 70%;
   display: block;

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles/roomChattingDiv.module.css';
 import { IChat } from '../../types/chat';
 import { timeStringHandler } from '../../utils/common/date';
-import { onErrorImg } from '../../constants/images/defaultImg';
+import Img from '../common/Img/Img';
 
 interface IChatCardProps {
   chat: IChat;
@@ -13,12 +13,7 @@ const OtherChatCard = ({ chat }: IChatCardProps) => {
     <li className={styles.chatCardLi}>
       <div className={styles.chatContentBox}>
         <section className={styles.youImgSection}>
-          <img
-            className={styles.youImg}
-            src={chat.image}
-            alt=''
-            onError={onErrorImg}
-          />
+          <Img src={chat.image} className={'profileImg'} />
         </section>
         <section className={styles.nicknAndContentSection}>
           <span className={styles.nicknameSpan}>{chat.nickName}</span>

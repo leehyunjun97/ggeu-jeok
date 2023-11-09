@@ -1,15 +1,14 @@
 import styles from './styles/profileSection.module.css';
 import { IUserInfo } from '../../../../types/user';
 import { IFriendInfo } from '../../../../types/friend';
-import { useEffect, useRef, useState } from 'react';
-import Input from '../../Input/Input';
-import { imgFileHandler } from '../../../../utils/common/imageUpload';
+import { useEffect, useState } from 'react';
 import { imgUpdateApi } from '../../../../services/user/user';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
 import Button from '../../Button/Button';
 import Toast from '../../Toast/Toast';
-import { onErrorImg } from '../../../../constants/images/defaultImg';
+import Img from '../../Img/Img';
+import FileUpload from '../../FileUpload/FileUpload';
 interface IProfileProps {
   info?: IUserInfo | IFriendInfo;
   my?: boolean;
@@ -17,29 +16,23 @@ interface IProfileProps {
 
 const ProfileSection = ({ info, my }: IProfileProps) => {
   const [img, setImg] = useState<File | null>(null);
-  const [imgSrc, setimgSrc] = useState<string | null>(null);
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
   const setInfo = useSetRecoilState(userInfo);
   const [visible, setVisible] = useState(false);
   const [toastText, setToastText] = useState('');
-
-  const imgRef = useRef<HTMLInputElement>(null);
-
-  const handleClick = () => {
-    imgRef?.current?.click();
-  };
 
   useEffect(() => {
     if (imgSrc === '') return;
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setimgSrc(reader.result as string);
+      setImgSrc(reader.result as string);
     };
 
     if (!img) return;
 
     reader.readAsDataURL(img);
-    setimgSrc(imgSrc);
+    setImgSrc(imgSrc);
   }, [img, imgSrc]);
 
   const imgUpdateHandler = async () => {
@@ -50,7 +43,7 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
         setVisible(!visible);
         setToastText('수정 성공!');
         setInfo((prev) => ({ ...prev, image: imgSrc! }));
-        setimgSrc('');
+        setImgSrc('');
       }
     } catch (error) {
       alert('이미지 업로드 에러!');
@@ -62,31 +55,15 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
       <section className={styles.imgSection}>
         {my ? (
           <>
-            <img
-              className={styles.myProfileImg}
+            <FileUpload
               src={imgSrc || info?.image}
-              alt='profile'
-              onClick={handleClick}
-              onError={onErrorImg}
-            />
-            <Input
-              style={{ display: 'none' }}
-              inputRef={imgRef}
-              type='file'
-              accept='image/*'
-              onChange={(e) => {
-                imgFileHandler(e, setImg);
-                setimgSrc('change');
-              }}
+              imgClassName={'myProfileImg'}
+              setImg={setImg}
+              setImgSrc={setImgSrc}
             />
           </>
         ) : (
-          <img
-            className={styles.profileImg}
-            src={info?.image}
-            alt='profile'
-            onError={onErrorImg}
-          />
+          <Img src={info?.image} />
         )}
       </section>
       <section className={styles.infoSection}>
@@ -100,7 +77,7 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
         <section className={styles.btnSection}>
           <Button.ActiveButton onClick={imgUpdateHandler} text={'수정하기'} />
           <Button.ActiveButton
-            onClick={() => setimgSrc('')}
+            onClick={() => setImgSrc('')}
             text={'수정취소'}
             isActive='cancel'
           />

@@ -16,9 +16,10 @@ import Label from '../../components/common/Label/Label';
 import ErrorMessage from '../../components/common/Error/ErrorMessage';
 import { postSignupApi } from '../../services/sign/sign';
 import { initialSignUpInputState } from '../../constants/sign/sign';
-import { imgFileHandler, imgUpload } from '../../utils/common/imageUpload';
+import { imgUpload } from '../../utils/common/imageUpload';
 import Span from '../../components/common/Span/Span';
 import BackgroundLoading from '../../components/common/Loading/BackgroundLoading';
+import FileUpload from '../../components/common/FileUpload/FileUpload';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>(
@@ -35,13 +36,8 @@ const Signup = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const nickNameRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
-  const imgRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    imgRef?.current?.click();
-  };
 
   useEffect(() => {
     const reader = new FileReader();
@@ -142,7 +138,9 @@ const Signup = () => {
               inputRef={emailRef}
             />
             <Button
-              onClick={checkEmail}
+              onClick={() => {
+                !!signUpInputState.email.trim().length && checkEmail();
+              }}
               text={'중복확인'}
               className={'emailCheck'}
               disable={emailDisable}
@@ -209,25 +207,13 @@ const Signup = () => {
 
           <Label htmlFor={'file'} text={'사진첨부'} className={'photoUpload'} />
 
-          <div className={styles.imgAttach} onClick={handleClick}>
-            {!imgSrc ? (
-              '+'
-            ) : (
-              <img
-                className={styles.imgPriview}
-                src={imgSrc as string}
-                alt=''
-              />
-            )}
+          <div className={styles.imgAttach}>
+            <FileUpload
+              src={imgSrc as string}
+              setImg={setImg}
+              setImgSrc={setimgSrc}
+            />
           </div>
-
-          <Input
-            style={{ display: 'none' }}
-            inputRef={imgRef}
-            type='file'
-            accept='image/*'
-            onChange={(e) => imgFileHandler(e, setImg)}
-          />
 
           <Button
             onClick={signupHandler}

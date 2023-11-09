@@ -12,6 +12,7 @@ import { fromEmail } from '../../../../utils/common/userFindAndTrans';
 import BackgroundLoading from '../../Loading/BackgroundLoading';
 import Toast from '../../Toast/Toast';
 import { onErrorImg } from '../../../../constants/images/defaultImg';
+import Img from '../../Img/Img';
 
 interface IProps {
   info: IFriendInfo | IUserInfo | IMemberInfo;
@@ -67,7 +68,7 @@ const UserInfoCard = ({ info, add }: IProps) => {
     <>
       <li className={styles.cardBody} onClick={cardClickHandler}>
         <section className={styles.imageSection}>
-          <img src={info.image} alt='' className={styles.cardImg} onError={onErrorImg}/>
+          <Img src={info.image} className={'profileImg'} />
         </section>
         <section className={styles.infoSection}>
           <p className={styles.emailP}>{info.email}</p>
