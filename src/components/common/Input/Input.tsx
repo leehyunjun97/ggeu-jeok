@@ -6,7 +6,7 @@ interface IInputProps {
   type: string;
   className?: string;
   value?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   inputRef?: React.RefObject<HTMLInputElement>;
   style?: React.CSSProperties;
   accept?: string;

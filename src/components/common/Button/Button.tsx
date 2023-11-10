@@ -6,13 +6,13 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface IButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  refusalOnClick?: React.MouseEventHandler<HTMLButtonElement>;
+  canecelOnClick?: React.MouseEventHandler<HTMLButtonElement>;
   text?: string | React.ReactNode;
   className?: string;
-  type?: string;
   disable?: boolean;
   style?: React.CSSProperties;
   children?: React.ReactNode;
+  isActive?: string;
 }
 
 const Button = ({
@@ -36,53 +36,31 @@ const Button = ({
   );
 };
 
-Button.CloseButton = ({ onClick }: IButtonProps) => {
+Button.ActiveButton = ({
+  onClick,
+  disable,
+  style,
+  isActive = 'success',
+  text,
+}: IButtonProps) => {
   return (
-    <button onClick={onClick} className={styles.modalCloseBtn}>
-      <FontAwesomeIcon icon={faXmark} />
+    <button
+      style={{ ...style }}
+      className={`${
+        isActive === 'success' ? styles.successBtn : styles.cancelBtn
+      } ${styles.basicBtn}`}
+      onClick={onClick}
+      disabled={disable}
+    >
+      {text}
     </button>
   );
 };
 
-Button.ReplyButton = ({
-  onClick,
-  refusalOnClick,
-  className,
-  type,
-  disable,
-}: IButtonProps) => {
+Button.CloseButton = ({ onClick }: IButtonProps) => {
   return (
-    <>
-      <button
-        className={`${styles.accepBtn} ${styles.basicBtn} ${
-          styles[`${className}`]
-        }`}
-        onClick={onClick}
-        disabled={disable}
-      >
-        {type === 'profile' ? '수정' : '수락'}
-      </button>
-      <button
-        className={`${styles.refusalBtn} ${styles.basicBtn} ${
-          styles[`${className}`]
-        }`}
-        onClick={refusalOnClick}
-        disabled={disable}
-      >
-        {type === 'profile' ? '수정취소' : '거절'}
-      </button>
-    </>
-  );
-};
-
-Button.CheckButton = ({ onClick, disable }: IButtonProps) => {
-  return (
-    <button
-      className={`${styles.refusalBtn} ${styles.basicBtn}`}
-      onClick={onClick}
-      disabled={disable}
-    >
-      확인
+    <button onClick={onClick} className={styles.modalCloseBtn}>
+      <FontAwesomeIcon icon={faXmark} />
     </button>
   );
 };

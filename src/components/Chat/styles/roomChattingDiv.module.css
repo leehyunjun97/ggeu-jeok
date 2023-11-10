@@ -1,9 +1,8 @@
 .chatDiv {
-  z-index: 999;
+  z-index: 3;
   position: fixed;
   bottom: 7%;
   right: 6%;
-  /* transform: translate(45%, -50%); */
   width: 400px;
   height: 600px;
   background-color: #f7f2c7;
@@ -11,8 +10,9 @@
   justify-content: center;
   border-radius: 1px;
   border: 1px solid none;
-  overflow: scroll;
+  overflow: hidden;
   box-shadow: 1px 3px 3px 3px rgb(227, 218, 205);
+  font-family: 'Nanum Pen Script', cursive;
 }
 
 .chatDiv::-webkit-scrollbar {
@@ -25,7 +25,123 @@
 
 .titleSection h4 {
   margin-bottom: 0px;
-  font-family: 'Nanum Pen Script', cursive;
   font-size: 22px;
   opacity: 0.8;
+}
+
+.inputSection {
+  width: 100%;
+  height: 15%;
+}
+
+.bodySection {
+  width: 100%;
+  height: 463px;
+  overflow: auto;
+}
+
+.bodySection::-webkit-scrollbar {
+  display: none;
+}
+
+.chatCardLi {
+  min-height: 10%;
+  max-height: 100%;
+  width: 100%;
+  display: block;
+  font-family: 'Jua', sans-serif;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.chatCardLi:hover {
+  background-color: transparent;
+}
+
+.chatContentBox {
+  display: flex;
+  position: relative;
+  align-items: flex-end;
+  margin-left: 10px;
+  margin-right: 20px;
+  min-width: 80%;
+}
+
+.nicknAndContentSection {
+  text-align: left;
+  word-wrap: break-word;
+  max-width: 60%;
+  padding-top: 10px;
+}
+
+.nicknameSpan {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.speechBubble {
+  height: 40%;
+  position: relative;
+  background: #ffffff;
+  border-radius: 5px;
+  color: rgb(86 79 79);
+  margin-top: 8px;
+  padding: 10px;
+  box-shadow: 2px 2px 2px rgb(208, 198, 175);
+}
+
+.speechBubble::after {
+  position: absolute;
+  content: '';
+  right: 0;
+  top: 57%;
+  width: 0;
+  height: 0;
+  border: 14px solid transparent;
+  border-left-color: #ffffff;
+  border-right: 0;
+  border-top: 0;
+  margin-top: -8px;
+  margin-right: -9px;
+}
+
+.you {
+  text-align: left;
+}
+
+.you::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 14px solid transparent;
+  border-right-color: #ffffff;
+  border-left: 0;
+  border-top: 0;
+  margin-top: -8px;
+  margin-left: -8px;
+}
+
+.chatDate {
+  width: max-content;
+  left: -50px;
+  bottom: 2px;
+  font-size: 11px;
+  font-weight: bold;
+  opacity: 0.5;
+  display: block;
+  max-height: max-content;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.youImgSection {
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  margin-right: 20px;
+  margin-top: 23px;
+  align-self: first baseline;
 }

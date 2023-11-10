@@ -8,25 +8,6 @@
   height: 40%;
 }
 
-.profileImg {
-  max-width: auto;
-  height: 100%;
-  border: none;
-  border-radius: 15px;
-}
-
-.myProfileImg {
-  max-width: auto;
-  height: 100%;
-  border: none;
-  border-radius: 15px;
-}
-
-.myProfileImg:hover {
-  opacity: 0.5;
-  cursor: pointer;
-}
-
 .infoSection {
   height: 15%;
   width: 50%;
@@ -54,6 +35,6 @@
   font-size: 18px;
 }
 
-.btnSection{
+.btnSection {
   height: 30px;
 }

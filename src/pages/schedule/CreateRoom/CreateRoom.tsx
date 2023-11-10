@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
 import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { dateStringHandler, dffDay } from '../../../utils/common/date';
 import {
@@ -20,10 +20,12 @@ import { postCreateRoomApi } from '../../../services/room/room';
 import { createMemberInfoObj } from '../../../utils/room/createRoom';
 import Button from '../../../components/common/Button/Button';
 import BackgroundLoading from '../../../components/common/Loading/BackgroundLoading';
+import { useNavigate } from 'react-router-dom';
+import Input from '../../../components/common/Input/Input';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
-  const [roomInfo, setRoomInfo] = useState<IRoomInfo>(defaultRoomInfo());
+  const [room, setRoomInfo] = useState<IRoomInfo>(defaultRoomInfo());
 
   const [isModal, setIsModal] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -33,6 +35,7 @@ const CreateRoom = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [checkList, setCheckList] = useState<Array<IFriendInfo>>([]);
+  const navigate = useNavigate();
 
   const roomTitleRef = useRef<HTMLInputElement>(null);
 
@@ -51,7 +54,7 @@ const CreateRoom = () => {
     const arr = Array.from(Array(diffDay + 1), (_, index) => index++);
 
     const dateDetailArray: IDateDetail[] = arr.map((it) => {
-      const nowDate = new Date();
+      const nowDate = new Date(startDate);
       nowDate.setDate(startDate.getDate() + it);
       const dateObj = {
         id: it + 1,
@@ -75,13 +78,13 @@ const CreateRoom = () => {
   };
 
   const createRoomHandler = async () => {
-    if (roomInfo.title.trim().length < 2) {
+    if (room.title.trim().length < 2) {
       setToastText('방 제목을 입력해주세요');
       setVisible(!visible);
       roomTitleRef.current?.focus();
       return;
     }
-    if (roomInfo.location === '') {
+    if (room.location === '') {
       setToastText('지역을 선택해주세요');
       setVisible(!visible);
       return;
@@ -98,7 +101,7 @@ const CreateRoom = () => {
     const member = memberClassAddHandler();
 
     const payload = {
-      ...roomInfo,
+      ...room,
       admin: myInfo.email,
       member,
       create_at: new Date(),
@@ -109,8 +112,7 @@ const CreateRoom = () => {
     try {
       const postCom = await postCreateRoomApi(payload);
       if (postCom.status === 200) {
-        // recoil setRoomInfo 해주기 아직 네비게이션 안됨
-        console.log(postCom.data);
+        navigate(`/main`);
       }
     } catch (error: any) {
       alert('방 생성 에러');
@@ -126,15 +128,16 @@ const CreateRoom = () => {
       <div className={styles.formSection}>
         <div className={styles.roomTitleSection}>
           <Label text='방 제목' />
-          <input
-            className={styles.roomTitleInput}
-            placeholder='10글자 이내'
-            type='text'
-            value={roomInfo.title}
+          <Input
+            style={{ width: '60%' }}
+            placeholder={'10글자 이내'}
+            type={'text'}
+            value={room.title}
             onChange={(e) => {
-              setRoomInfo({ ...roomInfo, title: e.target.value });
+              const title = e.target.value;
+              if (title.length <= 10) setRoomInfo({ ...room, title });
             }}
-            ref={roomTitleRef}
+            inputRef={roomTitleRef}
           />
         </div>
         <div className={styles.dateSection}>
@@ -157,12 +160,8 @@ const CreateRoom = () => {
         </div>
         <div className={styles.locationSection}>
           <Label text='지역' />
-          <input
-            className={styles.locationInput}
-            type='location'
-            value={roomInfo.location}
-            readOnly
-          />
+
+          <Input type={'location'} value={room.location} readOnly={true} />
           <Button
             text={'meeting'}
             onClick={modalHandler}
@@ -172,7 +171,7 @@ const CreateRoom = () => {
         <Label text='멤버 초대' />
         <div className={styles.invitationSection}>
           {!myInfo.friend.length ? (
-            <span>친구 만들어</span>
+            <span>친구를 추가해주세요</span>
           ) : (
             <InvitationList
               setCheckList={setCheckList}
@@ -192,9 +191,9 @@ const CreateRoom = () => {
       {isModal && (
         <MapModal
           closeModal={modalHandler}
-          addr={roomInfo.location}
-          setAddr={(lo: string) => {
-            setRoomInfo({ ...roomInfo, location: lo });
+          addr={room.location}
+          setAddr={(location: string) => {
+            setRoomInfo({ ...room, location });
           }}
         />
       )}

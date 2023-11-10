@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { roomInfo } from '../../recoil/room/roomInfo';
-import { IDateDetail, IDateDetailContent, IRoomInfo } from '../../types/room';
+import { IDateDetail, IRoomInfo } from '../../types/room';
 
 const getRoomListApi = async () => {
   try {

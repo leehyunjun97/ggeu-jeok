@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './style/signup.module.css';
-import { getUsersApi } from '../../services/user/user';
+import { getLoginCheckApi } from '../../services/user/user';
 import Toast from '../../components/common/Toast/Toast';
 import { IUserInfo } from '../../types/user';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { objTransArr } from '../../utils/common/objectTransformArray';
 import {
   isValidationCheck,
   isVisibleDisplay,
@@ -17,9 +16,10 @@ import Label from '../../components/common/Label/Label';
 import ErrorMessage from '../../components/common/Error/ErrorMessage';
 import { postSignupApi } from '../../services/sign/sign';
 import { initialSignUpInputState } from '../../constants/sign/sign';
-import { imgFileHandler, imgUpload } from '../../utils/common/imageUpload';
+import { imgUpload } from '../../utils/common/imageUpload';
 import Span from '../../components/common/Span/Span';
 import BackgroundLoading from '../../components/common/Loading/BackgroundLoading';
+import FileUpload from '../../components/common/FileUpload/FileUpload';
 
 const Signup = () => {
   const [signUpInputState, setSignUpInputState] = useState<IUserInfo>(
@@ -28,6 +28,7 @@ const Signup = () => {
   const [img, setImg] = useState<File | null>(null);
   const [imgSrc, setimgSrc] = useState<string | null>('');
   const [visible, setVisible] = useState(false);
+  const [emailDisable, setEmailDisable] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [toastText, setToastText] = useState('');
 
@@ -35,13 +36,8 @@ const Signup = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const nickNameRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
-  const imgRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    imgRef?.current?.click();
-  };
 
   useEffect(() => {
     const reader = new FileReader();
@@ -56,6 +52,12 @@ const Signup = () => {
   }, [img, imgSrc]);
 
   const signupHandler = () => {
+    if (!emailDisable) {
+      setToastText('이메일 중복체크를 해주세요');
+      setVisible(!visible);
+      return;
+    }
+
     if (signUpInputState.email.trim() === '') {
       emailRef.current?.focus();
       return;
@@ -100,18 +102,16 @@ const Signup = () => {
       return;
     }
 
-    const data = await getUsersApi();
-    const isEmail = objTransArr(data).find(
-      (item: any) => item.email === signUpInputState.email
-    );
+    const duplicate = await getLoginCheckApi(signUpInputState.email);
 
-    if (isEmail) {
+    if (Object.keys(duplicate)[0]) {
       setVisible(true);
       setToastText('중복된 이메일 입니다');
       return;
     }
 
     setVisible(true);
+    setEmailDisable(true);
     setToastText('사용 가능한 이메일 입니다');
   };
 
@@ -131,13 +131,20 @@ const Signup = () => {
               style={{ width: '75%' }}
               type='email'
               value={signUpInputState.email}
-              onChange={(e) => changeInputHandler(e.target.value, 'email')}
+              onChange={(e) => {
+                changeInputHandler(e.target.value, 'email');
+                setEmailDisable(false);
+              }}
               inputRef={emailRef}
             />
             <Button
-              onClick={checkEmail}
+              onClick={() => {
+                !!signUpInputState.email.trim().length && checkEmail();
+              }}
               text={'중복확인'}
               className={'emailCheck'}
+              disable={emailDisable}
+              style={{ opacity: emailDisable ? '0.5' : '1' }}
             />
           </section>
 
@@ -200,25 +207,13 @@ const Signup = () => {
 
           <Label htmlFor={'file'} text={'사진첨부'} className={'photoUpload'} />
 
-          <div className={styles.imgAttach} onClick={handleClick}>
-            {!imgSrc ? (
-              '+'
-            ) : (
-              <img
-                className={styles.imgPriview}
-                src={imgSrc as string}
-                alt=''
-              />
-            )}
+          <div className={styles.imgAttach}>
+            <FileUpload
+              src={imgSrc as string}
+              setImg={setImg}
+              setImgSrc={setimgSrc}
+            />
           </div>
-
-          <Input
-            style={{ display: 'none' }}
-            inputRef={imgRef}
-            type='file'
-            accept='image/*'
-            onChange={(e) => imgFileHandler(e, setImg)}
-          />
 
           <Button
             onClick={signupHandler}

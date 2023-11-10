@@ -72,12 +72,6 @@
   position: relative;
 }
 
-.roomTitleInput {
-  height: 25px;
-  width: 60%;
-  padding: 3px;
-}
-
 .dateInput {
   height: 25px;
   width: 240px;
@@ -98,7 +92,6 @@
   width: 100%;
   padding: 3px;
 }
-
 
 .invitationSection {
   height: 130px;
