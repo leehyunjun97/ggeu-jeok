@@ -4,7 +4,7 @@ import Input from '../Input/Input';
 import { imgFileHandler } from '../../../utils/common/imageUpload';
 
 interface IFileUploadProps {
-  src?: string;
+  src: string;
   imgClassName?: string;
   setImg: React.Dispatch<React.SetStateAction<File | null>>;
   setImgSrc: React.Dispatch<React.SetStateAction<string | null>>;
@@ -23,7 +23,7 @@ const FileUpload = ({
   };
   return (
     <>
-      <Img src={src} clickFunc={refClickHandler} className={imgClassName} />
+      <Img src={src} onClick={refClickHandler} className={imgClassName} />
       <Input
         style={{ display: 'none' }}
         inputRef={imgRef}

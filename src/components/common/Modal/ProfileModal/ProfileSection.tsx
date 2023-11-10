@@ -56,14 +56,14 @@ const ProfileSection = ({ info, my }: IProfileProps) => {
         {my ? (
           <>
             <FileUpload
-              src={imgSrc || info?.image}
+              src={imgSrc || info?.image!}
               imgClassName={'myProfileImg'}
               setImg={setImg}
               setImgSrc={setImgSrc}
             />
           </>
         ) : (
-          <Img src={info?.image} />
+          <Img src={info?.image!} />
         )}
       </section>
       <section className={styles.infoSection}>

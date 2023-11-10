@@ -4,18 +4,18 @@ import { onErrorImg } from '../../../constants/images/defaultImg';
 
 interface IImgProps {
   className?: string;
-  src?: string;
+  src: string;
   alt?: string;
-  clickFunc?: () => void;
+  onClick?: () => void;
 }
 
-const Img = ({ className, src, alt = '', clickFunc }: IImgProps) => {
+const Img = ({ className, src, alt = '', onClick }: IImgProps) => {
   return (
     <img
       alt={alt}
       className={`${styles.basicImg} ${styles[`${className}`]}`}
       src={src}
-      onClick={clickFunc}
+      onClick={onClick}
       onError={onErrorImg}
     />
   );

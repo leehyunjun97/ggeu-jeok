@@ -32,7 +32,7 @@ const ChatInputSection = () => {
   return (
     <section className={styles.inputSection}>
       <Textarea
-        placeholder={'shift+enter 전송'}
+        placeholder={'Enter 전송'}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) => shiftEnterKeyDownHandler(e, messagePushHandler)}
