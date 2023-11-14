@@ -51,7 +51,6 @@ const Login = () => {
     }
   };
 
-  // 따로 관리 하는법
   const errorMessageDivHandler = (bool: boolean) => {
     return !bool ? 'displayNone' : 'displayBlock';
   };

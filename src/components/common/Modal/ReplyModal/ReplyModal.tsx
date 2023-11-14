@@ -6,7 +6,7 @@ import Button from '../../Button/Button';
 interface IProps {
   isModal?: boolean;
   setIsModal: Dispatch<SetStateAction<boolean>>;
-  addFriendHandler?: any;
+  successFunc: React.MouseEventHandler<HTMLButtonElement>;
   text: string;
   isLoading: boolean;
 }
@@ -14,7 +14,7 @@ interface IProps {
 const ReplyModal = ({
   isModal,
   setIsModal,
-  addFriendHandler,
+  successFunc,
   text,
   isLoading,
 }: IProps) => {
@@ -33,7 +33,7 @@ const ReplyModal = ({
             </section>
             <section className={styles.replyBtnSection}>
               <Button.ActiveButton
-                onClick={addFriendHandler}
+                onClick={successFunc}
                 disable={isLoading}
                 text={'예'}
               />

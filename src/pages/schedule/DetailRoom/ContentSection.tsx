@@ -5,7 +5,6 @@ import {
   IDateDetailContent,
   IMemberInfo,
 } from '../../../types/room';
-import { updateDetailDateContentsApi } from '../../../services/room/room';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { detailScheduleInfo, roomInfo } from '../../../recoil/room/roomInfo';
 import Toast from '../../../components/common/Toast/Toast';
@@ -18,6 +17,7 @@ import {
 import { noneOrBlock } from '../../../utils/common/displayNoneBlock';
 import BackgroundLoading from '../../../components/common/Loading/BackgroundLoading';
 import Button from '../../../components/common/Button/Button';
+import ReplyModal from '../../../components/common/Modal/ReplyModal/ReplyModal';
 
 interface IProps {
   myProfile: IMemberInfo;
@@ -29,6 +29,7 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
     useRecoilState(detailScheduleInfo);
 
   const room = useRecoilValue(roomInfo);
+  const [isModal, setIsModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -65,7 +66,21 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
     });
   };
 
-  const updateContentsHandler = async () => {};
+  const updateContentsHandler = async () => {
+    setIsLoading(true);
+    const newDetail: IDateDetail = {
+      ...detailSchedule,
+      content: newContent,
+    };
+
+    updateContentsFunc(room, detailSchedule.id, newDetail, () => {
+      setDetailSchedule({ ...detailSchedule, content: newDetail.content });
+      setVisible(!visible);
+      setIsLoading(false);
+      setIsModal(!isModal);
+      setToastText('전체 수정되었습니다!');
+    });
+  };
 
   return (
     <>
@@ -99,8 +114,22 @@ const ContentSection = ({ myProfile, detailDatePath }: IProps) => {
           <Toast text={toastText} visible={visible} setVisible={setVisible} />
         )}
       </ul>
-      <Button text={'전체 수정'} onClick={() => {}} />
+      <Button
+        className={'contentsUpdateBtn'}
+        text={'전체 수정'}
+        onClick={() => setIsModal(!isModal)}
+        style={{ position: 'fixed', bottom: '30px', right: '34px' }}
+      />
       {isLoading && <BackgroundLoading />}
+      {isModal && (
+        <ReplyModal
+          isModal={isModal}
+          setIsModal={setIsModal}
+          successFunc={updateContentsHandler}
+          text='전체 내용을 수정하시겠습니까?'
+          isLoading={isLoading}
+        />
+      )}
     </>
   );
 };

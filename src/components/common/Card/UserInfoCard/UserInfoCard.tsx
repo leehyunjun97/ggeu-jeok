@@ -11,7 +11,6 @@ import ProfileModal from '../../Modal/ProfileModal/ProfileModal';
 import { fromEmail } from '../../../../utils/common/userFindAndTrans';
 import BackgroundLoading from '../../Loading/BackgroundLoading';
 import Toast from '../../Toast/Toast';
-import { onErrorImg } from '../../../../constants/images/defaultImg';
 import Img from '../../Img/Img';
 
 interface IProps {
@@ -79,7 +78,7 @@ const UserInfoCard = ({ info, add }: IProps) => {
         <ReplyModal
           isModal={isModal}
           setIsModal={setIsModal}
-          addFriendHandler={addFriendHandler}
+          successFunc={addFriendHandler}
           text='친구 요청을 보내시겠습니까?'
           isLoading={isLoading}
         />
