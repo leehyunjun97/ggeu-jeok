@@ -28,9 +28,6 @@ export const useFetchUserSearch = () => {
     {
       enabled: !!search,
       refetchOnWindowFocus: false,
-      useErrorBoundary: true,
-      // cacheTime: 5 * 10 * 1000,
-      // staleTime: 5 * 10 * 1000,
     }
   );
 
