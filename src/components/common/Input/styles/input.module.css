@@ -20,3 +20,7 @@
   font-weight: bold;
   margin-left: 3px;
 }
+
+.userCheckbox {
+  display: none;
+}

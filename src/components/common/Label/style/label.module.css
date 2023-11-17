@@ -1,4 +1,4 @@
-.roomCreateLabel {
+.basicLabel {
   display: block;
   font-size: 18px;
   margin-bottom: 6px;
@@ -15,4 +15,30 @@
   right: 3px;
   top: -24px;
   font-weight: bold;
+}
+
+.userCheckboxLabel {
+  display: flex;
+  border-radius: 20px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.userCheckboxLabel span {
+  height: 100%;
+  width: 100%;
+  border: 1px dotted black;
+  border-radius: 20px;
+  padding: 8px;
+  transition: 250ms all ease;
+}
+
+.userCheckboxLabel span:hover {
+  border: none;
+  background-color: #ecdaf3;
+}
+
+.userCheckboxLabel input:checked + span {
+  border: none;
+  background-color: #ecdaf3;
 }
