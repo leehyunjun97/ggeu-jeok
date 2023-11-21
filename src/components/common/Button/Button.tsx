@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './styles/button.module.css';
+import styles from './style/button.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface IButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  canecelOnClick?: React.MouseEventHandler<HTMLButtonElement>;
   text?: string | React.ReactNode;
   className?: string;
   disable?: boolean;

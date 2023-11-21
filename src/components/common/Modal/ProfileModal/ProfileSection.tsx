@@ -1,4 +1,4 @@
-import styles from './styles/profileSection.module.css';
+import styles from './style/profileSection.module.css';
 import { IUserInfo } from '../../../../types/user';
 import { IFriendInfo } from '../../../../types/friend';
 import { useEffect, useState } from 'react';

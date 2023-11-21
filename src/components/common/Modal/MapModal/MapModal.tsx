@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from './style/mapModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Portal from '../Portal/Portal';
 import Button from '../../Button/Button';
+import Title from '../../Heading/Title';
 
 declare global {
   interface Window {
@@ -35,12 +36,11 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
           setMap((prev: any) => ({
             ...prev,
             center: {
-              lat: position.coords.latitude, // 위도
-              lng: position.coords.longitude, // 경도
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
             },
             isLoading: false,
           }));
-          // transAddr(position.coords.longitude, position.coords.latitude);
         },
         (err) => {
           setMap((prev: any) => ({
@@ -51,7 +51,6 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
         }
       );
     } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
       setMap((prev: any) => ({
         ...prev,
         errMsg: 'geolocation을 사용할수 없어요..',
@@ -60,32 +59,6 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
     }
   };
 
-  // const onClickAddr = () => {
-  //   // 3) 주소 검색
-  //   new window.daum.Postcode({
-  //     // 4) 검색된 주소 클릭 시 콜백 함수
-  //     oncomplete: function (addrData: any) {
-  //       var geocoder = new window.kakao.maps.services.Geocoder();
-  //       geocoder.addressSearch(
-  //         addrData.address, // 검색된 주소
-  //         function (result: any, status: any) {
-  //           // 5) 성공시 좌표 값을 가져온다.
-  //           if (status === window.kakao.maps.services.Status.OK) {
-  //             var currentPos = new window.kakao.maps.LatLng(
-  //               result[0].y,
-  //               result[0].x
-  //             );
-  //             (document.getElementById('addr') as HTMLInputElement).value =
-  //               addrData.address;
-
-  //             setPosition(currentPos);
-  //           }
-  //         }
-  //       );
-  //     },
-  //   }).open();
-  // };
-
   const transAddr = (lng: any, lat: any) => {
     geocoder.coord2Address(lng, lat, (result: any, status: any) => {
       if (status === window.kakao.maps.services.Status.OK) {
@@ -93,7 +66,6 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
           ? result[0].road_address.address_name
           : result[0].address.address_name;
 
-        // 클릭한 위치 주소를 가져온다.
         console.log(addr);
         setAddr(addr);
       }
@@ -113,7 +85,7 @@ const MapModal = ({ closeModal, addr, setAddr }: any) => {
           <div className={styles.modalSection}>
             <Button.CloseButton onClick={closeModal} />
             <section className={styles.titleSection}>
-              <h4>지도</h4>
+              <Title text={'지도'} />
             </section>
             <section className={styles.searchSection}>
               <FontAwesomeIcon

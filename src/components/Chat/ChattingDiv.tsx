@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styles from './styles/roomChattingDiv.module.css';
+import styles from './style/roomChattingDiv.module.css';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../recoil/room/roomInfo';
 import { IChat } from '../../types/chat';
@@ -13,6 +13,7 @@ import {
 } from '../../utils/chat/chat';
 import { userInfo } from '../../recoil/user/user';
 import OtherChatCard from './OtherChatCard';
+import Title from '../common/Heading/Title';
 
 interface IProps {
   hide: boolean;
@@ -60,7 +61,7 @@ const RoomChattingDiv = ({ hide }: IProps) => {
       style={{ display: hide ? 'none' : 'block' }}
     >
       <section className={styles.titleSection}>
-        <h4>채팅방</h4>
+        <Title text={'채팅방'} />
       </section>
       <ul className={styles.bodySection} ref={chatBodyRef}>
         {!!chatList?.length &&

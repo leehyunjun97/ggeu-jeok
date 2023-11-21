@@ -20,7 +20,6 @@ const DetailSchedule = () => {
   const [detailSchedule, setDetailSchedule] =
     useRecoilState(detailScheduleInfo);
 
-  // 따로 라우팅
   useEffect(() => {
     const getMyDetailHandler = async () => {
       try {
@@ -33,7 +32,9 @@ const DetailSchedule = () => {
         }
 
         setDetailSchedule(data);
-      } catch (error) {}
+      } catch (error) {
+        alert('detail page 에러!');
+      }
     };
     room.uuid && getMyDetailHandler();
   }, [detailDatePath, navigate, room.uuid, setDetailSchedule]);

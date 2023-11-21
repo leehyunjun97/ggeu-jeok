@@ -12,7 +12,3 @@ export interface IUserInfo {
   friend: IFriendInfo[];
   alarm: IAlarm[];
 }
-
-export interface IEmail {
-  email: string;
-}

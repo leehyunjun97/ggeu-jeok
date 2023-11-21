@@ -24,10 +24,10 @@ const FileUpload = ({
   return (
     <>
       <Img src={src} onClick={refClickHandler} className={imgClassName} />
-      <Input
+
+      <Input.File
         style={{ display: 'none' }}
-        inputRef={imgRef}
-        type='file'
+        fileRef={imgRef}
         accept='image/*'
         onChange={(e) => {
           imgFileHandler(e, setImg);

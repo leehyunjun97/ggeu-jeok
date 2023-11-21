@@ -2,7 +2,6 @@ import axios from 'axios';
 import { IUserInfo } from '../../types/user';
 import { v4 as uuidv4 } from 'uuid';
 import { IAlarm } from '../../types/alarm';
-// import { postEmailCheckApi } from '../user/user';
 
 const myAlarmsApi = async (uuid: string) => {
   try {

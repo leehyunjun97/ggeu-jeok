@@ -6,6 +6,7 @@ import { IAlarm } from '../../../../types/alarm';
 import { IUserInfo } from '../../../../types/user';
 import Button from '../../Button/Button';
 import Portal from '../Portal/Portal';
+import Title from '../../Heading/Title';
 
 interface IAlarmProps {
   isModal: boolean;
@@ -32,7 +33,7 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
           <div className={styles.modalSection}>
             <Button.CloseButton onClick={modalHandler} />
             <section className={styles.titleSection}>
-              <h4>알림</h4>
+              <Title text={'알림'} />
             </section>
 
             <section className={styles.alarmSection}>
@@ -48,7 +49,7 @@ const AlarmModal = ({ isModal, setIsModal, myInfo }: IAlarmProps) => {
                   ))}
                 </ul>
               ) : (
-                <h4 className={styles.zeroAlarm}>알람이 없습니다.</h4>
+                <Title text='알람이 없습니다.' style={{ marginTop: '50%' }} />
               )}
             </section>
           </div>

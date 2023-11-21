@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './styles/schedulesUl.module.css';
+import styles from './style/schedulesUl.module.css';
 import { useNavigate } from 'react-router-dom';
 import ScheduleInfoCard from '../../Card/ScheduleInfoCard/ScheduleInfoCard';
 import { getRoomListApi } from '../../../../services/room/room';

@@ -1,4 +1,4 @@
-export type alarmType = 'friendRequest' | 'friendRequestRefusal' | 'roomInvite';
+export type alarmType = 'friendRequest' | 'friendRequestRefusal';
 
 export interface IAlarm {
   uuid: string;

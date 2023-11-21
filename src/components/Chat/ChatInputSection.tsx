@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import styles from './styles/roomChattingDiv.module.css';
+import styles from './style/roomChattingDiv.module.css';
 import Textarea from '../common/Textarea/Textarea';
 import Button from '../common/Button/Button';
 import { useRecoilValue } from 'recoil';

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles/backgroundLoading.module.css';
+import styles from './style/backgroundLoading.module.css';
 import sectionmg from '../../../assets/sectionLoadingImg.gif';
 import Portal from '../Modal/Portal/Portal';
 import Img from '../Img/Img';

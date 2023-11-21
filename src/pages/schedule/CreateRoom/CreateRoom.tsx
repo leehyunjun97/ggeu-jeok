@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
 import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { dateStringHandler, dffDay } from '../../../utils/common/date';
 import {
@@ -22,6 +22,7 @@ import Button from '../../../components/common/Button/Button';
 import BackgroundLoading from '../../../components/common/Loading/BackgroundLoading';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/common/Input/Input';
+import Title from '../../../components/common/Heading/Title';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -124,7 +125,7 @@ const CreateRoom = () => {
 
   return (
     <div className={styles.main}>
-      <h3>Make a plan</h3>
+      <Title text={'Make a plan'} />
       <div className={styles.formSection}>
         <div className={styles.roomTitleSection}>
           <Label text='방 제목' />
@@ -160,8 +161,7 @@ const CreateRoom = () => {
         </div>
         <div className={styles.locationSection}>
           <Label text='지역' />
-
-          <Input type={'location'} value={room.location} readOnly={true} />
+          <Input.Location value={room.location} />
           <Button
             text={'meeting'}
             onClick={modalHandler}

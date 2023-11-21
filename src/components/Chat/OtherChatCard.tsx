@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles/roomChattingDiv.module.css';
+import styles from './style/roomChattingDiv.module.css';
 import { IChat } from '../../types/chat';
 import { timeStringHandler } from '../../utils/common/date';
 import Img from '../common/Img/Img';

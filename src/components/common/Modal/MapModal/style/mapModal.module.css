@@ -33,21 +33,6 @@
   margin-top: 35px;
 }
 
-.titleSection h4 {
-  margin-bottom: 0px;
-}
-
-.modalCloseBtn {
-  background-color: transparent;
-  border: none;
-  color: black;
-  font-size: 18px;
-  cursor: pointer;
-  position: absolute;
-  right: -1px;
-  top: 2px;
-}
-
 .mapSection {
   width: 90%;
   height: 380px;
@@ -68,8 +53,6 @@
   font-weight: bold;
   font-size: 12px;
 }
-
-/* 나중에 뺄거 */
 
 .searchSection {
   height: 40px;
