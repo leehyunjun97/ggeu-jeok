@@ -1,8 +1,60 @@
-- git checkout -b branchNmae : 브랜치를 생성하고 그 브랜치로 이동
-- git checkout branchName : 브랜치 이동
-- git branch -D : 로컬 브랜치 삭제
-- git checkout -b localBranchName origin/branchName : 원격에 있는 브랜치 가져오기
-- git commit -m "메세지" : 커밋 메세지
-- git pull origin branchName : 원격 브랜치 내용 땡겨오기
-- git push origin --delete branchName : 원격 브랜치 삭제하기
-- git fetch -p : 원격에 있는 브랜치들로 재설정
+## :memo: GGEU-JEOK
+
+소통을 통해 계획 일정을 조정하는 웹 애플리케이션
+
+<br/>
+
+## :pager: 배포 페이지
+
+공백
+
+<br/>
+
+## :books: 기술 스택
+
+> ``React.js`` ``TypeScript`` ``Recoil`` ``CSS`` ``Firebase``
+
+<br/>
+
+## :eyes: 기능 및 UI
+
+#### 1. Sign In, Sign Up
+
+- 회원가입, 로그인을 할 수 있다.
+
+#### 2. 친구 추가 :couple:
+
+- 닉네임을 검색해 해당 유저 목록을 제공 받을 수 있다.
+- 친구 요청을 할 수 있다.
+- 요청을 수락, 거절 할 수 있다.
+
+#### 3. 알람
+
+- 친구 수락, 거절, 확인 알람을 받을 수 있다.
+
+#### 4. 프로필
+
+- 친구 목록에 있는 Card를 클릭 해 확인 할 수 있다.
+- Header에 있는 내 정보를 클릭 해 확인 할 수 있다.
+- 내 프로필에 이미지를 클릭 해 이미지를 수정 할 수 있다.
+
+#### 5. 방
+
+##### 5.1 방 생성
+
+- 방 제목 작성할 수 있다.
+- 계획 당일과 마지막 일 기간을 정할 수 있다.
+- 계획 장소를 지정할 수 있다.
+- 친구 목록을 통해 멤버를 추가 할 수 있다.
+
+#### 6. 
+
+
+
+
+
+
+
+
+
+
