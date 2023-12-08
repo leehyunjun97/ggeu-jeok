@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './style/userInfoCard.module.css';
 import { IUserInfo } from '../../../../types/user';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
@@ -12,6 +12,7 @@ import { fromEmail } from '../../../../utils/common/userFindAndTrans';
 import BackgroundLoading from '../../Loading/BackgroundLoading';
 import Toast from '../../Toast/Toast';
 import Img from '../../Img/Img';
+import { randomColorFunc } from '../../../../utils/common/randomColor';
 
 interface IProps {
   info: IFriendInfo | IUserInfo | IMemberInfo;
@@ -21,11 +22,16 @@ interface IProps {
 const UserInfoCard = ({ info, add }: IProps) => {
   const [isModal, setIsModal] = useState(false);
   const [isProfileModal, setIsProfileModal] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState<string>();
   const myinfo = useRecoilValue(userInfo);
 
   const [isLoading, setIsLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [toastText, setToastText] = useState('');
+
+  useEffect(() => {
+    setBackgroundColor(randomColorFunc());
+  }, []);
 
   const cardClickHandler = () => {
     if (add === 'friend') {
@@ -65,7 +71,11 @@ const UserInfoCard = ({ info, add }: IProps) => {
 
   return (
     <>
-      <li className={styles.cardBody} onClick={cardClickHandler}>
+      <li
+        className={styles.cardBody}
+        onClick={cardClickHandler}
+        style={{ backgroundColor }}
+      >
         <section className={styles.imageSection}>
           <Img src={info.image} className={'profileImg'} />
         </section>
