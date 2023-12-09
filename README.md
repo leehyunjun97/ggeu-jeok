@@ -20,13 +20,13 @@
 
 #### 1. Sign
 
-- 회원가입, 로그인을 할 수 있다.
+- ``회원가입`` ``로그인``을 할 수 있다.
 
 #### 2. 친구 추가 :couple:
 
 - ``닉네임``을 검색해 해당 유저 목록을 제공 받을 수 있다.
 - 친구 요청을 할 수 있다.
-- 요청을 수락, 거절 할 수 있다.
+- 요청을 ``수락, 거절`` 할 수 있다.
 
 #### 3. 알람 :bell:
 
@@ -54,7 +54,7 @@
  
 * #### 5.3 채팅 :speech_balloon:
 
-  - 멤버끼리 채팅을 할 수 있다.
+  - ``멤버끼리 채팅을 할 수 있다.``
 
 
 #### 6. 일정 ( Detail ) :calendar:
@@ -66,22 +66,35 @@
 
 ## :pencil2: 구현
 
-#### Routing
+#### 1. Routing
 
 - ``react-router-dom을 사용해 Page Routing을 했습니다.``
 - ``Route태그``를 나누어 ``로그인`` ``비로그인`` ``노매치`` 라우팅을 따로 해주었습니다.
 - 각 ``라우팅 컴포넌트``로 따로 빼 ``UseEffect를 사용해 초기 state``를 관리해주었습니다.
 
-#### Firebase
+#### 2. Firebase
 
-* Storage: ``Image`` 관리
+* Storage: ``User Profile Image`` 관리
 * Realtime: ``채팅 내역`` 관리
-* Firestore: ``user, room 데이터베이스`` 관리
+* Firestore: ``User, Room 데이터베이스`` 관리
 
-#### 1. Sign
+#### 3. Sign
 
- * #### 1.1 회원가입
+ * #### 3.1 회원가입
 
+   - ``ErrorMessage``라는 입력값의 형식을 감시하는 컴포넌트를 만들어 state가 변경될 때 마다 <br />
+     CSS display를 바꿔주어 실시간 반응 UI로 만들어주었습니다.
    - 
 
+### 100. ETC
 
+  * #### 100.1 Loading
+  * #### 100.2 Modal
+  * #### 100.3 Toast
+  * #### 100.4 Disable
+
+
+<br />
+
+## :blush: 느낀 점
+처음에 json-parse라는 가짜 디비서버를 사용했음
