@@ -69,22 +69,43 @@
 #### 1. Routing
 
 - ``react-router-dom을 사용해 Page Routing을 했습니다.``
-- ``Route태그``를 나누어 ``로그인`` ``비로그인`` ``노매치`` 라우팅을 따로 해주었습니다.
+- ``Route태그``를 나누어 ``User`` ``NonUser`` ``Schedule`` ``NoMatch`` 라우팅을 따로 해주었습니다.
 - 각 ``라우팅 컴포넌트``로 따로 빼 ``UseEffect를 사용해 초기 state``를 관리해주었습니다.
 
 #### 2. Firebase
 
 * Storage: ``User Profile Image`` 관리
-* Realtime: ``채팅 내역`` 관리
+* Realtime Database: ``채팅 내역`` 관리
 * Firestore: ``User, Room 데이터베이스`` 관리
 
+#### 3. Recoil
+
+* 상태 저장 라이브러리인 Recoil을 사용해 전역적으로 관리했습니다.
+* ``User`` ``Room``의 state를 관리해주었습니다.
+
+#### 4. Sign
+
+ * #### 4.1 회원가입
+
+   - ``isValidationCheck``라는 이메일 형식이나, input value의 length를 체크하는 함수를 만들어 boolean을 반환하도록 했습니다.
+   - ``ErrorMessage``라는 형식의 에러를 나타내는 컴포넌트를 만들어 input state가 변경될 때 마다 <br /> display style을 바꿔주어 실시간 반응 UI로 만들어주었습니다.
+   - 회원가입 성공 시 uuid라는 라이브러리를 사용해 user database id에 고유한 값을 넣어주었습니다.
+     
+ * #### 4.2 로그인
+
+   - 로그인 성공 시 localStorage에 id를 저장해 사용했습니다. ( 새로고침 방지 )
+   - 성공 후 ``UserRouter 컴포넌트``에 접근해 id를 가지고, ``getMyInfoApi``를 호출해 초기 state를 가공해주었습니다.
+   - Application의 localStorage의 값을 임의로 바꿀 시 ``잘못된 접근`` 처리를 해주었습니다.
+  
+#### 5. 
+
+ * #### 5.1 
+
+
 #### 3. Sign
-
- * #### 3.1 회원가입
-
-   - ``ErrorMessage``라는 입력값의 형식을 감시하는 컴포넌트를 만들어 state가 변경될 때 마다 <br />
-     CSS display를 바꿔주어 실시간 반응 UI로 만들어주었습니다.
-   - 
+#### 3. Sign
+#### 3. Sign
+#### 3. Sign
 
 ### 100. ETC
 
@@ -97,4 +118,5 @@
 <br />
 
 ## :blush: 느낀 점
-처음에 json-parse라는 가짜 디비서버를 사용했음
+처음에 json-parse라는 가짜 디비서버를 사용했음 <br />
+firebase database가 배열 ( 대괄호 ) 를 인식하지 못해 애먹음
