@@ -74,33 +74,79 @@
 
 #### 2. Firebase
 
-* Storage: ``User Profile Image`` 관리
-* Realtime Database: ``채팅 내역`` 관리
-* Firestore: ``User, Room 데이터베이스`` 관리
+* db 구조, image url 어떻게 저장되는지, 채팅 db 구조
+
+* Storage - ``User Profile Image`` 관리
+* Realtime Database - ``채팅 내역`` 관리
+* Firestore - ``User, Room 데이터베이스`` 관리
 
 #### 3. Recoil
 
 * 상태 저장 라이브러리인 Recoil을 사용해 전역적으로 관리했습니다.
 * ``User`` ``Room``의 state를 관리해주었습니다.
 
-#### 4. Sign
+#### 4. API
 
- * #### 4.1 회원가입
+* API 호출은 ``axios`` 라이브러리를 사용했습니다.
+
+#### 5. Sign
+
+ * #### 5.1 구조
+
+   - firebase 고유 key값으로 감싸져있습니다. ex) -NicC90trwosLIz8haw7
+   - ``email`` ``friend 객체`` ``alarm 객체`` ``uuid`` ``image`` ``name`` ``nickname`` ``password``로 구성되어있습니다.
+
+ * #### 5.2 회원가입
 
    - ``isValidationCheck``라는 이메일 형식이나, input value의 length를 체크하는 함수를 만들어 boolean을 반환하도록 했습니다.
-   - ``ErrorMessage``라는 형식의 에러를 나타내는 컴포넌트를 만들어 input state가 변경될 때 마다 <br /> display style을 바꿔주어 실시간 반응 UI로 만들어주었습니다.
-   - 회원가입 성공 시 uuid라는 라이브러리를 사용해 user database id에 고유한 값을 넣어주었습니다.
+   - ``ErrorMessage``라는 형식의 에러를 나타내는 컴포넌트를 만들어 input state가 변경될 때 마다 <br /> ``display style``을 바꿔주어 실시간 반응 UI로 만들어주었습니다.
+   - 회원가입 성공 시 ``uuid``라는 라이브러리를 사용해 ``user database id``에 고유한 값을 넣어주었습니다.
      
- * #### 4.2 로그인
+ * #### 5.3 로그인
 
-   - 로그인 성공 시 localStorage에 id를 저장해 사용했습니다. ( 새로고침 방지 )
+   - 로그인 성공 시 ``localStorage``에 id를 저장해 사용했습니다. ( 새로고침 방지 )
    - 성공 후 ``UserRouter 컴포넌트``에 접근해 id를 가지고, ``getMyInfoApi``를 호출해 초기 state를 가공해주었습니다.
    - Application의 localStorage의 값을 임의로 바꿀 시 ``잘못된 접근`` 처리를 해주었습니다.
   
-#### 5. 
+#### 6. Friends
 
- * #### 5.1 
+ * #### 6.1 구조
 
+   - ``email`` ``id`` ``image`` ``name`` ``nickname``으로 구성되어있습니다.
+
+ * #### 6.2 Friends List
+
+   - ``Recoil userInfo state``를 불러와 그 안에 friend 객체배열을 map으로 뿌려주었습니다. 
+
+ * #### 6.3 User Search
+
+   - UseQuery를 사용해 ``userSearchApi`` api를 호출 후 가공을 해주었습니다.
+   - filter를 사용해 이미 친구추가가 되어 있는지, 본인인지 필터링 해주었습니다.
+   - 가공한 user 객체배열을 map으로 뿌려주었습니다.
+
+ * #### 6.4 Friend request
+
+   - 가공한 list의 card를 클릭 시 ``friendRequestApi`` api를 호출 해 send user의 알람에 추가되도록 했습니다.
+   - ``friendRequestApi`` api를 호출하기 전, 이미 요청을 보냈는 지 send user의 alarm 객체의 type을 필터링해 <br /> 중복요청 방지를 해주었습니다.
+
+#### 7. Alarm
+
+ * #### 7.1 구조
+
+   - ``email`` ``message`` ``nickname`` ``type`` ``uuid`` ``create_at``으로 구성되어있습니다.
+
+ * #### 7.2 Accept friend request
+
+   - 
+ 
+ * #### 7.3 refusal friend request
+
+   -  
+
+#### 5. Component
+
+ * 각각의 ``User`` ``Friend`` ``Member``의 Ul List Component를 만들어 구성했습니다.
+ * UserInfoCard Component를 만들어 props로 user, friend, member type을 받아 사용하게했습니다.
 
 #### 3. Sign
 #### 3. Sign
@@ -119,4 +165,7 @@
 
 ## :blush: 느낀 점
 처음에 json-parse라는 가짜 디비서버를 사용했음 <br />
-firebase database가 배열 ( 대괄호 ) 를 인식하지 못해 애먹음
+firebase database가 배열 ( 대괄호 ) 를 인식하지 못해 애먹음 <br />
+객체안에 객체 <br />
+recoil을 쓰지않고, useLocation를 사용했을 때 <br />
+
