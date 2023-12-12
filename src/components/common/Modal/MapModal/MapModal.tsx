@@ -158,7 +158,7 @@ const MapTest = ({ closeModal, setAddr }: IMapProps) => {
                   }}
                   style={{
                     width: 'max-content',
-                    backgroundColor: '#f4acb7',
+                    backgroundColor: '#c8a2c8',
                     padding: '3px',
                   }}
                 />
