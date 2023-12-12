@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 declare module '*.svg' {
   import * as React from 'react';
 

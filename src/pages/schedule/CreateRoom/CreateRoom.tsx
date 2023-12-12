@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './style/createRoom.module.css';
 import Label from '../../../components/common/Label/Label';
-import MapModal from '../../../components/common/Modal/MapModal/MapModal';
 import ReactDatePicker from 'react-datepicker';
 import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -23,6 +22,7 @@ import BackgroundLoading from '../../../components/common/Loading/BackgroundLoad
 import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/common/Input/Input';
 import Title from '../../../components/common/Heading/Title';
+import MapModal from '../../../components/common/Modal/MapModal/MapModal';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -188,10 +188,10 @@ const CreateRoom = () => {
         disable={isLoading}
         text={'생성'}
       />
+
       {isModal && (
         <MapModal
           closeModal={modalHandler}
-          addr={room.location}
           setAddr={(location: string) => {
             setRoomInfo({ ...room, location });
           }}

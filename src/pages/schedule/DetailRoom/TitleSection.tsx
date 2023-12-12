@@ -74,16 +74,17 @@ const TitleSection = ({ myProfile }: IProps) => {
             readOnly={myProfile.class === 'member'}
             className={'newTitle'}
           />
-          <Button
+          <Button.ActiveButton
             onClick={updateTitleHandler}
             text={'수정'}
-            className={'newTitleUpdateBtn'}
             disable={isLoading}
+            style={{ width: '15%', height: '31px', marginLeft: '5px' }}
           />
-          <Button
+          <Button.ActiveButton
             onClick={subTitleToggle}
             text={'취소'}
-            className={'newTitleBtn'}
+            isActive='cancel'
+            style={{ width: '15%', height: '31px' }}
           />
         </div>
       )}
