@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { IUserInfo } from '../../types/user';
+import { firebaseUrl } from '../../constants/url/baseUrl';
 
 const addFriendApi = async (myInfo: IUserInfo, friendInfo: IUserInfo) => {
   try {
     const fatchCom = await axios.patch(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${myInfo.uuid}.json`,
+      `${firebaseUrl}/user/${myInfo.uuid}.json`,
       {
         ...myInfo,
         friend: [

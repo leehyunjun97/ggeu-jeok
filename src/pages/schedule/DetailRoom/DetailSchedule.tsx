@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './style/detailSchedule.module.css';
-import MembersList from '../../../components/common/Section/FriendsListUl/MembersList';
+import MembersList from '../../../components/common/Section/UserInfoListUl/MembersList';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import TitleSection from './TitleSection';
 import {

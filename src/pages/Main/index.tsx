@@ -1,5 +1,5 @@
 import styles from './style/main.module.css';
-import FriendsList from '../../components/common/Section/FriendsListUl/FriendsList';
+import FriendsList from '../../components/common/Section/UserInfoListUl/FriendsList';
 import SchedulesUl from '../../components/common/Section/SchedulesUl/SchedulesUl';
 import Span from '../../components/common/Span/Span';
 

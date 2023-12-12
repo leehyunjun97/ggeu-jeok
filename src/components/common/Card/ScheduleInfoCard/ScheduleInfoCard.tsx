@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { roomInfo } from '../../../../recoil/room/roomInfo';
 import { randomColorFunc } from '../../../../utils/common/randomColor';
+import { dateStringHandler } from '../../../../utils/common/date';
 
 interface IScheduleCardProps {
   room: IRoomInfo;
@@ -33,9 +34,12 @@ const ScheduleInfoCard = ({ room }: IScheduleCardProps) => {
       style={{ backgroundColor }}
     >
       <p className={styles.cardTitle}>{room.title}</p>
-      <p className={styles.membersNumber}>
-        <FontAwesomeIcon icon={faUser} /> {room.member.length}
-      </p>
+      <section className={styles.bottomSection}>
+        <p style={{ fontSize: '0.9vw' }}>{dateStringHandler(room.dDay!)}</p>
+        <p className={styles.membersNumber}>
+          <FontAwesomeIcon icon={faUser} /> {room.member.length}
+        </p>
+      </section>
     </li>
   );
 };

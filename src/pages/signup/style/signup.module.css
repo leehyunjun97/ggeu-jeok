@@ -17,6 +17,7 @@
   border: 1.7px solid black;
   position: relative;
   font-family: 'Nanum Pen Script', cursive;
+  box-shadow: 1px 1px 2px 1px #929aab;
 }
 
 .loginDiv {

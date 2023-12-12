@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useFetchUserSearch } from './hooks/useFetchUserSearch';
 import { useSetRecoilState } from 'recoil';
 import { userSearch } from '../../../../recoil/search/userSearch';
-import FriendSearchList from '../../Section/FriendsListUl/FriendSearchList';
+import FriendSearchList from '../../Section/UserInfoListUl/UserSearchList';
 import Button from '../../Button/Button';
 import Label from '../../Label/Label';
 import {

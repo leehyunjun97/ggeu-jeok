@@ -8,26 +8,17 @@
   justify-content: center;
 }
 
-.leftSection,
-.rightSection {
-  border-radius: 1px;
-  border: 1.7px solid black;
-}
-
-.leftSection {
-  background-color: transparent;
-  width: 400px;
-  margin-right: 5%;
-}
-
 .rightSection {
   display: flex;
+  border-radius: 1px;
+  border: 1.7px solid black;
   flex-direction: column;
   flex-grow: 1;
   background-color: transparent;
   justify-content: center;
   max-width: 350px;
   align-items: center;
+  box-shadow: 1px 1px 2px 1px #929aab;
 }
 
 .logoSection {

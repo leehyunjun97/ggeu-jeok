@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { IDateDetail, IRoomInfo } from '../../types/room';
+import { firebaseUrl } from '../../constants/url/baseUrl';
 
 const getRoomListApi = async () => {
   try {
-    const getComplet = await axios.get(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/room.json`
-    );
+    const getComplet = await axios.get(`${firebaseUrl}/room.json`);
     return getComplet.data;
   } catch (error: any) {
     throw new Error(error.message);
@@ -15,7 +14,7 @@ const getRoomListApi = async () => {
 const getMyRoomInfoApi = async (room_id: string) => {
   try {
     const getComplet = await axios.get<IRoomInfo>(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${room_id}.json`
+      `${firebaseUrl}/room/${room_id}.json`
     );
     return getComplet.data;
   } catch (error: any) {
@@ -28,7 +27,7 @@ const getMyDateDetailInfoApi = async (room_uuid: string, date: string) => {
     const getComplet = await axios.get<{
       [key: string]: IDateDetail;
     }>(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${room_uuid}/date.json?orderBy="dateDetail"&equalTo="${date}"`
+      `${firebaseUrl}/room/${room_uuid}/date.json?orderBy="dateDetail"&equalTo="${date}"`
     );
 
     return getComplet.data;
@@ -39,10 +38,7 @@ const getMyDateDetailInfoApi = async (room_uuid: string, date: string) => {
 
 const postCreateRoomApi = async (roomInfo: IRoomInfo) => {
   try {
-    const postComplet = await axios.post(
-      'https://ggeu-jeok-default-rtdb.firebaseio.com/room.json',
-      roomInfo
-    );
+    const postComplet = await axios.post('${firebaseUrl}/room.json', roomInfo);
     return postComplet;
   } catch (error: any) {
     throw new Error(error.message);
@@ -55,7 +51,7 @@ const updateDetailDateContentsApi = async (
 ) => {
   try {
     const patchCom = await axios.patch(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/room/${roomInfo.uuid}.json`,
+      `${firebaseUrl}/room/${roomInfo.uuid}.json`,
       {
         ...roomInfo,
         date: [...detailDates],

@@ -12,6 +12,7 @@
   display: block;
   text-align: center;
   position: relative;
+  font-family: 'Jua', sans-serif;
 }
 
 .cardTitle {
@@ -19,29 +20,20 @@
   font-weight: 400;
   font-size: 1.3vw;
   color: #262626;
-  font-family: 'Jua', sans-serif;
   line-height: 120px;
 }
 
-.period {
+.bottomSection {
   position: absolute;
-  color: #262626;
-  bottom: 0px;
-  left: 15px;
-  font-weight: bold;
-  opacity: 0.8;
-  font-size: 0.7vw;
-}
-
-.periodIcon {
-  margin-right: 5px;
+  bottom: 5px;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .membersNumber {
-  position: absolute;
   color: #262626;
-  bottom: 15px;
-  right: 16px;
   font-weight: bold;
   opacity: 0.8;
   font-size: 0.9vw;

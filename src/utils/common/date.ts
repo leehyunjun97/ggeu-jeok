@@ -1,5 +1,3 @@
-import { Timestamp } from 'firebase/firestore';
-
 const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
 
 export const dateStringHandler = (date: Date) => {

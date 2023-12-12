@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './style/roomMain.module.css';
-import MembersList from '../../../components/common/Section/FriendsListUl/MembersList';
+import MembersList from '../../../components/common/Section/UserInfoListUl/MembersList';
 import DetailScheduleList from '../../../components/common/Section/DetailScheduleListUI/DetailScheduleList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';

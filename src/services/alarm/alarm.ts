@@ -2,11 +2,12 @@ import axios from 'axios';
 import { IUserInfo } from '../../types/user';
 import { v4 as uuidv4 } from 'uuid';
 import { IAlarm } from '../../types/alarm';
+import { firebaseUrl } from '../../constants/url/baseUrl';
 
 const myAlarmsApi = async (uuid: string) => {
   try {
     const getComplet = await axios.get(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${uuid}/alarm.json`
+      `${firebaseUrl}/user/${uuid}/alarm.json`
     );
 
     return getComplet.data;
@@ -19,7 +20,7 @@ const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
   try {
     const addFriendAlarm = async () => {
       const patchComplet = await axios.patch(
-        `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${receiver.uuid}.json`,
+        `${firebaseUrl}/user/${receiver.uuid}.json`,
         {
           ...receiver,
           alarm: [
@@ -51,7 +52,7 @@ const friendRequestRefusalApi = async (
   try {
     const addFriendAlarm = async () => {
       const postComplet = await axios.patch(
-        `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${receiver.uuid}.json`,
+        `${firebaseUrl}/user/${receiver.uuid}.json`,
         {
           ...receiver,
           alarm: [
@@ -78,13 +79,10 @@ const friendRequestRefusalApi = async (
 
 const removeAlarm = async (info: IUserInfo, alarms: IAlarm[]) => {
   try {
-    const delCom = await axios.patch(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${info.uuid}.json`,
-      {
-        ...info,
-        alarm: [...alarms],
-      }
-    );
+    const delCom = await axios.patch(`${firebaseUrl}/user/${info.uuid}.json`, {
+      ...info,
+      alarm: [...alarms],
+    });
     return delCom;
   } catch (error: any) {
     throw new Error(error.message);

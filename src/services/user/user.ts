@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { IUserInfo } from '../../types/user';
+import { firebaseUrl } from '../../constants/url/baseUrl';
 
 const getUsersApi = async () => {
   try {
     const getComplet = await axios.get<{ data: { [key: string]: IUserInfo } }>(
-      'https://ggeu-jeok-default-rtdb.firebaseio.com/user.json'
+      `${firebaseUrl}/user.json`
     );
 
     return getComplet.data;
@@ -16,7 +17,7 @@ const getUsersApi = async () => {
 const getLoginCheckApi = async (email: string) => {
   try {
     const getComplet = await axios.get(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/user.json?orderBy="email"&equalTo="${email}"`
+      `${firebaseUrl}/user.json?orderBy="email"&equalTo="${email}"`
     );
     return getComplet.data;
   } catch (error: any) {
@@ -27,7 +28,7 @@ const getLoginCheckApi = async (email: string) => {
 const getMyInfoApi = async (id: string) => {
   try {
     const getComplet = await axios.get<IUserInfo>(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${id}.json`
+      `${firebaseUrl}/user/${id}.json`
     );
     return getComplet.data;
   } catch (error: any) {
@@ -38,7 +39,7 @@ const getMyInfoApi = async (id: string) => {
 const userSearchApi = async (search: string) => {
   try {
     const getSearchCom = await axios.get(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/user.json?orderBy="nickName"&equalTo="${search}"`
+      `${firebaseUrl}/user.json?orderBy="nickName"&equalTo="${search}"`
     );
     return getSearchCom.data;
   } catch (error: any) {
@@ -49,7 +50,7 @@ const userSearchApi = async (search: string) => {
 const imgUpdateApi = async (uuid: string, src: string) => {
   try {
     const putCom = await axios.put(
-      `https://ggeu-jeok-default-rtdb.firebaseio.com/user/${uuid}/image.json`,
+      `${firebaseUrl}/user/${uuid}/image.json`,
       `"${src}"`
     );
     return putCom;

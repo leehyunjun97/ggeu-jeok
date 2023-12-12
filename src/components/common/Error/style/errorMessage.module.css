@@ -2,8 +2,9 @@
   text-align: left;
   width: 95%;
   height: 15px;
-  font-size: 10.5px;
-  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff0000;
   margin-bottom: 10px;
   display: none;
 }
