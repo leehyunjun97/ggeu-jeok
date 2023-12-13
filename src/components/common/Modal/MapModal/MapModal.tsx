@@ -5,8 +5,10 @@ import Title from '../../Heading/Title';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Input from '../../Input/Input';
 import Toast from '../../Toast/Toast';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Marker {
+  id: string;
   position: {
     lat: number;
     lng: number;
@@ -19,7 +21,7 @@ interface IMapProps {
   setAddr: (location: string) => void;
 }
 
-const MapTest = ({ closeModal, setAddr }: IMapProps) => {
+const MapModal = ({ closeModal, setAddr }: IMapProps) => {
   const [info, setInfo] = useState<Marker | undefined>();
   const [markers, setMarkers] = useState<Marker[]>([]);
   const [map, setMap] = useState<kakao.maps.Map | undefined>();
@@ -49,7 +51,9 @@ const MapTest = ({ closeModal, setAddr }: IMapProps) => {
         let markers: Marker[] = [];
 
         for (let i = 0; i < data.length; i++) {
+          console.log(data[i]);
           markers.push({
+            id: uuidv4(),
             position: {
               lat: Number(data[i].y),
               lng: Number(data[i].x),
@@ -80,6 +84,7 @@ const MapTest = ({ closeModal, setAddr }: IMapProps) => {
           setMarkers((prev) => [
             ...prev,
             {
+              id: uuidv4(),
               position: {
                 lat: mouseEvent.latLng.getLat(),
                 lng: mouseEvent.latLng.getLng(),
@@ -137,7 +142,7 @@ const MapTest = ({ closeModal, setAddr }: IMapProps) => {
             width: '100%',
             height: '350px',
           }}
-          level={3}
+          level={1}
           onCreate={setMap}
           onClick={(_t, mouseEvent) => {
             markerHandler(mouseEvent);
@@ -145,7 +150,7 @@ const MapTest = ({ closeModal, setAddr }: IMapProps) => {
         >
           {markers.map((marker) => (
             <MapMarker
-              key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+              key={marker.id}
               position={marker.position}
               onClick={() => setInfo(marker)}
             >
@@ -158,6 +163,7 @@ const MapTest = ({ closeModal, setAddr }: IMapProps) => {
                   }}
                   style={{
                     width: 'max-content',
+                    minWidth: '150px',
                     backgroundColor: '#c8a2c8',
                     padding: '3px',
                   }}
@@ -173,4 +179,4 @@ const MapTest = ({ closeModal, setAddr }: IMapProps) => {
     </>
   );
 };
-export default MapTest;
+export default MapModal;

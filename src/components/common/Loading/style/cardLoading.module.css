@@ -1,0 +1,17 @@
+.loadingUl {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding-left: 0px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.loadingLi {
+  margin: 8px;
+  margin-top: 5px;
+  height: 200px;
+  list-style-type: none;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}

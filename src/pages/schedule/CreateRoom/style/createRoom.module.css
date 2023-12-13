@@ -91,6 +91,7 @@
 
 .invitationSection {
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   align-content: flex-start;
   height: 130px;
@@ -106,4 +107,12 @@
 
 .createBtn:hover {
   background-color: #a3bd9e;
+}
+
+.noneFriend {
+  font-family: 'Nanum Pen Script', cursive;
+  position: absolute;
+  font-size: 20px;
+  left: 40%;
+  top: 35%;
 }

@@ -23,6 +23,7 @@ const RoomMain = () => {
         <MembersList room={room} />
       </section>
       <section className={styles.roomRightSection}>
+        <Span text={`장소>>> ${room.location}`} className={'backSpan'} />
         <Span text={'계획 일정'} className={'sectionsSpan'} />
         <DetailScheduleList room={room} />
         <RoomChattingDiv hide={hide} />

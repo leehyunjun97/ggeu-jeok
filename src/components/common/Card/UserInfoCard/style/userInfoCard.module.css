@@ -22,7 +22,7 @@
   line-height: 65px;
 }
 
-li:hover,
+.cardBody:hover,
 .defaultLi:hover {
   background-color: #ead0b0;
   transform: rotate(1.2);

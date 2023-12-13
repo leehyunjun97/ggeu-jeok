@@ -171,7 +171,7 @@ const CreateRoom = () => {
         <Label text='멤버 초대' />
         <div className={styles.invitationSection}>
           {!myInfo.friend.length ? (
-            <span>친구를 추가해주세요</span>
+            <span className={styles.noneFriend}>친구를 추가해주세요</span>
           ) : (
             <InvitationList
               setCheckList={setCheckList}
