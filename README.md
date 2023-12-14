@@ -18,27 +18,27 @@
 
 ## :eyes: 기능 및 UI
 
-#### 1. Sign
+### 1. Sign
 
 - ``회원가입`` ``로그인``을 할 수 있다.
 
-#### 2. 친구 추가 :couple:
+### 2. 친구 추가 :couple:
 
 - ``닉네임``을 검색해 해당 유저 목록을 제공 받을 수 있다.
 - 친구 요청을 할 수 있다.
 - 요청을 ``수락, 거절`` 할 수 있다.
 
-#### 3. 알람 :bell:
+### 3. 알람 :bell:
 
 - 친구 ``수락`` ``거절`` ``확인`` 알람을 받을 수 있다.
 
-#### 4. 프로필 :smile:
+### 4. 프로필 :smile:
 
 - 친구 목록에 있는 ``li Card``를 클릭 해 확인 할 수 있다.
 - Header에 있는 ``내 정보``를 클릭 해 확인 할 수 있다.
 - ``내 프로필에 이미지를 클릭 해 이미지를 수정 할 수 있다.``
 
-#### 5. 방 :game_die:
+### 5. 방 :game_die:
 
 * #### 5.1 방 생성
 
@@ -57,7 +57,7 @@
   - ``멤버끼리 채팅을 할 수 있다.``
 
 
-#### 6. 일정 ( Detail ) :calendar:
+### 6. 일정 ( Detail ) :calendar:
 
 - 방 메인의 일정들을 클릭 해 확인 할 수 있다.
 - ``방장이 제목, 각 시간의 세부 일정을 수정 할 수 있다.``
@@ -66,13 +66,13 @@
 
 ## :pencil2: 구현
 
-#### 1. Routing
+### 1. Routing
 
 - ``react-router-dom을 사용해 Page Routing을 했습니다.``
 - ``Route태그``를 나누어 ``User`` ``NonUser`` ``Schedule`` ``NoMatch`` 라우팅을 따로 해주었습니다.
 - 각 ``라우팅 컴포넌트``로 따로 빼 ``UseEffect를 사용해 초기 state``를 관리해주었습니다.
 
-#### 2. Firebase
+### 2. Firebase
 
 * db 구조, image url 어떻게 저장되는지, 채팅 db 구조
 
@@ -80,16 +80,16 @@
 * Realtime Database - ``채팅 내역`` 관리
 * Firestore - ``User, Room 데이터베이스`` 관리
 
-#### 3. Recoil
+### 3. Recoil
 
 * 상태 저장 라이브러리인 Recoil을 사용해 전역적으로 관리했습니다.
 * ``User`` ``Room``의 state를 관리해주었습니다.
 
-#### 4. API
+### 4. API
 
 * API 호출은 ``axios`` 라이브러리를 사용했습니다.
 
-#### 5. Sign
+### 5. Sign
 
  * #### 5.1 구조
 
@@ -108,7 +108,7 @@
    - 성공 후 ``UserRouter 컴포넌트``에 접근해 id를 가지고, ``getMyInfoApi``를 호출해 초기 state를 가공해주었습니다.
    - Application의 localStorage의 값을 임의로 바꿀 시 ``잘못된 접근`` 처리를 해주었습니다.
   
-#### 6. Friends
+### 6. Friends
 
  * #### 6.1 구조
 
@@ -120,26 +120,36 @@
 
  * #### 6.3 User Search
 
-   - UseQuery를 사용해 ``userSearchApi`` api를 호출 후 가공을 해주었습니다.
+   - UseQuery를 사용해 ``userSearchApi`` api를 호출 후 데이터(list)를 가공을 해주었습니다.
    - filter를 사용해 이미 친구추가가 되어 있는지, 본인인지 필터링 해주었습니다.
    - 가공한 user 객체배열을 map으로 뿌려주었습니다.
 
  * #### 6.4 Friend request
 
-   - 가공한 list의 card를 클릭 시 ``friendRequestApi`` api를 호출 해 send user의 알람에 추가되도록 했습니다.
-   - ``friendRequestApi`` api를 호출하기 전, 이미 요청을 보냈는 지 send user의 alarm 객체의 type을 필터링해 <br /> 중복요청 방지를 해주었습니다.
+   - 가공한 List의 card를 클릭 시 ``alarmPushApi`` api를 호출 해 받는 유저의 알람에 추가되도록 했습니다.
+   - api를 호출하기 전, 이미 요청을 보냈는 지, 받는 유저 alarm 객체의 type을 필터링해 <br /> 중복요청 방지를 해주었습니다.
 
-#### 7. Alarm
+### 7. Alarm
 
  * #### 7.1 구조
 
    - ``email`` ``message`` ``nickname`` ``type`` ``uuid`` ``create_at``으로 구성되어있습니다.
+   - Type: ``'friendRequest' | 'friendRequestRefusal' | 'invite'``
+  
+ * #### 7.2 Alarms list
+
+  - ``Recoil userInfo state``를 불러와 그 안에 alarm 객체배열을 map으로 뿌려주었습니다.
+  - Type에 따라 맞는 형식으로 UI를 제공했습니다. 
 
  * #### 7.2 Accept friend request
 
    - 
  
- * #### 7.3 refusal friend request
+ * #### 7.3 Refusal friend request
+
+   -  
+
+ * #### 7.3 invite
 
    -  
 
