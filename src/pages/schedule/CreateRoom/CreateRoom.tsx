@@ -23,6 +23,9 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/common/Input/Input';
 import Title from '../../../components/common/Heading/Title';
 import MapModal from '../../../components/common/Modal/MapModal/MapModal';
+import { IUserInfo } from '../../../types/user';
+import { fromEmail } from '../../../utils/common/userFindAndTrans';
+import { alarmPushApi } from '../../../services/alarm/alarm';
 
 const CreateRoom = () => {
   const myInfo = useRecoilValue(userInfo);
@@ -112,6 +115,12 @@ const CreateRoom = () => {
 
     try {
       const postCom = await postCreateRoomApi(payload);
+
+      payload.member.map(async (item) => {
+        let sendUser: IUserInfo = await fromEmail(item.email);
+        await alarmPushApi(myInfo, sendUser, '방에 초대 하셨습니다.', 'invite');
+      });
+
       if (postCom.status === 200) {
         navigate(`/main`);
       }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './style/userInfoCard.module.css';
 import { IUserInfo } from '../../../../types/user';
 import ReplyModal from '../../Modal/ReplyModal/ReplyModal';
-import { friendRequestApi } from '../../../../services/alarm/alarm';
+import { alarmPushApi } from '../../../../services/alarm/alarm';
 import { IFriendInfo } from '../../../../types/friend';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../../recoil/user/user';
@@ -56,7 +56,12 @@ const UserInfoCard = ({ info, add }: IProps) => {
         return;
       }
 
-      const postCom = await friendRequestApi(myinfo, sendUser);
+      const postCom = await alarmPushApi(
+        myinfo,
+        sendUser,
+        '친구요청을 보냈습니다.',
+        'friendRequest'
+      );
       if (postCom.status === 200) {
         setToastText('친구요청 보내기 완료!');
         setVisible(!visible);

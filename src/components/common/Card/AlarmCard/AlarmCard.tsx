@@ -4,10 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { userRender } from '../../../../recoil/user/user';
 import { IUserInfo } from '../../../../types/user';
 import { IAlarm } from '../../../../types/alarm';
-import {
-  friendRequestRefusalApi,
-  removeAlarm,
-} from '../../../../services/alarm/alarm';
+import { alarmPushApi, removeAlarm } from '../../../../services/alarm/alarm';
 import { dateStringHandler } from '../../../../utils/common/date';
 import Button from '../../Button/Button';
 import { fromEmail } from '../../../../utils/common/userFindAndTrans';
@@ -59,7 +56,12 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
     try {
       setIsLoading(true);
       const sendUser = await fromEmail(alarm.email);
-      const postCom = await friendRequestRefusalApi(myInfo, sendUser);
+      const postCom = await alarmPushApi(
+        myInfo,
+        sendUser,
+        '친구요청을 거절했습니다.',
+        'friendRequestRefusal'
+      );
       if (postCom.status === 200) {
         alarmProcessingHandler();
       }
@@ -107,6 +109,13 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
             </>
           )}
           {alarm.type === 'friendRequestRefusal' && (
+            <Button
+              onClick={alarmProcessingHandler}
+              disable={isLoading}
+              text={'확인'}
+            />
+          )}
+          {alarm.type === 'invite' && (
             <Button
               onClick={alarmProcessingHandler}
               disable={isLoading}

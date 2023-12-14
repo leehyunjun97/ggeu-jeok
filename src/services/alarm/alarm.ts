@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IUserInfo } from '../../types/user';
 import { v4 as uuidv4 } from 'uuid';
-import { IAlarm } from '../../types/alarm';
+import { IAlarm, alarmMessageType, alarmType } from '../../types/alarm';
 import { firebaseUrl } from '../../constants/url/baseUrl';
 
 const myAlarmsApi = async (uuid: string) => {
@@ -16,42 +16,15 @@ const myAlarmsApi = async (uuid: string) => {
   }
 };
 
-const friendRequestApi = async (sender: IUserInfo, receiver: IUserInfo) => {
-  try {
-    const addFriendAlarm = async () => {
-      const patchComplet = await axios.patch(
-        `${firebaseUrl}/user/${receiver.uuid}.json`,
-        {
-          ...receiver,
-          alarm: [
-            ...receiver.alarm,
-            {
-              uuid: uuidv4(),
-              email: sender.email,
-              nickName: sender.nickName,
-              message: '친구요청을 보냈습니다.',
-              type: 'friendRequest',
-              create_at: new Date(),
-            },
-          ],
-        }
-      );
-      return patchComplet;
-    };
-
-    return addFriendAlarm();
-  } catch (error: any) {
-    throw new Error(error.message);
-  }
-};
-
-const friendRequestRefusalApi = async (
+const alarmPushApi = async (
   sender: IUserInfo,
-  receiver: IUserInfo
+  receiver: IUserInfo,
+  message: alarmMessageType,
+  type: alarmType
 ) => {
   try {
-    const addFriendAlarm = async () => {
-      const postComplet = await axios.patch(
+    const pushAlarm = async () => {
+      const alarmPatchComplet = await axios.patch(
         `${firebaseUrl}/user/${receiver.uuid}.json`,
         {
           ...receiver,
@@ -61,17 +34,17 @@ const friendRequestRefusalApi = async (
               uuid: uuidv4(),
               email: sender.email,
               nickName: sender.nickName,
-              message: '친구요청을 거절하였습니다.',
-              type: 'friendRequestRefusal',
+              message,
+              type,
               create_at: new Date(),
             },
           ],
         }
       );
-      return postComplet;
+      return alarmPatchComplet;
     };
 
-    return addFriendAlarm();
+    return pushAlarm();
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -89,4 +62,4 @@ const removeAlarm = async (info: IUserInfo, alarms: IAlarm[]) => {
   }
 };
 
-export { myAlarmsApi, friendRequestApi, friendRequestRefusalApi, removeAlarm };
+export { myAlarmsApi, alarmPushApi, removeAlarm };

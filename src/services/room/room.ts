@@ -38,7 +38,7 @@ const getMyDateDetailInfoApi = async (room_uuid: string, date: string) => {
 
 const postCreateRoomApi = async (roomInfo: IRoomInfo) => {
   try {
-    const postComplet = await axios.post('${firebaseUrl}/room.json', roomInfo);
+    const postComplet = await axios.post(`${firebaseUrl}/room.json`, roomInfo);
     return postComplet;
   } catch (error: any) {
     throw new Error(error.message);
