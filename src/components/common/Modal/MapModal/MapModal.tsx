@@ -6,6 +6,7 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Input from '../../Input/Input';
 import Toast from '../../Toast/Toast';
 import { v4 as uuidv4 } from 'uuid';
+import { enterKeyDownHandler } from '../../../../utils/common/keyDown';
 
 interface Marker {
   id: string;
@@ -50,17 +51,17 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
         const bounds = new kakao.maps.LatLngBounds();
         let markers: Marker[] = [];
 
-        data.map((item, i) => {
+        data.map((item) => {
           markers.push({
             id: uuidv4(),
             position: {
-              lat: Number(data[i].y),
-              lng: Number(data[i].x),
+              lat: Number(item.y),
+              lng: Number(item.x),
             },
-            content: data[i].place_name,
+            content: item.place_name,
           });
-          bounds.extend(
-            new kakao.maps.LatLng(Number(data[i].y), Number(data[i].x))
+          return bounds.extend(
+            new kakao.maps.LatLng(Number(item.y), Number(item.x))
           );
         });
         setMarkers(markers);
@@ -120,6 +121,9 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
             type='text'
             value={mapSearch}
             onChange={(e) => setMapSearch(e.target.value)}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+              enterKeyDownHandler(e, mapSearchHandler)
+            }
           />
           <Button.ActiveButton
             onClick={mapSearchHandler}

@@ -3,7 +3,7 @@ import styles from './style/roomMain.module.css';
 import MembersList from '../../../components/common/Section/UserInfoListUl/MembersList';
 import DetailScheduleList from '../../../components/common/Section/DetailScheduleListUI/DetailScheduleList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import RoomChattingDiv from '../../../components/Chat/ChattingDiv';
 import Span from '../../../components/common/Span/Span';
 import { useRecoilValue } from 'recoil';
@@ -26,6 +26,13 @@ const RoomMain = () => {
         <Span text={'계획 일정'} className={'sectionsSpan'} />
         <DetailScheduleList room={room} />
         <RoomChattingDiv hide={hide} />
+
+        <Button
+          children={<FontAwesomeIcon icon={faLocationDot} />}
+          onClick={() => setHide(!hide)}
+          className='chatToggleBtn'
+          style={{ bottom: '60px' }}
+        />
 
         <Button
           children={<FontAwesomeIcon icon={faComment} />}
