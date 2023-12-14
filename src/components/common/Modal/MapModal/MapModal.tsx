@@ -50,8 +50,7 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
         const bounds = new kakao.maps.LatLngBounds();
         let markers: Marker[] = [];
 
-        for (let i = 0; i < data.length; i++) {
-          console.log(data[i]);
+        data.map((item, i) => {
           markers.push({
             id: uuidv4(),
             position: {
@@ -63,7 +62,7 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
           bounds.extend(
             new kakao.maps.LatLng(Number(data[i].y), Number(data[i].x))
           );
-        }
+        });
         setMarkers(markers);
 
         map.setBounds(bounds);
