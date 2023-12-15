@@ -5,17 +5,12 @@ import Title from '../../Heading/Title';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import Input from '../../Input/Input';
 import Toast from '../../Toast/Toast';
-import { v4 as uuidv4 } from 'uuid';
 import { enterKeyDownHandler } from '../../../../utils/common/keyDown';
-
-interface Marker {
-  id: string;
-  position: {
-    lat: number;
-    lng: number;
-  };
-  content: string;
-}
+import {
+  getPlaceNameFromCoordinates,
+  mapKeywordSearchHandler,
+} from '../../../../utils/map/map';
+import { Marker } from '../../../../types/map';
 
 interface IMapProps {
   closeModal: () => void;
@@ -34,67 +29,29 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
   const [toastText, setToastText] = useState('');
   const [visible, setVisible] = useState(false);
 
-  const geocoder = new window.kakao.maps.services.Geocoder();
+  const mapSearchHandler = async () => {
+    try {
+      if (!map) return;
+      const keywordMarkers = await mapKeywordSearchHandler(map, mapSearch);
 
-  const mapSearchHandler = () => {
-    if (!map) return;
-
-    const ps = new kakao.maps.services.Places();
-
-    ps.keywordSearch(mapSearch, (data, status, _pagination) => {
-      if (!!!data.length) {
+      if (!!!keywordMarkers.length) {
         setToastText('위치를 찾을 수 없습니다.');
         setVisible(!visible);
       }
 
-      if (status === kakao.maps.services.Status.OK) {
-        const bounds = new kakao.maps.LatLngBounds();
-        let markers: Marker[] = [];
-
-        data.map((item) => {
-          markers.push({
-            id: uuidv4(),
-            position: {
-              lat: Number(item.y),
-              lng: Number(item.x),
-            },
-            content: item.place_name,
-          });
-          return bounds.extend(
-            new kakao.maps.LatLng(Number(item.y), Number(item.x))
-          );
-        });
-        setMarkers(markers);
-
-        map.setBounds(bounds);
-      }
-    });
+      setMarkers(keywordMarkers);
+    } catch (error) {}
   };
 
-  const markerHandler = (mouseEvent: kakao.maps.event.MouseEvent) => {
-    geocoder.coord2Address(
-      mouseEvent.latLng.getLng(),
-      mouseEvent.latLng.getLat(),
-      (result: any, status: any) => {
-        if (status === window.kakao.maps.services.Status.OK) {
-          const addr = !!result[0].road_address
-            ? result[0].road_address.address_name
-            : result[0].address.address_name;
+  const markerHandler = async (mouseEvent: kakao.maps.event.MouseEvent) => {
+    try {
+      if (!map) return;
 
-          setMarkers((prev) => [
-            ...prev,
-            {
-              id: uuidv4(),
-              position: {
-                lat: mouseEvent.latLng.getLat(),
-                lng: mouseEvent.latLng.getLng(),
-              },
-              content: addr,
-            },
-          ]);
-        }
-      }
-    );
+      const marker = await getPlaceNameFromCoordinates(map, mouseEvent);
+      setMarkers(marker);
+    } catch (error) {
+      alert('마커 에러!');
+    }
   };
 
   useEffect(() => {
@@ -137,9 +94,13 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
           />
         </section>
         <Map
+          // center={{
+          //   lat: currentLocation?.lat || 0,
+          //   lng: currentLocation?.lng || 0,
+          // }}
           center={{
-            lat: currentLocation?.lat || 0,
-            lng: currentLocation?.lng || 0,
+            lat: 37.50816088470778,
+            lng: 126.7265706962144,
           }}
           style={{
             width: '100%',

@@ -6,13 +6,11 @@ interface ILable {
   htmlFor?: string;
   className?: string;
   children?: React.ReactNode;
-  key?: string;
 }
 
-const Label = ({ text, htmlFor, className, children, key }: ILable) => {
+const Label = ({ text, htmlFor, className, children }: ILable) => {
   return (
     <label
-      key={key}
       htmlFor={htmlFor}
       className={`${styles[`${className}`]} ${styles.basicLabel}`}
     >

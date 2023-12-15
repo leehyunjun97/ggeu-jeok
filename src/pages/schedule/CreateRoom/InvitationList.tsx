@@ -27,11 +27,7 @@ const InvitationList = ({
     <>
       {myInfo.friend &&
         myInfo.friend.map((item) => (
-          <Label
-            key={item.id}
-            htmlFor={item.id}
-            className={'userCheckboxLabel'}
-          >
+          <Label htmlFor={item.id} className={'userCheckboxLabel'}>
             <Input.Checkbox
               id={item.id}
               onChange={(e) => {
