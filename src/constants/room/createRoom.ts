@@ -14,7 +14,7 @@ export const defaultRoomInfo = () => {
     uuid: '',
     title: '',
     admin: '',
-    location: '',
+    location: { placeName: '', lat: 0, lng: 0 },
     member: [],
     date: [],
     talk: [],

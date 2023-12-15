@@ -6,7 +6,7 @@ import { ko } from 'date-fns/esm/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import InvitationList from './InvitationList';
 import { IFriendInfo } from '../../../types/friend';
-import { IDateDetail, IMemberInfo, IRoomInfo } from '../../../types/room';
+import { IDateDetail, ILocation, IMemberInfo, IRoomInfo } from '../../../types/room';
 import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 import { dateStringHandler, dffDay } from '../../../utils/common/date';
@@ -88,7 +88,7 @@ const CreateRoom = () => {
       roomTitleRef.current?.focus();
       return;
     }
-    if (room.location === '') {
+    if (room.location.placeName === '') {
       setToastText('지역을 선택해주세요');
       setVisible(!visible);
       return;
@@ -170,7 +170,7 @@ const CreateRoom = () => {
         </div>
         <div className={styles.locationSection}>
           <Label text='지역' />
-          <Input.Location value={room.location} />
+          <Input.Location value={room.location.placeName} />
           <Button
             text={'meeting'}
             onClick={modalHandler}
@@ -201,7 +201,7 @@ const CreateRoom = () => {
       {isModal && (
         <MapModal
           closeModal={modalHandler}
-          setAddr={(location: string) => {
+          setAddr={(location: ILocation) => {
             setRoomInfo({ ...room, location });
           }}
         />

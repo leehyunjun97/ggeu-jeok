@@ -9,10 +9,16 @@ import Span from '../../../components/common/Span/Span';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../recoil/room/roomInfo';
 import Button from '../../../components/common/Button/Button';
+import PlanPlaceModal from '../../../components/common/Modal/MapModal/PlanPlaceModal';
 
 const RoomMain = () => {
   const [hide, setHide] = useState(false);
   const room = useRecoilValue(roomInfo);
+  const [isModal, setIsModal] = useState(false);
+
+  const modalHandler = () => {
+    setIsModal(!isModal);
+  };
 
   return (
     <div className={styles.main}>
@@ -29,7 +35,7 @@ const RoomMain = () => {
 
         <Button
           children={<FontAwesomeIcon icon={faLocationDot} />}
-          onClick={() => setHide(!hide)}
+          onClick={modalHandler}
           className='chatToggleBtn'
           style={{ bottom: '60px' }}
         />
@@ -40,6 +46,7 @@ const RoomMain = () => {
           className='chatToggleBtn'
         />
       </section>
+      {isModal && <PlanPlaceModal closeModal={modalHandler} />}
     </div>
   );
 };

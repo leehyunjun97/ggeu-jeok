@@ -24,11 +24,17 @@ export interface ITalk {
   date: string;
 }
 
+export interface ILocation {
+  placeName: string;
+  lat: number;
+  lng: number;
+}
+
 export interface IRoomInfo {
   uuid: string;
   title: string;
   admin: string;
-  location: string;
+  location: ILocation;
   member: IMemberInfo[];
   date: IDateDetail[];
   talk: ITalk[];

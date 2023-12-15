@@ -23,6 +23,7 @@
   border: 2px solid black;
   overflow: scroll;
   box-shadow: 5px 5px 5px rgb(191, 146, 87);
+  font-family: 'Nanum Pen Script', cursive;
 }
 
 .modalSection::-webkit-scrollbar {
@@ -58,11 +59,27 @@
   width: 80%;
   border: none;
   background-color: transparent;
-  font-family: 'Nanum Pen Script', cursive;
+
   font-size: 15px;
   font-weight: bold;
 }
 
 .searchSection input:focus {
   outline: none;
+}
+
+.map {
+  width: 90%;
+  height: 350px;
+  margin: auto;
+}
+
+.placeName {
+  width: max-content;
+  min-width: 280px;
+  background-color: #c8a2c8;
+  padding: 3px;
+  border-radius: 3px;
+  color: white;
+  font-size: 23px;
 }

@@ -11,10 +11,11 @@ import {
   mapKeywordSearchHandler,
 } from '../../../../utils/map/map';
 import { Marker } from '../../../../types/map';
+import { ILocation } from '../../../../types/room';
 
 interface IMapProps {
   closeModal: () => void;
-  setAddr: (location: string) => void;
+  setAddr: (location: ILocation) => void;
 }
 
 const MapModal = ({ closeModal, setAddr }: IMapProps) => {
@@ -94,17 +95,10 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
           />
         </section>
         <Map
-          // center={{
-          //   lat: currentLocation?.lat || 0,
-          //   lng: currentLocation?.lng || 0,
-          // }}
+          className={styles.map}
           center={{
-            lat: 37.50816088470778,
-            lng: 126.7265706962144,
-          }}
-          style={{
-            width: '100%',
-            height: '350px',
+            lat: currentLocation?.lat || 0,
+            lng: currentLocation?.lng || 0,
           }}
           level={1}
           onCreate={setMap}
@@ -122,7 +116,11 @@ const MapModal = ({ closeModal, setAddr }: IMapProps) => {
                 <Button
                   text={marker.content}
                   onClick={() => {
-                    setAddr(marker.content);
+                    setAddr({
+                      placeName: marker.content,
+                      lat: marker.position.lat,
+                      lng: marker.position.lng,
+                    });
                     closeModal();
                   }}
                   style={{
