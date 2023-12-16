@@ -187,7 +187,22 @@
 
  * #### 9.2 Create room
 
-   - 
+   - 9.2.1 일정 (date)
+
+     - ``react-datepicker`` 라이브러리를 사용했습니다.
+     - ``startDate`` ``endDate``의 차이 일 수 만큼 ``IDateDetail`` 객체를 생성해주었습니다.
+    
+   - 9.2.2 Map
+
+     - ``KAKAOMAP API`` 라이브러리를 사용했습니다.
+     - ``Marker`` : ``id`` ``position: lat, lng`` ``content``
+     - 장소를 검색 시 ``kakao.maps.services.Places()``의 ``keywordSearch`` 함수를 사용해 ``좌표`` ``주소 이름`` ``상호명``을<br /> 알아내 ``Marker`` 객체에 담아 Map에 찍어주었습니다.
+     - Map을 클릭 시  ``kakao.maps.event.MouseEvent``의 좌표를 받아 ``geocoder.coord2Address`` 주소 변환 함수를 사용해 <br /> ``Marker`` 객체에 담아 Map에 찍어주었습니다.
+
+   - 9.2.3 Invite
+  
+     - input 의 checkbox type으로 내 friends list를 체크할 때마다 IFriendInfo 객체를 state에 저장했습니다.
+     - 그 객체를 담은 state에 ``class`` 객체를 추가해 ``IMemberInfo`` 타입으로 재 가공해주었습니다.
  
  * #### 9.3 Main room
 
