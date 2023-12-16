@@ -37,7 +37,7 @@ const RoomMain = () => {
           children={<FontAwesomeIcon icon={faLocationDot} />}
           onClick={modalHandler}
           className='chatToggleBtn'
-          style={{ bottom: '60px' }}
+          style={{ bottom: '60px', color: '#216ba5' }}
         />
 
         <Button
