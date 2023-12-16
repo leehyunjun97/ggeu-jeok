@@ -124,13 +124,13 @@
 
  * #### 6.3 User Search
 
-   - UseQuery를 사용해 ``userSearchApi`` api를 호출 후 데이터(list)를 가공을 해주었습니다.
+   - UseQuery를 사용해 ``userSearchApi``를 호출 후 데이터(list)를 가공을 해주었습니다.
    - filter를 사용해 이미 친구추가가 되어 있는지, 본인인지 필터링 해주었습니다.
    - 가공한 ``IUserInfo`` 객체배열을 map으로 뿌려주었습니다.
 
  * #### 6.4 Friend request
 
-   - 가공한 List의 card를 클릭 시 ``alarmPushApi`` api를 호출 해 받는 user의 알람에 추가되도록 했습니다.
+   - 가공한 List의 card를 클릭 시 ``alarmPushApi``를 호출 해 받는 user의 알람에 추가되도록 했습니다.
    - api를 호출하기 전, 이미 요청을 보냈는 지, 받는 user alarm 객체의 type을 필터링해 <br /> 중복요청 방지를 해주었습니다.
 
 ### 7. Alarm
@@ -147,16 +147,16 @@
 
  * #### 7.2 Accept friend request
 
-   - 친구 요청을 수락했을 시, ``addFriendApi`` api 함수를 호출했습니다.
+   - 친구 요청을 수락했을 시, ``addFriendApi`` 함수를 호출했습니다.
    - ``Promise.all``을 사용해 ``내 user의 friend 객체 추가`` ``상대 user의 friend 객체 추가`` 작업을 병렬적으로 수행해줬습니다.
  
  * #### 7.3 Refusal friend request
 
-   - 친구 요청을 거절했을 시, ``alarmPushApi`` api를 호출 해 ``friendRequestRefusal`` 타입으로 <br /> 상대 user alarm 객체에 거절 알람을 추가를 해줬습니다.
+   - 친구 요청을 거절했을 시, ``alarmPushApi``를 호출 해 ``friendRequestRefusal`` 타입으로 <br /> 상대 user alarm 객체에 거절 알람을 추가를 해줬습니다.
 
  * #### 7.3 invite
 
-   - 방을 생성할 때 친구를 초대 했을 시, ``alarmPushApi`` api를 호출 해 ``invite`` 타입으로 <br /> 각 멤버들에게 친구 초대 알람을 추가 해줬습니다.
+   - 방을 생성할 때 친구를 초대 했을 시, ``alarmPushApi``를 호출 해 ``invite`` 타입으로 <br /> 각 멤버들에게 친구 초대 알람을 추가 해줬습니다.
 
 ### 8. Profile
 
@@ -201,16 +201,30 @@
 
    - 9.2.3 Invite
   
-     - input 의 checkbox type으로 내 friends list를 체크할 때마다 IFriendInfo 객체를 state에 저장했습니다.
+     - input 의 ``checkbox type``으로 내 friends list를 체크할 때마다 ``IFriendInfo`` 객체를 state에 저장했습니다.
      - 그 객체를 담은 state에 ``class`` 객체를 추가해 ``IMemberInfo`` 타입으로 재 가공해주었습니다.
  
  * #### 9.3 Main room
 
-   - 
+   - url : ``domain/schedule/email/uuid``
+   - Main room에 접근 시 ``useLocation().pathname.split()``을 사용해 ``uuid``를 추출했습니다.
+   - 추출한 uuid를 사용해 ``getMyRoomInfoApi`` api를 호출 해 ``Recoil roomInfo state`` 초기 상태를 가공해주었습니다.
 
  * #### 9.4 Chatting
 
-   - 
+   - 9.4,1 Get messages
+
+     - ``useEffect``로 마운트 되기 전 ``getMessageApi``를 호출 해 초기 상태를 가공해주었습니다.
+     - firestore의 ``collection``함수를 호출해 Chat db path를 알아내고 ``query``함수의 2번쨰 인자로 ``orderBy('sentAt','asc')`` 통해 Chat db를 정렬해줬습니다.
+     - ``getDocs`` 함수를 호출해 Chat의 ``DocumentData[]``을 제공 받고 ``IChat[]`` 타입으로 재 가공해주었습니다.
+
+   - 9.4.2 Push message
+  
+     - ``collection`` 함수를 호출해 Chat db path를 알아내고 ``addDoc`` 함수를 통해 ``IChat`` 타입의 객체를 Chat db에 저장했습니다.
+
+   - 9.4.3 Real time chatting
+  
+     - ``collection db path``를 갖고, ``onSnapshot``함수를 호출해 새로운 ``데이터가 저장된 것을 감지``하고 새로운 chat ``DocumentData``을 받아 ``기존 chat state에 저장해 업데이트`` 해주었습니다.
  
  * #### 9.5 Place
 
