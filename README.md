@@ -16,6 +16,84 @@
 
 <br/>
 
+## 구조
+
+```
+src
+├── assets
+├── components
+│    ├── chat   
+│    ├── common
+│    │    ├── Button
+│    │    ├── Card
+│    │    │    ├── AlarmCard
+│    │    │    ├── DetailScheduleCard
+│    │    │    ├── ScheduleInfoCard
+│    │    │    ├── UserInfoCard
+│    │    ├── Error
+│    │    ├── FileUpload
+│    │    ├── Heading
+│    │    ├── Img
+│    │    ├── Input
+│    │    ├── Label
+│    │    ├── Loading
+│    │    ├── Logo
+│    │    ├── Modal
+│    │    │    ├── AlarmModal
+│    │    │    ├── FriendAddModal
+│    │    │    ├── MapModal
+│    │    │    ├── Portal
+│    │    │    ├── ProfileModal
+│    │    │    ├── ReplyModal
+│    │    ├── Section
+│    │    │    ├── DetailScheduleListUl
+│    │    │    ├── SchedulesUl
+│    │    │    ├── UserInfoListUl
+│    │    ├── Span
+│    │    ├── Textarea
+│    │    ├── Toast
+│    ├── header
+│    ├── login
+├── constants
+│    ├── color
+│    ├── images
+│    ├── room
+│    ├── sign
+│    ├── url
+├── pages
+│    ├── home
+│    ├── main
+│    ├── schedule
+│    │    ├── CreateRoom
+│    │    ├── DetailRoom
+│    │    ├── Room
+│    ├── signup
+├── recoil
+│    ├── room
+│    ├── search
+│    ├── user
+├── router
+├── scripts
+├── services
+│    ├── alarm
+│    ├── chat
+│    ├── friend
+│    ├── room
+│    ├── sign
+│    ├── user
+├── types
+├── utils
+│    ├── chat
+│    ├── common
+│    ├── map
+│    ├── room
+├── App.tsx
+├── index.css
+├── index.tsx
+```
+
+<br />
+
 ## :eyes: 기능 및 UI
 
 ### 1. Sign
@@ -206,7 +284,7 @@
  
  * #### 9.3 Main room
 
-   - URL : ``domain/schedule/email/uuid``
+   - URL : ``도메인/schedule/email/uuid``
    - Main room에 접근 시 ``useLocation().pathname.split()``을 사용해 ``uuid``를 추출했습니다.
    - 추출한 uuid를 사용해 ``getMyRoomInfoApi`` api를 호출 해 ``Recoil roomInfo state`` 초기 상태를 가공해주었습니다.
 
