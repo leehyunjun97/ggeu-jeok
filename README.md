@@ -329,15 +329,6 @@ src
 
 <br />
 
-### 100. ETC
-
-  * #### 100.1 Loading
-  * #### 100.2 Modal
-  * #### 100.3 Toast
-  * #### 100.4 Disable
-
-
-<br />
 
 ## :blush: 느낀 점
 처음에 json-parse라는 가짜 디비서버를 사용했음 <br />
