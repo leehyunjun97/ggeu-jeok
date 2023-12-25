@@ -206,7 +206,7 @@
  
  * #### 9.3 Main room
 
-   - url : ``domain/schedule/email/uuid``
+   - URL : ``domain/schedule/email/uuid``
    - Main room에 접근 시 ``useLocation().pathname.split()``을 사용해 ``uuid``를 추출했습니다.
    - 추출한 uuid를 사용해 ``getMyRoomInfoApi`` api를 호출 해 ``Recoil roomInfo state`` 초기 상태를 가공해주었습니다.
 
