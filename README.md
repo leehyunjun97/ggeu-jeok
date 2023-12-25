@@ -29,7 +29,7 @@ src
 │    │    │    ├── AlarmCard
 │    │    │    ├── DetailScheduleCard
 │    │    │    ├── ScheduleInfoCard
-│    │    │    ├── UserInfoCard
+│    │    │    └── UserInfoCard
 │    │    ├── Error
 │    │    ├── FileUpload
 │    │    ├── Heading
@@ -44,34 +44,34 @@ src
 │    │    │    ├── MapModal
 │    │    │    ├── Portal
 │    │    │    ├── ProfileModal
-│    │    │    ├── ReplyModal
+│    │    │    └── ReplyModal
 │    │    ├── Section
 │    │    │    ├── DetailScheduleListUl
 │    │    │    ├── SchedulesUl
-│    │    │    ├── UserInfoListUl
+│    │    │    └── UserInfoListUl
 │    │    ├── Span
 │    │    ├── Textarea
-│    │    ├── Toast
+│    │    └── Toast
 │    ├── header
-│    ├── login
+│    └── login
 ├── constants
 │    ├── color
 │    ├── images
 │    ├── room
 │    ├── sign
-│    ├── url
+│    └── url
 ├── pages
 │    ├── home
 │    ├── main
 │    ├── schedule
 │    │    ├── CreateRoom
 │    │    ├── DetailRoom
-│    │    ├── Room
-│    ├── signup
+│    │    └── Room
+│    └── signup
 ├── recoil
 │    ├── room
 │    ├── search
-│    ├── user
+│    └── user
 ├── router
 ├── scripts
 ├── services
@@ -80,13 +80,13 @@ src
 │    ├── friend
 │    ├── room
 │    ├── sign
-│    ├── user
+│    └── user
 ├── types
 ├── utils
 │    ├── chat
 │    ├── common
 │    ├── map
-│    ├── room
+│    └── room
 ├── App.tsx
 ├── index.css
 ├── index.tsx
