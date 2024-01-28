@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './style/mapModal.module.css';
 import Button from '../../Button/Button';
 import Title from '../../Heading/Title';
 import { useRecoilValue } from 'recoil';
 import { roomInfo } from '../../../../recoil/room/roomInfo';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import { Marker } from '../../../../types/map';
 
 interface IMapProps {
   closeModal: () => void;
@@ -21,7 +20,7 @@ const PlanPlaceModal = ({ closeModal }: IMapProps) => {
       <div className={styles.modalBackground} onClick={closeModal}></div>
       <div className={styles.modalSection}>
         <Button.CloseButton onClick={closeModal} />
-        <section className={styles.titleSection}>
+      <section className={styles.titleSection}>
           <Title text={'모임 장소'} />
         </section>
         <Map

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 type validationType = 'email' | 'password' | 'nickName' | 'name';
 
 export const isValidationCheck = (value: string, type: validationType) => {
