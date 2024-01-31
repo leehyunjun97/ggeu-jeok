@@ -39,7 +39,7 @@ const FriendAddModal = ({ isModal, setIsModal }: IFriendModalIProps) => {
   };
 
   return (
-    <Portal
+    <Portal   
       id='modal'
       children={
         <div

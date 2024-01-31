@@ -109,14 +109,14 @@ const AlarmCard = ({ alarm, closeModal, myInfo }: IAlarmCardProps) => {
             </>
           )}
           {alarm.type === 'friendRequestRefusal' && (
-            <Button
+            <Button.ActiveButton
               onClick={alarmProcessingHandler}
               disable={isLoading}
               text={'확인'}
             />
           )}
           {alarm.type === 'invite' && (
-            <Button
+            <Button.ActiveButton
               onClick={alarmProcessingHandler}
               disable={isLoading}
               text={'확인'}
