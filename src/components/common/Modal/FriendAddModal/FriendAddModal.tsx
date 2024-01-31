@@ -62,7 +62,6 @@ const FriendAddModal = ({ isModal, setIsModal }: IFriendModalIProps) => {
                 }}
               />
               <Input
-                placeholder='ex) monstamp'
                 type='text'
                 value={userSearchState}
                 onChange={(e) => {
