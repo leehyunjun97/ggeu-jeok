@@ -24,7 +24,10 @@ password: 123456
 
 ### 1. Sign
 
-- ``회원가입`` ``로그인``을 할 수 있다. 
+- ``회원가입`` ``로그인``을 할 수 있다.
+
+![로그인](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/0a097dc2-61e3-4570-8283-d4be5c0519ed)
+![회원가입](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/44dd6e10-926a-49bf-ba5f-27f7b1f7a7d4)
 
 ### 2. 친구 추가 :couple:
 
@@ -32,9 +35,12 @@ password: 123456
 - 친구 요청을 할 수 있다.
 - 요청을 ``수락, 거절`` 할 수 있다.
 
+![친구추가](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/e432c225-d60e-457d-bd81-0e08296b7a8f)
+
 ### 3. 알람 :bell:
 
 - 친구 ``수락`` ``거절`` ``확인`` 알람을 받을 수 있다.
+- ``방 생성`` 알람을 받을 수 있다.
 
 ### 4. 프로필 :smile:
 
