@@ -35,18 +35,25 @@ password: 123456
 - 친구 요청을 할 수 있다.
 - 요청을 ``수락, 거절`` 할 수 있다.
 
-![친구추가](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/e432c225-d60e-457d-bd81-0e08296b7a8f)
+![친구추가sizedown](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/e5e37844-c09d-4dd6-ae90-f843143121e4)
 
 ### 3. 알람 :bell:
 
 - 친구 ``수락`` ``거절`` ``확인`` 알람을 받을 수 있다.
 - ``방 생성`` 알람을 받을 수 있다.
 
+![알람](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/4fca0371-a10c-4961-a782-cb3eb381582b)
+
+
 ### 4. 프로필 :smile:
 
 - 친구 목록에 있는 ``li Card``를 클릭 해 확인 할 수 있다.
 - Header에 있는 ``내 정보``를 클릭 해 확인 할 수 있다.
 - ``내 프로필에 이미지를 클릭 해 이미지를 수정 할 수 있다.``
+
+![프로필1](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/d0ad8cdb-2f20-40d2-aaac-272771f2bb39)
+![프로필2](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/40165292-c545-4235-ab16-1d066317b6db)
+
 
 ### 5. 방 :game_die:
 
@@ -58,14 +65,22 @@ password: 123456
   - 친구 목록을 통해 멤버를 추가 할 수 있다.
   - 일정 수 만큼 Detail room이 생성된다.
  
+  ![방생성](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/d441ab25-9fa6-4af2-a86d-281b012fd0aa)
+  ![방생성_지도](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/27910c1e-6a39-4baa-9d1a-e4ee7236fba3)
+ 
 * #### 5.2 방 메인
 
   - 멤버 목록을 확인 할 수 있다.
   - 계획 일정을 확인 할 수 있다.
+  
+  ![방 메인](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/e559c772-1b05-4abb-9e57-502fd9d50a9c)
  
 * #### 5.3 채팅 :speech_balloon:
 
   - ``멤버끼리 채팅을 할 수 있다.``
+
+  ![채팅](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/882899ba-4c0e-4e15-93ea-44b38c411b1d)
+
 
 * #### 5.4 장소
 
@@ -75,6 +90,8 @@ password: 123456
 
 - 방 메인의 일정들을 클릭 해 확인 할 수 있다.
 - ``방장이 제목, 각 시간의 세부 일정을 수정 할 수 있다.``
+
+  ![방세부일정](https://github.com/leehyunjun97/ggeu-jeok/assets/130208301/19281c19-d2a7-41c7-ba12-62e85b141396)
 
 <br />
 
