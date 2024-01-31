@@ -8,7 +8,7 @@
 
 [https://roaring-gumption-2cae99.netlify.app/](https://roaring-gumption-2cae99.netlify.app/) <br />
 
-id: ba@naver.com <br />
+id: test@naver.com test2@naver.com test3@naver.com test4@naver.com <br />
 password: 123456
 
 
@@ -24,7 +24,7 @@ password: 123456
 
 ### 1. Sign
 
-- ``회원가입`` ``로그인``을 할 수 있다.
+- ``회원가입`` ``로그인``을 할 수 있다. 
 
 ### 2. 친구 추가 :couple:
 
