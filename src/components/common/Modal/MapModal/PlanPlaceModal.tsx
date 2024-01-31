@@ -13,14 +13,12 @@ interface IMapProps {
 const PlanPlaceModal = ({ closeModal }: IMapProps) => {
   const room = useRecoilValue(roomInfo);
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <div className={styles.modalBackground} onClick={closeModal}></div>
       <div className={styles.modalSection}>
         <Button.CloseButton onClick={closeModal} />
-      <section className={styles.titleSection}>
+        <section className={styles.titleSection}>
           <Title text={'모임 장소'} />
         </section>
         <Map
