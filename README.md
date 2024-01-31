@@ -6,7 +6,11 @@
 
 ## :pager: 배포 페이지
 
-공백
+[https://roaring-gumption-2cae99.netlify.app/](https://roaring-gumption-2cae99.netlify.app/) <br />
+
+id: ba@naver.com <br />
+password: 123456
+
 
 <br/>
 
