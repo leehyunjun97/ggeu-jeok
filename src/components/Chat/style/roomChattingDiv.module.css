@@ -139,3 +139,21 @@
   margin-top: 23px;
   align-self: first baseline;
 }
+
+@media (max-width: 1300px) {
+  .chatDiv {
+    right: 8%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .chatDiv {
+    right: 10%;
+  }
+}
+
+@media (max-width: 800px) {
+  .chatDiv {
+    right: 12%;
+  }
+}
