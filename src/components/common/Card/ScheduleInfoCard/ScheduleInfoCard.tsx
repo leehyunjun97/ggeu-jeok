@@ -35,7 +35,7 @@ const ScheduleInfoCard = ({ room }: IScheduleCardProps) => {
     >
       <p className={styles.cardTitle}>{room.title}</p>
       <section className={styles.bottomSection}>
-        <p style={{ fontSize: '0.9vw' }}>{dateStringHandler(room.dDay!)}</p>
+        <p style={{ fontSize: '11px' }}>{dateStringHandler(room.dDay!)}</p>
         <p className={styles.membersNumber}>
           <FontAwesomeIcon icon={faUser} /> {room.member.length}
         </p>

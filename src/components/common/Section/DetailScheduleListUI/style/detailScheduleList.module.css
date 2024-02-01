@@ -32,3 +32,27 @@
   color: white;
   font-size: 45px;
 }
+
+@media (max-width: 1300px) {
+  .ulList {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 1000px) {
+  .ulList {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .ulList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .ulList {
+    grid-template-columns: 1fr;
+  }
+}
