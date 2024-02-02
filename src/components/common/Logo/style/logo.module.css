@@ -2,3 +2,9 @@
   font-family: 'Jua', sans-serif;
   font-size: 28px;
 }
+
+@media (max-width: 600px) {
+  .mainLogo {
+    font-size: 25px;
+  }
+}

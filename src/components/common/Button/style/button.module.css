@@ -7,6 +7,8 @@
   cursor: pointer;
 }
 
+/* Header */
+
 .headerBtn {
   font-size: 20px;
   height: 100%;
@@ -17,9 +19,20 @@
   white-space: nowrap;
 }
 
+@media (max-width: 600px) {
+  .headerBtn {
+    font-size: 17px;
+    width: 55px;
+  }
+}
+
+/* Alarm */
+
 .alarmBtn {
   font-size: 15px;
 }
+
+/* SignUp */
 
 .emailCheck {
   height: 35px;
@@ -37,6 +50,8 @@
   transition: all 200ms ease;
 }
 
+/* Login */
+
 .loginBtn {
   background-color: rgb(238 199 152);
   height: 35px;
@@ -51,6 +66,8 @@
   background-color: rgb(218, 197, 144);
 }
 
+/* Modal */
+
 .modalCloseBtn {
   background-color: transparent;
   border: none;
@@ -62,22 +79,7 @@
   top: 2px;
 }
 
-.successBtn {
-  background-color: #75d777;
-  border-radius: 3px;
-  font-size: 15px;
-  margin-right: 5px;
-  width: 30%;
-  height: 80%;
-}
-
-.cancelBtn {
-  background-color: #e46060;
-  border-radius: 3px;
-  font-size: 15px;
-  width: 30%;
-  height: 80%;
-}
+/* Create room  */
 
 .roomCreateBtn {
   background-color: #bad0b6;
@@ -104,6 +106,8 @@
   background-color: #bb9d75;
 }
 
+/* Room */
+
 .contentsUpdateBtn {
   width: 80px;
   height: 30px;
@@ -129,14 +133,6 @@
   font-size: 40px;
 }
 
-.liCardBtn {
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-  font-size: 2.5vh;
-  color: #46423df3;
-}
-
 .messageBtn {
   background-color: #d9d9d9;
   position: absolute;
@@ -144,4 +140,31 @@
   bottom: 5px;
   width: 15%;
   height: 5%;
+}
+
+/* Common */
+
+.successBtn {
+  background-color: #75d777;
+  border-radius: 3px;
+  font-size: 15px;
+  margin-right: 5px;
+  width: 30%;
+  height: 80%;
+}
+
+.cancelBtn {
+  background-color: #e46060;
+  border-radius: 3px;
+  font-size: 15px;
+  width: 30%;
+  height: 80%;
+}
+
+.liCardBtn {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  font-size: 2.5vh;
+  color: #46423df3;
 }

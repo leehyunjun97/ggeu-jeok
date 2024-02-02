@@ -41,3 +41,17 @@
 .mainRightSection {
   width: 75%;
 }
+
+@media (max-width: 800px) {
+  .main {
+    display: block;
+  }
+  .mainLeftSection {
+    width: 92%;
+    height: 25%;
+  }
+  .mainRightSection {
+    width: 92%;
+    height: 65%;
+  }
+}
