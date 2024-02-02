@@ -19,13 +19,6 @@
   white-space: nowrap;
 }
 
-@media (max-width: 600px) {
-  .headerBtn {
-    font-size: 17px;
-    width: 55px;
-  }
-}
-
 /* Alarm */
 
 .alarmBtn {
@@ -167,4 +160,20 @@
   background-color: transparent;
   font-size: 2.5vh;
   color: #46423df3;
+}
+
+/* mediaQuery */
+
+@media (max-width: 600px) {
+  .headerBtn {
+    font-size: 17px;
+    width: 55px;
+  }
+}
+
+@media (max-width: 400px) {
+  .headerBtn {
+    font-size: 17px;
+    width: 35px;
+  }
 }
